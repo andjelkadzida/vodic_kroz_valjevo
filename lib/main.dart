@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'navigation/navigation_drawer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const VodicKrozValjevo());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class VodicKrozValjevo extends StatelessWidget {
+  const VodicKrozValjevo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'Dobrodošli u Valjevo',
-            ),
-          ],
-        ),
-      ),
-    );
+        appBar: AppBar(title: const Text("Vodič kroz Valjevo")),
+        drawer: NavigationDrawer());
   }
 }

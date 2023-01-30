@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 class SportsAndRecreation extends StatelessWidget {
   const SportsAndRecreation({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class SportsAndRecreation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sport i rekreacija"),
+        title: Text(localization(context).sportRecreation),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),

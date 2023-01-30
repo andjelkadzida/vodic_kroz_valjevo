@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 class AboutCity extends StatelessWidget {
   const AboutCity({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class AboutCity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("O gradu"),
+        title: Text(localization(context).aboutCity),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),

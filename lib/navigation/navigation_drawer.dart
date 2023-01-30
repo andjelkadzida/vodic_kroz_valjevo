@@ -6,7 +6,6 @@ import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
 import 'package:vodic_kroz_valjevo/pages/sights.dart';
 import 'package:vodic_kroz_valjevo/pages/sport_and_recreation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -99,7 +98,7 @@ class NavigationDrawer extends StatelessWidget {
     return Row(
       children: [
         const CircleAvatar(
-          radius: 40,
+          radius: 20,
           //backgroundImage: NetworkImage(url),
         ),
         const SizedBox(

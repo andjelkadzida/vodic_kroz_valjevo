@@ -8,9 +8,9 @@ class Language {
 
   static List<Language> languageList() {
     return <Language>[
-      Language(1, '🇷🇸', 'Srpski', 'rs'),
-      Language(2, 'US', 'English', 'en'),
-      Language(3, 'DE', 'Deutsch', 'de')
+      Language(1, '🇷🇸', 'Srpski', 'sr'),
+      Language(2, '🇺🇸', 'English', 'en'),
+      Language(3, '🇩🇪', 'Deutsch', 'de')
     ];
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
-import 'navigation/navigation_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
@@ -29,6 +28,12 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     setState(() {
       _lang = lang;
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    getLocale().then((lang) => {setLanguage(lang)});
+    super.didChangeDependencies();
   }
 
   @override

@@ -6,5 +6,9 @@
     "sights": "Sights",
     "sportRecreation": "Sport & recreation",
     "restaurantsAndHotels": "Hotels & restaurants",
-    "language": "Language"
+    "language": "Language",
+    "serbian", "Serbian (Latin)",
+    "serbianCyrl": "Serbian (Cyrillic)",
+    "english": "English",
+    "german": "German"
 }

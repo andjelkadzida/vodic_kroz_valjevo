@@ -1,10 +1,15 @@
 {
     "appTitle": "Водич кроз Ваљево",
-    "cityName": "Ваљевп",
+    "cityName": "Ваљево",
     "homePage": "Почетна",
     "aboutCity": "О граду",
     "sights": "Знаменитости",
     "sportRecreation": "Спорт и рекреација",
     "restaurantsAndHotels": "Ресторани и преноћиште",
-    "language": "Језик"
+    "language": "Језик",
+    "language": "Jezik",
+    "serbian", "Српски (Латиница)",
+    "serbianCyrl": "Српски (Ћирилица)",
+    "english": "Енглески",
+    "german": "Немачки"
 }

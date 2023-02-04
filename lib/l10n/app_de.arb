@@ -6,5 +6,9 @@
     "sights": "Sehenswürdigkeiten",
     "sportRecreation": "Sport & Erholung",
     "restaurantsAndHotels": "Hotels & Gaststätten",
-    "language": "Sprache"
+    "language": "Sprache",
+    "serbian", "Serbisch (Latein)",
+    "serbianCyrl": "Serbisch (Kyrillisch)",
+    "english": "Englisch",
+    "german": "Deutsch"
 }

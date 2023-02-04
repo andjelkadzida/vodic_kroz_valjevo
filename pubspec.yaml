@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dropdown_button2: ^1.9.2  
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/language.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
@@ -95,63 +96,58 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   //Header widget
-  Widget headerWidget(BuildContext context) {
-    // const url = '';
+  Widget headerWidget(BuildContext buildContext) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        Text(
+          localization(buildContext).cityName,
+          style: const TextStyle(fontSize: 25, color: Colors.white),
+        ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: DropdownButton<Language>(
-            underline: const SizedBox(),
-            icon: const Icon(
-              Icons.language,
-              color: Colors.white,
-            ),
-            onChanged: (Language? language) async {
-              if (language != null) {
-                Locale _locale = await setLocale(language.scriptCode);
-                VodicKrozValjevo.setLanguage(context, _locale);
-              }
-            },
-            items: Language.languageList()
-                .map<DropdownMenuItem<Language>>(
-                  (e) => DropdownMenuItem<Language>(
-                    value: e,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text(
-                          e.flag,
-                          style: const TextStyle(fontSize: 30),
-                        ),
-                        Text(e.name)
-                      ],
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+          padding: const EdgeInsets.all(1),
+          child: languageWidget(buildContext),
         ),
-        const CircleAvatar(
-          radius: 20,
-          //backgroundImage: NetworkImage(url),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              'Valjevo',
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
-        )
       ],
+    );
+  }
+
+  // Language dropdown widget
+  Widget languageWidget(BuildContext buildContext) {
+    return DropdownButton2<Language>(
+      icon: const Icon(
+        Icons.language,
+        color: Colors.white,
+        textDirection: TextDirection.ltr,
+      ),
+      underline: const SizedBox(),
+      hint: Text(localization(buildContext).language),
+      onChanged: (Language? language) async {
+        if (language != null) {
+          Locale locale = await setLocale(language.scriptCode);
+          VodicKrozValjevo.setLanguage(buildContext, locale);
+        }
+      },
+      dropdownDirection: DropdownDirection.left,
+      scrollbarAlwaysShow: false,
+      style: const TextStyle(fontSize: 15, color: Colors.black),
+      items: Language.languageList()
+          .map<DropdownMenuItem<Language>>(
+            (e) => DropdownMenuItem<Language>(
+              value: e,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text(
+                    e.flag,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Text(e.name)
+                ],
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }

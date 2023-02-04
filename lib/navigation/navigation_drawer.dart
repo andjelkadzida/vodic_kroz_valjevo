@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/localization/language.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
+import 'package:vodic_kroz_valjevo/main.dart';
 import 'package:vodic_kroz_valjevo/navigation/drawer_item.dart';
 import 'package:vodic_kroz_valjevo/pages/about_city.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
@@ -19,7 +21,7 @@ class NavigationDrawer extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(24.0, 80, 24, 0),
             child: Column(
               children: [
-                headerWidget(),
+                headerWidget(context),
                 const SizedBox(
                   height: 40,
                 ),
@@ -93,10 +95,43 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   //Header widget
-  Widget headerWidget() {
+  Widget headerWidget(BuildContext context) {
     // const url = '';
     return Row(
       children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DropdownButton<Language>(
+            underline: const SizedBox(),
+            icon: const Icon(
+              Icons.language,
+              color: Colors.white,
+            ),
+            onChanged: (Language? language) async {
+              if (language != null) {
+                Locale _locale = await setLocale(language.scriptCode);
+                VodicKrozValjevo.setLanguage(context, _locale);
+              }
+            },
+            items: Language.languageList()
+                .map<DropdownMenuItem<Language>>(
+                  (e) => DropdownMenuItem<Language>(
+                    value: e,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          e.flag,
+                          style: const TextStyle(fontSize: 30),
+                        ),
+                        Text(e.name)
+                      ],
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        ),
         const CircleAvatar(
           radius: 20,
           //backgroundImage: NetworkImage(url),

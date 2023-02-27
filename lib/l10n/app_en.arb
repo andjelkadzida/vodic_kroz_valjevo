@@ -10,5 +10,8 @@
     "serbian": "Serbian (Latin)",
     "serbianCyrl": "Serbian (Cyrillic)",
     "english": "English",
-    "german": "German"
+    "german": "German",
+    "museum": "Museum",
+    "moreInfo": "More information",
+    "directions": "Navigation instructions"
 }

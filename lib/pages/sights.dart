@@ -7,11 +7,14 @@ class Sights extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localization(context).sights),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
-    );
+        appBar: AppBar(
+          title: Text(localization(context).sights),
+          centerTitle: true,
+          backgroundColor: Colors.black,
+        ),
+        body: GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        )));
   }
 }

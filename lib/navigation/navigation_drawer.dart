@@ -140,51 +140,58 @@ class NavigationDrawer extends StatelessWidget {
 
   // Language dropdown widget
   Widget languageWidget(BuildContext buildContext) {
-    return DropdownButton2<Language>(
-      icon: Semantics(
-        label: localization(buildContext).languageMenu,
-        child: const Icon(
-          Icons.language,
-          color: Colors.white,
-          textDirection: TextDirection.ltr,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Tooltip(
+        message: localization(buildContext).languageMenu,
+        child: DropdownButton2<Language>(
+          icon: Semantics(
+            label: localization(buildContext).languageMenu,
+            child: const Icon(
+              Icons.language,
+              color: Colors.white,
+              textDirection: TextDirection.ltr,
+            ),
+          ),
+          underline: const SizedBox(),
+          dropdownDecoration: null,
+          hint: Text(localization(buildContext).language),
+          onChanged: (Language? language) async {
+            if (language != null) {
+              Locale locale = await setLocale(language.scriptCode);
+              VodicKrozValjevo.setLanguage(buildContext, locale);
+            }
+          },
+          dropdownDirection: DropdownDirection.left,
+          scrollbarAlwaysShow: false,
+          style: const TextStyle(fontSize: 15, color: Colors.black),
+          items: Language.languageList()
+              .map<DropdownMenuItem<Language>>(
+                (e) => DropdownMenuItem<Language>(
+                  value: e,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Semantics(
+                        label: e.flag,
+                        child: Text(
+                          e.flag,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      Semantics(
+                        label: e.name,
+                        child: Text(
+                          e.name,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
-      underline: const SizedBox(),
-      hint: Text(localization(buildContext).language),
-      onChanged: (Language? language) async {
-        if (language != null) {
-          Locale locale = await setLocale(language.scriptCode);
-          VodicKrozValjevo.setLanguage(buildContext, locale);
-        }
-      },
-      dropdownDirection: DropdownDirection.left,
-      scrollbarAlwaysShow: false,
-      style: const TextStyle(fontSize: 15, color: Colors.black),
-      items: Language.languageList()
-          .map<DropdownMenuItem<Language>>(
-            (e) => DropdownMenuItem<Language>(
-              value: e,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Semantics(
-                    label: e.flag,
-                    child: Text(
-                      e.flag,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  Semantics(
-                    label: e.name,
-                    child: Text(
-                      e.name,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 }

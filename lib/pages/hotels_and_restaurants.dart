@@ -8,10 +8,13 @@ class HotelsAndRestaurants extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(localization(context).restaurantsAndHotels),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
+          title: Text(localization(context).restaurantsAndHotels,
+              style: const TextStyle(color: Colors.white)),
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          iconTheme:
+              const IconThemeData(color: Colors.white) // Color of drawer icon
+          ),
     );
   }
 }

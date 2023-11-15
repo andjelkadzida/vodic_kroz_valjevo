@@ -8,10 +8,13 @@ class Sights extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(localization(context).sights),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-        ),
+            title: Text(localization(context).sights,
+                style: const TextStyle(color: Colors.white)),
+            centerTitle: true,
+            backgroundColor: Colors.black,
+            iconTheme:
+                const IconThemeData(color: Colors.white) // Color of drawer icon
+            ),
         body: GridView(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

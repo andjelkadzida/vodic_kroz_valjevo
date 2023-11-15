@@ -9,7 +9,10 @@ class Sights extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
             title: Text(localization(context).sights,
-                style: const TextStyle(color: Colors.white)),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300)),
             centerTitle: true,
             backgroundColor: Colors.black,
             iconTheme:

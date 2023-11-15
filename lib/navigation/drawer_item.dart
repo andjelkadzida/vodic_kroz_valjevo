@@ -33,7 +33,11 @@ class DrawerItem extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w900),
                   ),
                 ],
               ),

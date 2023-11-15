@@ -164,7 +164,8 @@ class NavigationDrawer extends StatelessWidget {
           },
           dropdownDirection: DropdownDirection.left,
           scrollbarAlwaysShow: false,
-          style: const TextStyle(fontSize: 15, color: Colors.black),
+          style: const TextStyle(
+              fontSize: 15, fontFamily: 'Roboto', color: Colors.black),
           items: Language.languageList()
               .map<DropdownMenuItem<Language>>(
                 (e) => DropdownMenuItem<Language>(

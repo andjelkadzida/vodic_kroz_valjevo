@@ -72,7 +72,6 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 
-  // Routing navigation
   Widget drawerItemWidget(BuildContext context,
       {required String label, required IconData icon, required int index}) {
     return Semantics(
@@ -81,19 +80,20 @@ class NavigationDrawer extends StatelessWidget {
       child: ListTile(
         title: Text(label,
             style: const TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 color: Colors.white,
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.w500)),
         leading: Icon(
           icon,
-          color: Colors.white, // Set icon color to white
+          color: Colors.white,
         ),
         onTap: () => onItemPressed(context, index: index),
       ),
     );
   }
 
+  // Routing navigation
   void onItemPressed(BuildContext context, {required int index}) {
     Navigator.pop(context);
 
@@ -132,7 +132,7 @@ class NavigationDrawer extends StatelessWidget {
   Widget headerWidget(BuildContext buildContext) {
     return Semantics(
       label: localization(buildContext).cityName,
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(buildContext).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -166,7 +166,7 @@ class NavigationDrawer extends StatelessWidget {
           textDirection: TextDirection.ltr,
         ),
       ),
-      offset: const Offset(60, 40), // Adjust the vertical offset as needed
+      offset: const Offset(60, 40), // Adjust the vertical offset
       onSelected: (Language language) async {
         Locale locale = await setLocale(language.scriptCode);
         VodicKrozValjevo.setLanguage(buildContext, locale);

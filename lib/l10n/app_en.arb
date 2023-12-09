@@ -14,5 +14,8 @@
     "museum": "Museum",
     "moreInfo": "More information",
     "directions": "Navigation instructions",
-    "languageMenu": "Language menu"
+    "languageMenu": "Language menu",
+    "imageNotAvailable": "Image is not available",
+    "navigateToDestination": "Navigate to destination",
+    "startNavigation": "Start navigation"
 }

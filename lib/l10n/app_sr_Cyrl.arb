@@ -15,5 +15,8 @@
     "museum": "Музеј",
     "moreInfo": "Више информација",
     "directions": "Навигација",
-    "languageMenu": "Мени за избор језика"
+    "languageMenu": "Мени за избор језика",
+    "imageNotAvailable": "Слика није доступна",
+    "navigateToDestination": "Навигација до одредишта",
+    "startNavigation": "Покрените навигацију"
 }

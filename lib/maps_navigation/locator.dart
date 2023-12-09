@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:launch_app_store/launch_app_store.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:open_store/open_store.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 class MapScreen {
@@ -35,16 +35,17 @@ class MapScreen {
     if (currentPosition != null) {
       // Show installed maps application
       final availableMaps = await MapLauncher.installedMaps;
-
       if (availableMaps.isNotEmpty) {
         final coords = Coords(destinationLatitude, destinationLongitude);
+        // Gets first found maps app
         await availableMaps.first.showDirections(
             destination: coords, directionsMode: DirectionsMode.walking);
       } else {
-        // Launch platform specific app store to install Google maps
-        LaunchReview.launch(
-            androidAppId: "com.google.android.apps.maps",
-            iOSAppId: "id585027354");
+        // Launch platform specific app store to install Google map
+        OpenStore.instance.open(
+          androidAppBundleId: "com.google.android.apps.maps",
+          appStoreId: "id585027354",
+        );
       }
     }
   }

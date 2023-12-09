@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -7,6 +8,7 @@ import 'package:open_store/open_store.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 class MapScreen {
+  late StreamSubscription<Position> _positionStream;
   Position? currentPosition; // Store current position
 
   // Obtaining user's location

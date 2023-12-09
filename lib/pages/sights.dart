@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
+
+  final MapScreen mapScreen = MapScreen();
+  final FlutterTts flutterTts = FlutterTts();
+
+  Future<void> _speak(String text) async {
+    await flutterTts.speak(text);
+  }
 
   // Lista slika znamenitosti
   final List<String> imageUrls = [
@@ -19,8 +27,6 @@ class Sights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MapScreen mapScreen = MapScreen();
-
     final screenWidth = MediaQuery.of(context).size.width;
     // Adjust the number of items per row
     final itemWidth = (screenWidth / 2).floor();
@@ -104,7 +110,7 @@ class Sights extends StatelessWidget {
                       child: Semantics(
                         button: true,
                         onTap: () async {
-                          final MapScreen mapScreen = MapScreen();
+                          _speak(localization(context).startNavigation);
                           await mapScreen.getCurrentLocation(context);
                           if (index < destinationCoordinates.length) {
                             await mapScreen.navigateToDestination(
@@ -114,6 +120,7 @@ class Sights extends StatelessWidget {
                         },
                         child: ElevatedButton(
                           onPressed: () async {
+                            _speak(localization(context).startNavigation);
                             await mapScreen.getCurrentLocation(context);
                             if (index < destinationCoordinates.length) {
                               await mapScreen.navigateToDestination(

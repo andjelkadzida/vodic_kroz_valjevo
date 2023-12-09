@@ -112,27 +112,23 @@ class NavigationDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context, MaterialPageRoute(builder: (context) => HomePage()));
         break;
       case 1:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const AboutCity()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AboutCity()));
         break;
       case 2:
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Sights()));
         break;
       case 3:
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const SportsAndRecreation()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SportsAndRecreation()));
         break;
       case 4:
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const HotelsAndRestaurants()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HotelsAndRestaurants()));
         break;
       default:
         Navigator.pop(context);

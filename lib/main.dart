@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:accessibility_tools/accessibility_tools.dart';
 
 void main() {
   runApp(const VodicKrozValjevo());
@@ -46,6 +47,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      builder: (context, child) => AccessibilityTools(child: child),
       home: const HomePage(),
     );
   }

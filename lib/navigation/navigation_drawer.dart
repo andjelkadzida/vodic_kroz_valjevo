@@ -34,31 +34,43 @@ class NavigationDrawer extends StatelessWidget {
                       drawerItemWidget(
                         context,
                         label: localization(context).homePage,
-                        icon: Icons.home,
+                        icon: Icon(Icons.home,
+                            semanticLabel: localization(context).homePage,
+                            color: Colors.white),
                         index: 0,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).aboutCity,
-                        icon: Icons.info,
+                        icon: Icon(Icons.info,
+                            semanticLabel: localization(context).aboutCity,
+                            color: Colors.white),
                         index: 1,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).sights,
-                        icon: Icons.location_city,
+                        icon: Icon(Icons.location_city,
+                            semanticLabel: localization(context).sights,
+                            color: Colors.white),
                         index: 2,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).sportRecreation,
-                        icon: Icons.sports_gymnastics,
+                        icon: Icon(Icons.sports_gymnastics,
+                            semanticLabel:
+                                localization(context).sportRecreation,
+                            color: Colors.white),
                         index: 3,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).restaurantsAndHotels,
-                        icon: Icons.restaurant_menu,
+                        icon: Icon(Icons.restaurant_menu,
+                            semanticLabel:
+                                localization(context).restaurantsAndHotels,
+                            color: Colors.white),
                         index: 4,
                       ),
                     ],
@@ -73,21 +85,21 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   Widget drawerItemWidget(BuildContext context,
-      {required String label, required IconData icon, required int index}) {
+      {required String label, required Icon icon, required int index}) {
     return Semantics(
       label: label,
       button: true,
       child: ListTile(
-        title: Text(label,
-            style: const TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w500)),
-        leading: Icon(
-          icon,
-          color: Colors.white,
+        title: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w500,
+          ),
         ),
+        leading: Semantics(label: label, child: icon),
         onTap: () => onItemPressed(context, index: index),
       ),
     );
@@ -141,10 +153,11 @@ class NavigationDrawer extends StatelessWidget {
               child: Text(
                 localization(buildContext).cityName,
                 style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700),
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             languageWidget(buildContext),
@@ -160,10 +173,11 @@ class NavigationDrawer extends StatelessWidget {
       tooltip: localization(buildContext).languageMenu, // Tooltip for the icon
       icon: Semantics(
         label: localization(buildContext).languageMenu,
-        child: const Icon(
+        child: Icon(
           Icons.language,
           color: Colors.white,
           textDirection: TextDirection.ltr,
+          semanticLabel: localization(buildContext).languageMenu,
         ),
       ),
       offset: const Offset(60, 40), // Adjust the vertical offset

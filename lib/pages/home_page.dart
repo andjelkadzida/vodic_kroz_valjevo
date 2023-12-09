@@ -10,11 +10,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(localization(context).appTitle,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w300)),
+          title: Semantics(
+              label: localization(context).appTitle,
+              child: Text(localization(context).appTitle,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w300))),
           centerTitle: true,
           backgroundColor: Colors.black,
           iconTheme:

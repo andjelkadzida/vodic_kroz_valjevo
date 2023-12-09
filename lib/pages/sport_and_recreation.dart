@@ -8,11 +8,14 @@ class SportsAndRecreation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(localization(context).sportRecreation,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w300)),
+          title: Semantics(
+              label: localization(context).sportRecreation,
+              child: Text(localization(context).sportRecreation,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300,
+                  ))),
           centerTitle: true,
           backgroundColor: Colors.black,
           iconTheme:

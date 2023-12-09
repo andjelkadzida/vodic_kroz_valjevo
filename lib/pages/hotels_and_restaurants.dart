@@ -8,11 +8,14 @@ class HotelsAndRestaurants extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(localization(context).restaurantsAndHotels,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w300)),
+          title: Semantics(
+              label: localization(context).restaurantsAndHotels,
+              child: Text(localization(context).restaurantsAndHotels,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300,
+                  ))),
           centerTitle: true,
           backgroundColor: Colors.black,
           iconTheme:

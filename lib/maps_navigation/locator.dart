@@ -41,7 +41,7 @@ class MapScreen {
         await availableMaps.first.showDirections(
             destination: coords, directionsMode: DirectionsMode.walking);
       } else {
-        // Launch platform specific app store to install Google map
+        // Launch platform specific app store to install Google maps
         OpenStore.instance.open(
           androidAppBundleId: "com.google.android.apps.maps",
           appStoreId: "id585027354",
@@ -53,29 +53,43 @@ class MapScreen {
   void showLocationDeniedForeverDialog(BuildContext buildContext) {
     showPlatformDialog(
       context: buildContext,
-      builder: (context) => BasicDialogAlert(
-        title: Text(localization(context).locationUnavailable,
-            style: const TextStyle(
-                fontFamily: 'Roboto', fontWeight: FontWeight.w500)),
-        content: Text(localization(context).locationUnavailableMsg,
-            style: const TextStyle(
-                fontFamily: 'Roboto', fontWeight: FontWeight.w400)),
+      builder: (context) => AlertDialog(
+        title: Text(
+          localization(context).locationUnavailable,
+          style: const TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        content: Text(
+          localization(context).locationUnavailableMsg,
+          style: const TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+          ),
+        ),
         actions: <Widget>[
-          BasicDialogAction(
-            title: Text(localization(context).cancel,
-                style: const TextStyle(
-                    fontFamily: 'Roboto', fontWeight: FontWeight.w500)),
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
+            child: Text(
+              localization(context).cancel,
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
-          BasicDialogAction(
-            title: Text(localization(context).openSettings,
-                style: const TextStyle(
-                    fontFamily: 'Roboto', fontWeight: FontWeight.w500)),
-            onPressed: () {
-              openAppSettings();
-            },
+          TextButton(
+            onPressed: openAppSettings,
+            child: Text(
+              localization(context).openSettings,
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ],
       ),

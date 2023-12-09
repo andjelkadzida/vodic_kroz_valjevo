@@ -89,7 +89,7 @@ class Sights extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       await mapScreen
-                          .getCurrentLocation(); // Get current location
+                          .getCurrentLocation(context); // Get current location
                       await mapScreen.navigateToDestination(
                           37.7749, -122.4194); // Navigate to destination
                     },
@@ -97,8 +97,8 @@ class Sights extends StatelessWidget {
                         label: localization(context).navigateToDestination,
                         button: true,
                         onTap: () async {
-                          await mapScreen
-                              .getCurrentLocation(); // Get current location
+                          await mapScreen.getCurrentLocation(
+                              context); // Get current location
                           await mapScreen.navigateToDestination(
                               37.7749, -122.4194); // Navigate to destination
                         },

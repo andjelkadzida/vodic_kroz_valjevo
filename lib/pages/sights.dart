@@ -5,20 +5,25 @@ import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
 
+  // Lista slika znamenitosti
   final List<String> imageUrls = [
     'https://via.placeholder.com/300',
     'https://via.placeholder.com/300',
     'https://via.placeholder.com/300',
-    // Add more image URLs as needed
+  ];
+
+  // Lista koordinata do znamenitosti
+  final List<List<double>> destinationCoordinates = [
+    [44.27809742651686, 19.88519586174966], // Kula Nenadovica
   ];
 
   @override
   Widget build(BuildContext context) {
-    final MapScreen mapScreen = MapScreen(); // Instantiate MapScreen
+    final MapScreen mapScreen = MapScreen();
 
     final screenWidth = MediaQuery.of(context).size.width;
     final itemWidth =
-        (screenWidth / 2).floor(); // Adjust the number of items per row here
+        (screenWidth / 2).floor(); // Adjust the number of items per row
 
     int crossAxisCount = (screenWidth / itemWidth).floor();
 
@@ -88,19 +93,26 @@ class Sights extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      await mapScreen
-                          .getCurrentLocation(context); // Get current location
-                      await mapScreen.navigateToDestination(
-                          37.7749, -122.4194); // Navigate to destination
+                      await mapScreen.getCurrentLocation(context);
+                      // Use the destination coordinates based on the index
+                      if (index < destinationCoordinates.length) {
+                        await mapScreen.navigateToDestination(
+                            destinationCoordinates[index][0],
+                            destinationCoordinates[index][1]);
+                      }
                     },
                     child: Semantics(
                         label: localization(context).navigateToDestination,
                         button: true,
                         onTap: () async {
-                          await mapScreen.getCurrentLocation(
-                              context); // Get current location
-                          await mapScreen.navigateToDestination(
-                              37.7749, -122.4194); // Navigate to destination
+                          final MapScreen mapScreen = MapScreen();
+                          await mapScreen.getCurrentLocation(context);
+                          // Use the destination coordinates based on the index
+                          if (index < destinationCoordinates.length) {
+                            await mapScreen.navigateToDestination(
+                                destinationCoordinates[index][0],
+                                destinationCoordinates[index][1]);
+                          }
                         },
                         child: Text(
                           localization(context).startNavigation,

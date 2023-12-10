@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,7 +14,7 @@ class VodicKrozValjevo extends StatefulWidget {
   @override
   State<VodicKrozValjevo> createState() => _VodicKrozValjevo();
 
-  //Setting language
+  // Setting language
   static void setLanguage(BuildContext buildContext, Locale newLanguage) {
     _VodicKrozValjevo? appState =
         buildContext.findAncestorStateOfType<_VodicKrozValjevo>();
@@ -23,6 +24,7 @@ class VodicKrozValjevo extends StatefulWidget {
 
 class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   Locale? _lang;
+  final flutterTts = FlutterTts();
 
   setLanguage(Locale lang) {
     setState(() {
@@ -38,6 +40,12 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
 
   @override
   Widget build(BuildContext context) {
+    // Flutter Text-To-Speech voice configuration
+    flutterTts.setLanguage(COUNTRY_CODE);
+    flutterTts.setSpeechRate(0.5);
+    flutterTts.setVolume(1.0);
+    flutterTts.setPitch(1.0);
+
     return MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -46,7 +54,8 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      // builder: (context, child) => AccessibilityTools(child: child),
+      home: HomePage(),
     );
   }
 }

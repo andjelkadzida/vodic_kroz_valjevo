@@ -14,5 +14,12 @@
     "museum": "Museum",
     "moreInfo": "More information",
     "directions": "Navigation instructions",
-    "languageMenu": "Language menu"
+    "languageMenu": "Language menu",
+    "imageNotAvailable": "Image is not available",
+    "navigateToDestination": "Navigate to destination",
+    "startNavigation": "Start navigation",
+    "locationUnavailable": "Location unavailable",
+    "locationUnavailableMsg": "Oops! We're unable to detect your location at the moment. Please check your settings or try again later.",
+    "cancel": "Cancel",
+    "openSettings": "Settings"
 }

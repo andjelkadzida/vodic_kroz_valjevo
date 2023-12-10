@@ -75,7 +75,6 @@ class NavigationDrawer extends StatelessWidget {
   Widget drawerItemWidget(BuildContext context,
       {required String label, required IconData icon, required int index}) {
     return Semantics(
-      label: label,
       button: true,
       child: ListTile(
         title: Text(label,
@@ -100,7 +99,7 @@ class NavigationDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context, MaterialPageRoute(builder: (context) => HomePage()));
         break;
       case 1:
         Navigator.push(context,
@@ -108,19 +107,15 @@ class NavigationDrawer extends StatelessWidget {
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Sights()));
+            context, MaterialPageRoute(builder: (context) => Sights()));
         break;
       case 3:
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const SportsAndRecreation()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SportsAndRecreation()));
         break;
       case 4:
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const HotelsAndRestaurants()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HotelsAndRestaurants()));
         break;
       default:
         Navigator.pop(context);
@@ -131,7 +126,6 @@ class NavigationDrawer extends StatelessWidget {
   // Header widget
   Widget headerWidget(BuildContext buildContext) {
     return Semantics(
-      label: localization(buildContext).cityName,
       child: SizedBox(
         width: MediaQuery.of(buildContext).size.width,
         child: Row(
@@ -141,10 +135,12 @@ class NavigationDrawer extends StatelessWidget {
               child: Text(
                 localization(buildContext).cityName,
                 style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700),
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                ),
+                semanticsLabel: localization(buildContext).cityName,
               ),
             ),
             languageWidget(buildContext),
@@ -179,14 +175,12 @@ class NavigationDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Semantics(
-                  label: e.flag,
                   child: Text(
                     e.flag,
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
                 Semantics(
-                  label: e.name,
                   child: Text(
                     e.name,
                   ),

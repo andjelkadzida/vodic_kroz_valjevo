@@ -15,5 +15,12 @@
     "museum": "Музеј",
     "moreInfo": "Више информација",
     "directions": "Навигација",
-    "languageMenu": "Мени за избор језика"
+    "languageMenu": "Мени за избор језика",
+    "imageNotAvailable": "Слика није доступна",
+    "navigateToDestination": "Навигација до одредишта",
+    "startNavigation": "Покрените навигацију",
+    "locationUnavailable": "Локација није доступна",
+    "locationUnavailableMsg": "Упс! Тренутно не можемо да детектујемо Вашу локацију. Проверите подешавања или покушајте касније.",
+    "cancel": "Откажи",
+    "openSettings": "Подешавања"
 }

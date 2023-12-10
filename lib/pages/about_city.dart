@@ -8,16 +8,23 @@ class AboutCity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(localization(context).aboutCity,
+        title: Semantics(
+            label: localization(context).aboutCity,
+            child: Text(
+              localization(context).aboutCity,
               style: const TextStyle(
                   color: Colors.white,
                   fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w300)),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          iconTheme:
-              const IconThemeData(color: Colors.white) // Color of drawer icon
-          ),
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: 1),
+            )),
+        excludeHeaderSemantics: true,
+        centerTitle: true,
+        backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ), // Color of drawer icon
+      ),
     );
   }
 }

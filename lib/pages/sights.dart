@@ -90,7 +90,9 @@ class Sights extends StatelessWidget {
                         semanticLabel: 'Image ${index + 1}',
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
-                          return Text(localization(context).imageNotAvailable);
+                          return Text(localization(context).imageNotAvailable,
+                              semanticsLabel:
+                                  localization(context).imageNotAvailable);
                         },
                       ),
                     ),

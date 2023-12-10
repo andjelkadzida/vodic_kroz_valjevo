@@ -34,43 +34,31 @@ class NavigationDrawer extends StatelessWidget {
                       drawerItemWidget(
                         context,
                         label: localization(context).homePage,
-                        icon: Icon(Icons.home,
-                            semanticLabel: localization(context).homePage,
-                            color: Colors.white),
+                        icon: Icons.home,
                         index: 0,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).aboutCity,
-                        icon: Icon(Icons.info,
-                            semanticLabel: localization(context).aboutCity,
-                            color: Colors.white),
+                        icon: Icons.info,
                         index: 1,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).sights,
-                        icon: Icon(Icons.location_city,
-                            semanticLabel: localization(context).sights,
-                            color: Colors.white),
+                        icon: Icons.location_city,
                         index: 2,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).sportRecreation,
-                        icon: Icon(Icons.sports_gymnastics,
-                            semanticLabel:
-                                localization(context).sportRecreation,
-                            color: Colors.white),
+                        icon: Icons.sports_gymnastics,
                         index: 3,
                       ),
                       drawerItemWidget(
                         context,
                         label: localization(context).restaurantsAndHotels,
-                        icon: Icon(Icons.restaurant_menu,
-                            semanticLabel:
-                                localization(context).restaurantsAndHotels,
-                            color: Colors.white),
+                        icon: Icons.restaurant_menu,
                         index: 4,
                       ),
                     ],
@@ -85,21 +73,20 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   Widget drawerItemWidget(BuildContext context,
-      {required String label, required Icon icon, required int index}) {
+      {required String label, required IconData icon, required int index}) {
     return Semantics(
-      label: label,
       button: true,
       child: ListTile(
-        title: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w500,
-          ),
+        title: Text(label,
+            style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w500)),
+        leading: Icon(
+          icon,
+          color: Colors.white,
         ),
-        leading: Semantics(label: label, child: icon),
         onTap: () => onItemPressed(context, index: index),
       ),
     );
@@ -115,8 +102,8 @@ class NavigationDrawer extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => HomePage()));
         break;
       case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AboutCity()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AboutCity()));
         break;
       case 2:
         Navigator.push(
@@ -169,11 +156,10 @@ class NavigationDrawer extends StatelessWidget {
       tooltip: localization(buildContext).languageMenu, // Tooltip for the icon
       icon: Semantics(
         label: localization(buildContext).languageMenu,
-        child: Icon(
+        child: const Icon(
           Icons.language,
           color: Colors.white,
           textDirection: TextDirection.ltr,
-          semanticLabel: localization(buildContext).languageMenu,
         ),
       ),
       offset: const Offset(60, 40), // Adjust the vertical offset
@@ -189,14 +175,12 @@ class NavigationDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Semantics(
-                  label: e.flag,
                   child: Text(
                     e.flag,
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
                 Semantics(
-                  label: e.name,
                   child: Text(
                     e.name,
                   ),

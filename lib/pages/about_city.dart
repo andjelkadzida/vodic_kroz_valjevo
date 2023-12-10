@@ -13,10 +13,10 @@ class AboutCity extends StatelessWidget {
             child: Text(
               localization(context).aboutCity,
               style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w300,
-              ),
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: 1),
             )),
         excludeHeaderSemantics: true,
         centerTitle: true,

@@ -36,10 +36,10 @@ class Sights extends StatelessWidget {
           child: Text(
             localization(context).sights,
             style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w300,
-            ),
+                color: Colors.white,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w300,
+                letterSpacing: 1),
           ),
         ),
         excludeHeaderSemantics: true,
@@ -48,7 +48,6 @@ class Sights extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Semantics(
-        label: localization(context).sights,
         child: GridView.builder(
           semanticChildCount: imageUrls.length,
           itemCount: imageUrls.length,
@@ -83,30 +82,25 @@ class Sights extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Flexible(
-                      child: Semantics(
-                        label: 'Image ${index + 1}',
-                        image: true,
-                        child: Image.network(
-                          imageUrls[index],
-                          width: itemWidth.toDouble(),
-                          height: itemWidth.toDouble(),
-                          fit: BoxFit.cover,
-                          semanticLabel: 'Image ${index + 1}',
-                          errorBuilder: (BuildContext context, Object exception,
-                              StackTrace? stackTrace) {
-                            return Text(
-                                localization(context).imageNotAvailable);
-                          },
-                        ),
+                      child: Image.network(
+                        imageUrls[index],
+                        width: itemWidth.toDouble(),
+                        height: itemWidth.toDouble(),
+                        fit: BoxFit.cover,
+                        semanticLabel: 'Image ${index + 1}',
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Text(localization(context).imageNotAvailable);
+                        },
                       ),
                     ),
                     const SizedBox(height: 8.0),
                     SizedBox(
                       width: itemWidth.toDouble(),
                       height: 48.0,
-                      child: Semantics(
-                        button: true,
-                        onTap: () async {
+                      child: MaterialButton(
+                        materialTapTargetSize: MaterialTapTargetSize.padded,
+                        onPressed: () async {
                           textToSpeechConfig
                               .speak(localization(context).startNavigation);
                           await mapScreen.getCurrentLocation(context);
@@ -116,28 +110,16 @@ class Sights extends StatelessWidget {
                                 destinationCoordinates[index][1]);
                           }
                         },
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            textToSpeechConfig
-                                .speak(localization(context).startNavigation);
-                            await mapScreen.getCurrentLocation(context);
-                            if (index < destinationCoordinates.length) {
-                              await mapScreen.navigateToDestination(
-                                  destinationCoordinates[index][0],
-                                  destinationCoordinates[index][1]);
-                            }
-                          },
-                          child: Text(
-                            localization(context).startNavigation,
-                            semanticsLabel:
-                                localization(context).startNavigation,
-                            style: const TextStyle(
+                        child: Text(
+                          localization(context).startNavigation,
+                          semanticsLabel: localization(context).startNavigation,
+                          style: const TextStyle(
                               fontFamily: 'Roboto',
-                            ),
-                          ),
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 1.5),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -20,10 +20,10 @@ class HotelsAndRestaurants extends StatelessWidget {
               child: Text(
                 localization(context).restaurantsAndHotels,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w300,
-                ),
+                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300,
+                    letterSpacing: 1),
               )),
           excludeHeaderSemantics: true,
           centerTitle: true,

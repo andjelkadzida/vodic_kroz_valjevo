@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
 
   final MapScreen mapScreen = MapScreen();
-  final FlutterTts flutterTts = FlutterTts();
-
-  Future<void> _speak(String text) async {
-    await flutterTts.speak(text);
-  }
+  final TextToSpeechConfig textToSpeechConfig = TextToSpeechConfig();
 
   // Lista slika znamenitosti
   final List<String> imageUrls = [
@@ -46,6 +42,7 @@ class Sights extends StatelessWidget {
             ),
           ),
         ),
+        excludeHeaderSemantics: true,
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -110,7 +107,8 @@ class Sights extends StatelessWidget {
                       child: Semantics(
                         button: true,
                         onTap: () async {
-                          _speak(localization(context).startNavigation);
+                          textToSpeechConfig
+                              .speak(localization(context).startNavigation);
                           await mapScreen.getCurrentLocation(context);
                           if (index < destinationCoordinates.length) {
                             await mapScreen.navigateToDestination(
@@ -120,7 +118,8 @@ class Sights extends StatelessWidget {
                         },
                         child: ElevatedButton(
                           onPressed: () async {
-                            _speak(localization(context).startNavigation);
+                            textToSpeechConfig
+                                .speak(localization(context).startNavigation);
                             await mapScreen.getCurrentLocation(context);
                             if (index < destinationCoordinates.length) {
                               await mapScreen.navigateToDestination(

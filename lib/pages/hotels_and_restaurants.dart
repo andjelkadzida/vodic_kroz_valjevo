@@ -17,12 +17,15 @@ class HotelsAndRestaurants extends StatelessWidget {
       appBar: AppBar(
           title: Semantics(
               label: localization(context).restaurantsAndHotels,
-              child: Text(localization(context).restaurantsAndHotels,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w300,
-                  ))),
+              child: Text(
+                localization(context).restaurantsAndHotels,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w300,
+                ),
+              )),
+          excludeHeaderSemantics: true,
           centerTitle: true,
           backgroundColor: Colors.black,
           iconTheme:

@@ -15,19 +15,23 @@ class SportsAndRecreation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Semantics(
-              label: localization(context).sportRecreation,
-              child: Text(localization(context).sportRecreation,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w300,
-                  ))),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          iconTheme:
-              const IconThemeData(color: Colors.white) // Color of drawer icon
-          ),
+        title: Semantics(
+            label: localization(context).sportRecreation,
+            child: Text(
+              localization(context).sportRecreation,
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w300,
+              ),
+            )),
+        excludeHeaderSemantics: true,
+        centerTitle: true,
+        backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ), // Color of drawer icon
+      ),
     );
   }
 }

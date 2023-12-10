@@ -126,7 +126,6 @@ class NavigationDrawer extends StatelessWidget {
   // Header widget
   Widget headerWidget(BuildContext buildContext) {
     return Semantics(
-      label: localization(buildContext).cityName,
       child: SizedBox(
         width: MediaQuery.of(buildContext).size.width,
         child: Row(
@@ -141,6 +140,7 @@ class NavigationDrawer extends StatelessWidget {
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w700,
                 ),
+                semanticsLabel: localization(buildContext).cityName,
               ),
             ),
             languageWidget(buildContext),

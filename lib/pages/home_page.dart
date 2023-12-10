@@ -18,12 +18,16 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Semantics(
-              label: localization(context).appTitle,
-              child: Text(localization(context).appTitle,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w300))),
+              label: localization(context).homePage,
+              child: Text(
+                localization(context).homePage,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w300,
+                ),
+              )),
+          excludeHeaderSemantics: true,
           centerTitle: true,
           backgroundColor: Colors.black,
           iconTheme:

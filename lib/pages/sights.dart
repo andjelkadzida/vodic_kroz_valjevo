@@ -38,10 +38,6 @@ class Sights extends StatelessWidget {
   }
 
   Widget buildSightsDataWidget(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final itemWidth = (screenWidth / 2).floor();
-
-    int crossAxisCount = (screenWidth / itemWidth).floor();
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: _getSightsDataFromDatabase(localization(context).localeName),
       builder: (context, snapshot) {
@@ -50,98 +46,114 @@ class Sights extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No data available'));
+          return const Center(child: Text('No data available!'));
         } else {
-          final List<Map<String, dynamic>> sightsData = snapshot.data!;
-
-          return ListView(
-            children: [
-              GridView.builder(
-                shrinkWrap: true,
-                itemCount: sightsData.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount > 0 ? crossAxisCount : 1,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  final Uint8List imageBytes =
-                      sightsData[index]['sights_image_path'];
-                  final String title = sightsData[index]['title'];
-                  final double destLatitude = sightsData[index]['latitude'];
-                  final double destLongitude = sightsData[index]['longitude'];
-
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onLongPress: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext dialogContext) {
-                              return Dialog(
-                                child: InteractiveViewer(
-                                  boundaryMargin: const EdgeInsets.all(20.0),
-                                  minScale: 0.5,
-                                  maxScale: 5.0,
-                                  child: Image.memory(
-                                    imageBytes,
-                                    fit: BoxFit.cover,
-                                    semanticLabel: title,
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              SizedBox(
-                                width: itemWidth.toDouble(),
-                                height: itemWidth.toDouble(),
-                                child: Image.memory(
-                                  imageBytes,
-                                  fit: BoxFit.fitWidth,
-                                  semanticLabel: title,
-                                ),
-                              ),
-                              const SizedBox(height: 8.0),
-                              SizedBox(
-                                width: itemWidth.toDouble(),
-                                height: 48.0,
-                                child: MaterialButton(
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.padded,
-                                  onPressed: () async {
-                                    print('Button pressed');
-                                    textToSpeechConfig.speak(
-                                        localization(context).startNavigation);
-                                    await mapScreen.getCurrentLocation(context);
-                                    await mapScreen.navigateToDestination(
-                                        destLatitude, destLongitude);
-                                  },
-                                  child: Text(
-                                    localization(context).startNavigation,
-                                    style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ],
-          );
+          return buildSightsGrid(snapshot.data!);
         }
+      },
+    );
+  }
+
+  Widget buildGridItem(double itemWidth, Uint8List imageBytes, String title,
+      double destLatitude, double destLongitude, BuildContext context) {
+    return GestureDetector(
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return Dialog(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  InteractiveViewer(
+                    maxScale: 5.0,
+                    child: Image.memory(
+                      imageBytes,
+                      fit: BoxFit.cover,
+                      semanticLabel: title,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: SizedBox(
+                width: itemWidth,
+                height: itemWidth,
+                child: Image.memory(
+                  imageBytes,
+                  fit: BoxFit.fitWidth,
+                  semanticLabel: title,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            SizedBox(
+              width: itemWidth,
+              height: 48.0,
+              child: MaterialButton(
+                onPressed: () async {
+                  textToSpeechConfig
+                      .speak(localization(context).startNavigation);
+                  await mapScreen.getCurrentLocation(context);
+                  await mapScreen.navigateToDestination(
+                      destLatitude, destLongitude);
+                },
+                child: Text(
+                  localization(context).startNavigation,
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildSightsGrid(List<Map<String, dynamic>> sightsData) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final itemWidth = (screenWidth / 2).floorToDouble();
+
+        return GridView.builder(
+          shrinkWrap: true,
+          itemCount: sightsData.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            final Uint8List imageBytes = sightsData[index]['sights_image_path'];
+            final String title = sightsData[index]['title'];
+            final double destLatitude = sightsData[index]['latitude'];
+            final double destLongitude = sightsData[index]['longitude'];
+
+            return buildGridItem(itemWidth, imageBytes, title, destLatitude,
+                destLongitude, context);
+          },
+        );
       },
     );
   }

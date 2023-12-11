@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:vodic_kroz_valjevo/database_config/db_helper.dart';
+import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';

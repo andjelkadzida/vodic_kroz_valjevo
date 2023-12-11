@@ -1,0 +1,76 @@
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+class DatabaseHelper {
+  static late Database _database;
+
+  static Future<Database> getNamedDatabase() async {
+    String dbName = 'valjevo_tour_guide.db';
+    String path = join(await getDatabasesPath(), dbName);
+
+    _database = await openDatabase(path,
+        version: 1,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade,
+        onDowngrade: _onDowngrade);
+
+    return _database;
+  }
+
+  static void _onCreate(Database db, int version) async {
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS Sights (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sights_image_path BLOB,
+            latitude REAL NOT NULL,
+            longitude REAL NOT NULL,
+            title_en TEXT,
+            title_de TEXT,
+            title_sr TEXT,
+            title_sr_Cyrl TEXT,
+            title_sr_Latn TEXT,
+            description_en TEXT,
+            description_de TEXT,
+            description_sr TEXT,
+            description_sr_Cyrl TEXT,
+            description_sr_Latn TEXT
+          )
+        ''');
+
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS SportsAndRecreation (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sports_image_path BLOB,
+            title_en TEXT,
+            title_de TEXT,
+            title_sr TEXT,
+            title_sr_Cyrl TEXT,
+            title_sr_Latn TEXT,
+            description_en TEXT,
+            description_de TEXT,
+            description_sr TEXT,
+            description_sr_Cyrl TEXT,
+            description_sr_Latn TEXT
+          )
+        ''');
+  }
+
+  static void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < newVersion) {
+      await db.execute('''
+          DROP TABLE IF EXISTS Sights;
+          DROP TABLE IF EXISTS SportsAndRecreation;
+        ''');
+      _onCreate(db, newVersion);
+    }
+  }
+
+  static void _onDowngrade(
+      Database db, int currentVersion, int newVersion) async {
+    currentVersion = await db.getVersion();
+    if (currentVersion > newVersion) {
+      db.delete(db.path);
+      _onCreate(db, newVersion);
+    }
+  }
+}

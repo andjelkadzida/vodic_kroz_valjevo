@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:vodic_kroz_valjevo/database_config/db_helper.dart';
+import 'package:vodic_kroz_valjevo/database_config/sights_data.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
-  runApp(const VodicKrozValjevo());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize the database
+  final db = await DatabaseHelper.getNamedDatabase();
+  runApp(VodicKrozValjevo(database: db));
 }
 
 class VodicKrozValjevo extends StatefulWidget {
-  const VodicKrozValjevo({Key? key}) : super(key: key);
+  final Database database;
+
+  const VodicKrozValjevo({Key? key, required this.database}) : super(key: key);
 
   @override
   State<VodicKrozValjevo> createState() => _VodicKrozValjevo();
@@ -25,6 +34,18 @@ class VodicKrozValjevo extends StatefulWidget {
 class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   Locale? _lang;
   final flutterTts = FlutterTts();
+  late SightsRepository sightsRepo;
+
+  @override
+  void initState() {
+    super.initState();
+    sightsRepo = SightsRepository(widget.database);
+    _initializeData();
+  }
+
+  void _initializeData() async {
+    await sightsRepo.dataInsertion();
+  }
 
   setLanguage(Locale lang) {
     setState(() {

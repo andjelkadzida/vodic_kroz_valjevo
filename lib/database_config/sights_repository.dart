@@ -71,7 +71,7 @@ class SightsRepository {
         'longitude': 19.885692396117847,
         'titles': {
           'en': 'Valjevo Museum',
-          'de': 'Titel auf Deutsch',
+          'de': 'Museum von Valjevo',
           'sr': 'Naslov na srpskom latinicom',
           'sr_Cyrl': 'Наслов на српском ћирилицом',
           'sr_Latn': 'Naslov na srpskom latinicom',

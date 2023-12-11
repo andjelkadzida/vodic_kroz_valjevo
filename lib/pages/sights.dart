@@ -62,26 +62,52 @@ class Sights extends StatelessWidget {
           context: context,
           builder: (BuildContext dialogContext) {
             return Dialog(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
+              child: SizedBox(
+                width: MediaQuery.of(dialogContext).size.width * 0.8,
+                height: MediaQuery.of(dialogContext).size.height * 0.35,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.memory(
+                          imageBytes,
+                          semanticLabel: title,
+                        ),
+                      ),
                     ),
-                  ),
-                  InteractiveViewer(
-                    maxScale: 5.0,
-                    child: Image.memory(
-                      imageBytes,
-                      fit: BoxFit.cover,
-                      semanticLabel: title,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            title,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 1.0,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Flexible(
+                          child: IconButton(
+                            onPressed: () {
+                              textToSpeechConfig.speak(title);
+                            },
+                            icon: Icon(Icons.volume_up_sharp,
+                                semanticLabel: title),
+                            enableFeedback: true,
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
@@ -114,6 +140,7 @@ class Sights extends StatelessWidget {
                   await mapScreen.navigateToDestination(
                       destLatitude, destLongitude);
                 },
+                enableFeedback: true,
                 child: Text(
                   localization(context).startNavigation,
                   style: const TextStyle(
@@ -157,12 +184,13 @@ class Sights extends StatelessWidget {
       },
     );
   }
+}
 
-  Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
-      String languageCode) async {
-    final Database db = await DatabaseHelper.getNamedDatabase();
+Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
+    String languageCode) async {
+  final Database db = await DatabaseHelper.getNamedDatabase();
 
-    final List<Map<String, dynamic>> data = await db.rawQuery('''
+  final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
         sights_image_path, 
         title_$languageCode AS title,
@@ -172,6 +200,5 @@ class Sights extends StatelessWidget {
       FROM 
         Sights
     ''');
-    return data;
-  }
+  return data;
 }

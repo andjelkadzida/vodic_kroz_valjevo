@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -11,7 +11,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), dbName);
 
     _database = await openDatabase(path,
-        version: 1,
+        version: 3,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
         onDowngrade: _onDowngrade);
@@ -47,12 +47,7 @@ class DatabaseHelper {
             title_de TEXT,
             title_sr TEXT,
             title_sr_Cyrl TEXT,
-            title_sr_Latn TEXT,
-            description_en TEXT,
-            description_de TEXT,
-            description_sr TEXT,
-            description_sr_Cyrl TEXT,
-            description_sr_Latn TEXT
+            title_sr_Latn TEXT
           )
         ''');
   }
@@ -78,5 +73,11 @@ class DatabaseHelper {
       }
       _onCreate(db, newVersion);
     }
+  }
+
+  // Image loader
+  static Future<Uint8List> loadImageAsUint8List(String imagePath) async {
+    ByteData data = await rootBundle.load(imagePath);
+    return data.buffer.asUint8List();
   }
 }

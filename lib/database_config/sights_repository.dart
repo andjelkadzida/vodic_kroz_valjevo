@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
 
 class SightsRepository {
   late Database _databaseInstance;
@@ -8,13 +9,20 @@ class SightsRepository {
     _databaseInstance = database;
   }
 
+// Check if data exists returns true if sights data exists, false otherwise
+  Future<bool> checkSightsDataExist() async {
+    List<Map<String, dynamic>> sights = await _databaseInstance.query('Sights');
+    return sights.isNotEmpty;
+  }
+
   Future<void> bulkInsertSightsData(List<Map<String, dynamic>> dataList) async {
     // Begin the transaction
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
       for (var data in dataList) {
         // Load image as Uint8List
-        Uint8List imageBytes = await _loadImageAsUint8List(data['imagePath']);
+        Uint8List imageBytes =
+            await DatabaseHelper.loadImageAsUint8List(data['imagePath']);
 
         // Add insert operation to the batch
         batch.rawInsert('''
@@ -55,12 +63,7 @@ class SightsRepository {
     });
   }
 
-  Future<Uint8List> _loadImageAsUint8List(String imagePath) async {
-    ByteData data = await rootBundle.load(imagePath);
-    return data.buffer.asUint8List();
-  }
-
-  Future<void> dataInsertion() async {
+  Future<void> sightsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
       {
         'imagePath': 'images/muzejLogo.png',

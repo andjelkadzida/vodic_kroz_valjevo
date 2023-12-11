@@ -3,6 +3,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
 import 'package:vodic_kroz_valjevo/database_config/sights_repository.dart';
+import 'package:vodic_kroz_valjevo/database_config/sports_repository.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,16 +36,27 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   Locale? _lang;
   final flutterTts = FlutterTts();
   late SightsRepository sightsRepo;
+  late SportsRepository sportsRepo;
 
   @override
   void initState() {
     super.initState();
     sightsRepo = SightsRepository(widget.database);
+    sportsRepo = SportsRepository(widget.database);
     _initializeData();
   }
 
   void _initializeData() async {
-    await sightsRepo.dataInsertion();
+    bool sportsExist = await sportsRepo.chechSportsDataExists();
+    bool sightsExist = await sightsRepo.checkSightsDataExist();
+
+    if (!sportsExist) {
+      await sportsRepo.sportsDataInsertion();
+    }
+
+    if (!sightsExist) {
+      await sightsRepo.sightsDataInsertion();
+    }
   }
 
   setLanguage(Locale lang) {

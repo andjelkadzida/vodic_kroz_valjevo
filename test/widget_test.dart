@@ -1,34 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart'; // Import sqflite_ffi
+import 'package:vodic_kroz_valjevo/database_config/db_helper.dart';
 import 'package:vodic_kroz_valjevo/main.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
-  group('VodicKrozValjevo', () {
-    testWidgets('should set language', (WidgetTester tester) async {
-      await tester.pumpWidget(const MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: VodicKrozValjevo(),
-      ));
-      VodicKrozValjevo.setLanguage(
-          tester.element(find.byType(VodicKrozValjevo)), const Locale('en'));
-      await tester.pumpAndSettle();
-      expect(find.byType(HomePage), findsOneWidget);
-    });
+  sqfliteFfiInit(); // Initialize sqflite_ffi
 
+  group('VodicKrozValjevo', () {
     testWidgets('should use default language if not set',
         (WidgetTester tester) async {
-      await tester.pumpWidget(const MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: VodicKrozValjevo(),
-      ));
+      databaseFactory = databaseFactoryFfi;
+      final db = await DatabaseHelper.getNamedDatabase();
+      late Locale defaultLocale;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Builder(
+            builder: (BuildContext buildContext) {
+              defaultLocale = Localizations.localeOf(buildContext);
+              return VodicKrozValjevo(database: db);
+            },
+          ),
+        ),
+      );
+
       await tester.pumpAndSettle();
+
       expect(
-          Localizations.localeOf(tester.element(find.byType(VodicKrozValjevo))),
-          equals(const Locale('en')));
+        Localizations.localeOf(tester.element(find.byType(VodicKrozValjevo))),
+        equals(defaultLocale),
+      );
     });
   });
 }

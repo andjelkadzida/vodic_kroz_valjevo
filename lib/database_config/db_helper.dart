@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -67,9 +69,13 @@ class DatabaseHelper {
 
   static void _onDowngrade(
       Database db, int currentVersion, int newVersion) async {
+    File dbFile = File(db.path);
+
     currentVersion = await db.getVersion();
     if (currentVersion > newVersion) {
-      db.delete(db.path);
+      if (await dbFile.exists()) {
+        await dbFile.delete();
+      }
       _onCreate(db, newVersion);
     }
   }

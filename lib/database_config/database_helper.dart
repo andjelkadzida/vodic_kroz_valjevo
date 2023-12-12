@@ -11,7 +11,8 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), dbName);
 
     _database = await openDatabase(path,
-        version: 3,
+        version: 1,
+        readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
         onDowngrade: _onDowngrade);

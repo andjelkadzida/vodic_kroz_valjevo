@@ -10,7 +10,7 @@ class SportsRepository {
   }
 
   // Check if data exists returns true if sights data exists, false otherwise
-  Future<bool> chechSportsDataExists() async {
+  Future<bool> checkSportsDataExists() async {
     List<Map<String, dynamic>> sports =
         await _databaseInstance.query('SportsAndRecreation');
     return sports.isNotEmpty;

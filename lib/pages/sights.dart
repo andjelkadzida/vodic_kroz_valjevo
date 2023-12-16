@@ -10,7 +10,6 @@ import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
   final MapScreen mapScreen = MapScreen();
-  final TextToSpeechConfig textToSpeechConfig = TextToSpeechConfig();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +96,7 @@ class Sights extends StatelessWidget {
                         Flexible(
                           child: IconButton(
                             onPressed: () {
-                              textToSpeechConfig.speak(title);
+                              TextToSpeechConfig.instance.speak(title);
                             },
                             icon: Icon(Icons.volume_up_sharp,
                                 semanticLabel: title),
@@ -134,9 +133,9 @@ class Sights extends StatelessWidget {
               height: 48.0,
               child: MaterialButton(
                 onPressed: () async {
-                  textToSpeechConfig
+                  TextToSpeechConfig.instance
                       .speak(localization(context).startNavigation);
-                  await mapScreen.getCurrentLocation(context);
+                  await mapScreen.getCurrentLocation();
                   await mapScreen.navigateToDestination(
                       destLatitude, destLongitude);
                 },
@@ -144,10 +143,10 @@ class Sights extends StatelessWidget {
                 child: Text(
                   localization(context).startNavigation,
                   style: const TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1.5,
-                  ),
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.5,
+                      color: Colors.black),
                 ),
               ),
             ),

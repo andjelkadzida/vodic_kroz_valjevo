@@ -8,32 +8,46 @@ import 'package:open_store/open_store.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 class MapScreen {
-  late StreamSubscription<Position> _positionStream;
-  Position? currentPosition; // Store current position
+  // Store current position
+  Position? currentPosition;
+
+  MapScreen._privateConstructor();
+  static final MapScreen _instance = MapScreen._privateConstructor();
+  factory MapScreen() {
+    return _instance;
+  }
 
   // Obtaining user's location
-  Future<void> getCurrentLocation(BuildContext buildContext) async {
+  Future<void> getCurrentLocation() async {
     var gpsEnabled = await Geolocator.isLocationServiceEnabled();
     var gpsPermission = await Geolocator.checkPermission();
 
     // Check if GPS is enabled and permissions granted
-    if (gpsPermission == LocationPermission.denied) {
+    if (gpsPermission == LocationPermission.denied ||
+        gpsPermission == LocationPermission.deniedForever) {
       gpsPermission = await Geolocator.requestPermission();
-    } else if (!gpsEnabled) {
+    }
+
+    if (!gpsEnabled) {
       await Geolocator.openLocationSettings();
-    } else if (gpsEnabled &&
+      return;
+    }
+
+    // Check if permission is granted
+    if (gpsEnabled &&
         (gpsPermission == LocationPermission.always ||
             gpsPermission == LocationPermission.whileInUse)) {
       var position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
-      currentPosition = position; // Update the current position
-    } else {
-      showLocationDeniedForeverDialog(buildContext);
+      // Update the current position
+      currentPosition = position;
     }
   }
 
   Future<void> navigateToDestination(
       double destinationLatitude, double destinationLongitude) async {
+    await getCurrentLocation();
+
     if (currentPosition != null) {
       // Show installed maps application
       final availableMaps = await MapLauncher.installedMaps;

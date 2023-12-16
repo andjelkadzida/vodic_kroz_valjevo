@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
 import 'package:vodic_kroz_valjevo/database_config/sights_repository.dart';
 import 'package:vodic_kroz_valjevo/database_config/sports_repository.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 import 'package:vodic_kroz_valjevo/pages/home_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +49,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   }
 
   void _initializeData() async {
-    bool sportsExist = await sportsRepo.chechSportsDataExists();
+    bool sportsExist = await sportsRepo.checkSportsDataExists();
     bool sightsExist = await sightsRepo.checkSightsDataExist();
 
     if (!sportsExist) {
@@ -62,6 +64,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   setLanguage(Locale lang) {
     setState(() {
       _lang = lang;
+      TextToSpeechConfig.instance.setLanguage(lang.languageCode);
     });
   }
 
@@ -73,15 +76,14 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
 
   @override
   Widget build(BuildContext context) {
-    // Flutter Text-To-Speech voice configuration
-    flutterTts.setLanguage(COUNTRY_CODE);
-    flutterTts.setSpeechRate(0.5);
-    flutterTts.setVolume(1.0);
-    flutterTts.setPitch(1.0);
-
     return MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       locale: _lang,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

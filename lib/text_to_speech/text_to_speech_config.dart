@@ -1,8 +1,21 @@
 import 'package:flutter_tts/flutter_tts.dart';
 
 class TextToSpeechConfig {
+  static final TextToSpeechConfig _instance = TextToSpeechConfig._internal();
   final FlutterTts flutterTts = FlutterTts();
   bool isPaused = false;
+
+  TextToSpeechConfig._internal();
+
+  static TextToSpeechConfig get instance => _instance;
+
+  Future<void> setLanguage(String languageCode) async {
+    flutterTts.setSpeechRate(0.5);
+    flutterTts.setVolume(1.0);
+    flutterTts.setPitch(1.0);
+
+    await flutterTts.setLanguage(languageCode);
+  }
 
   Future<void> speak(String text) async {
     // Setting configurations

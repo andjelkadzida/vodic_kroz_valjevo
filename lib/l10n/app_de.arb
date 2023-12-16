@@ -4,6 +4,7 @@
     "homePage": "Startseite",
     "aboutCity": "Über Stadt",
     "sights": "Sehenswürdigkeiten",
+    "sight": "Sehenswürdigkeit:",
     "sportRecreation": "Sport & Erholung",
     "restaurantsAndHotels": "Hotels & Gaststätten",
     "language": "Sprache",
@@ -18,8 +19,16 @@
     "imageNotAvailable": "Bild ist nicht verfügbar",
     "navigateToDestination": "Navigieren Sie zum Ziel",
     "startNavigation": "Navigation starten",
+    "navigateTo": "Navigieren zu",
     "locationUnavailable": "Standort nicht verfügbar",
     "locationUnavailableMsg": "Oops! Wir können Ihren Standort im Moment nicht erkennen. Bitte überprüfen Sie Ihre Einstellungen oder versuchen Sie es später erneut.",
     "cancel": "Abbrechen",
-    "openSettings": "Einstellungen"
+    "openSettings": "Einstellungen",
+    "image": "Build von",
+    "loading": "Daten werden geladen, bitte warten...",
+    "errorLoadingData": "Fehler beim Laden der Daten aufgetreten.",
+    "noDataAvailable": "Keine Daten verfügbar!",
+    "error": "Fehler",
+    "tapForDetails": "Tippen, um Details anzuzeigen.",
+    "nameOfSight": "Name der Sehenswürdigkeit:"
 }

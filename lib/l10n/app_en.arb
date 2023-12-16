@@ -4,6 +4,7 @@
     "homePage": "Home",
     "aboutCity": "About city",
     "sights": "Sights",
+    "sight": "Sight:",
     "sportRecreation": "Sport & recreation",
     "restaurantsAndHotels": "Hotels & restaurants",
     "language": "Language",
@@ -18,8 +19,16 @@
     "imageNotAvailable": "Image is not available",
     "navigateToDestination": "Navigate to destination",
     "startNavigation": "Start navigation",
+    "navigateTo": "Navigate to",
     "locationUnavailable": "Location unavailable",
     "locationUnavailableMsg": "Oops! We're unable to detect your location at the moment. Please check your settings or try again later.",
     "cancel": "Cancel",
-    "openSettings": "Settings"
+    "openSettings": "Settings",
+    "image": "Image of",
+    "loading": "Loading data, please wait...",
+    "errorLoadingData": "Error occured during loading data.",
+    "noDataAvailable": "No data available!",
+    "error": "Error",
+    "tapForDetails": "Tap to view details.",
+    "nameOfSight": "Landmark name:"
 }

@@ -4,6 +4,7 @@
     "homePage": "Почетна",
     "aboutCity": "О граду",
     "sights": "Знаменитости",
+    "sight": "Знаменитост:",
     "sportRecreation": "Спорт и рекреација",
     "restaurantsAndHotels": "Ресторани и преноћиште",
     "language": "Језик",
@@ -19,8 +20,16 @@
     "imageNotAvailable": "Слика није доступна",
     "navigateToDestination": "Навигација до одредишта",
     "startNavigation": "Покрените навигацију",
+    "navigateTo": "Води ме до",
     "locationUnavailable": "Локација није доступна",
     "locationUnavailableMsg": "Упс! Тренутно не можемо да детектујемо Вашу локацију. Проверите подешавања или покушајте касније.",
     "cancel": "Откажи",
-    "openSettings": "Подешавања"
+    "openSettings": "Подешавања",
+    "image": "Слика",
+    "loading": "Учитавање података, молимо сачекајте...",
+    "errorLoadingData": "Дошло је до грешке приликом учитавања података.",
+    "noDataAvailable": "Подаци нису доступни!",
+    "error": "Грешка",
+    "tapForDetails": "Додирните за приказ детаља.",
+    "nameOfSight": "Назив знаменитости:"
 }

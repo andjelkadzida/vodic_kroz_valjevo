@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
@@ -15,19 +14,15 @@ class Sights extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Semantics(
-          label: localization(context).sights,
-          child: Text(
-            localization(context).sights,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w300,
-              letterSpacing: 1,
-            ),
+        title: Text(
+          localization(context).sights,
+          style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w300,
+            letterSpacing: 1,
           ),
         ),
-        excludeHeaderSemantics: true,
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -41,11 +36,22 @@ class Sights extends StatelessWidget {
       future: _getSightsDataFromDatabase(localization(context).localeName),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Semantics(
+            label: localization(context).loading,
+            child: const Center(child: CircularProgressIndicator()),
+          );
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Semantics(
+            label: localization(context).errorLoadingData,
+            child: Center(
+                child: Text(
+                    '${localization(context).errorLoadingData}: ${snapshot.error}')),
+          );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No data available!'));
+          return Semantics(
+            label: localization(context).noDataAvailable,
+            child: Center(child: Text(localization(context).noDataAvailable)),
+          );
         } else {
           return buildSightsGrid(snapshot.data!);
         }
@@ -53,120 +59,18 @@ class Sights extends StatelessWidget {
     );
   }
 
-  Widget buildGridItem(double itemWidth, Uint8List imageBytes, String title,
-      double destLatitude, double destLongitude, BuildContext context) {
-    return GestureDetector(
-      onLongPress: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return Dialog(
-              child: SizedBox(
-                width: MediaQuery.of(dialogContext).size.width * 0.8,
-                height: MediaQuery.of(dialogContext).size.height * 0.35,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.memory(
-                          imageBytes,
-                          semanticLabel: title,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            title,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1.0,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Flexible(
-                          child: IconButton(
-                            onPressed: () {
-                              TextToSpeechConfig.instance.speak(title);
-                            },
-                            icon: Icon(Icons.volume_up_sharp,
-                                semanticLabel: title),
-                            enableFeedback: true,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-      child: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: SizedBox(
-                width: itemWidth,
-                height: itemWidth,
-                child: Image.memory(
-                  imageBytes,
-                  fit: BoxFit.fitWidth,
-                  semanticLabel: title,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8.0),
-            SizedBox(
-              width: itemWidth,
-              height: 48.0,
-              child: MaterialButton(
-                onPressed: () async {
-                  TextToSpeechConfig.instance
-                      .speak(localization(context).startNavigation);
-                  await mapScreen.getCurrentLocation();
-                  await mapScreen.navigateToDestination(
-                      destLatitude, destLongitude);
-                },
-                enableFeedback: true,
-                child: Text(
-                  localization(context).startNavigation,
-                  style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.5,
-                      color: Colors.black),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget buildSightsGrid(List<Map<String, dynamic>> sightsData) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
-        final itemWidth = (screenWidth / 2).floorToDouble();
+        int crossAxisCount = screenWidth < 600 ? 2 : 4;
+        double itemWidth = screenWidth / crossAxisCount - 16;
 
         return GridView.builder(
           shrinkWrap: true,
           itemCount: sightsData.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
           ),
@@ -183,21 +87,142 @@ class Sights extends StatelessWidget {
       },
     );
   }
-}
 
-Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
-    String languageCode) async {
-  final Database db = await DatabaseHelper.getNamedDatabase();
+  Widget buildGridItem(double itemWidth, Uint8List imageBytes, String title,
+      double destLatitude, double destLongitude, BuildContext context) {
+    final textScaler = MediaQuery.textScalerOf(context);
 
-  final List<Map<String, dynamic>> data = await db.rawQuery('''
+    return GestureDetector(
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return Dialog(
+              child: SizedBox(
+                width: MediaQuery.of(dialogContext).size.width * 0.8,
+                height: MediaQuery.of(dialogContext).size.height * 0.35,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Semantics(
+                        label: 'Enlarged image of $title',
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.memory(
+                            imageBytes,
+                            fit: BoxFit.contain,
+                            semanticLabel: 'Enlarged image of $title',
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Semantics(
+                            label: '${localization(context).nameOfSight}$title',
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                fontSize: textScaler.scale(18),
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 1.0,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Semantics(
+                          // label: 'Speak title',
+                          child: IconButton(
+                            onPressed: () {
+                              TextToSpeechConfig.instance.speak(title);
+                            },
+                            icon: const Icon(Icons.volume_up_sharp),
+                            enableFeedback: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+      child: Semantics(
+        container: true,
+        label:
+            '${localization(context).sight} $title. ${localization(context).tapForDetails}',
+        child: Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: Semantics(
+                  image: true,
+                  label: title,
+                  child: Image.memory(
+                    imageBytes,
+                    fit: BoxFit.contain,
+                    semanticLabel: title,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Semantics(
+                  button: true,
+                  label: '${localization(context).navigateTo}$title',
+                  child: MaterialButton(
+                    onPressed: () async {
+                      TextToSpeechConfig.instance
+                          .speak(localization(context).startNavigation);
+                      await mapScreen.getCurrentLocation();
+                      await mapScreen.navigateToDestination(
+                          destLatitude, destLongitude);
+                    },
+                    minWidth: itemWidth,
+                    height: 48.0,
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      localization(context).startNavigation,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
+      String languageCode) async {
+    final Database db = await DatabaseHelper.getNamedDatabase();
+
+    final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
         sights_image_path, 
         title_$languageCode AS title,
-        description_$languageCode AS description,
         latitude,
         longitude
       FROM 
         Sights
     ''');
-  return data;
+    return data;
+  }
 }

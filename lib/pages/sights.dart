@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
+import 'package:vodic_kroz_valjevo/pages/sight_details_page.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 import '../navigation/navigation_drawer.dart' as Nav_Drawer;
@@ -75,19 +76,26 @@ class Sights extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final Uint8List imageBytes = sightsData[index]['sights_image_path'];
             final String title = sightsData[index]['title'];
+            final String description = sightsData[index]['description'];
             final double destLatitude = sightsData[index]['latitude'];
             final double destLongitude = sightsData[index]['longitude'];
 
             return buildGridItem(itemWidth, imageBytes, title, destLatitude,
-                destLongitude, context);
+                destLongitude, description, context);
           },
         );
       },
     );
   }
 
-  Widget buildGridItem(double itemWidth, Uint8List imageBytes, String title,
-      double destLatitude, double destLongitude, BuildContext context) {
+  Widget buildGridItem(
+      double itemWidth,
+      Uint8List imageBytes,
+      String title,
+      double destLatitude,
+      double destLongitude,
+      String description,
+      BuildContext context) {
     final textScaler = MediaQuery.textScalerOf(context);
 
     return GestureDetector(
@@ -154,7 +162,6 @@ class Sights extends StatelessWidget {
           },
         );
       },
-      onTap: () => {MaterialPageRoute(builder: (context) => Sights())},
       child: Semantics(
         container: true,
         label:
@@ -164,13 +171,24 @@ class Sights extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Semantics(
-                  image: true,
-                  label: title,
-                  child: Image.memory(
-                    imageBytes,
-                    fit: BoxFit.contain,
-                    semanticLabel: '${localization(context).sight} $title',
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => SightDetailsPage(
+                              imageBytes: imageBytes,
+                              title: title,
+                              description: description)),
+                    );
+                  },
+                  child: Semantics(
+                    image: true,
+                    label: title,
+                    child: Image.memory(
+                      imageBytes,
+                      fit: BoxFit.contain,
+                      semanticLabel: '${localization(context).sight} $title',
+                    ),
                   ),
                 ),
               ),
@@ -217,6 +235,7 @@ class Sights extends StatelessWidget {
       SELECT 
         sights_image_path, 
         title_$languageCode AS title,
+        description_$languageCode AS description,
         latitude,
         longitude
       FROM 

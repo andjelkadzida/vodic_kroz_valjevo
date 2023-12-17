@@ -7,6 +7,8 @@ import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
 import 'package:vodic_kroz_valjevo/pages/sights.dart';
 import 'package:vodic_kroz_valjevo/pages/sport_and_recreation.dart';
+import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class NavigationDrawer extends StatelessWidget {
         child: Material(
           color: Colors.black,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
             child: Column(
               children: [
                 headerWidget(context),
@@ -28,40 +30,11 @@ class NavigationDrawer extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 Expanded(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      drawerItemWidget(
-                        context,
-                        label: localization(context).homePage,
-                        icon: Icons.home,
-                        index: 0,
-                      ),
-                      drawerItemWidget(
-                        context,
-                        label: localization(context).aboutCity,
-                        icon: Icons.info,
-                        index: 1,
-                      ),
-                      drawerItemWidget(
-                        context,
-                        label: localization(context).sights,
-                        icon: Icons.location_city,
-                        index: 2,
-                      ),
-                      drawerItemWidget(
-                        context,
-                        label: localization(context).sportRecreation,
-                        icon: Icons.sports_gymnastics,
-                        index: 3,
-                      ),
-                      drawerItemWidget(
-                        context,
-                        label: localization(context).restaurantsAndHotels,
-                        icon: Icons.restaurant_menu,
-                        index: 4,
-                      ),
-                    ],
+                  child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return drawerItemWidget(context, index);
+                    },
                   ),
                 ),
               ],
@@ -72,30 +45,55 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 
-  Widget drawerItemWidget(BuildContext context,
-      {required String label, required IconData icon, required int index}) {
+  Widget drawerItemWidget(BuildContext context, int index) {
+    final textScaler = MediaQuery.textScalerOf(context);
+
+    String label;
+    IconData icon;
+    switch (index) {
+      case 0:
+        label = localization(context).homePage;
+        icon = Icons.home;
+        break;
+      case 1:
+        label = localization(context).aboutCity;
+        icon = Icons.info;
+        break;
+      case 2:
+        label = localization(context).sights;
+        icon = Icons.location_city;
+        break;
+      case 3:
+        label = localization(context).sportRecreation;
+        icon = Icons.sports_gymnastics;
+        break;
+      case 4:
+        label = localization(context).restaurantsAndHotels;
+        icon = Icons.restaurant_menu;
+        break;
+      default:
+        label = localization(context).close;
+        icon = Icons.close;
+    }
+
     return Semantics(
       button: true,
+      label: label,
       child: ListTile(
-        title: Text(label,
-            style: const TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w500)),
+        title:
+            Text(label, style: AppStyles.navigationListItemStyle(textScaler)),
         leading: Icon(
           icon,
           color: Colors.white,
         ),
-        onTap: () => onItemPressed(context, index: index),
+        onTap: () => onItemPressed(context, index),
       ),
     );
   }
 
-  // Routing navigation
-  void onItemPressed(BuildContext context, {required int index}) {
+  void onItemPressed(BuildContext context, int index) {
     Navigator.pop(context);
-
+    // Implement navigation based on index
     switch (index) {
       case 0:
         Navigator.push(
@@ -119,53 +117,51 @@ class NavigationDrawer extends StatelessWidget {
         break;
       default:
         Navigator.pop(context);
-        break;
     }
   }
 
-  // Header widget
-  Widget headerWidget(BuildContext buildContext) {
+  Widget headerWidget(BuildContext context) {
+    final textScaler = MediaQuery.textScalerOf(context);
+
     return Semantics(
       child: SizedBox(
-        width: MediaQuery.of(buildContext).size.width,
+        width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Text(
-                localization(buildContext).cityName,
-                style: const TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
-                ),
-                semanticsLabel: localization(buildContext).cityName,
+                localization(context).cityName,
+                style: AppStyles.headerWidgetStyle(textScaler),
+                semanticsLabel: localization(context).cityName,
               ),
             ),
-            languageWidget(buildContext),
+            languageWidget(context),
           ],
         ),
       ),
     );
   }
 
-  // Language dropdown widget
-  Widget languageWidget(BuildContext buildContext) {
+  Widget languageWidget(BuildContext context) {
+    final textScaler = MediaQuery.textScalerOf(context);
+
     return PopupMenuButton<Language>(
-      tooltip: localization(buildContext).languageMenu, // Tooltip for the icon
+      tooltip: localization(context).languageMenu,
       icon: Semantics(
-        label: localization(buildContext).languageMenu,
+        label: localization(context).languageMenu,
         child: const Icon(
           Icons.language,
           color: Colors.white,
           textDirection: TextDirection.ltr,
         ),
       ),
-      offset: const Offset(60, 40), // Adjust the vertical offset
+      offset: const Offset(60, 40),
       onSelected: (Language language) async {
         Locale locale = await setLocale(language.scriptCode);
-        VodicKrozValjevo.setLanguage(buildContext, locale);
+        VodicKrozValjevo.setLanguage(context, locale);
+        await TextToSpeechConfig.instance
+            .speak(localization(context).selectedLang(language.name));
       },
       itemBuilder: (BuildContext context) {
         return Language.languageList().map((Language e) {
@@ -174,13 +170,13 @@ class NavigationDrawer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Semantics(
-                  child: Text(
-                    e.flag,
-                    style: const TextStyle(fontSize: 20),
-                  ),
+                Text(
+                  e.flag,
+                  style: TextStyle(fontSize: textScaler.scale(20)),
                 ),
                 Semantics(
+                  label: e.name,
+                  excludeSemantics: true,
                   child: Text(
                     e.name,
                   ),

@@ -61,10 +61,10 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     }
   }
 
-  setLanguage(Locale lang) {
+  setLanguage(Locale lang) async {
+    await TextToSpeechConfig.instance.setLanguage(lang.languageCode);
     setState(() {
       _lang = lang;
-      TextToSpeechConfig.instance.setLanguage(lang.languageCode);
     });
   }
 

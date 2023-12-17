@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
+import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 class Sights extends StatelessWidget {
@@ -12,17 +13,12 @@ class Sights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = MediaQuery.textScalerOf(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          localization(context).sights,
-          style: const TextStyle(
-            color: Colors.white,
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w300,
-            letterSpacing: 1,
-          ),
-        ),
+        title: Text(localization(context).sights,
+            style: AppStyles.defaultAppBarTextStyle(textScaler)),
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -108,13 +104,14 @@ class Sights extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Semantics(
-                        label: 'Enlarged image of $title',
+                        label: '${localization(context).enlargedImage} $title',
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.memory(
                             imageBytes,
                             fit: BoxFit.contain,
-                            semanticLabel: 'Enlarged image of $title',
+                            semanticLabel:
+                                '${localization(context).enlargedImage} $title',
                           ),
                         ),
                       ),
@@ -138,7 +135,8 @@ class Sights extends StatelessWidget {
                           ),
                         ),
                         Semantics(
-                          // label: 'Speak title',
+                          label: localization(context).hearLandmarkName,
+                          tooltip: localization(context).hearLandmarkName,
                           child: IconButton(
                             onPressed: () {
                               TextToSpeechConfig.instance.speak(title);
@@ -156,6 +154,7 @@ class Sights extends StatelessWidget {
           },
         );
       },
+      onTap: () => {MaterialPageRoute(builder: (context) => Sights())},
       child: Semantics(
         container: true,
         label:
@@ -171,7 +170,7 @@ class Sights extends StatelessWidget {
                   child: Image.memory(
                     imageBytes,
                     fit: BoxFit.contain,
-                    semanticLabel: title,
+                    semanticLabel: '${localization(context).sight} $title',
                   ),
                 ),
               ),
@@ -183,7 +182,7 @@ class Sights extends StatelessWidget {
                   child: MaterialButton(
                     onPressed: () async {
                       TextToSpeechConfig.instance
-                          .speak(localization(context).startNavigation);
+                          .speak('${localization(context).navigateTo}$title');
                       await mapScreen.getCurrentLocation();
                       await mapScreen.navigateToDestination(
                           destLatitude, destLongitude);
@@ -192,7 +191,7 @@ class Sights extends StatelessWidget {
                     height: 48.0,
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      localization(context).startNavigation,
+                      '${localization(context).navigateTo}$title',
                       style: const TextStyle(
                         color: Colors.black,
                         fontFamily: 'Roboto',

@@ -13,6 +13,8 @@ import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //Locale initialLocale = await getLocale();
+
   // Initialize the database
   final db = await DatabaseHelper.getNamedDatabase();
   runApp(VodicKrozValjevo(database: db));
@@ -27,14 +29,14 @@ class VodicKrozValjevo extends StatefulWidget {
   State<VodicKrozValjevo> createState() => _VodicKrozValjevo();
 
   // Setting language
-  static void setLanguage(BuildContext buildContext, Locale newLanguage) {
-    _VodicKrozValjevo? appState =
-        buildContext.findAncestorStateOfType<_VodicKrozValjevo>();
+  static void setLanguage(Locale newLanguage) {
+    final appState = _VodicKrozValjevo._instance;
     appState?.setLanguage(newLanguage);
   }
 }
 
 class _VodicKrozValjevo extends State<VodicKrozValjevo> {
+  static _VodicKrozValjevo? _instance;
   Locale? _lang;
   final flutterTts = FlutterTts();
   late SightsRepository sightsRepo;
@@ -43,6 +45,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   @override
   void initState() {
     super.initState();
+    _instance = this;
     sightsRepo = SightsRepository(widget.database);
     sportsRepo = SportsRepository(widget.database);
     _initializeData();
@@ -61,10 +64,10 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     }
   }
 
-  setLanguage(Locale lang) async {
-    await TextToSpeechConfig.instance.setLanguage(lang.languageCode);
+  setLanguage(Locale lang) {
     setState(() {
       _lang = lang;
+      TextToSpeechConfig.instance.setLanguage(lang.languageCode);
     });
   }
 

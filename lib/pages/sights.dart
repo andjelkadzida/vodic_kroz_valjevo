@@ -112,8 +112,6 @@ class Sights extends StatelessWidget {
                           child: Image.memory(
                             imageBytes,
                             fit: BoxFit.contain,
-                            semanticLabel:
-                                '${localization(context).enlargedImage} $title',
                           ),
                         ),
                       ),

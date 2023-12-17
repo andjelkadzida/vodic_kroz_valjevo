@@ -9,7 +9,6 @@ import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
 import 'package:vodic_kroz_valjevo/pages/sights.dart';
 import 'package:vodic_kroz_valjevo/pages/sport_and_recreation.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
@@ -78,18 +77,19 @@ class NavigationDrawer extends StatelessWidget {
     }
 
     return Semantics(
-      button: true,
-      label: label,
-      child: ListTile(
-        title:
-            Text(label, style: AppStyles.navigationListItemStyle(textScaler)),
-        leading: Icon(
-          icon,
-          color: Colors.white,
-        ),
-        onTap: () => onItemPressed(context, index),
-      ),
-    );
+        button: true,
+        label: label,
+        child: ExcludeSemantics(
+          child: ListTile(
+            title: Text(label,
+                style: AppStyles.navigationListItemStyle(textScaler)),
+            leading: Icon(
+              icon,
+              color: Colors.white,
+            ),
+            onTap: () => onItemPressed(context, index),
+          ),
+        ));
   }
 
   void onItemPressed(BuildContext context, int index) {
@@ -169,10 +169,11 @@ class NavigationDrawer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Text(
+                ExcludeSemantics(
+                    child: Text(
                   e.flag,
                   style: TextStyle(fontSize: textScaler.scale(20)),
-                ),
+                )),
                 Semantics(
                   label: e.name,
                   excludeSemantics: true,

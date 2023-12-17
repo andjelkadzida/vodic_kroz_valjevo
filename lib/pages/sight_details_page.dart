@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 class SightDetailsPage extends StatelessWidget {
@@ -20,13 +21,18 @@ class SightDetailsPage extends StatelessWidget {
     final textScaler = MediaQuery.textScalerOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Semantics(
+            label: title,
+            child: Text(title,
+                style: AppStyles.defaultAppBarTextStyle(textScaler))),
+        excludeHeaderSemantics: true,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.memory(imageBytes, fit: BoxFit.cover),
+            Image.memory(imageBytes),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
@@ -37,7 +43,7 @@ class SightDetailsPage extends StatelessWidget {
             GestureDetector(
                 onTap: () => TextToSpeechConfig.instance.speak(description),
                 onDoubleTap: () => TextToSpeechConfig.instance.pauseSpeaking(),
-                child: const Icon(Icons.volume_up_sharp)),
+                child: Icon(Icons.volume_up_sharp)),
           ],
         ),
       ),

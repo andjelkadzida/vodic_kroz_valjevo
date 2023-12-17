@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -12,8 +13,6 @@ import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  //Locale initialLocale = await getLocale();
 
   // Initialize the database
   final db = await DatabaseHelper.getNamedDatabase();

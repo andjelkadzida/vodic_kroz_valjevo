@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:vodic_kroz_valjevo/localization/language.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/main.dart';
@@ -11,7 +12,7 @@ import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+  NavigationDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -143,13 +144,13 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 
-  Widget languageWidget(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
+  Widget languageWidget(BuildContext buildContext) {
+    final textScaler = MediaQuery.textScalerOf(buildContext);
 
     return PopupMenuButton<Language>(
-      tooltip: localization(context).languageMenu,
+      tooltip: localization(buildContext).languageMenu,
       icon: Semantics(
-        label: localization(context).languageMenu,
+        label: localization(buildContext).languageMenu,
         child: const Icon(
           Icons.language,
           color: Colors.white,
@@ -159,9 +160,7 @@ class NavigationDrawer extends StatelessWidget {
       offset: const Offset(60, 40),
       onSelected: (Language language) async {
         Locale locale = await setLocale(language.scriptCode);
-        VodicKrozValjevo.setLanguage(context, locale);
-        await TextToSpeechConfig.instance
-            .speak(localization(context).selectedLang(language.name));
+        VodicKrozValjevo.setLanguage(locale);
       },
       itemBuilder: (BuildContext context) {
         return Language.languageList().map((Language e) {

@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
           iconTheme:
               const IconThemeData(color: Colors.white) // Color of drawer icon
           ),
-      drawer: const Nav_Drawer.NavigationDrawer(),
+      drawer: Nav_Drawer.NavigationDrawer(),
     );
   }
 }

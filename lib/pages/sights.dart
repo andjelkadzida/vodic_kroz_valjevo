@@ -6,6 +6,7 @@ import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
+import '../navigation/navigation_drawer.dart' as Nav_Drawer;
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class Sights extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: buildSightsDataWidget(context),
+      drawer: Nav_Drawer.NavigationDrawer(),
     );
   }
 

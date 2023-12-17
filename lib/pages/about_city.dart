@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
+import '../navigation/navigation_drawer.dart' as Nav_Drawer;
 
 class AboutCity extends StatelessWidget {
   const AboutCity({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class AboutCity extends StatelessWidget {
           color: Colors.white,
         ), // Color of drawer icon
       ),
+      drawer: Nav_Drawer.NavigationDrawer(),
     );
   }
 }

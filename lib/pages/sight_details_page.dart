@@ -25,8 +25,12 @@ class SightDetailsPage extends StatelessWidget {
             label: title,
             child: Text(title,
                 style: AppStyles.defaultAppBarTextStyle(textScaler))),
-        excludeHeaderSemantics: true,
         centerTitle: true,
+        excludeHeaderSemantics: true,
+        backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -43,7 +47,7 @@ class SightDetailsPage extends StatelessWidget {
             GestureDetector(
                 onTap: () => TextToSpeechConfig.instance.speak(description),
                 onDoubleTap: () => TextToSpeechConfig.instance.pauseSpeaking(),
-                child: Icon(Icons.volume_up_sharp)),
+                child: const Icon(Icons.volume_up_sharp)),
           ],
         ),
       ),

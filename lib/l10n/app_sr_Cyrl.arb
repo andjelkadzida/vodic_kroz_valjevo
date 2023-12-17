@@ -17,6 +17,7 @@
     "moreInfo": "Више информација",
     "directions": "Навигација",
     "languageMenu": "Мени за избор језика",
+    "selectedLang": "Изабрали сте {lang} језик.",
     "imageNotAvailable": "Слика није доступна",
     "navigateToDestination": "Навигација до одредишта",
     "startNavigation": "Покрените навигацију",

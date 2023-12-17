@@ -17,6 +17,7 @@
     "moreInfo": "More information",
     "directions": "Navigation instructions",
     "languageMenu": "Language menu",
+    "selectedLang": "You have chosen the ",
     "imageNotAvailable": "Image is not available",
     "navigateToDestination": "Navigate to destination",
     "startNavigation": "Start navigation",

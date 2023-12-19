@@ -24,6 +24,13 @@ class AboutCity extends StatelessWidget {
         ), // Color of drawer icon
       ),
       drawer: const nav_drawer.NavigationDrawer(),
+      body: Center(
+        child: Image.asset(
+          'assets/images/grbValjeva.png',
+          width: 200,
+          height: 200,
+        ),
+      ),
     );
   }
 }

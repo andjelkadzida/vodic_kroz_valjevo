@@ -15,6 +15,7 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.black,
       child: SafeArea(
         child: Material(
           color: Colors.black,

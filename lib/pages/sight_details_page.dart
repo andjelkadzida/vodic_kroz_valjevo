@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
@@ -47,7 +48,11 @@ class SightDetailsPage extends StatelessWidget {
             GestureDetector(
                 onTap: () => TextToSpeechConfig.instance.speak(description),
                 onDoubleTap: () => TextToSpeechConfig.instance.pauseSpeaking(),
-                child: const Icon(Icons.volume_up_sharp)),
+                child: Icon(
+                  Icons.volume_up_sharp,
+                  size: textScaler.scale(48),
+                  semanticLabel: localization(context).tapToHearDetails,
+                )),
           ],
         ),
       ),

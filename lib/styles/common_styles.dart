@@ -27,4 +27,23 @@ class AppStyles {
       fontWeight: FontWeight.w700,
     );
   }
+
+  static TextStyle sightDialogStyle(TextScaler textScaler) {
+    return TextStyle(
+      fontSize: textScaler.scale(18),
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.0,
+    );
+  }
+
+  static TextStyle sightTitleStyle(TextScaler textScaler) {
+    return TextStyle(
+      color: Colors.black,
+      fontFamily: 'Roboto',
+      fontSize: textScaler.scale(16),
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.5,
+    );
+  }
 }

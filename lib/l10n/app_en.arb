@@ -34,5 +34,6 @@
     "tapForDetails": "Tap to view details.",
     "nameOfSight": "Landmark name:",
     "hearLandmarkName": "Listen to the name of the landmark.",
-    "enlargedImage": "Enlarged image of "
+    "enlargedImage": "Enlarged image of ",
+    "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to pause."
 }

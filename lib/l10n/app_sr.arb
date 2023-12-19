@@ -34,5 +34,6 @@
     "tapForDetails": "Dodirnite za prikaz detalja.",
     "nameOfSight": "Naziv znamenitosti: ",
     "hearLandmarkName": "Čujte ime znamenitosti.",
-    "enlargedImage": "Uvećana slika "
+    "enlargedImage": "Uvećana slika ",
+    "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste pauzirali."
 }

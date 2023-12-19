@@ -7,7 +7,7 @@ import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 import 'package:vodic_kroz_valjevo/pages/sight_details_page.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
-import '../navigation/navigation_drawer.dart' as Nav_Drawer;
+import '../navigation/navigation_drawer.dart' as nav_drawer;
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class Sights extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: buildSightsDataWidget(context),
-      drawer: Nav_Drawer.NavigationDrawer(),
+      drawer: const nav_drawer.NavigationDrawer(),
     );
   }
 
@@ -132,12 +132,7 @@ class Sights extends StatelessWidget {
                             label: '${localization(context).nameOfSight}$title',
                             child: Text(
                               title,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(18),
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1.0,
-                              ),
+                              style: AppStyles.sightDialogStyle(textScaler),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -210,12 +205,7 @@ class Sights extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       '${localization(context).navigateTo}$title',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1.5,
-                      ),
+                      style: AppStyles.sightTitleStyle(textScaler),
                     ),
                   ),
                 ),
@@ -227,6 +217,7 @@ class Sights extends StatelessWidget {
     );
   }
 
+  // Getting data from the database
   Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
       String languageCode) async {
     final Database db = await DatabaseHelper.getNamedDatabase();

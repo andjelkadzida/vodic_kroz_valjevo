@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
 
-import '../navigation/navigation_drawer.dart' as Nav_Drawer;
+import '../navigation/navigation_drawer.dart' as nav_drawer;
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
           iconTheme:
               const IconThemeData(color: Colors.white) // Color of drawer icon
           ),
-      drawer: Nav_Drawer.NavigationDrawer(),
+      drawer: const nav_drawer.NavigationDrawer(),
     );
   }
 }

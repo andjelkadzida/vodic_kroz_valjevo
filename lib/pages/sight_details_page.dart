@@ -42,7 +42,7 @@ class SightDetailsPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 description,
-                style: TextStyle(fontSize: textScaler.scale(16)),
+                style: AppStyles.sightTitleStyle(textScaler),
               ),
             ),
             GestureDetector(

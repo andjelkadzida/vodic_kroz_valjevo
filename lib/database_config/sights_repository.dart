@@ -72,9 +72,9 @@ class SightsRepository {
         'titles': {
           'en': 'Valjevo Museum',
           'de': 'Museum von Valjevo',
-          'sr': 'Naslov na srpskom latinicom',
-          'sr_Cyrl': 'Наслов на српском ћирилицом',
-          'sr_Latn': 'Naslov na srpskom latinicom',
+          'sr': 'Valjevski muzej',
+          'sr_Cyrl': 'Ваљевски музеј',
+          'sr_Latn': 'Valjevski muzej',
         },
         'descriptions': {
           'en': 'Description in English',

@@ -20,6 +20,7 @@ class SightDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textScaler = MediaQuery.textScalerOf(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Semantics(

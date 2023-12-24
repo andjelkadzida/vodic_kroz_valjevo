@@ -1,6 +1,6 @@
 # vodic_kroz_valjevo
 
-Aplikacija 'Vodič kroz Valjevo'
+Aplikacija "Vodič kroz Valjevo"
 
 ## Description
 

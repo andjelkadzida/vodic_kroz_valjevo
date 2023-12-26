@@ -1,6 +1,7 @@
 # vodic_kroz_valjevo
 
-Android & iOS application 'Vodič kroz Valjevo'
+Android & iOS application "Vodič kroz Valjevo"
+
 
 ## Description
 

@@ -4,9 +4,14 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static late Database _database;
+  static final DatabaseHelper _instance = DatabaseHelper._privateConstructor();
+  static Database? _database;
 
-  static Future<Database> getNamedDatabase() async {
+  DatabaseHelper._privateConstructor();
+
+  static DatabaseHelper get instance => _instance;
+
+  Future<Database> getNamedDatabase() async {
     String dbName = 'valjevo_tour_guide.db';
     String path = join(await getDatabasesPath(), dbName);
 
@@ -17,7 +22,7 @@ class DatabaseHelper {
         onUpgrade: _onUpgrade,
         onDowngrade: _onDowngrade);
 
-    return _database;
+    return _database!;
   }
 
   static void _onCreate(Database db, int version) async {

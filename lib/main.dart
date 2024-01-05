@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize the database
-  final db = await DatabaseHelper.getNamedDatabase();
+  final db = await DatabaseHelper.instance.getNamedDatabase();
   runApp(VodicKrozValjevo(database: db));
 }
 

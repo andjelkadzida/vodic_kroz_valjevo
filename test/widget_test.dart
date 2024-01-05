@@ -12,7 +12,7 @@ void main() {
     testWidgets('should use default language if not set',
         (WidgetTester tester) async {
       databaseFactory = databaseFactoryFfi;
-      final db = await DatabaseHelper.getNamedDatabase();
+      final db = await DatabaseHelper.instance.getNamedDatabase();
       late Locale defaultLocale;
 
       await tester.pumpWidget(

@@ -220,7 +220,7 @@ class Sights extends StatelessWidget {
   // Getting data from the database
   Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
       String languageCode) async {
-    final Database db = await DatabaseHelper.getNamedDatabase();
+    final Database db = await DatabaseHelper.instance.getNamedDatabase();
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 

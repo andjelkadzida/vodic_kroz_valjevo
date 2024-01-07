@@ -1,3 +1,6 @@
+import 'package:app_settings/app_settings.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class TextToSpeechConfig {
@@ -18,20 +21,28 @@ class TextToSpeechConfig {
   }
 
   Future<void> speak(String text) async {
-    // Setting configurations
-    await flutterTts.setSharedInstance(true);
+    //Check connectivity
+    var connectivityResult = await (Connectivity().checkConnectivity());
 
-    await flutterTts.setIosAudioCategory(
-      IosTextToSpeechAudioCategory.ambient,
-      [
-        IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-        IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-        IosTextToSpeechAudioCategoryOptions.mixWithOthers,
-      ],
-      IosTextToSpeechAudioMode.voicePrompt,
-    );
-    await flutterTts.awaitSpeakCompletion(true);
-    await flutterTts.speak(text);
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      // Setting configurations
+      await flutterTts.setSharedInstance(true);
+
+      await flutterTts.setIosAudioCategory(
+        IosTextToSpeechAudioCategory.ambient,
+        [
+          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+          IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+        ],
+        IosTextToSpeechAudioMode.voicePrompt,
+      );
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.speak(text);
+    } else if (connectivityResult == ConnectivityResult.none) {
+      AppSettings.openAppSettings(type: AppSettingsType.wireless);
+    }
   }
 
   Future<void> stopSpeaking() async {

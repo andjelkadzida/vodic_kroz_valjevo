@@ -1,13 +1,14 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
-import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
-import 'package:vodic_kroz_valjevo/pages/sight_details_page.dart';
-import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
+
 import '../navigation/navigation_drawer.dart' as nav_drawer;
+import 'sight_details_page.dart';
+import '../database_config/database_helper.dart';
+import '../text_to_speech/text_to_speech_config.dart';
+import '../maps_navigation/locator.dart';
+import '../localization/supported_languages.dart';
+import '../styles/common_styles.dart';
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);

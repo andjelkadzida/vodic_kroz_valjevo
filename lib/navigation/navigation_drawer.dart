@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/localization/language.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
-import 'package:vodic_kroz_valjevo/main.dart';
-import 'package:vodic_kroz_valjevo/pages/about_city.dart';
-import 'package:vodic_kroz_valjevo/pages/home_page.dart';
-import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
-import 'package:vodic_kroz_valjevo/pages/sights.dart';
-import 'package:vodic_kroz_valjevo/pages/sport_and_recreation.dart';
-import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
+
+import '../localization/language.dart';
+import '../localization/supported_languages.dart';
+import '../main.dart';
+import '../pages/about_city.dart';
+import '../pages/home_page.dart';
+import '../pages/hotels_and_restaurants/hotels.dart';
+import '../pages/sights.dart';
+import '../pages/sport_and_recreation.dart';
+import '../styles/common_styles.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -113,8 +114,8 @@ class NavigationDrawer extends StatelessWidget {
             MaterialPageRoute(builder: (context) => SportsAndRecreation()));
         break;
       case 4:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HotelsAndRestaurants()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Hotels()));
         break;
       default:
         Navigator.pop(context);

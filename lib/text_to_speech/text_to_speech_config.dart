@@ -2,6 +2,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TextToSpeechConfig {
   static final TextToSpeechConfig _instance = TextToSpeechConfig._internal();
@@ -41,6 +42,15 @@ class TextToSpeechConfig {
       await flutterTts.awaitSpeakCompletion(true);
       await flutterTts.speak(text);
     } else if (connectivityResult == ConnectivityResult.none) {
+      //TO-DO Change toast message
+      Fluttertoast.showToast(
+          msg: "This is Center Short Toast",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
       AppSettings.openAppSettings(type: AppSettingsType.wireless);
     }
   }

@@ -5,7 +5,8 @@ import 'package:map_launcher/map_launcher.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:open_store/open_store.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
+
+import '../localization/supported_languages.dart';
 
 class MapScreen {
   // Store current position

@@ -1,5 +1,3 @@
-import 'package:app_settings/app_settings.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -25,66 +23,52 @@ class Hotels extends StatelessWidget {
     });
   }
 
-  void _checkInternetConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      AppSettings.openAppSettings(type: AppSettingsType.wireless);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final textScaler = MediaQuery.textScalerOf(context);
 
     return Scaffold(
-      appBar: AppBar(
-          title: Semantics(
-              label: localization(context).hotels,
-              child: Text(
-                localization(context).hotels,
-                style: AppStyles.defaultAppBarTextStyle(textScaler),
-              )),
-          excludeHeaderSemantics: true,
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          iconTheme:
-              const IconThemeData(color: Colors.white) // Color of drawer icon
-          ),
-      body: FutureBuilder<List<LatLng>>(
-        future: fetchMarkerData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text(''));
-          }
-          // Open settings for internet if there is no Internet connection
-          _checkInternetConnection();
-
-          List<Marker> markers = snapshot.data!
-              .map((latLng) => Marker(
-                    point: latLng,
-                    child: const Icon(Icons.pin_drop),
-                  ))
-              .toList();
-
-          return FlutterMap(
-            options: const MapOptions(
-              initialCenter: LatLng(44.275, 19.898),
-              initialZoom: 13.0,
+        appBar: AppBar(
+            title: Semantics(
+                label: localization(context).hotels,
+                child: Text(
+                  localization(context).hotels,
+                  style: AppStyles.defaultAppBarTextStyle(textScaler),
+                )),
+            excludeHeaderSemantics: true,
+            centerTitle: true,
+            backgroundColor: Colors.black,
+            iconTheme:
+                const IconThemeData(color: Colors.white) // Color of drawer icon
             ),
-            children: [
-              TileLayer(
-                urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              ),
-              MarkerLayer(markers: markers),
-            ],
-          );
-        },
+        body: FutureBuilder<List<LatLng>>(
+            future: fetchMarkerData(),
+            builder: (context, snapshot) {
+              return DatabaseHelper.buildFutureState<List<LatLng>>(
+                  context: context,
+                  snapshot: snapshot,
+                  onData: (data) => buildWithMarkers(data));
+            }));
+  }
+
+  Widget buildWithMarkers(List<LatLng> markerData) {
+    List<Marker> markers = markerData
+        .map((latLng) =>
+            Marker(point: latLng, child: const Icon(Icons.pin_drop)))
+        .toList();
+
+    return FlutterMap(
+      options: const MapOptions(
+        initialCenter: LatLng(44.275, 19.898),
+        initialZoom: 13.0,
       ),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          subdomains: ['a', 'b', 'c'],
+        ),
+        MarkerLayer(markers: markers),
+      ],
     );
   }
 

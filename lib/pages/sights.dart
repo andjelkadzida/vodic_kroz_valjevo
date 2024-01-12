@@ -35,26 +35,11 @@ class Sights extends StatelessWidget {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: _getSightsDataFromDatabase(localization(context).localeName),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Semantics(
-            label: localization(context).loading,
-            child: const Center(child: CircularProgressIndicator()),
-          );
-        } else if (snapshot.hasError) {
-          return Semantics(
-            label: localization(context).errorLoadingData,
-            child: Center(
-                child: Text(
-                    '${localization(context).errorLoadingData}: ${snapshot.error}')),
-          );
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Semantics(
-            label: localization(context).noDataAvailable,
-            child: Center(child: Text(localization(context).noDataAvailable)),
-          );
-        } else {
-          return buildSightsGrid(snapshot.data!);
-        }
+        return DatabaseHelper.buildFutureState<List<Map<String, dynamic>>>(
+          context: context,
+          snapshot: snapshot,
+          onData: (data) => buildSightsGrid(data),
+        );
       },
     );
   }

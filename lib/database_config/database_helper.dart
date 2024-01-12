@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../localization/supported_languages.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._privateConstructor();
@@ -95,6 +98,36 @@ class DatabaseHelper {
       }
       _onCreate(db, newVersion);
     }
+  }
+
+  // Checking database connection
+  static Widget buildFutureState<T>({
+    required BuildContext context,
+    required AsyncSnapshot<T> snapshot,
+    required Widget Function(T data) onData,
+  }) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return Semantics(
+        label: localization(context).loading,
+        child: const Center(child: CircularProgressIndicator()),
+      );
+    } else if (snapshot.hasError) {
+      return Semantics(
+        label: localization(context).errorLoadingData,
+        child: Center(
+          child: Text(
+              '${localization(context).errorLoadingData}: ${snapshot.error}'),
+        ),
+      );
+    } else if (!snapshot.hasData ||
+        (snapshot.data is List && (snapshot.data as List).isEmpty)) {
+      return Semantics(
+        label: localization(context).noDataAvailable,
+        child: Center(child: Text(localization(context).noDataAvailable)),
+      );
+    }
+    // Handle the case when data is available
+    return onData(snapshot.data as T);
   }
 
   // Image loader

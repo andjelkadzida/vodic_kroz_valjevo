@@ -81,7 +81,15 @@ class Hotels extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) {
+          // Data processing
           Uint8List imageBytes = hotelData['hotel_image_path'];
+          int numberOfStars = hotelData['noStars'];
+
+          //List of stars icon
+          List<Widget> hotelStars = List.generate(numberOfStars,
+              ((index) => Icon(Icons.star, color: Colors.amber)));
+
+          // Alert dialog with data about hotel
           return AlertDialog(
             title: Text(hotelData['title'],
                 style: AppStyles.sightTitleStyle(textScaler)),
@@ -92,7 +100,7 @@ class Hotels extends StatelessWidget {
                   imageBytes,
                   fit: BoxFit.contain,
                 ),
-                Text('Stars: ${hotelData['noStars']}'),
+                Row(mainAxisSize: MainAxisSize.min, children: hotelStars),
               ],
             ),
             actions: <Widget>[

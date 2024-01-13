@@ -2,8 +2,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../navigation/navigation_drawer.dart' as nav_drawer;
 import 'sight_details_page.dart';
+import '../navigation/navigation_drawer.dart' as nav_drawer;
 import '../database_config/database_helper.dart';
 import '../text_to_speech/text_to_speech_config.dart';
 import '../maps_navigation/locator.dart';

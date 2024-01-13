@@ -1,8 +1,6 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class TextToSpeechConfig {
   static final TextToSpeechConfig _instance = TextToSpeechConfig._internal();
@@ -22,37 +20,26 @@ class TextToSpeechConfig {
   }
 
   Future<void> speak(String text) async {
-    //Check connectivity
+    //Check internet connection
     var connectivityResult = await (Connectivity().checkConnectivity());
 
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
-      // Setting configurations
-      await flutterTts.setSharedInstance(true);
-
-      await flutterTts.setIosAudioCategory(
-        IosTextToSpeechAudioCategory.ambient,
-        [
-          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-          IosTextToSpeechAudioCategoryOptions.mixWithOthers,
-        ],
-        IosTextToSpeechAudioMode.voicePrompt,
-      );
-      await flutterTts.awaitSpeakCompletion(true);
-      await flutterTts.speak(text);
-    } else if (connectivityResult == ConnectivityResult.none) {
-      //TO-DO Change toast message
-      Fluttertoast.showToast(
-          msg: "This is Center Short Toast",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+    if (connectivityResult == ConnectivityResult.none) {
       AppSettings.openAppSettings(type: AppSettingsType.wireless);
     }
+    // Setting configurations
+    await flutterTts.setSharedInstance(true);
+
+    await flutterTts.setIosAudioCategory(
+      IosTextToSpeechAudioCategory.ambient,
+      [
+        IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+        IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+        IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+      ],
+      IosTextToSpeechAudioMode.voicePrompt,
+    );
+    await flutterTts.awaitSpeakCompletion(true);
+    await flutterTts.speak(text);
   }
 
   Future<void> stopSpeaking() async {

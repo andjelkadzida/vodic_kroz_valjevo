@@ -48,15 +48,19 @@ class Hotels extends StatelessWidget {
       LatLng position = LatLng(
           hotelData['latitude'] as double, hotelData['longitude'] as double);
 
+      final textScaler = MediaQuery.textScalerOf(context);
+
       return Marker(
         point: position,
         child: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.pin_drop,
-            size: 20,
+            size: textScaler.scale(35),
+            semanticLabel: '${hotelData['title']}',
           ),
           color: Colors.black,
           onPressed: () => showHotelDetailsDialog(context, hotelData),
+          tooltip: '${hotelData['title']}',
         ),
       );
     }).toList();
@@ -77,46 +81,69 @@ class Hotels extends StatelessWidget {
 
   void showHotelDetailsDialog(
       BuildContext context, Map<String, dynamic> hotelData) {
+    final MediaQueryData mediaQueryData = MediaQuery.of(context);
+    final double screenHeight = mediaQueryData.size.height;
+    final double screenWidth = mediaQueryData.size.width;
     final textScaler = MediaQuery.textScalerOf(context);
+
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // Data processing
-          Uint8List imageBytes = hotelData['hotel_image_path'];
-          int numberOfStars = hotelData['noStars'];
+      context: context,
+      builder: (BuildContext context) {
+        Uint8List imageBytes = hotelData['hotel_image_path'];
+        int numberOfStars = hotelData['noStars'];
 
-          //List of stars icon
-          List<Widget> hotelStars = List.generate(
-              numberOfStars,
-              ((index) => Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    semanticLabel:
-                        (localization(context).starCount(numberOfStars)),
-                  )));
+        List<Widget> hotelStars = List.generate(
+          numberOfStars,
+          (index) => Icon(
+            Icons.star,
+            color: Colors.amber,
+            size: textScaler.scale(30),
+          ),
+        );
 
-          // Alert dialog with data about hotel
-          return AlertDialog(
-            title: Text(hotelData['title'],
-                style: AppStyles.sightTitleStyle(textScaler)),
-            content: Column(
+        return AlertDialog(
+          title: Text(
+            hotelData['title'],
+            textAlign: TextAlign.center,
+            style: AppStyles.sightTitleStyle(textScaler),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Image.memory(
-                  imageBytes,
-                  fit: BoxFit.contain,
+                Semantics(
+                  label: hotelData['title'],
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: screenWidth * 0.8, // Max width constraint
+                      maxHeight: screenHeight * 0.4, // Max height constraint
+                    ),
+                    child: Image.memory(
+                      imageBytes,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
-                Row(mainAxisSize: MainAxisSize.min, children: hotelStars),
+                Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: hotelStars,
+                  ),
+                ),
               ],
             ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Close'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          );
-        });
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(localization(context).close),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   // Getting hotel data from the database

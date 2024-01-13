@@ -41,6 +41,7 @@ class Hotels extends StatelessWidget {
     );
   }
 
+  // Creating markers on map dynamically
   Widget buildWithMarkers(
       BuildContext context, List<Map<String, dynamic>> hotelsData) {
     List<Marker> markers = hotelsData.map((hotelData) {
@@ -63,12 +64,11 @@ class Hotels extends StatelessWidget {
     return FlutterMap(
       options: const MapOptions(
         initialCenter: LatLng(44.275, 19.898),
-        initialZoom: 13.0,
+        initialZoom: 14.0,
       ),
       children: [
         TileLayer(
-          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          subdomains: ['a', 'b', 'c'],
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         ),
         MarkerLayer(markers: markers),
       ],
@@ -86,8 +86,14 @@ class Hotels extends StatelessWidget {
           int numberOfStars = hotelData['noStars'];
 
           //List of stars icon
-          List<Widget> hotelStars = List.generate(numberOfStars,
-              ((index) => Icon(Icons.star, color: Colors.amber)));
+          List<Widget> hotelStars = List.generate(
+              numberOfStars,
+              ((index) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                    semanticLabel:
+                        (localization(context).starCount(numberOfStars)),
+                  )));
 
           // Alert dialog with data about hotel
           return AlertDialog(
@@ -113,6 +119,7 @@ class Hotels extends StatelessWidget {
         });
   }
 
+  // Getting hotel data from the database
   Future<List<Map<String, dynamic>>> _getHotelsDataFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();

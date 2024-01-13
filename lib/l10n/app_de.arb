@@ -36,5 +36,6 @@
     "nameOfSight": "Name der Sehenswürdigkeit: ",
     "hearLandmarkName": "Höre den Namen der Sehenswürdigkeit.",
     "enlargedImage": "Vergrößertes Bild von ",
-    "tapToHearDetails": "Tippen Sie, um Details über die Sehenswürdigkeit zu hören. Tippen Sie zweimal, um anzuhalten."
+    "tapToHearDetails": "Tippen Sie, um Details über die Sehenswürdigkeit zu hören. Tippen Sie zweimal, um anzuhalten.",
+    "starCount": "{numberOfStars, plural, =1{1 Stern} other{{numberOfStars} Sterne}}"
 }

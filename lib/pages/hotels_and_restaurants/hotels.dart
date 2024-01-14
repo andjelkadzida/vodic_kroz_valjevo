@@ -115,15 +115,17 @@ class Hotels extends StatelessWidget {
                 Semantics(
                   label: hotelData['title'],
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: screenWidth * 0.8, // Max width constraint
-                      maxHeight: screenHeight * 0.4, // Max height constraint
-                    ),
-                    child: Image.memory(
-                      imageBytes,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                      constraints: BoxConstraints(
+                        maxWidth: screenWidth * 0.8, // Max width constraint
+                        maxHeight: screenHeight * 0.4, // Max height constraint
+                      ),
+                      child: Semantics(
+                        label: hotelData['titel'],
+                        child: Image.memory(
+                          imageBytes,
+                          fit: BoxFit.contain,
+                        ),
+                      )),
                 ),
                 Flex(
                   direction: Axis.horizontal,

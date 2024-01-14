@@ -124,13 +124,10 @@ class Hotels extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(2),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: hotelStars,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: hotelStars,
                 ),
               ],
             ),
@@ -141,6 +138,7 @@ class Hotels extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],
+          buttonPadding: EdgeInsets.zero,
         );
       },
     );

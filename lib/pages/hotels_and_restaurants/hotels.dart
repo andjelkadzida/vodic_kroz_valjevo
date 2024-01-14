@@ -51,18 +51,19 @@ class Hotels extends StatelessWidget {
       final textScaler = MediaQuery.textScalerOf(context);
 
       return Marker(
-        point: position,
-        child: IconButton(
-          icon: Icon(
-            Icons.pin_drop,
-            size: textScaler.scale(35),
-            semanticLabel: '${hotelData['title']}',
-          ),
-          color: Colors.black,
-          onPressed: () => showHotelDetailsDialog(context, hotelData),
-          tooltip: '${hotelData['title']}',
-        ),
-      );
+          point: position,
+          child: GestureDetector(
+            onTap: () => showHotelDetailsDialog(context, hotelData),
+            child: Tooltip(
+              message: '${hotelData['title']}',
+              child: Icon(
+                Icons.pin_drop,
+                size: textScaler.scale(35),
+                semanticLabel: '${hotelData['title']}',
+                color: Colors.black,
+              ),
+            ),
+          ));
     }).toList();
 
     return FlutterMap(
@@ -129,16 +130,20 @@ class Hotels extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:
                       hotelStars.map((star) => Flexible(child: star)).toList(),
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      isSemanticButton: true,
+                      child: Text(localization(context).close),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(localization(context).close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
         );
       },
     );

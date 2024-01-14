@@ -7,6 +7,7 @@
     "sight": "Знаменитост:",
     "sportRecreation": "Спорт и рекреација",
     "restaurantsAndHotels": "Ресторани и преноћиште",
+    "hotels": "Хотели",
     "close": "Затвори",
     "language": "Језик",
     "serbian": "Српски (Латиница)",
@@ -35,5 +36,6 @@
     "nameOfSight": "Назив знаменитости: ",
     "hearLandmarkName": "Чујте име знаменитости.",
     "enlargedImage": "Увећана слика ",
-    "tapToHearDetails": "Додирните да бисте чули детаље о знаменитости. Додирните два пута, да бисте паузирали."
+    "tapToHearDetails": "Додирните да бисте чули детаље о знаменитости. Додирните два пута, да бисте паузирали.",
+    "starCount": "{numberOfStars, plural, =1{1 звездица} other{{numberOfStars} звездице}}"
 }

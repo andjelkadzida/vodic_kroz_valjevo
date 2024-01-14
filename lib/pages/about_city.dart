@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
-import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
+
 import '../navigation/navigation_drawer.dart' as nav_drawer;
+import '../localization/supported_languages.dart';
+import '../styles/common_styles.dart';
 
 class AboutCity extends StatelessWidget {
   const AboutCity({Key? key}) : super(key: key);

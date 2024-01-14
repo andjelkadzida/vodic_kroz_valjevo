@@ -1,34 +1,36 @@
-import 'package:flutter/services.dart';
+import 'dart:typed_data';
+
 import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
 
-class SightsRepository {
+class HotelsRepository {
   late Database _databaseInstance;
 
-  SightsRepository(Database database) {
+  HotelsRepository(Database database) {
     _databaseInstance = database;
   }
 
-  // Check if data exists returns true if sights data exists, false otherwise
-  Future<bool> checkSightsDataExist() async {
-    List<Map<String, dynamic>> sights = await _databaseInstance.query('Sights');
+  // Check if data exists returns true if hotels data exists, false otherwise
+  Future<bool> checkHotelsDataExist() async {
+    List<Map<String, dynamic>> sights = await _databaseInstance.query('Hotels');
     return sights.isNotEmpty;
   }
 
-  Future<void> bulkInsertSightsData(List<Map<String, dynamic>> dataList) async {
+  Future<void> bulkInsertHotelsData(
+      List<Map<String, dynamic>> hotelsList) async {
     // Begin the transaction
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
-      for (var data in dataList) {
+      for (var data in hotelsList) {
         // Load image as Uint8List
         Uint8List imageBytes =
             await DatabaseHelper.loadImageAsUint8List(data['imagePath']);
 
         // Add insert operation to the batch
         batch.rawInsert('''
-          INSERT INTO Sights(
-            sights_image_path, 
+          INSERT INTO Hotels(
+            hotel_image_path, 
             latitude,
             longitude,
             title_en, 
@@ -36,13 +38,9 @@ class SightsRepository {
             title_sr, 
             title_sr_Cyrl, 
             title_sr_Latn, 
-            description_en, 
-            description_de, 
-            description_sr, 
-            description_sr_Cyrl, 
-            description_sr_Latn
+            noStars
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
           imageBytes,
           data['latitude'],
@@ -52,11 +50,7 @@ class SightsRepository {
           data['titles']['sr'],
           data['titles']['sr_Cyrl'],
           data['titles']['sr_Latn'],
-          data['descriptions']['en'],
-          data['descriptions']['de'],
-          data['descriptions']['sr'],
-          data['descriptions']['sr_Cyrl'],
-          data['descriptions']['sr_Latn'],
+          data['noStars'],
         ]);
       }
       // Commit the batch
@@ -64,8 +58,8 @@ class SightsRepository {
     });
   }
 
-  Future<void> sightsDataInsertion() async {
-    List<Map<String, dynamic>> dataList = [
+  Future<void> hotelsDataInsertion() async {
+    List<Map<String, dynamic>> hotelsList = [
       {
         'imagePath': 'images/muzejLogo.png',
         'latitude': 44.26925398584459,
@@ -77,13 +71,7 @@ class SightsRepository {
           'sr_Cyrl': 'Ваљевски музеј',
           'sr_Latn': 'Valjevski muzej',
         },
-        'descriptions': {
-          'en': 'Description in English',
-          'de': 'Beschreibung auf Deutsch',
-          'sr': 'Opis na srpskom latinicom',
-          'sr_Cyrl': 'Опис на српском ћирилицом',
-          'sr_Latn': 'Opis na srpskom latinicom',
-        },
+        'noStars': '3',
       },
       {
         'imagePath': 'images/kulaNenadovica.jpg',
@@ -96,16 +84,12 @@ class SightsRepository {
           'sr_Cyrl': 'Кула Ненадовића',
           'sr_Latn': 'Kula Nenadovića',
         },
-        'descriptions': {
-          'en': 'Tower description',
-          'de': 'Turm Beschreibung',
-          'sr': 'Kula opis',
-          'sr_Cyrl': 'Кула опис',
-          'sr_Latn': 'Kula opis',
-        },
+        'noStars': '3',
       },
     ];
 
-    await bulkInsertSightsData(dataList);
+    await bulkInsertHotelsData(hotelsList);
+
+    await _databaseInstance.close();
   }
 }

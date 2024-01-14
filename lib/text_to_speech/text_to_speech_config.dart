@@ -1,3 +1,5 @@
+import 'package:app_settings/app_settings.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class TextToSpeechConfig {
@@ -18,6 +20,12 @@ class TextToSpeechConfig {
   }
 
   Future<void> speak(String text) async {
+    //Check internet connection
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult == ConnectivityResult.none) {
+      AppSettings.openAppSettings(type: AppSettingsType.wireless);
+    }
     // Setting configurations
     await flutterTts.setSharedInstance(true);
 

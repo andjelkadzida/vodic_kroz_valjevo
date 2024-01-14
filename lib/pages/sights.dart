@@ -1,13 +1,14 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
-import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
-import 'package:vodic_kroz_valjevo/pages/sight_details_page.dart';
-import 'package:vodic_kroz_valjevo/styles/common_styles.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
+
+import 'sight_details_page.dart';
 import '../navigation/navigation_drawer.dart' as nav_drawer;
+import '../database_config/database_helper.dart';
+import '../text_to_speech/text_to_speech_config.dart';
+import '../maps_navigation/locator.dart';
+import '../localization/supported_languages.dart';
+import '../styles/common_styles.dart';
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);
@@ -34,26 +35,11 @@ class Sights extends StatelessWidget {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: _getSightsDataFromDatabase(localization(context).localeName),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Semantics(
-            label: localization(context).loading,
-            child: const Center(child: CircularProgressIndicator()),
-          );
-        } else if (snapshot.hasError) {
-          return Semantics(
-            label: localization(context).errorLoadingData,
-            child: Center(
-                child: Text(
-                    '${localization(context).errorLoadingData}: ${snapshot.error}')),
-          );
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Semantics(
-            label: localization(context).noDataAvailable,
-            child: Center(child: Text(localization(context).noDataAvailable)),
-          );
-        } else {
-          return buildSightsGrid(snapshot.data!);
-        }
+        return DatabaseHelper.buildFutureState<List<Map<String, dynamic>>>(
+          context: context,
+          snapshot: snapshot,
+          onData: (data) => buildSightsGrid(data),
+        );
       },
     );
   }
@@ -220,7 +206,7 @@ class Sights extends StatelessWidget {
   // Getting data from the database
   Future<List<Map<String, dynamic>>> _getSightsDataFromDatabase(
       String languageCode) async {
-    final Database db = await DatabaseHelper.getNamedDatabase();
+    final Database db = await DatabaseHelper.instance.getNamedDatabase();
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 

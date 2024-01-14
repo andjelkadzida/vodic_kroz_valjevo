@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
+
+import 'database_helper.dart';
 
 class SportsRepository {
   late Database _databaseInstance;

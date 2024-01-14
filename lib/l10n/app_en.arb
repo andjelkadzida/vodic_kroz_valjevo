@@ -7,6 +7,7 @@
     "sight": "Sight:",
     "sportRecreation": "Sport & recreation",
     "restaurantsAndHotels": "Hotels & restaurants",
+    "hotels": "Hotels",
     "close": "Close",
     "language": "Language",
     "serbian": "Serbian (Latin)",
@@ -35,5 +36,6 @@
     "nameOfSight": "Landmark name:",
     "hearLandmarkName": "Listen to the name of the landmark.",
     "enlargedImage": "Enlarged image of ",
-    "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to pause."
+    "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to pause.",
+    "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}"
 }

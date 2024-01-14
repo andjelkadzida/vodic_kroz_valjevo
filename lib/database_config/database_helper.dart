@@ -19,7 +19,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), dbName);
 
     _database = await openDatabase(path,
-        version: 3,
+        version: 1,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -64,6 +64,8 @@ class DatabaseHelper {
           CREATE TABLE IF NOT EXISTS Hotels (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             hotel_image_path BLOB,
+            hotel_image_path2 BLOB,
+            hotel_image_path3 BLOB,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,

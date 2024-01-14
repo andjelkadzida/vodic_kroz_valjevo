@@ -18,11 +18,12 @@ class Hotels extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
-            label: localization(context).hotels,
-            child: Text(
-              localization(context).hotels,
-              style: AppStyles.defaultAppBarTextStyle(textScaler),
-            )),
+          label: localization(context).hotels,
+          child: Text(
+            localization(context).hotels,
+            style: AppStyles.defaultAppBarTextStyle(textScaler),
+          ),
+        ),
         excludeHeaderSemantics: true,
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -71,8 +72,8 @@ class Hotels extends StatelessWidget {
 
     return FlutterMap(
       options: const MapOptions(
-        initialCenter: LatLng(44.275, 19.898),
-        initialZoom: 14.0,
+        initialCenter: LatLng(44.267, 19.886),
+        initialZoom: 13.0,
       ),
       children: [
         TileLayer(
@@ -93,7 +94,6 @@ class Hotels extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        Uint8List imageBytes = hotelData['hotel_image_path'];
         int numberOfStars = hotelData['noStars'];
 
         List<Widget> hotelStars = List.generate(
@@ -136,9 +136,15 @@ class Hotels extends StatelessWidget {
                   itemCount: 3,
                   itemBuilder:
                       (BuildContext context, int itemIndex, int pageViewIndex) {
+                    List<Uint8List> images = [
+                      hotelData['hotel_image_path'],
+                      hotelData['hotel_image_path2'],
+                      hotelData['hotel_image_path3'],
+                    ];
+
                     return Semantics(
                       label: localization(context).hotelImage,
-                      child: Image.memory(imageBytes, fit: BoxFit.cover),
+                      child: Image.memory(images[itemIndex], fit: BoxFit.cover),
                     );
                   },
                   options: CarouselOptions(
@@ -146,7 +152,7 @@ class Hotels extends StatelessWidget {
                     enlargeCenterPage: true,
                     viewportFraction: 0.9,
                     aspectRatio: 2.0,
-                    initialPage: 2,
+                    initialPage: 0,
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.02),
@@ -187,6 +193,8 @@ class Hotels extends StatelessWidget {
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
         hotel_image_path, 
+        hotel_image_path2,
+        hotel_image_path3,
         title_$languageCode AS title, 
         latitude, 
         longitude, 

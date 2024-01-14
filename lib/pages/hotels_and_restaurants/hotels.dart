@@ -1,6 +1,6 @@
-import 'dart:typed_data';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -53,7 +53,10 @@ class Hotels extends StatelessWidget {
       return Marker(
           point: position,
           child: GestureDetector(
-            onTap: () => showHotelDetailsDialog(context, hotelData),
+            onTap: () => {
+              showHotelDetailsDialog(context, hotelData),
+              HapticFeedback.vibrate()
+            },
             child: Tooltip(
               message: '${hotelData['title']}',
               child: Icon(
@@ -84,64 +87,89 @@ class Hotels extends StatelessWidget {
       BuildContext context, Map<String, dynamic> hotelData) {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     final double screenHeight = mediaQueryData.size.height;
-    final double screenWidth = mediaQueryData.size.width;
     final textScaler = MediaQuery.textScalerOf(context);
 
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         Uint8List imageBytes = hotelData['hotel_image_path'];
         int numberOfStars = hotelData['noStars'];
 
         List<Widget> hotelStars = List.generate(
           numberOfStars,
-          (index) => Icon(
-            Icons.star,
-            color: Colors.amber,
-            size: textScaler.scale(30),
+          (index) => Semantics(
+            label: '${localization(context).starRating} $numberOfStars',
+            child: Icon(
+              Icons.star,
+              color: Colors.amber,
+              size: textScaler.scale(35),
+            ),
           ),
         );
 
-        return AlertDialog(
-          title: Text(
-            hotelData['title'],
-            textAlign: TextAlign.center,
-            style: AppStyles.sightTitleStyle(textScaler),
-          ),
-          content: SingleChildScrollView(
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Semantics(
-                  label: hotelData['title'],
-                  child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: screenWidth * 0.8, // Max width constraint
-                        maxHeight: screenHeight * 0.4, // Max height constraint
+                  label:
+                      '${localization(context).hotelName} ${hotelData['title']}',
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: hotelData['title'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: textScaler.scale(20),
+                        color: Colors.black,
                       ),
-                      child: Semantics(
-                        label: hotelData['titel'],
-                        child: Image.memory(
-                          imageBytes,
-                          fit: BoxFit.contain,
-                        ),
-                      )),
-                ),
-                Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                      hotelStars.map((star) => Flexible(child: star)).toList(),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      isSemanticButton: true,
-                      child: Text(localization(context).close),
-                      onPressed: () => Navigator.of(context).pop(),
                     ),
-                  ],
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                CarouselSlider.builder(
+                  itemCount: 3,
+                  itemBuilder:
+                      (BuildContext context, int itemIndex, int pageViewIndex) {
+                    return Semantics(
+                      label: localization(context).hotelImage,
+                      child: Image.memory(imageBytes, fit: BoxFit.cover),
+                    );
+                  },
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.9,
+                    aspectRatio: 2.0,
+                    initialPage: 2,
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: hotelStars,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                Semantics(
+                  button: true,
+                  label: localization(context).closeDialog,
+                  child: Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: TextButton(
+                      child: Text(
+                        localization(context).close,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -151,7 +179,7 @@ class Hotels extends StatelessWidget {
     );
   }
 
-  // Getting hotel data from the database
+// Getting hotel data from the database
   Future<List<Map<String, dynamic>>> _getHotelsDataFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();

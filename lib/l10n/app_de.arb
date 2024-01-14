@@ -37,5 +37,12 @@
     "hearLandmarkName": "Höre den Namen der Sehenswürdigkeit.",
     "enlargedImage": "Vergrößertes Bild von ",
     "tapToHearDetails": "Tippen Sie, um Details über die Sehenswürdigkeit zu hören. Tippen Sie zweimal, um anzuhalten.",
-    "starCount": "{numberOfStars, plural, =1{1 Stern} other{{numberOfStars} Sterne}}"
+    "doubleTapToStopHearing": "Doppeltippen, um das Hören zu beenden.",
+    "starCount": "{numberOfStars, plural, =1{1 Stern} other{{numberOfStars} Sterne}}",
+    "description": "Beschreibung",
+    "closeDialog": "Dialog schließen",
+    "hotelImage": "Hotelbild",
+    "hotelName": "Hotelname: ",
+    "starRating": "Sternebewertung",
+    "restaurants": "Restaurants"
 }

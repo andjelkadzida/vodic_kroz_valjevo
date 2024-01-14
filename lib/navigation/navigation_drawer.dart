@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
 
 import '../localization/language.dart';
 import '../localization/supported_languages.dart';
@@ -115,7 +116,9 @@ class NavigationDrawer extends StatelessWidget {
         break;
       case 4:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Hotels()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => const HotelsAndRestaurants()));
         break;
       default:
         Navigator.pop(context);

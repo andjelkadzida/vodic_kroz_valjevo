@@ -44,5 +44,6 @@
     "hotelImage": "Слика хотела",
     "hotelName": "Назив хотела: ",
     "starRating": "Број звездица",
-    "restaurants": "Ресторани"
+    "restaurants": "Ресторани",
+    "tapToView": "Додирните да бисте отворили страницу: "
 }

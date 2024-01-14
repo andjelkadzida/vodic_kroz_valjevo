@@ -6,7 +6,6 @@ import '../localization/supported_languages.dart';
 import '../main.dart';
 import '../pages/about_city.dart';
 import '../pages/home_page.dart';
-import '../pages/hotels_and_restaurants/hotels.dart';
 import '../pages/sights.dart';
 import '../pages/sport_and_recreation.dart';
 import '../styles/common_styles.dart';

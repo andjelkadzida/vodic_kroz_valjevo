@@ -32,7 +32,8 @@ class HotelsAndRestaurants extends StatelessWidget {
       drawer: const nav_drawer.NavigationDrawer(),
       body: Padding(
         padding: EdgeInsets.all(screenSize.width * 0.05),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildItem(
               context,
@@ -46,6 +47,7 @@ class HotelsAndRestaurants extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 20),
             _buildItem(
               context,
               label: localization(context).restaurants,
@@ -71,25 +73,30 @@ class HotelsAndRestaurants extends StatelessWidget {
     required String lottieAsset,
     required VoidCallback onTap,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+    final textScaler = MediaQuery.textScalerOf(context);
+    return Semantics(
+      label: localization(context).tapToView + label,
       child: GestureDetector(
         onTap: onTap,
         child: Card(
           elevation: 4,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Lottie.asset(lottieAsset, width: 100, height: 100),
-              const SizedBox(height: 10),
-              Text(
-                label,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Icon(icon, size: 30),
-            ],
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Lottie.asset(lottieAsset, width: 100, height: 100),
+                const SizedBox(height: 10),
+                Text(
+                  label,
+                  style: AppStyles.hotelsAndRestaurantsStyle(textScaler),
+                ),
+                Icon(icon, size: textScaler.scale(35)),
+              ],
+            ),
           ),
         ),
       ),

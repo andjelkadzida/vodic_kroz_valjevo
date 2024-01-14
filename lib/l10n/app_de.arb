@@ -44,5 +44,6 @@
     "hotelImage": "Hotelbild",
     "hotelName": "Hotelname: ",
     "starRating": "Sternebewertung",
-    "restaurants": "Restaurants"
+    "restaurants": "Restaurants",
+    "tapToView": "Tippen Sie, um die Seite zu öffnen: "
 }

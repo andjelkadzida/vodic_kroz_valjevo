@@ -14,8 +14,8 @@ class Restaurants extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
-            label: localization(context).aboutCity,
-            child: Text(localization(context).aboutCity,
+            label: localization(context).restaurants,
+            child: Text(localization(context).restaurants,
                 style: AppStyles.defaultAppBarTextStyle(textScaler))),
         excludeHeaderSemantics: true,
         centerTitle: true,

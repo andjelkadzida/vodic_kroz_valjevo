@@ -9,7 +9,7 @@ import '../../localization/supported_languages.dart';
 import '../../styles/common_styles.dart';
 
 class Hotels extends StatelessWidget {
-  Hotels({Key? key}) : super(key: key);
+  const Hotels({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

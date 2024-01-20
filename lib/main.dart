@@ -69,6 +69,8 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     if (!hotelsExist) {
       await hotelsRepo.hotelsDataInsertion();
     }
+
+    await widget.database.close();
   }
 
   setLanguage(Locale lang) {
@@ -100,7 +102,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
         primarySwatch: Colors.blue,
       ),
       // builder: (context, child) => AccessibilityTools(child: child),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

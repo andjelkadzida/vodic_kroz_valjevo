@@ -99,7 +99,7 @@ class NavigationDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
         break;
       case 1:
         Navigator.push(context,
@@ -110,8 +110,10 @@ class NavigationDrawer extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => Sights()));
         break;
       case 3:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SportsAndRecreation()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const SportsAndRecreation()));
         break;
       case 4:
         Navigator.push(

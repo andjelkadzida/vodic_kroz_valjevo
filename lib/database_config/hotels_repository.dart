@@ -116,7 +116,5 @@ class HotelsRepository {
     ];
 
     await bulkInsertHotelsData(hotelsList);
-
-    await _databaseInstance.close();
   }
 }

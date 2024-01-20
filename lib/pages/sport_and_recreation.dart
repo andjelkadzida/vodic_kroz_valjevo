@@ -5,7 +5,7 @@ import '../localization/supported_languages.dart';
 import '../styles/common_styles.dart';
 
 class SportsAndRecreation extends StatelessWidget {
-  SportsAndRecreation({Key? key}) : super(key: key);
+  const SportsAndRecreation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

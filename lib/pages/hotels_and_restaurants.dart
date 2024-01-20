@@ -43,7 +43,7 @@ class HotelsAndRestaurants extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Hotels()),
+                  MaterialPageRoute(builder: (context) => const Hotels()),
                 );
               },
             ),

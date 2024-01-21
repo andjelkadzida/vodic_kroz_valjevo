@@ -1,3 +1,5 @@
+import 'package:app_settings/app_settings.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -7,8 +9,27 @@ import '../navigation/navigation_drawer.dart' as nav_drawer;
 import '../localization/supported_languages.dart';
 import '../styles/common_styles.dart';
 
-class HotelsAndRestaurants extends StatelessWidget {
+class HotelsAndRestaurants extends StatefulWidget {
   const HotelsAndRestaurants({Key? key}) : super(key: key);
+
+  @override
+  _HotelsAndRestaurants createState() => _HotelsAndRestaurants();
+}
+
+class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
+  @override
+  void initState() {
+    super.initState();
+    checkConnectivity();
+  }
+
+  // Checking network connectivity
+  Future<void> checkConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      AppSettings.openAppSettings(type: AppSettingsType.wireless);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +77,7 @@ class HotelsAndRestaurants extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Restaurants()),
+                  MaterialPageRoute(builder: (context) => Restaurants()),
                 );
               },
             ),

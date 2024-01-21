@@ -45,5 +45,8 @@
     "hotelName": "Hotelname: ",
     "starRating": "Sternebewertung",
     "restaurants": "Restaurants",
-    "tapToView": "Tippen Sie, um die Seite zu öffnen: "
+    "restaurantName": "Restaurantname: ",
+    "tapToView": "Tippen Sie, um die Seite zu öffnen: ",
+    "distanceFromRestaurant": "Entfernung vom Restaurant: ",
+    "distanceNotAvailable": "Entfernung zum Restaurant kann nicht berechnet werden."
 }

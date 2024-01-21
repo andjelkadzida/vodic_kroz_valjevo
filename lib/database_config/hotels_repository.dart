@@ -13,8 +13,8 @@ class HotelsRepository {
 
   // Check if data exists returns true if hotels data exists, false otherwise
   Future<bool> checkHotelsDataExist() async {
-    List<Map<String, dynamic>> sights = await _databaseInstance.query('Hotels');
-    return sights.isNotEmpty;
+    List<Map<String, dynamic>> hotels = await _databaseInstance.query('Hotels');
+    return hotels.isNotEmpty;
   }
 
   Future<void> bulkInsertHotelsData(

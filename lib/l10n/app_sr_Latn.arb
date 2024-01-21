@@ -45,6 +45,8 @@
     "hotelName": "Naziv hotela: ",
     "starRating": "Broj zvezdica",
     "restaurants": "Restorani",
-    "tapToView": "Dodirnite da biste otvorili stranicu: "
-
+    "restaurantName": "Naziv restorana: ",
+    "tapToView": "Dodirnite da biste otvorili stranicu: ",
+    "distanceFromRestaurant": "Udaljenost od restorana: ",
+    "distanceNotAvailable": "Nije moguće izračunati udaljenost od restorana."
 }

@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:vodic_kroz_valjevo/database_config/restaurants_repository.dart';
 
 import 'database_config/database_helper.dart';
 import 'database_config/hotels_repository.dart';
@@ -42,6 +43,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   late SightsRepository sightsRepo;
   late SportsRepository sportsRepo;
   late HotelsRepository hotelsRepo;
+  late RestaurantsRepository restaurantsRepo;
 
   @override
   void initState() {
@@ -50,6 +52,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     sightsRepo = SightsRepository(widget.database);
     sportsRepo = SportsRepository(widget.database);
     hotelsRepo = HotelsRepository(widget.database);
+    restaurantsRepo = RestaurantsRepository(widget.database);
     _initializeData();
   }
 
@@ -57,6 +60,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     bool sportsExist = await sportsRepo.checkSportsDataExists();
     bool sightsExist = await sightsRepo.checkSightsDataExist();
     bool hotelsExist = await hotelsRepo.checkHotelsDataExist();
+    bool restaurantsExists = await restaurantsRepo.checkRestaurantsDataExist();
 
     if (!sportsExist) {
       await sportsRepo.sportsDataInsertion();
@@ -68,6 +72,10 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
 
     if (!hotelsExist) {
       await hotelsRepo.hotelsDataInsertion();
+    }
+
+    if (!restaurantsExists) {
+      await restaurantsRepo.restaurantsDataInsertion();
     }
 
     await widget.database.close();

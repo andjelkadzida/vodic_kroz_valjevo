@@ -19,7 +19,7 @@ class MapScreen {
   }
 
   // Obtaining user's location
-  Future<void> getCurrentLocation() async {
+  Future<Position?> getCurrentLocation() async {
     var gpsEnabled = await Geolocator.isLocationServiceEnabled();
     var gpsPermission = await Geolocator.checkPermission();
 
@@ -31,7 +31,7 @@ class MapScreen {
 
     if (!gpsEnabled) {
       await Geolocator.openLocationSettings();
-      return;
+      return null;
     }
 
     // Check if permission is granted
@@ -42,7 +42,9 @@ class MapScreen {
           desiredAccuracy: LocationAccuracy.best);
       // Update the current position
       currentPosition = position;
+      return currentPosition;
     }
+    return null;
   }
 
   Future<void> navigateToDestination(

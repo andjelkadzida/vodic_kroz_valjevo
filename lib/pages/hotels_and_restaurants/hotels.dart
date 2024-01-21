@@ -61,10 +61,10 @@ class Hotels extends StatelessWidget {
             child: Tooltip(
               message: '${hotelData['title']}',
               child: Icon(
-                Icons.pin_drop,
+                Icons.location_pin,
                 size: textScaler.scale(35),
                 semanticLabel: '${hotelData['title']}',
-                color: Colors.black,
+                color: Colors.blue,
               ),
             ),
           ));
@@ -142,9 +142,17 @@ class Hotels extends StatelessWidget {
                       hotelData['hotel_image_path3'],
                     ];
 
+                    //Prechache images to avoid screen flickering
+                    precacheImage(MemoryImage(images[itemIndex]), context);
+
                     return Semantics(
                       label: localization(context).hotelImage,
-                      child: Image.memory(images[itemIndex], fit: BoxFit.cover),
+                      child: InteractiveViewer(
+                        child: Image.memory(
+                          images[itemIndex],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     );
                   },
                   options: CarouselOptions(

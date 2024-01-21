@@ -56,4 +56,22 @@ class AppStyles {
       letterSpacing: 2,
     );
   }
+
+  static TextStyle hotelsAndRestaurantsTitleStyle(TextScaler textScaler) {
+    return TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: textScaler.scale(20),
+      color: Colors.black,
+    );
+  }
+
+  static TextStyle hotelsAndRestaurantsTextStyle(TextScaler textScaler) {
+    return TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400,
+      fontSize: textScaler.scale(16),
+      color: Colors.black,
+    );
+  }
 }

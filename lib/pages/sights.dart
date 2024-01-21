@@ -183,7 +183,6 @@ class Sights extends StatelessWidget {
                     onPressed: () async {
                       TextToSpeechConfig.instance
                           .speak('${localization(context).navigateTo}$title');
-                      await mapScreen.getCurrentLocation();
                       await mapScreen.navigateToDestination(
                           destLatitude, destLongitude);
                     },

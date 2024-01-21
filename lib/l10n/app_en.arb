@@ -37,5 +37,16 @@
     "hearLandmarkName": "Listen to the name of the landmark.",
     "enlargedImage": "Enlarged image of ",
     "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to pause.",
-    "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}"
+    "doubleTapToStopHearing": "Double tap to stop hearing.",
+    "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
+    "description": "Description",
+    "closeDialog": "Close dialog",
+    "hotelImage": "Hotel image",
+    "hotelName": "Hotel name: ",
+    "starRating": "Star rating",
+    "restaurants": "Restaurants",
+    "restaurantName": "Restaurant name: ",
+    "tapToView": "Tap to open page: ",
+    "distanceFromRestaurant": "Distance from the restaurant: ",
+    "distanceNotAvailable": "Unable to calculate the distance to the restaurant."
 }

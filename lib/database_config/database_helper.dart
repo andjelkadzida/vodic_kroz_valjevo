@@ -19,7 +19,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), dbName);
 
     _database = await openDatabase(path,
-        version: 3,
+        version: 1,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -64,6 +64,8 @@ class DatabaseHelper {
           CREATE TABLE IF NOT EXISTS Hotels (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             hotel_image_path BLOB,
+            hotel_image_path2 BLOB,
+            hotel_image_path3 BLOB,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -74,6 +76,22 @@ class DatabaseHelper {
             noStars INT
             )
         ''');
+
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS Restaurants (
+            id  INTEGER PRIMARY KEY AUTOINCREMENT,
+            restaurant_image_path BLOB,
+            restaurant_image_path2 BLOB,
+            restaurant_image_path3 BLOB,
+            latitude REAL NOT NULL,
+            longitude REAL NOT NULL,
+            title_en TEXT,
+            title_de TEXT,
+            title_sr TEXT,
+            title_sr_Cyrl TEXT,
+            title_sr_Latn TEXT
+            )
+        ''');
   }
 
   static void _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -82,6 +100,7 @@ class DatabaseHelper {
           DROP TABLE IF EXISTS Sights;
           DROP TABLE IF EXISTS SportsAndRecreation;
           DROP TABLE IF EXISTS Hotels;
+          DROP TABLE IF EXISTS Restaurants;
         ''');
       _onCreate(db, newVersion);
     }
@@ -95,6 +114,7 @@ class DatabaseHelper {
     if (currentVersion > newVersion) {
       if (await dbFile.exists()) {
         await dbFile.delete();
+        await db.close();
       }
       _onCreate(db, newVersion);
     }

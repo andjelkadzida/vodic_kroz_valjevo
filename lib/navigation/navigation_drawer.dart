@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
 
 import '../localization/language.dart';
 import '../localization/supported_languages.dart';
 import '../main.dart';
 import '../pages/about_city.dart';
 import '../pages/home_page.dart';
-import '../pages/hotels_and_restaurants/hotels.dart';
 import '../pages/sights.dart';
 import '../pages/sport_and_recreation.dart';
 import '../styles/common_styles.dart';
@@ -99,7 +99,7 @@ class NavigationDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
         break;
       case 1:
         Navigator.push(context,
@@ -110,12 +110,16 @@ class NavigationDrawer extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => Sights()));
         break;
       case 3:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SportsAndRecreation()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const SportsAndRecreation()));
         break;
       case 4:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Hotels()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => const HotelsAndRestaurants()));
         break;
       default:
         Navigator.pop(context);

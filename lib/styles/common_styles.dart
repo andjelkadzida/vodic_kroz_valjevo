@@ -46,4 +46,32 @@ class AppStyles {
       letterSpacing: 1.5,
     );
   }
+
+  static TextStyle hotelsAndRestaurantsStyle(TextScaler textScaler) {
+    return TextStyle(
+      color: Colors.black,
+      fontFamily: 'Roboto',
+      fontSize: textScaler.scale(35),
+      fontWeight: FontWeight.w700,
+      letterSpacing: 2,
+    );
+  }
+
+  static TextStyle hotelsAndRestaurantsTitleStyle(TextScaler textScaler) {
+    return TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: textScaler.scale(20),
+      color: Colors.black,
+    );
+  }
+
+  static TextStyle hotelsAndRestaurantsTextStyle(TextScaler textScaler) {
+    return TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400,
+      fontSize: textScaler.scale(16),
+      color: Colors.black,
+    );
+  }
 }

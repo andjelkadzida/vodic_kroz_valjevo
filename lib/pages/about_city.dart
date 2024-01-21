@@ -27,7 +27,7 @@ class AboutCity extends StatelessWidget {
       drawer: const nav_drawer.NavigationDrawer(),
       body: Center(
         child: Image.asset(
-          'assets/images/grbValjeva.png',
+          'images/grbValjeva.png',
           width: 200,
           height: 200,
         ),

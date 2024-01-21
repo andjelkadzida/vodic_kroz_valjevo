@@ -37,5 +37,16 @@
     "hearLandmarkName": "Чујте име знаменитости.",
     "enlargedImage": "Увећана слика ",
     "tapToHearDetails": "Додирните да бисте чули детаље о знаменитости. Додирните два пута, да бисте паузирали.",
-    "starCount": "{numberOfStars, plural, =1{1 звездица} other{{numberOfStars} звездице}}"
+    "doubleTapToStopHearing": "Додирните два пута да зауставите слушање.",
+    "starCount": "{numberOfStars, plural, =1{1 звездица} other{{numberOfStars} звездице}}",
+    "description": "Опис",
+    "closeDialog": "Затвори дијалог",
+    "hotelImage": "Слика хотела",
+    "hotelName": "Назив хотела: ",
+    "starRating": "Број звездица",
+    "restaurants": "Ресторани",
+    "restaurantName": "Назив ресторана: ",
+    "tapToView": "Додирните да бисте отворили страницу: ",
+    "distanceFromRestaurant": "Удаљеност од ресторана: ",
+    "distanceNotAvailable": "Није могуће израчунати удаљеност од ресторана."
 }

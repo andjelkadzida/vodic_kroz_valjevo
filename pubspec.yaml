@@ -39,11 +39,14 @@ dependencies:
   flutter_tts: ^3.8.5
   sqflite: ^2.3.0
   path: ^1.8.3
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^4.0.0
   app_settings: ^5.1.1
   fluttertoast: ^8.2.4
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
+  carousel_slider: ^4.2.1
+  lottie: ^3.0.0
+  flutter_staggered_grid_view: ^0.7.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -80,6 +83,32 @@ flutter:
     - images/muzejLogo.png
     - images/kulaNenadovica.jpg
     - images/grbValjeva.png
+    - images/hotelsImages/bubicaSpolja.jpeg
+    - images/hotelsImages/bubicaSoba.jpeg
+    - images/hotelsImages/bubicaKupatilo.jpeg
+    - images/hotelsImages/grandSpolja.jpeg
+    - images/hotelsImages/grandSoba.jpg
+    - images/hotelsImages/grandKupatilo.jpg
+    - images/hotelsImages/omniSpolja.jpg
+    - images/hotelsImages/omniSoba.jpg
+    - images/hotelsImages/omniKupatilo.jpg
+    - images/restaurantsImages/paviljonNapolju.jpeg
+    - images/restaurantsImages/paviljonPrizemlje.jpeg
+    - images/restaurantsImages/paviljonSprat.jpeg
+    - images/restaurantsImages/lovciNapolju.jpeg
+    - images/restaurantsImages/lovciUnutra.jpeg
+    - images/restaurantsImages/lovciHrana.jpeg
+    - images/restaurantsImages/kucaSpolja.jpeg
+    - images/restaurantsImages/kucaUnutra.jpeg
+    - images/restaurantsImages/kucaHrana.jpeg
+    - images/restaurantsImages/tavernaSpolja.jpeg
+    - images/restaurantsImages/tavernaUnutra.jpeg
+    - images/restaurantsImages/tavernaHrana.jpeg
+    - images/restaurantsImages/laPiazzaSpolja.jpeg
+    - images/restaurantsImages/laPiazzaUnutra.jpeg
+    - images/restaurantsImages/laPiazzaHrana.jpeg
+    - animations/hotels.json
+    - animations/restaurants.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

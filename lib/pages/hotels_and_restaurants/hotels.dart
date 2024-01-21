@@ -1,6 +1,6 @@
-import 'dart:typed_data';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -9,7 +9,7 @@ import '../../localization/supported_languages.dart';
 import '../../styles/common_styles.dart';
 
 class Hotels extends StatelessWidget {
-  Hotels({Key? key}) : super(key: key);
+  const Hotels({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +18,12 @@ class Hotels extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
-            label: localization(context).hotels,
-            child: Text(
-              localization(context).hotels,
-              style: AppStyles.defaultAppBarTextStyle(textScaler),
-            )),
+          label: localization(context).hotels,
+          child: Text(
+            localization(context).hotels,
+            style: AppStyles.defaultAppBarTextStyle(textScaler),
+          ),
+        ),
         excludeHeaderSemantics: true,
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -53,14 +54,17 @@ class Hotels extends StatelessWidget {
       return Marker(
           point: position,
           child: GestureDetector(
-            onTap: () => showHotelDetailsDialog(context, hotelData),
+            onTap: () => {
+              showHotelDetailsDialog(context, hotelData),
+              HapticFeedback.vibrate()
+            },
             child: Tooltip(
               message: '${hotelData['title']}',
               child: Icon(
-                Icons.pin_drop,
+                Icons.location_pin,
                 size: textScaler.scale(35),
                 semanticLabel: '${hotelData['title']}',
-                color: Colors.black,
+                color: Colors.blue,
               ),
             ),
           ));
@@ -68,8 +72,8 @@ class Hotels extends StatelessWidget {
 
     return FlutterMap(
       options: const MapOptions(
-        initialCenter: LatLng(44.275, 19.898),
-        initialZoom: 14.0,
+        initialCenter: LatLng(44.267, 19.886),
+        initialZoom: 13.0,
       ),
       children: [
         TileLayer(
@@ -84,62 +88,102 @@ class Hotels extends StatelessWidget {
       BuildContext context, Map<String, dynamic> hotelData) {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     final double screenHeight = mediaQueryData.size.height;
-    final double screenWidth = mediaQueryData.size.width;
     final textScaler = MediaQuery.textScalerOf(context);
 
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        Uint8List imageBytes = hotelData['hotel_image_path'];
         int numberOfStars = hotelData['noStars'];
 
         List<Widget> hotelStars = List.generate(
           numberOfStars,
-          (index) => Icon(
-            Icons.star,
-            color: Colors.amber,
-            size: textScaler.scale(30),
+          (index) => Semantics(
+            label: '${localization(context).starRating} $numberOfStars',
+            child: Icon(
+              Icons.star,
+              color: Colors.amber,
+              size: textScaler.scale(35),
+            ),
           ),
         );
 
-        return AlertDialog(
-          title: Text(
-            hotelData['title'],
-            textAlign: TextAlign.center,
-            style: AppStyles.sightTitleStyle(textScaler),
-          ),
-          content: SingleChildScrollView(
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Semantics(
-                  label: hotelData['title'],
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: screenWidth * 0.8, // Max width constraint
-                      maxHeight: screenHeight * 0.4, // Max height constraint
-                    ),
-                    child: Image.memory(
-                      imageBytes,
-                      fit: BoxFit.contain,
+                  label:
+                      '${localization(context).hotelName} ${hotelData['title']}',
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: hotelData['title'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: textScaler.scale(20),
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
-                Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                      hotelStars.map((star) => Flexible(child: star)).toList(),
+                SizedBox(height: screenHeight * 0.02),
+                CarouselSlider.builder(
+                  itemCount: 3,
+                  itemBuilder:
+                      (BuildContext context, int itemIndex, int pageViewIndex) {
+                    List<Uint8List> images = [
+                      hotelData['hotel_image_path'],
+                      hotelData['hotel_image_path2'],
+                      hotelData['hotel_image_path3'],
+                    ];
+
+                    //Prechache images to avoid screen flickering
+                    precacheImage(MemoryImage(images[itemIndex]), context);
+
+                    return Semantics(
+                      label: localization(context).hotelImage,
+                      child: InteractiveViewer(
+                        child: Image.memory(
+                          images[itemIndex],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.9,
+                    aspectRatio: 2.0,
+                    initialPage: 0,
+                  ),
                 ),
+                SizedBox(height: screenHeight * 0.02),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      isSemanticButton: true,
-                      child: Text(localization(context).close),
-                      onPressed: () => Navigator.of(context).pop(),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: hotelStars,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                Semantics(
+                  button: true,
+                  label: localization(context).closeDialog,
+                  child: Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: TextButton(
+                      child: Text(
+                        localization(context).close,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -149,7 +193,7 @@ class Hotels extends StatelessWidget {
     );
   }
 
-  // Getting hotel data from the database
+// Getting hotel data from the database
   Future<List<Map<String, dynamic>>> _getHotelsDataFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
@@ -157,6 +201,8 @@ class Hotels extends StatelessWidget {
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
         hotel_image_path, 
+        hotel_image_path2,
+        hotel_image_path3,
         title_$languageCode AS title, 
         latitude, 
         longitude, 

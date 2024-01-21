@@ -1,5 +1,5 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'sight_details_page.dart';
@@ -86,6 +86,7 @@ class Sights extends StatelessWidget {
 
     return GestureDetector(
       onLongPress: () {
+        HapticFeedback.vibrate();
         showDialog(
           context: context,
           builder: (BuildContext dialogContext) {
@@ -182,7 +183,6 @@ class Sights extends StatelessWidget {
                     onPressed: () async {
                       TextToSpeechConfig.instance
                           .speak('${localization(context).navigateTo}$title');
-                      await mapScreen.getCurrentLocation();
                       await mapScreen.navigateToDestination(
                           destLatitude, destLongitude);
                     },

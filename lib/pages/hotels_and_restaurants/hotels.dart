@@ -13,15 +13,14 @@ class Hotels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
           label: localization(context).hotels,
           child: Text(
             localization(context).hotels,
-            style: AppStyles.defaultAppBarTextStyle(textScaler),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler),
           ),
         ),
         excludeHeaderSemantics: true,
@@ -49,8 +48,6 @@ class Hotels extends StatelessWidget {
       LatLng position = LatLng(
           hotelData['latitude'] as double, hotelData['longitude'] as double);
 
-      final textScaler = MediaQuery.textScalerOf(context);
-
       return Marker(
           point: position,
           child: GestureDetector(
@@ -62,7 +59,7 @@ class Hotels extends StatelessWidget {
               message: '${hotelData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: textScaler.scale(35),
+                size: MediaQuery.of(context).textScaler.scale(35),
                 semanticLabel: '${hotelData['title']}',
                 color: Colors.blue,
               ),
@@ -88,7 +85,6 @@ class Hotels extends StatelessWidget {
       BuildContext context, Map<String, dynamic> hotelData) {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     final double screenHeight = mediaQueryData.size.height;
-    final textScaler = MediaQuery.textScalerOf(context);
 
     showDialog(
       context: context,
@@ -96,8 +92,8 @@ class Hotels extends StatelessWidget {
       builder: (BuildContext context) {
         int numberOfStars = hotelData['noStars'];
 
-        Widget hotelStars =
-            _generateStarIcons(numberOfStars, context, textScaler);
+        Widget hotelStars = _generateStarIcons(
+            numberOfStars, context, MediaQuery.of(context).textScaler);
 
         return Dialog(
           shape:
@@ -115,7 +111,7 @@ class Hotels extends StatelessWidget {
                       text: hotelData['title'],
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: textScaler.scale(20),
+                        fontSize: MediaQuery.of(context).textScaler.scale(20),
                         color: Colors.black,
                       ),
                     ),
@@ -191,7 +187,7 @@ class Hotels extends StatelessWidget {
       (index) => Icon(
         Icons.star,
         color: Colors.amber,
-        size: textScaler.scale(35),
+        size: MediaQuery.of(context).textScaler.scale(35),
       ),
     );
 

@@ -104,7 +104,6 @@ Future<void> showRestaurantDetailsDialog(
     BuildContext context, Map<String, dynamic> restaurantData) async {
   final MediaQueryData mediaQueryData = MediaQuery.of(context);
   final double screenHeight = mediaQueryData.size.height;
-  final textScaler = MediaQuery.textScalerOf(context);
   final MapScreen mapScreen = MapScreen();
   double? distance;
   Position? currentPosition = await mapScreen.getCurrentLocation();
@@ -135,7 +134,8 @@ Future<void> showRestaurantDetailsDialog(
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: restaurantData['title'],
-                    style: AppStyles.hotelsAndRestaurantsTitleStyle(textScaler),
+                    style: AppStyles.hotelsAndRestaurantsTitleStyle(
+                        MediaQuery.of(context).textScaler),
                   ),
                 ),
               ),
@@ -177,7 +177,8 @@ Future<void> showRestaurantDetailsDialog(
                   distance != null
                       ? '${localization(context).distanceFromRestaurant} $distance m'
                       : localization(context).distanceNotAvailable,
-                  style: AppStyles.hotelsAndRestaurantsTextStyle(textScaler),
+                  style: AppStyles.hotelsAndRestaurantsTextStyle(
+                      MediaQuery.of(context).textScaler),
                 ),
               ),
               Semantics(

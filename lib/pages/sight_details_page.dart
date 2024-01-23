@@ -38,12 +38,11 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title,
-            style: AppStyles.defaultAppBarTextStyle(textScaler)),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler)),
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -65,7 +64,7 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
               child: ExpansionTile(
                 trailing: Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
-                  size: textScaler.scale(35),
+                  size: MediaQuery.of(context).textScaler.scale(35),
                   color: Colors.blue,
                 ),
                 onExpansionChanged: (expanded) {
@@ -81,7 +80,8 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
                       Expanded(
                         child: Text(
                           localization(context).description,
-                          style: AppStyles.sightTitleStyle(textScaler),
+                          style: AppStyles.sightTitleStyle(
+                              MediaQuery.of(context).textScaler),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -93,7 +93,7 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
                         child: Icon(
                           Icons.volume_up_sharp,
                           semanticLabel: localization(context).tapToHearDetails,
-                          size: textScaler.scale(30),
+                          size: MediaQuery.of(context).textScaler.scale(30),
                         ),
                       ),
                     ],
@@ -105,7 +105,8 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
                     duration: const Duration(seconds: 1),
                     child: Text(
                       widget.description,
-                      style: AppStyles.sightTitleStyle(textScaler),
+                      style: AppStyles.sightTitleStyle(
+                          MediaQuery.of(context).textScaler),
                       textAlign: TextAlign.justify,
                     ),
                   ),

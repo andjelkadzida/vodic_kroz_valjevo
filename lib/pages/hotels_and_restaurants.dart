@@ -35,7 +35,6 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final textScaler = MediaQuery.textScalerOf(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +42,8 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
           label: localization(context).restaurantsAndHotels,
           child: Text(
             localization(context).restaurantsAndHotels,
-            style: AppStyles.defaultAppBarTextStyle(textScaler),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler),
           ),
         ),
         excludeHeaderSemantics: true,

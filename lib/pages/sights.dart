@@ -16,12 +16,11 @@ class Sights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(localization(context).sights,
-            style: AppStyles.defaultAppBarTextStyle(textScaler)),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler)),
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),

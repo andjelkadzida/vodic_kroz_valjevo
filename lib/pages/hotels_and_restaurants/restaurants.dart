@@ -15,15 +15,14 @@ class Restaurants extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
           label: localization(context).restaurants,
           child: Text(
             localization(context).restaurants,
-            style: AppStyles.defaultAppBarTextStyle(textScaler),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler),
           ),
         ),
         excludeHeaderSemantics: true,
@@ -50,7 +49,6 @@ class Restaurants extends StatelessWidget {
     List<Marker> markers = restaurantsData.map((restaurantData) {
       LatLng position = LatLng(restaurantData['latitude'] as double,
           restaurantData['longitude'] as double);
-      final textScaler = MediaQuery.textScalerOf(context);
 
       return Marker(
           point: position,
@@ -63,7 +61,7 @@ class Restaurants extends StatelessWidget {
               message: '${restaurantData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: textScaler.scale(35),
+                size: MediaQuery.of(context).textScaler.scale(35),
                 semanticLabel: '${restaurantData['title']}',
                 color: Colors.blue,
               ),

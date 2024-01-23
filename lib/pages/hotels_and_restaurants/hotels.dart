@@ -56,7 +56,7 @@ class Hotels extends StatelessWidget {
           child: GestureDetector(
             onTap: () => {
               showHotelDetailsDialog(context, hotelData),
-              HapticFeedback.vibrate()
+              HapticFeedback.selectionClick()
             },
             child: Tooltip(
               message: '${hotelData['title']}',
@@ -96,17 +96,8 @@ class Hotels extends StatelessWidget {
       builder: (BuildContext context) {
         int numberOfStars = hotelData['noStars'];
 
-        List<Widget> hotelStars = List.generate(
-          numberOfStars,
-          (index) => Semantics(
-            label: '${localization(context).starRating} $numberOfStars',
-            child: Icon(
-              Icons.star,
-              color: Colors.amber,
-              size: textScaler.scale(35),
-            ),
-          ),
-        );
+        Widget hotelStars =
+            _generateStarIcons(numberOfStars, context, textScaler);
 
         return Dialog(
           shape:
@@ -117,8 +108,7 @@ class Hotels extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Semantics(
-                  label:
-                      '${localization(context).hotelName} ${hotelData['title']}',
+                  label: localization(context).hotelName,
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -166,7 +156,7 @@ class Hotels extends StatelessWidget {
                 SizedBox(height: screenHeight * 0.02),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: hotelStars,
+                  children: [hotelStars],
                 ),
                 SizedBox(height: screenHeight * 0.02),
                 Semantics(
@@ -190,6 +180,27 @@ class Hotels extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  // Generate number of stars
+  Widget _generateStarIcons(
+      int numberOfStars, BuildContext context, TextScaler textScaler) {
+    List<Widget> stars = List.generate(
+      numberOfStars,
+      (index) => Icon(
+        Icons.star,
+        color: Colors.amber,
+        size: textScaler.scale(35),
+      ),
+    );
+
+    return Semantics(
+      label: '${localization(context).starRating} $numberOfStars',
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: stars,
+      ),
     );
   }
 

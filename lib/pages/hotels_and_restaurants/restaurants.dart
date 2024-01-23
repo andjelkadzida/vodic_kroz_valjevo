@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -56,7 +57,10 @@ class Restaurants extends StatelessWidget {
       return Marker(
           point: position,
           child: GestureDetector(
-            onTap: () => showRestaurantDetailsDialog(context, restaurantData),
+            onTap: () => {
+              showRestaurantDetailsDialog(context, restaurantData),
+              HapticFeedback.selectionClick()
+            },
             child: Tooltip(
               message: '${restaurantData['title']}',
               child: Icon(
@@ -128,8 +132,7 @@ Future<void> showRestaurantDetailsDialog(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Semantics(
-                label:
-                    '${localization(context).restaurantName} ${restaurantData['title']}',
+                label: localization(context).restaurantName,
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
@@ -171,11 +174,13 @@ Future<void> showRestaurantDetailsDialog(
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),
-              Text(
-                distance != null
-                    ? '${localization(context).distanceFromRestaurant} $distance m'
-                    : localization(context).distanceNotAvailable,
-                style: AppStyles.hotelsAndRestaurantsTextStyle(textScaler),
+              Semantics(
+                child: Text(
+                  distance != null
+                      ? '${localization(context).distanceFromRestaurant} $distance m'
+                      : localization(context).distanceNotAvailable,
+                  style: AppStyles.hotelsAndRestaurantsTextStyle(textScaler),
+                ),
               ),
               Semantics(
                 button: true,
@@ -189,6 +194,7 @@ Future<void> showRestaurantDetailsDialog(
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
+                      HapticFeedback.selectionClick();
                     },
                   ),
                 ),

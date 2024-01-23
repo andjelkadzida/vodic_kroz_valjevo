@@ -83,6 +83,8 @@ class Sights extends StatelessWidget {
       String description,
       BuildContext context) {
     final textScaler = MediaQuery.textScalerOf(context);
+    //Prechache images to avoid screen flickering
+    precacheImage(MemoryImage(imageBytes), context);
 
     return GestureDetector(
       onLongPress: () {
@@ -168,8 +170,8 @@ class Sights extends StatelessWidget {
                     label: title,
                     child: Image.memory(
                       imageBytes,
-                      fit: BoxFit.contain,
-                      semanticLabel: '${localization(context).sight} $title',
+                      fit: BoxFit.cover,
+                      semanticLabel: '${localization(context).sight}"$title"',
                     ),
                   ),
                 ),
@@ -178,11 +180,11 @@ class Sights extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Semantics(
                   button: true,
-                  label: '${localization(context).navigateTo}$title',
+                  label: '${localization(context).navigateTo}"$title"',
                   child: MaterialButton(
                     onPressed: () async {
                       TextToSpeechConfig.instance
-                          .speak('${localization(context).navigateTo}$title');
+                          .speak('${localization(context).navigateTo}"$title"');
                       await mapScreen.navigateToDestination(
                           destLatitude, destLongitude);
                     },
@@ -190,7 +192,7 @@ class Sights extends StatelessWidget {
                     height: 48.0,
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      '${localization(context).navigateTo}$title',
+                      '${localization(context).navigateTo}"$title"',
                       style: AppStyles.sightTitleStyle(textScaler),
                     ),
                   ),

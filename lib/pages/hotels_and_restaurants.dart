@@ -1,6 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 import 'hotels_and_restaurants/hotels.dart';
@@ -66,6 +67,7 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
                   context,
                   MaterialPageRoute(builder: (context) => const Hotels()),
                 );
+                HapticFeedback.selectionClick();
               },
             ),
             const SizedBox(height: 20),
@@ -79,6 +81,7 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
                   context,
                   MaterialPageRoute(builder: (context) => Restaurants()),
                 );
+                HapticFeedback.selectionClick();
               },
             ),
           ],

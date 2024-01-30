@@ -97,7 +97,6 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required String lottieAsset,
     required VoidCallback onTap,
   }) {
-    final textScaler = MediaQuery.textScalerOf(context);
     return Semantics(
       label: localization(context).tapToView + label,
       child: GestureDetector(
@@ -116,9 +115,10 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                 const SizedBox(height: 10),
                 Text(
                   label,
-                  style: AppStyles.hotelsAndRestaurantsStyle(textScaler),
+                  style: AppStyles.hotelsAndRestaurantsStyle(
+                      MediaQuery.of(context).textScaler),
                 ),
-                Icon(icon, size: textScaler.scale(35)),
+                Icon(icon, size: MediaQuery.of(context).textScaler.scale(35)),
               ],
             ),
           ),

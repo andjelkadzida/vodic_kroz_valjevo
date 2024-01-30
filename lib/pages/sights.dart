@@ -176,7 +176,8 @@ class Sights extends StatelessWidget {
                   flex: 5,
                   fit: FlexFit.loose,
                   child: Semantics(
-                    label: '${localization(context).enlargedImage} $title',
+                    label:
+                        '${localization(dialogContext).enlargedImage} $title',
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.memory(
@@ -191,26 +192,28 @@ class Sights extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Semantics(
-                        label: '${localization(context).nameOfSight}$title',
+                        label:
+                            '${localization(dialogContext).nameOfSight}$title',
                         child: Text(
                           title,
                           style: AppStyles.sightDialogStyle(
-                              MediaQuery.of(context).textScaler),
+                              MediaQuery.of(dialogContext).textScaler),
                           textAlign: TextAlign.center,
                         ),
                       ),
                     ),
                     Semantics(
-                      label: localization(context).hearLandmarkName,
-                      tooltip: localization(context).hearLandmarkName,
+                      label: localization(dialogContext).hearLandmarkName,
+                      tooltip: localization(dialogContext).hearLandmarkName,
                       child: IconButton(
                         onPressed: () {
                           TextToSpeechConfig.instance.speak(title);
                         },
                         icon: Icon(Icons.volume_up_sharp,
                             semanticLabel:
-                                localization(context).hearLandmarkName),
-                        iconSize: MediaQuery.of(context).textScaler.scale(30),
+                                localization(dialogContext).hearLandmarkName),
+                        iconSize:
+                            MediaQuery.of(dialogContext).textScaler.scale(30),
                         enableFeedback: true,
                       ),
                     ),

@@ -51,6 +51,8 @@ class Hotels extends StatelessWidget {
 
       return Marker(
           point: position,
+          width: MediaQuery.of(context).textScaler.scale(48),
+          height: MediaQuery.of(context).textScaler.scale(48),
           child: GestureDetector(
             onTap: () => {
               showHotelDetailsDialog(context, hotelData),
@@ -60,7 +62,7 @@ class Hotels extends StatelessWidget {
               message: '${hotelData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: MediaQuery.of(context).textScaler.scale(48),
+                size: MediaQuery.of(context).textScaler.scale(35),
                 semanticLabel: '${hotelData['title']}',
                 color: Colors.blue,
               ),

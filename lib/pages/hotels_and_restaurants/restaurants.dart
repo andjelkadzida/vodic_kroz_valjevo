@@ -53,6 +53,8 @@ class Restaurants extends StatelessWidget {
 
       return Marker(
           point: position,
+          width: MediaQuery.of(context).textScaler.scale(48),
+          height: MediaQuery.of(context).textScaler.scale(48),
           child: GestureDetector(
             onTap: () => {
               showRestaurantDetailsDialog(context, restaurantData),
@@ -62,7 +64,7 @@ class Restaurants extends StatelessWidget {
               message: '${restaurantData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: MediaQuery.of(context).textScaler.scale(48),
+                size: MediaQuery.of(context).textScaler.scale(35),
                 semanticLabel: '${restaurantData['title']}',
                 color: Colors.blue,
               ),

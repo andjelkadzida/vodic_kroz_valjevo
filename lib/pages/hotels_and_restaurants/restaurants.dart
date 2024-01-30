@@ -101,8 +101,11 @@ Future<void> showRestaurantDetailsDialog(
         LatLng(currentPosition.latitude, currentPosition.longitude);
     LatLng restaurantPosition =
         LatLng(restaurantData['latitude'], restaurantData['longitude']);
-    distance =
-        const Distance().as(LengthUnit.Meter, userPosition, restaurantPosition);
+    distance = Geolocator.distanceBetween(
+        userPosition.latitude,
+        userPosition.longitude,
+        restaurantPosition.latitude,
+        restaurantPosition.longitude);
   }
 
   // ignore: use_build_context_synchronously

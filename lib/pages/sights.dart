@@ -207,7 +207,10 @@ class Sights extends StatelessWidget {
                         onPressed: () {
                           TextToSpeechConfig.instance.speak(title);
                         },
-                        icon: const Icon(Icons.volume_up_sharp),
+                        icon: Icon(Icons.volume_up_sharp,
+                            semanticLabel:
+                                localization(context).hearLandmarkName),
+                        iconSize: MediaQuery.of(context).textScaler.scale(30),
                         enableFeedback: true,
                       ),
                     ),

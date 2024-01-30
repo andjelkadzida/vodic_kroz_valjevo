@@ -1,7 +1,6 @@
-# vodic_kroz_valjevo
+# Vodic kroz Valjevo
 
 Android & iOS application "Vodič kroz Valjevo"
-
 
 ## Description
 

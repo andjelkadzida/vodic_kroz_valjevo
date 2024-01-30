@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:vodic_kroz_valjevo/maps_navigation/map_builder.dart';
 
 import '../../database_config/database_helper.dart';
 import '../../localization/supported_languages.dart';
@@ -11,7 +12,7 @@ import '../../maps_navigation/locator.dart';
 import '../../styles/common_styles.dart';
 
 class Restaurants extends StatelessWidget {
-  Restaurants({Key? key}) : super(key: key);
+  const Restaurants({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +70,7 @@ class Restaurants extends StatelessWidget {
           ));
     }).toList();
 
-    return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(44.267, 19.886),
-        initialZoom: 13.0,
-      ),
-      children: [
-        TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-        MarkerLayer(markers: markers),
-      ],
-    );
+    return buildMapWithMarkers(markers);
   }
 
   Future<List<Map<String, dynamic>>> _getRestaurantsFromDatabase(
@@ -111,7 +102,7 @@ Future<void> showRestaurantDetailsDialog(
     LatLng restaurantPosition =
         LatLng(restaurantData['latitude'], restaurantData['longitude']);
     distance =
-        Distance().as(LengthUnit.Meter, userPosition, restaurantPosition);
+        const Distance().as(LengthUnit.Meter, userPosition, restaurantPosition);
   }
 
   // ignore: use_build_context_synchronously

@@ -22,27 +22,39 @@ class SightDetailsPage extends StatefulWidget {
   _SightDetailsPageState createState() => _SightDetailsPageState();
 }
 
-class _SightDetailsPageState extends State<SightDetailsPage> {
-  double opacity = 0.0;
+class _SightDetailsPageState extends State<SightDetailsPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _opacityAnimation;
   bool isExpanded = false;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        opacity = 1.0;
-      });
-    });
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _opacityAnimation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title,
-            style: AppStyles.defaultAppBarTextStyle(
-                MediaQuery.of(context).textScaler)),
+        title: Text(
+          widget.title,
+          style: AppStyles.defaultAppBarTextStyle(
+              MediaQuery.of(context).textScaler),
+        ),
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -51,13 +63,17 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            AnimatedOpacity(
-              opacity: opacity,
-              duration: const Duration(seconds: 1),
-              child: Image.memory(
-                widget.imageBytes,
-                fit: BoxFit.cover,
-              ),
+            AnimatedBuilder(
+              animation: _opacityAnimation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _opacityAnimation.value,
+                  child: Image.memory(
+                    widget.imageBytes,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -100,15 +116,19 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
                   ),
                 ),
                 children: <Widget>[
-                  AnimatedOpacity(
-                    opacity: opacity,
-                    duration: const Duration(seconds: 1),
-                    child: Text(
-                      widget.description,
-                      style: AppStyles.sightTitleStyle(
-                          MediaQuery.of(context).textScaler),
-                      textAlign: TextAlign.justify,
-                    ),
+                  AnimatedBuilder(
+                    animation: _opacityAnimation,
+                    builder: (context, child) {
+                      return Opacity(
+                        opacity: _opacityAnimation.value,
+                        child: Text(
+                          widget.description,
+                          style: AppStyles.sightTitleStyle(
+                              MediaQuery.of(context).textScaler),
+                          textAlign: TextAlign.justify,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

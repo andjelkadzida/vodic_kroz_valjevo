@@ -79,7 +79,7 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Restaurants()),
+                  MaterialPageRoute(builder: (context) => const Restaurants()),
                 );
                 HapticFeedback.selectionClick();
               },

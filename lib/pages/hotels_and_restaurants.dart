@@ -14,10 +14,10 @@ class HotelsAndRestaurants extends StatefulWidget {
   const HotelsAndRestaurants({Key? key}) : super(key: key);
 
   @override
-  _HotelsAndRestaurants createState() => _HotelsAndRestaurants();
+  HotelsAndRestaurantsState createState() => HotelsAndRestaurantsState();
 }
 
-class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
+class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
   @override
   void initState() {
     super.initState();

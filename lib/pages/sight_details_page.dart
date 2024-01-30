@@ -19,10 +19,10 @@ class SightDetailsPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SightDetailsPageState createState() => _SightDetailsPageState();
+  SightDetailsPageState createState() => SightDetailsPageState();
 }
 
-class _SightDetailsPageState extends State<SightDetailsPage>
+class SightDetailsPageState extends State<SightDetailsPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;

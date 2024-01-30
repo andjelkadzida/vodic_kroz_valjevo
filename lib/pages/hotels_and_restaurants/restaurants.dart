@@ -167,16 +167,23 @@ Future<void> showRestaurantDetailsDialog(
               ),
               SizedBox(height: screenHeight * 0.02),
               Semantics(
-                child: Text(
-                  distance != null
-                      ? '${localization(context).distanceFromRestaurant} $distance m'
-                      : localization(context).distanceNotAvailable,
-                  style: AppStyles.hotelsAndRestaurantsTextStyle(
-                      MediaQuery.of(context).textScaler),
+                label: distance != null
+                    ? '${localization(context).distanceFromRestaurant}\n$distance m'
+                    : localization(context).distanceNotAvailable,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    distance != null
+                        ? '${localization(context).distanceFromRestaurant}\n$distance m'
+                        : localization(context).distanceNotAvailable,
+                    style: AppStyles.hotelsAndRestaurantsTextStyle(
+                        MediaQuery.of(context).textScaler),
+                  ),
                 ),
               ),
               Semantics(
                 button: true,
+                enabled: true,
                 label: localization(context).closeDialog,
                 child: Align(
                   alignment: AlignmentDirectional.bottomEnd,

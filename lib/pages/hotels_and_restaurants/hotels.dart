@@ -142,13 +142,18 @@ class Hotels extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.02),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [hotelStars],
+                Tooltip(
+                  message:
+                      '${localization(context).starRating}: $numberOfStars',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [hotelStars],
+                  ),
                 ),
                 SizedBox(height: screenHeight * 0.02),
                 Semantics(
                   button: true,
+                  enabled: true,
                   label: localization(context).closeDialog,
                   child: Align(
                     alignment: AlignmentDirectional.bottomEnd,

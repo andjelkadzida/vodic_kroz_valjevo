@@ -124,30 +124,27 @@ class Sights extends StatelessWidget {
                   ),
                 ),
               ),
-              Flexible(
-                flex: 3,
-                child: Semantics(
-                  button: true,
-                  label: '${localization(context).navigateTo}\n"$title"',
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      TextToSpeechConfig.instance.speak(
-                          '${localization(context).navigateTo}\n"$title"');
-                      await mapScreen.navigateToDestination(
-                          destLatitude, destLongitude);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      shape: const ContinuousRectangleBorder(
-                          borderRadius: BorderRadius.zero),
-                      padding: const EdgeInsets.all(0),
-                      alignment: Alignment.center,
-                    ),
-                    child: Text(
-                      '${localization(context).navigateTo}\n"$title"',
-                      style: AppStyles.sightTitleStyle(
-                          MediaQuery.of(context).textScaler),
-                    ),
+              Semantics(
+                button: true,
+                label: '${localization(context).navigateTo}\n"$title"',
+                child: ElevatedButton(
+                  onPressed: () async {
+                    TextToSpeechConfig.instance
+                        .speak('${localization(context).navigateTo}\n"$title"');
+                    await mapScreen.navigateToDestination(
+                        destLatitude, destLongitude);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    shape: const ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.zero),
+                    padding: const EdgeInsets.all(0),
+                    alignment: Alignment.center,
+                  ),
+                  child: Text(
+                    '${localization(context).navigateTo}\n"$title"',
+                    style: AppStyles.sightTitleStyle(
+                        MediaQuery.of(context).textScaler),
                   ),
                 ),
               ),

@@ -60,7 +60,7 @@ class Hotels extends StatelessWidget {
               message: '${hotelData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: MediaQuery.of(context).textScaler.scale(35),
+                size: MediaQuery.of(context).textScaler.scale(48),
                 semanticLabel: '${hotelData['title']}',
                 color: Colors.blue,
               ),

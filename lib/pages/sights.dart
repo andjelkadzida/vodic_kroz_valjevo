@@ -91,17 +91,20 @@ class Sights extends StatelessWidget {
         HapticFeedback.vibrate();
         _showImageDialog(context, imageBytes, title);
       },
+      behavior: HitTestBehavior.translucent,
       child: Semantics(
         container: true,
         label:
             '${localization(context).sight} $title. ${localization(context).tapForDetails}',
         child: Card(
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Flexible(
+              Expanded(
                 flex: 9,
                 child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -124,27 +127,35 @@ class Sights extends StatelessWidget {
                   ),
                 ),
               ),
-              Semantics(
-                button: true,
-                label: '${localization(context).navigateTo}\n"$title"',
-                child: ElevatedButton(
-                  onPressed: () async {
-                    TextToSpeechConfig.instance
-                        .speak('${localization(context).navigateTo}\n"$title"');
-                    await mapScreen.navigateToDestination(
-                        destLatitude, destLongitude);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    shape: const ContinuousRectangleBorder(
-                        borderRadius: BorderRadius.zero),
-                    padding: const EdgeInsets.all(0),
-                    alignment: Alignment.center,
-                  ),
-                  child: Text(
-                    '${localization(context).navigateTo}\n"$title"',
-                    style: AppStyles.sightTitleStyle(
-                        MediaQuery.of(context).textScaler),
+              Expanded(
+                flex: 3,
+                child: Semantics(
+                  button: true,
+                  label: '${localization(context).navigateTo}\n"$title"',
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      TextToSpeechConfig.instance.speak(
+                          '${localization(context).navigateTo}\n"$title"');
+                      await mapScreen.navigateToDestination(
+                          destLatitude, destLongitude);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      shape: const ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0))),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 0),
+                      alignment: Alignment.center,
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '${localization(context).navigateTo}\n"$title"',
+                        style: AppStyles.sightTitleStyle(
+                            MediaQuery.of(context).textScaler),
+                      ),
+                    ),
                   ),
                 ),
               ),

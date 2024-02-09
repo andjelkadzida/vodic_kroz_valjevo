@@ -51,7 +51,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
       ),
       drawer: const nav_drawer.NavigationDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.5),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -68,7 +68,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                 HapticFeedback.selectionClick();
               },
             ),
-            SizedBox(height: MediaQuery.devicePixelRatioOf(context) * 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             _buildItem(
               context,
               label: localization(context).restaurants,
@@ -104,13 +104,13 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Container(
-            padding: MediaQuery.viewPaddingOf(context),
+            padding: const EdgeInsets.all(20),
             width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Lottie.asset(lottieAsset, width: 100, height: 100),
-                SizedBox(height: MediaQuery.devicePixelRatioOf(context) * 10),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Text(
                   label,
                   style: AppStyles.hotelsAndRestaurantsStyle(

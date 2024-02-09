@@ -81,7 +81,7 @@ class Sights extends StatelessWidget {
       double destLongitude,
       String description,
       BuildContext context) {
-    //Prechache images to avoid screen flickering
+    //Precache images to avoid screen flickering
     precacheImage(MemoryImage(imageBytes), context);
 
     Uint8List imagePlaceholder = Uint8List.fromList(imageBytes);

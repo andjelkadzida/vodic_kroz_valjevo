@@ -75,9 +75,6 @@ class Hotels extends StatelessWidget {
 
   void showHotelDetailsDialog(
       BuildContext context, Map<String, dynamic> hotelData) {
-    final MediaQueryData mediaQueryData = MediaQuery.of(context);
-    final double screenHeight = mediaQueryData.size.height;
-
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -109,7 +106,7 @@ class Hotels extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 CarouselSlider.builder(
                   itemCount: 3,
                   itemBuilder:
@@ -120,7 +117,7 @@ class Hotels extends StatelessWidget {
                       hotelData['hotel_image_path3'],
                     ];
 
-                    //Prechache images to avoid screen flickering
+                    //Precache images to avoid screen flickering
                     precacheImage(MemoryImage(images[itemIndex]), context);
 
                     return Semantics(
@@ -141,7 +138,7 @@ class Hotels extends StatelessWidget {
                     initialPage: 0,
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Tooltip(
                   message:
                       '${localization(context).starRating}: $numberOfStars',
@@ -150,7 +147,7 @@ class Hotels extends StatelessWidget {
                     children: [hotelStars],
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Semantics(
                   button: true,
                   enabled: true,

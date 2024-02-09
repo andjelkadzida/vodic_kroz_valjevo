@@ -34,8 +34,6 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
@@ -53,7 +51,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
       ),
       drawer: const nav_drawer.NavigationDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(screenSize.width * 0.05),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -70,7 +68,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                 HapticFeedback.selectionClick();
               },
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: MediaQuery.devicePixelRatioOf(context) * 20),
             _buildItem(
               context,
               label: localization(context).restaurants,
@@ -106,13 +104,13 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: MediaQuery.viewPaddingOf(context),
             width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Lottie.asset(lottieAsset, width: 100, height: 100),
-                const SizedBox(height: 10),
+                SizedBox(height: MediaQuery.devicePixelRatioOf(context) * 10),
                 Text(
                   label,
                   style: AppStyles.hotelsAndRestaurantsStyle(

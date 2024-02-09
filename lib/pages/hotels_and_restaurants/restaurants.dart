@@ -93,8 +93,6 @@ class Restaurants extends StatelessWidget {
 
 Future<void> showRestaurantDetailsDialog(
     BuildContext context, Map<String, dynamic> restaurantData) async {
-  final MediaQueryData mediaQueryData = MediaQuery.of(context);
-  final double screenHeight = mediaQueryData.size.height;
   final MapScreen mapScreen = MapScreen();
   double? distance;
   Position? currentPosition = await mapScreen.getCurrentLocation();
@@ -133,7 +131,7 @@ Future<void> showRestaurantDetailsDialog(
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               CarouselSlider.builder(
                 itemCount: 3,
                 itemBuilder:
@@ -144,7 +142,7 @@ Future<void> showRestaurantDetailsDialog(
                     restaurantData['restaurant_image_path3'],
                   ];
 
-                  //Prechache images to avoid screen flickering
+                  //Precache images to avoid screen flickering
                   precacheImage(MemoryImage(images[itemIndex]), context);
 
                   return Semantics(
@@ -165,7 +163,7 @@ Future<void> showRestaurantDetailsDialog(
                   initialPage: 0,
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Semantics(
                 label: distance != null
                     ? '${localization(context).distanceFromRestaurant}\n$distance m'

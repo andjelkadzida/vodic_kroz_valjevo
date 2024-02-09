@@ -108,8 +108,8 @@ Future<void> showRestaurantDetailsDialog(
         restaurantPosition.longitude);
   }
 
-  // ignore: use_build_context_synchronously
   showDialog(
+    // ignore: use_build_context_synchronously
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {

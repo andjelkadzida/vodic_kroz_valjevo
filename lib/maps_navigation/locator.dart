@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:open_store/open_store.dart';
 
 import '../localization/supported_languages.dart';
+import '../styles/common_styles.dart';
 
 class MapScreen {
   // Store current position
@@ -75,10 +76,8 @@ class MapScreen {
       builder: (context) => AlertDialog(
         title: Text(
           localization(context).locationUnavailable,
-          style: const TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w500,
-          ),
+          style: AppStyles.locationDenialTextStyle(
+              MediaQuery.of(context).textScaler),
         ),
         content: Text(
           localization(context).locationUnavailableMsg,
@@ -94,20 +93,16 @@ class MapScreen {
             },
             child: Text(
               localization(context).cancel,
-              style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w500,
-              ),
+              style: AppStyles.locationDenialTextStyle(
+                  MediaQuery.of(context).textScaler),
             ),
           ),
           TextButton(
             onPressed: openAppSettings,
             child: Text(
               localization(context).openSettings,
-              style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w500,
-              ),
+              style: AppStyles.locationDenialTextStyle(
+                  MediaQuery.of(context).textScaler),
             ),
           ),
         ],

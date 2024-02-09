@@ -74,4 +74,8 @@ class AppStyles {
       color: Colors.black,
     );
   }
+
+  static TextStyle locationDenialTextStyle(TextScaler textScaler) {
+    return const TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w500);
+  }
 }

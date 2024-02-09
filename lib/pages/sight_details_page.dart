@@ -19,31 +19,42 @@ class SightDetailsPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SightDetailsPageState createState() => _SightDetailsPageState();
+  SightDetailsPageState createState() => SightDetailsPageState();
 }
 
-class _SightDetailsPageState extends State<SightDetailsPage> {
-  double opacity = 0.0;
+class SightDetailsPageState extends State<SightDetailsPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _opacityAnimation;
   bool isExpanded = false;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        opacity = 1.0;
-      });
-    });
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _opacityAnimation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title,
-            style: AppStyles.defaultAppBarTextStyle(textScaler)),
+        title: Text(
+          widget.title,
+          style: AppStyles.defaultAppBarTextStyle(
+              MediaQuery.of(context).textScaler),
+        ),
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -52,20 +63,24 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            AnimatedOpacity(
-              opacity: opacity,
-              duration: const Duration(seconds: 1),
-              child: Image.memory(
-                widget.imageBytes,
-                fit: BoxFit.cover,
-              ),
+            AnimatedBuilder(
+              animation: _opacityAnimation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _opacityAnimation.value,
+                  child: Image.memory(
+                    widget.imageBytes,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ExpansionTile(
                 trailing: Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
-                  size: textScaler.scale(35),
+                  size: MediaQuery.of(context).textScaler.scale(35),
                   color: Colors.blue,
                 ),
                 onExpansionChanged: (expanded) {
@@ -81,7 +96,8 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
                       Expanded(
                         child: Text(
                           localization(context).description,
-                          style: AppStyles.sightTitleStyle(textScaler),
+                          style: AppStyles.sightTitleStyle(
+                              MediaQuery.of(context).textScaler),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -93,21 +109,26 @@ class _SightDetailsPageState extends State<SightDetailsPage> {
                         child: Icon(
                           Icons.volume_up_sharp,
                           semanticLabel: localization(context).tapToHearDetails,
-                          size: textScaler.scale(30),
+                          size: MediaQuery.of(context).textScaler.scale(30),
                         ),
                       ),
                     ],
                   ),
                 ),
                 children: <Widget>[
-                  AnimatedOpacity(
-                    opacity: opacity,
-                    duration: const Duration(seconds: 1),
-                    child: Text(
-                      widget.description,
-                      style: AppStyles.sightTitleStyle(textScaler),
-                      textAlign: TextAlign.justify,
-                    ),
+                  AnimatedBuilder(
+                    animation: _opacityAnimation,
+                    builder: (context, child) {
+                      return Opacity(
+                        opacity: _opacityAnimation.value,
+                        child: Text(
+                          widget.description,
+                          style: AppStyles.sightTitleStyle(
+                              MediaQuery.of(context).textScaler),
+                          textAlign: TextAlign.justify,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

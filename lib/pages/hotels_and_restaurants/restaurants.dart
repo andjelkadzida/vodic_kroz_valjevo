@@ -1,7 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -9,22 +8,22 @@ import 'package:latlong2/latlong.dart';
 import '../../database_config/database_helper.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/locator.dart';
+import '../../maps_navigation/map_builder.dart';
 import '../../styles/common_styles.dart';
 
 class Restaurants extends StatelessWidget {
-  Restaurants({Key? key}) : super(key: key);
+  const Restaurants({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
           label: localization(context).restaurants,
           child: Text(
             localization(context).restaurants,
-            style: AppStyles.defaultAppBarTextStyle(textScaler),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler),
           ),
         ),
         excludeHeaderSemantics: true,
@@ -51,17 +50,21 @@ class Restaurants extends StatelessWidget {
     List<Marker> markers = restaurantsData.map((restaurantData) {
       LatLng position = LatLng(restaurantData['latitude'] as double,
           restaurantData['longitude'] as double);
-      final textScaler = MediaQuery.textScalerOf(context);
 
       return Marker(
           point: position,
+          width: MediaQuery.of(context).textScaler.scale(48),
+          height: MediaQuery.of(context).textScaler.scale(48),
           child: GestureDetector(
-            onTap: () => showRestaurantDetailsDialog(context, restaurantData),
+            onTap: () => {
+              showRestaurantDetailsDialog(context, restaurantData),
+              HapticFeedback.selectionClick()
+            },
             child: Tooltip(
               message: '${restaurantData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: textScaler.scale(35),
+                size: MediaQuery.of(context).textScaler.scale(35),
                 semanticLabel: '${restaurantData['title']}',
                 color: Colors.blue,
               ),
@@ -69,17 +72,7 @@ class Restaurants extends StatelessWidget {
           ));
     }).toList();
 
-    return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(44.267, 19.886),
-        initialZoom: 13.0,
-      ),
-      children: [
-        TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-        MarkerLayer(markers: markers),
-      ],
-    );
+    return buildMapWithMarkers(markers);
   }
 
   Future<List<Map<String, dynamic>>> _getRestaurantsFromDatabase(
@@ -100,9 +93,6 @@ class Restaurants extends StatelessWidget {
 
 Future<void> showRestaurantDetailsDialog(
     BuildContext context, Map<String, dynamic> restaurantData) async {
-  final MediaQueryData mediaQueryData = MediaQuery.of(context);
-  final double screenHeight = mediaQueryData.size.height;
-  final textScaler = MediaQuery.textScalerOf(context);
   final MapScreen mapScreen = MapScreen();
   double? distance;
   Position? currentPosition = await mapScreen.getCurrentLocation();
@@ -111,8 +101,11 @@ Future<void> showRestaurantDetailsDialog(
         LatLng(currentPosition.latitude, currentPosition.longitude);
     LatLng restaurantPosition =
         LatLng(restaurantData['latitude'], restaurantData['longitude']);
-    distance =
-        Distance().as(LengthUnit.Meter, userPosition, restaurantPosition);
+    distance = Geolocator.distanceBetween(
+        userPosition.latitude,
+        userPosition.longitude,
+        restaurantPosition.latitude,
+        restaurantPosition.longitude);
   }
 
   // ignore: use_build_context_synchronously
@@ -128,17 +121,17 @@ Future<void> showRestaurantDetailsDialog(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Semantics(
-                label:
-                    '${localization(context).restaurantName} ${restaurantData['title']}',
+                label: localization(context).restaurantName,
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: restaurantData['title'],
-                    style: AppStyles.hotelsAndRestaurantsTitleStyle(textScaler),
+                    style: AppStyles.hotelsAndRestaurantsTitleStyle(
+                        MediaQuery.of(context).textScaler),
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               CarouselSlider.builder(
                 itemCount: 3,
                 itemBuilder:
@@ -149,7 +142,7 @@ Future<void> showRestaurantDetailsDialog(
                     restaurantData['restaurant_image_path3'],
                   ];
 
-                  //Prechache images to avoid screen flickering
+                  //Precache images to avoid screen flickering
                   precacheImage(MemoryImage(images[itemIndex]), context);
 
                   return Semantics(
@@ -170,15 +163,25 @@ Future<void> showRestaurantDetailsDialog(
                   initialPage: 0,
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
-              Text(
-                distance != null
-                    ? '${localization(context).distanceFromRestaurant} $distance m'
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              Semantics(
+                label: distance != null
+                    ? '${localization(context).distanceFromRestaurant}\n$distance m'
                     : localization(context).distanceNotAvailable,
-                style: AppStyles.hotelsAndRestaurantsTextStyle(textScaler),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    distance != null
+                        ? '${localization(context).distanceFromRestaurant}\n$distance m'
+                        : localization(context).distanceNotAvailable,
+                    style: AppStyles.hotelsAndRestaurantsTextStyle(
+                        MediaQuery.of(context).textScaler),
+                  ),
+                ),
               ),
               Semantics(
                 button: true,
+                enabled: true,
                 label: localization(context).closeDialog,
                 child: Align(
                   alignment: AlignmentDirectional.bottomEnd,
@@ -189,6 +192,7 @@ Future<void> showRestaurantDetailsDialog(
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
+                      HapticFeedback.selectionClick();
                     },
                   ),
                 ),

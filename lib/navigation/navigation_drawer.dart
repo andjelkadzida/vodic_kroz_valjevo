@@ -150,8 +150,6 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   Widget languageWidget(BuildContext buildContext) {
-    final textScaler = MediaQuery.textScalerOf(buildContext);
-
     return PopupMenuButton<Language>(
       tooltip: localization(buildContext).languageMenu,
       icon: Semantics(
@@ -177,7 +175,8 @@ class NavigationDrawer extends StatelessWidget {
                 ExcludeSemantics(
                     child: Text(
                   e.flag,
-                  style: TextStyle(fontSize: textScaler.scale(20)),
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).textScaler.scale(20)),
                 )),
                 Semantics(
                   label: e.name,

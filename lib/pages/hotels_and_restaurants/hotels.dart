@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 
 import '../../database_config/database_helper.dart';
 import '../../localization/supported_languages.dart';
+import '../../maps_navigation/map_builder.dart';
 import '../../styles/common_styles.dart';
 
 class Hotels extends StatelessWidget {
@@ -13,15 +14,14 @@ class Hotels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
           label: localization(context).hotels,
           child: Text(
             localization(context).hotels,
-            style: AppStyles.defaultAppBarTextStyle(textScaler),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler),
           ),
         ),
         excludeHeaderSemantics: true,
@@ -49,20 +49,20 @@ class Hotels extends StatelessWidget {
       LatLng position = LatLng(
           hotelData['latitude'] as double, hotelData['longitude'] as double);
 
-      final textScaler = MediaQuery.textScalerOf(context);
-
       return Marker(
           point: position,
+          width: MediaQuery.of(context).textScaler.scale(48),
+          height: MediaQuery.of(context).textScaler.scale(48),
           child: GestureDetector(
             onTap: () => {
               showHotelDetailsDialog(context, hotelData),
-              HapticFeedback.vibrate()
+              HapticFeedback.selectionClick()
             },
             child: Tooltip(
               message: '${hotelData['title']}',
               child: Icon(
                 Icons.location_pin,
-                size: textScaler.scale(35),
+                size: MediaQuery.of(context).textScaler.scale(35),
                 semanticLabel: '${hotelData['title']}',
                 color: Colors.blue,
               ),
@@ -70,43 +70,19 @@ class Hotels extends StatelessWidget {
           ));
     }).toList();
 
-    return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(44.267, 19.886),
-        initialZoom: 13.0,
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        ),
-        MarkerLayer(markers: markers),
-      ],
-    );
+    return buildMapWithMarkers(markers);
   }
 
   void showHotelDetailsDialog(
       BuildContext context, Map<String, dynamic> hotelData) {
-    final MediaQueryData mediaQueryData = MediaQuery.of(context);
-    final double screenHeight = mediaQueryData.size.height;
-    final textScaler = MediaQuery.textScalerOf(context);
-
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         int numberOfStars = hotelData['noStars'];
 
-        List<Widget> hotelStars = List.generate(
-          numberOfStars,
-          (index) => Semantics(
-            label: '${localization(context).starRating} $numberOfStars',
-            child: Icon(
-              Icons.star,
-              color: Colors.amber,
-              size: textScaler.scale(35),
-            ),
-          ),
-        );
+        Widget hotelStars = _generateStarIcons(
+            numberOfStars, context, MediaQuery.of(context).textScaler);
 
         return Dialog(
           shape:
@@ -117,21 +93,20 @@ class Hotels extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Semantics(
-                  label:
-                      '${localization(context).hotelName} ${hotelData['title']}',
+                  label: localization(context).hotelName,
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       text: hotelData['title'],
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: textScaler.scale(20),
+                        fontSize: MediaQuery.of(context).textScaler.scale(20),
                         color: Colors.black,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 CarouselSlider.builder(
                   itemCount: 3,
                   itemBuilder:
@@ -142,7 +117,7 @@ class Hotels extends StatelessWidget {
                       hotelData['hotel_image_path3'],
                     ];
 
-                    //Prechache images to avoid screen flickering
+                    //Precache images to avoid screen flickering
                     precacheImage(MemoryImage(images[itemIndex]), context);
 
                     return Semantics(
@@ -163,14 +138,19 @@ class Hotels extends StatelessWidget {
                     initialPage: 0,
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: hotelStars,
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                Tooltip(
+                  message:
+                      '${localization(context).starRating}: $numberOfStars',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [hotelStars],
+                  ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Semantics(
                   button: true,
+                  enabled: true,
                   label: localization(context).closeDialog,
                   child: Align(
                     alignment: AlignmentDirectional.bottomEnd,
@@ -190,6 +170,27 @@ class Hotels extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  // Generate number of stars
+  Widget _generateStarIcons(
+      int numberOfStars, BuildContext context, TextScaler textScaler) {
+    List<Widget> stars = List.generate(
+      numberOfStars,
+      (index) => Icon(
+        Icons.star,
+        color: Colors.amber,
+        size: MediaQuery.of(context).textScaler.scale(35),
+      ),
+    );
+
+    return Semantics(
+      label: '${localization(context).starRating} $numberOfStars',
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: stars,
+      ),
     );
   }
 

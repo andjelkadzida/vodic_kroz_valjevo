@@ -1,6 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 import 'hotels_and_restaurants/hotels.dart';
@@ -13,10 +14,10 @@ class HotelsAndRestaurants extends StatefulWidget {
   const HotelsAndRestaurants({Key? key}) : super(key: key);
 
   @override
-  _HotelsAndRestaurants createState() => _HotelsAndRestaurants();
+  HotelsAndRestaurantsState createState() => HotelsAndRestaurantsState();
 }
 
-class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
+class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
   @override
   void initState() {
     super.initState();
@@ -33,16 +34,14 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
           label: localization(context).restaurantsAndHotels,
           child: Text(
             localization(context).restaurantsAndHotels,
-            style: AppStyles.defaultAppBarTextStyle(textScaler),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler),
           ),
         ),
         excludeHeaderSemantics: true,
@@ -52,7 +51,7 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
       ),
       drawer: const nav_drawer.NavigationDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(screenSize.width * 0.05),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -66,9 +65,10 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
                   context,
                   MaterialPageRoute(builder: (context) => const Hotels()),
                 );
+                HapticFeedback.selectionClick();
               },
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             _buildItem(
               context,
               label: localization(context).restaurants,
@@ -77,8 +77,9 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Restaurants()),
+                  MaterialPageRoute(builder: (context) => const Restaurants()),
                 );
+                HapticFeedback.selectionClick();
               },
             ),
           ],
@@ -94,7 +95,6 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
     required String lottieAsset,
     required VoidCallback onTap,
   }) {
-    final textScaler = MediaQuery.textScalerOf(context);
     return Semantics(
       label: localization(context).tapToView + label,
       child: GestureDetector(
@@ -110,12 +110,13 @@ class _HotelsAndRestaurants extends State<HotelsAndRestaurants> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Lottie.asset(lottieAsset, width: 100, height: 100),
-                const SizedBox(height: 10),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Text(
                   label,
-                  style: AppStyles.hotelsAndRestaurantsStyle(textScaler),
+                  style: AppStyles.hotelsAndRestaurantsStyle(
+                      MediaQuery.of(context).textScaler),
                 ),
-                Icon(icon, size: textScaler.scale(35)),
+                Icon(icon, size: MediaQuery.of(context).textScaler.scale(35)),
               ],
             ),
           ),

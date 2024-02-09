@@ -16,12 +16,11 @@ class Sights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(localization(context).sights,
-            style: AppStyles.defaultAppBarTextStyle(textScaler)),
+            style: AppStyles.defaultAppBarTextStyle(
+                MediaQuery.of(context).textScaler)),
         centerTitle: true,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -82,78 +81,30 @@ class Sights extends StatelessWidget {
       double destLongitude,
       String description,
       BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
+    //Precache images to avoid screen flickering
+    precacheImage(MemoryImage(imageBytes), context);
+
+    Uint8List imagePlaceholder = Uint8List.fromList(imageBytes);
 
     return GestureDetector(
       onLongPress: () {
         HapticFeedback.vibrate();
-        showDialog(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return Dialog(
-              child: SizedBox(
-                width: MediaQuery.of(dialogContext).size.width * 0.8,
-                height: MediaQuery.of(dialogContext).size.height * 0.35,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Semantics(
-                        label: '${localization(context).enlargedImage} $title',
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.memory(
-                            imageBytes,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Semantics(
-                            label: '${localization(context).nameOfSight}$title',
-                            child: Text(
-                              title,
-                              style: AppStyles.sightDialogStyle(textScaler),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        Semantics(
-                          label: localization(context).hearLandmarkName,
-                          tooltip: localization(context).hearLandmarkName,
-                          child: IconButton(
-                            onPressed: () {
-                              TextToSpeechConfig.instance.speak(title);
-                            },
-                            icon: const Icon(Icons.volume_up_sharp),
-                            enableFeedback: true,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
+        _showImageDialog(context, imageBytes, title);
       },
+      behavior: HitTestBehavior.translucent,
       child: Semantics(
         container: true,
         label:
             '${localization(context).sight} $title. ${localization(context).tapForDetails}',
         child: Card(
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
+                flex: 9,
                 child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -166,32 +117,44 @@ class Sights extends StatelessWidget {
                   child: Semantics(
                     image: true,
                     label: title,
-                    child: Image.memory(
-                      imageBytes,
-                      fit: BoxFit.contain,
-                      semanticLabel: '${localization(context).sight} $title',
+                    child: FadeInImage(
+                      placeholder: MemoryImage(imagePlaceholder),
+                      image: MemoryImage(imageBytes),
+                      fit: BoxFit.cover,
+                      imageSemanticLabel:
+                          '${localization(context).sight}"$title"',
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Expanded(
+                flex: 3,
                 child: Semantics(
                   button: true,
-                  label: '${localization(context).navigateTo}$title',
-                  child: MaterialButton(
+                  label: '${localization(context).navigateTo}\n"$title"',
+                  child: ElevatedButton(
                     onPressed: () async {
-                      TextToSpeechConfig.instance
-                          .speak('${localization(context).navigateTo}$title');
+                      TextToSpeechConfig.instance.speak(
+                          '${localization(context).navigateTo}\n"$title"');
                       await mapScreen.navigateToDestination(
                           destLatitude, destLongitude);
                     },
-                    minWidth: itemWidth,
-                    height: 48.0,
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      '${localization(context).navigateTo}$title',
-                      style: AppStyles.sightTitleStyle(textScaler),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      shape: const ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0))),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 0),
+                      alignment: Alignment.center,
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '${localization(context).navigateTo}\n"$title"',
+                        style: AppStyles.sightTitleStyle(
+                            MediaQuery.of(context).textScaler),
+                      ),
                     ),
                   ),
                 ),
@@ -200,6 +163,75 @@ class Sights extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showImageDialog(
+      BuildContext context, Uint8List imageBytes, String title) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return Dialog(
+          child: SizedBox(
+            width: MediaQuery.of(dialogContext).size.width * 0.8,
+            height: MediaQuery.of(dialogContext).size.height * 0.35,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 5,
+                  fit: FlexFit.loose,
+                  child: Semantics(
+                    label:
+                        '${localization(dialogContext).enlargedImage} $title',
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.memory(
+                        imageBytes,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Semantics(
+                        label:
+                            '${localization(dialogContext).nameOfSight}$title',
+                        child: Text(
+                          title,
+                          style: AppStyles.sightDialogStyle(
+                              MediaQuery.of(dialogContext).textScaler),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    Semantics(
+                      label: localization(dialogContext).hearLandmarkName,
+                      tooltip: localization(dialogContext).hearLandmarkName,
+                      child: IconButton(
+                        onPressed: () {
+                          TextToSpeechConfig.instance.speak(title);
+                        },
+                        icon: Icon(Icons.volume_up_sharp,
+                            semanticLabel:
+                                localization(dialogContext).hearLandmarkName),
+                        iconSize:
+                            MediaQuery.of(dialogContext).textScaler.scale(30),
+                        enableFeedback: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

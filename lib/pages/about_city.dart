@@ -9,14 +9,13 @@ class AboutCity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textScaler = MediaQuery.textScalerOf(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
             label: localization(context).aboutCity,
             child: Text(localization(context).aboutCity,
-                style: AppStyles.defaultAppBarTextStyle(textScaler))),
+                style: AppStyles.defaultAppBarTextStyle(
+                    MediaQuery.of(context).textScaler))),
         excludeHeaderSemantics: true,
         centerTitle: true,
         backgroundColor: Colors.black,

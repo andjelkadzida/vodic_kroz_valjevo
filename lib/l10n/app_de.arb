@@ -48,5 +48,7 @@
     "restaurantName": "Restaurantname: ",
     "tapToView": "Tippen Sie, um die Seite zu öffnen: ",
     "distanceFromRestaurant": "Entfernung vom Restaurant: ",
-    "distanceNotAvailable": "Entfernung zum Restaurant kann nicht berechnet werden."
+    "distanceNotAvailable": "Entfernung zum Restaurant kann nicht berechnet werden.",
+    "sportFields": "Sportplätze",
+    "parks": "Parks"
 }

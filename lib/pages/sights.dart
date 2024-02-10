@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
@@ -107,7 +108,7 @@ class Sights extends StatelessWidget {
                   behavior: HitTestBehavior.translucent,
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
+                      CupertinoPageRoute(
                           builder: (context) => SightDetailsPage(
                               imageBytes: imageBytes,
                               title: title,

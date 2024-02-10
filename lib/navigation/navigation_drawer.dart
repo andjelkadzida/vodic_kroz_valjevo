@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
 
@@ -98,27 +99,27 @@ class NavigationDrawer extends StatelessWidget {
     // Implement navigation based on index
     switch (index) {
       case 0:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.push(context,
+            CupertinoPageRoute(builder: (context) => const HomePage()));
         break;
       case 1:
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const AboutCity()));
+            CupertinoPageRoute(builder: (context) => const AboutCity()));
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Sights()));
+            context, CupertinoPageRoute(builder: (context) => Sights()));
         break;
       case 3:
         Navigator.push(
             context,
-            MaterialPageRoute(
+            CupertinoPageRoute(
                 builder: (context) => const SportsAndRecreation()));
         break;
       case 4:
         Navigator.push(
             context,
-            MaterialPageRoute(
+            CupertinoPageRoute(
                 builder: (context) => const HotelsAndRestaurants()));
         break;
       default:

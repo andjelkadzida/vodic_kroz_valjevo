@@ -115,6 +115,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // builder: (context, child) => AccessibilityTools(child: child),
       home: const HomePage(),

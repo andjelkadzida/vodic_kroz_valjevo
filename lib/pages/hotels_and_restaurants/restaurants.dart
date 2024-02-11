@@ -110,6 +110,7 @@ Future<void> showRestaurantDetailsDialog(
     distanceInKilometers = double.parse((distance / 1000).toStringAsFixed(2));
   }
 
+  // ignore: use_build_context_synchronously
   showDialog(
     // ignore: use_build_context_synchronously
     context: context,
@@ -174,6 +175,10 @@ Future<void> showRestaurantDetailsDialog(
                   alignment: Alignment.bottomCenter,
                   child: Row(
                     children: <Widget>[
+                      Icon(Icons.location_on,
+                          color: Colors.blue,
+                          semanticLabel:
+                              localization(context).distanceFromRestaurant),
                       Text(
                         distanceInKilometers != null
                             ? '$distanceInKilometers km'
@@ -181,10 +186,6 @@ Future<void> showRestaurantDetailsDialog(
                         style: AppStyles.hotelsAndRestaurantsTextStyle(
                             MediaQuery.of(context).textScaler),
                       ),
-                      Icon(Icons.location_on,
-                          color: Colors.blue,
-                          semanticLabel:
-                              localization(context).distanceFromRestaurant),
                     ],
                   ),
                 ),

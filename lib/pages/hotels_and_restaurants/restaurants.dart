@@ -95,6 +95,7 @@ Future<void> showRestaurantDetailsDialog(
     BuildContext context, Map<String, dynamic> restaurantData) async {
   final MapScreen mapScreen = MapScreen();
   double? distance;
+  double? distanceInKilometers;
   Position? currentPosition = await mapScreen.getCurrentLocation();
   if (currentPosition != null) {
     LatLng userPosition =
@@ -106,6 +107,7 @@ Future<void> showRestaurantDetailsDialog(
         userPosition.longitude,
         restaurantPosition.latitude,
         restaurantPosition.longitude);
+    distanceInKilometers = double.parse((distance / 1000).toStringAsFixed(2));
   }
 
   showDialog(
@@ -165,17 +167,25 @@ Future<void> showRestaurantDetailsDialog(
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Semantics(
-                label: distance != null
-                    ? '${localization(context).distanceFromRestaurant}\n$distance m'
+                label: distanceInKilometers != null
+                    ? '$distanceInKilometers km'
                     : localization(context).distanceNotAvailable,
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Text(
-                    distance != null
-                        ? '${localization(context).distanceFromRestaurant}\n$distance m'
-                        : localization(context).distanceNotAvailable,
-                    style: AppStyles.hotelsAndRestaurantsTextStyle(
-                        MediaQuery.of(context).textScaler),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        distanceInKilometers != null
+                            ? '$distanceInKilometers km'
+                            : localization(context).distanceNotAvailable,
+                        style: AppStyles.hotelsAndRestaurantsTextStyle(
+                            MediaQuery.of(context).textScaler),
+                      ),
+                      Icon(Icons.location_on,
+                          color: Colors.blue,
+                          semanticLabel:
+                              localization(context).distanceFromRestaurant),
+                    ],
                   ),
                 ),
               ),

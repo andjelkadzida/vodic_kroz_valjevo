@@ -14,9 +14,16 @@ class SportsAndRecreation extends StatelessWidget {
         title: Text(
           localization(context).sportRecreation,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontSize: MediaQuery.of(context).size.width * 0.05,
+                fontSize: MediaQuery.of(context).size.width * 0.06,
+                color: Colors.white,
               ),
         ),
+        excludeHeaderSemantics: true,
+        centerTitle: true,
+        backgroundColor: Colors.teal,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ), // Color of drawer icon
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getSportsDataFromDatabase(localization(context).localeName),
@@ -108,16 +115,18 @@ class SportsAndRecreation extends StatelessWidget {
             ),
             child: Align(
               alignment: Alignment.center,
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.05,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              child: Semantics(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1, //Change to 2 if needed
                 ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1, //Change to 2 if needed
               ),
             ),
           ),

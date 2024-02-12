@@ -9,9 +9,11 @@ import 'navigation_helper.dart';
 
 class NavItem {
   final IconData icon;
+  final IconData selectedIcon;
   final String title;
+  final String tooltip;
 
-  NavItem(this.icon, this.title);
+  NavItem(this.icon, this.selectedIcon, this.title, this.tooltip);
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -50,25 +52,43 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final List<NavItem> navItems = [
-      NavItem(Icons.home, localization(context).homePage),
-      NavItem(Icons.map, localization(context).mapPage),
-      NavItem(Icons.menu, localization(context).menu),
-      NavItem(Icons.language, localization(context).languageMenu),
+      NavItem(Icons.home, Icons.home_filled, localization(context).homePage,
+          localization(context).homePage),
+      NavItem(Icons.map, Icons.map_outlined, localization(context).mapPage,
+          localization(context).mapPage),
+      NavItem(Icons.menu, Icons.menu_open, localization(context).menu,
+          localization(context).menu),
+      NavItem(
+          Icons.language,
+          Icons.language_outlined,
+          localization(context).languageMenu,
+          localization(context).languageMenu),
     ];
 
     return BottomNavigationBar(
-      items: navItems.map((NavItem navItem) {
-        return BottomNavigationBarItem(
-          icon: Icon(navItem.icon,
-              size: MediaQuery.of(context).size.width * 0.07),
-          label: navItem.title,
-        );
-      }).toList(),
+      items: navItems
+          .asMap()
+          .map((index, NavItem navItem) {
+            return MapEntry(
+                index,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    _selectedIndex == -1 || _selectedIndex != index
+                        ? navItem.icon
+                        : navItem.selectedIcon,
+                    size: MediaQuery.of(context).size.width * 0.07,
+                  ),
+                  label: navItem.title,
+                  tooltip: navItem.tooltip,
+                ));
+          })
+          .values
+          .toList(),
       currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
       selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: false,
-      showSelectedLabels: true,
+      showSelectedLabels: false,
       onTap: _onNavItemTapped,
     );
   }

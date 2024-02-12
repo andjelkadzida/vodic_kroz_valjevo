@@ -26,20 +26,26 @@ class SportsAndRecreation extends StatelessWidget {
             snapshot: snapshot,
             onData: (data) => Column(
               children: [
-                Text(
-                  localization(context).parks,
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.07,
-                    fontWeight: FontWeight.bold,
+                Semantics(
+                  header: true,
+                  child: Text(
+                    localization(context).parks,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.07,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 _buildSportsSlider(context, data),
                 const SizedBox(height: 20),
-                Text(
-                  localization(context).sportFields,
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.07,
-                    fontWeight: FontWeight.bold,
+                Semantics(
+                  header: true,
+                  child: Text(
+                    localization(context).sportFields,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.07,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 _buildSportsSlider(context, data),
@@ -87,6 +93,7 @@ class SportsAndRecreation extends StatelessWidget {
               child: Image.memory(
                 imageBytes,
                 fit: BoxFit.cover,
+                semanticLabel: localization(context).image + title,
               ),
             ),
           ),

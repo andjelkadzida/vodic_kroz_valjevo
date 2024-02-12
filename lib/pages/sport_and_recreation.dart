@@ -24,7 +24,27 @@ class SportsAndRecreation extends StatelessWidget {
           return DatabaseHelper.buildFutureState<List<Map<String, dynamic>>>(
             context: context,
             snapshot: snapshot,
-            onData: (data) => _buildSportsSlider(context, data),
+            onData: (data) => Column(
+              children: [
+                Text(
+                  localization(context).parks,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.07,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                _buildSportsSlider(context, data),
+                const SizedBox(height: 20),
+                Text(
+                  localization(context).sportFields,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.07,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                _buildSportsSlider(context, data),
+              ],
+            ),
           );
         },
       ),
@@ -37,8 +57,7 @@ class SportsAndRecreation extends StatelessWidget {
     double viewportFraction =
         MediaQuery.of(context).size.width < 600 ? 0.8 : 0.5;
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.3,
+    return Expanded(
       child: PageView.builder(
         itemCount: data.length,
         controller: PageController(viewportFraction: viewportFraction),

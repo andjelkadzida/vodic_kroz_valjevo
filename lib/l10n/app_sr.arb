@@ -53,5 +53,7 @@
     "parks": "Parkovi",
     "valjevoCityImage": "Slika grada Valjeva",
     "chooseLanguage": "Izaberite jezik",
-    "menu": "Meni"
+    "menu": "Meni",
+    "getStarted": "Počni",
+    "mapPage": "Mapa grada"
 }

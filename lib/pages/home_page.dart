@@ -55,7 +55,6 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       showLanguageMenuIfNeeded(context);
                     },
-                    child: Text('Get Started'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
                       foregroundColor: Colors.white,
@@ -67,6 +66,7 @@ class HomePage extends StatelessWidget {
                         vertical: mediaQueryData.size.height * 0.02,
                       ),
                     ),
+                    child: Text(localization(context).getStarted),
                   ),
                 ),
               ),

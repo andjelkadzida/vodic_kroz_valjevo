@@ -53,5 +53,7 @@
     "parks": "Parks",
     "valjevoCityImage": "Image of the city of Valjevo",
     "chooseLanguage": "Select language",
-    "menu": "Menu"
+    "menu": "Menu",
+    "getStarted": "Get Started",
+    "mapPage": "City map"
 }

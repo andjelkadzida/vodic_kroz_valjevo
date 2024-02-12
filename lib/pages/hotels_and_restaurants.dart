@@ -97,14 +97,14 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                 child: Text(
                   label,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.deepPurple,
+                        color: Colors.teal,
                         fontSize: MediaQuery.of(context).size.width * 0.05,
                       ),
                 ),
               ),
               Icon(icon,
                   size: MediaQuery.of(context).size.width * 0.08,
-                  color: Colors.deepPurple),
+                  color: Colors.teal),
             ],
           ),
         ),

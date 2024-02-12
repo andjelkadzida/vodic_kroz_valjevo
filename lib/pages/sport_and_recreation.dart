@@ -11,19 +11,16 @@ class SportsAndRecreation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    var themeData = Theme.of(context);
-
-    var headlineStyle = themeData.textTheme.headlineSmall?.copyWith(
-      fontSize: screenSize.width * 0.05,
-    );
+    var headlineStyle = Theme.of(context).textTheme.headlineSmall?.copyWith(
+          fontSize: MediaQuery.of(context).size.width * 0.05,
+        );
 
     return Scaffold(
       appBar: AppBar(
         title:
             Text(localization(context).sportRecreation, style: headlineStyle),
         excludeHeaderSemantics: true,
-        toolbarTextStyle: themeData.primaryTextTheme.titleLarge,
+        toolbarTextStyle: Theme.of(context).primaryTextTheme.titleLarge,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getSportsDataFromDatabase(localization(context).localeName),

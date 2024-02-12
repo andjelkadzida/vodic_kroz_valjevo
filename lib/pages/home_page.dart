@@ -1,74 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+import '../localization/language.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            double fontSizeTitle = constraints.maxWidth * 0.08;
-            double fontSizeSubtitle = constraints.maxWidth * 0.04;
-            double padding = constraints.maxWidth * 0.05;
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
 
-            return Center(
-              child: Container(
-                padding: EdgeInsets.all(padding),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  image: DecorationImage(
-                    image: AssetImage('assets/your_background_image.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        Image.asset(
+          'images/kulaNenadovica.jpg',
+          fit: BoxFit.cover,
+          semanticLabel: localization(context).valjevoCityImage,
+        ),
+        Column(
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(mediaQueryData.size.width * 0.05),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       'Explore.\nTravel.\nInspire.',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: fontSizeTitle,
+                        fontSize: mediaQueryData.size.width * 0.08,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    Text(
-                      'Life is all about journey.\nFind yours.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: fontSizeSubtitle,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Semantics(
-                      button: true,
-                      label: 'Get Started Button',
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Handle button press
-                        },
-                        child: Text('Get Started'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.teal,
-                          onPrimary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 15),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
-            );
-          },
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                mediaQueryData.size.width * 0.05,
+                0,
+                mediaQueryData.size.width * 0.05,
+                mediaQueryData.size.height * 0.02,
+              ),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Semantics(
+                  button: true,
+                  label: 'Get Started Button',
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showLanguageMenuIfNeeded(context);
+                    },
+                    child: Text('Get Started'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: mediaQueryData.size.width * 0.1,
+                        vertical: mediaQueryData.size.height * 0.02,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
+      ],
     );
   }
 }

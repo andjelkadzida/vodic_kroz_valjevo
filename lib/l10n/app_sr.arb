@@ -50,5 +50,8 @@
     "distanceFromRestaurant": "Udaljenost od restorana: ",
     "distanceNotAvailable": "Nije moguće izračunati udaljenost od restorana.",
     "sportFields": "Sportski tereni",
-    "parks": "Parkovi"
+    "parks": "Parkovi",
+    "valjevoCityImage": "Slika grada Valjeva",
+    "chooseLanguage": "Izaberite jezik",
+    "menu": "Meni"
 }

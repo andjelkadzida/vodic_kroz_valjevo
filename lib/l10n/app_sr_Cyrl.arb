@@ -50,5 +50,8 @@
     "distanceFromRestaurant": "Удаљеност од ресторана: ",
     "distanceNotAvailable": "Није могуће израчунати удаљеност од ресторана.",
     "sportFields": "Спортски терени",
-    "parks": "Паркови"
+    "parks": "Паркови",
+    "valjevoCityImage": "Слика града Ваљева",
+    "chooseLanguage": "Изаберите језик",
+    "menu": "Мени"
 }

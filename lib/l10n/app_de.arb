@@ -50,5 +50,8 @@
     "distanceFromRestaurant": "Entfernung vom Restaurant: ",
     "distanceNotAvailable": "Entfernung zum Restaurant kann nicht berechnet werden.",
     "sportFields": "Sportplätze",
-    "parks": "Parks"
+    "parks": "Parks",
+    "valjevoCityImage": "Bild der Stadt Valjevo",
+    "chooseLanguage": "Sprache wählen",
+    "menu": "Menü"
 }

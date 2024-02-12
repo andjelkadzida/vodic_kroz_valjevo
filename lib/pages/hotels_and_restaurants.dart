@@ -1,13 +1,12 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
+import '../navigation/bottom_navigation.dart';
 import 'hotels_and_restaurants/hotels.dart';
 import 'hotels_and_restaurants/restaurants.dart';
-import '../navigation/navigation_drawer.dart' as nav_drawer;
+import '../navigation/navigation_drawer.dart';
 import '../localization/supported_languages.dart';
 
 class HotelsAndRestaurants extends StatefulWidget {
@@ -44,9 +43,9 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
               fontSize: MediaQuery.of(context).size.width * 0.05),
         ),
         centerTitle: true,
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.teal,
       ),
-      drawer: const nav_drawer.NavigationDrawer(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: Padding(
         padding: EdgeInsets.all(padding),
         child: ListView(
@@ -56,14 +55,14 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
               label: localization(context).hotels,
               icon: Icons.hotel,
               lottieAsset: 'animations/hotels.json',
-              onTap: () => _navigateTo(context, const Hotels()),
+              onTap: () => navigateTo(context, const Hotels()),
             ),
             _buildItem(
               context,
               label: localization(context).restaurants,
               icon: Icons.restaurant,
               lottieAsset: 'animations/restaurants.json',
-              onTap: () => _navigateTo(context, const Restaurants()),
+              onTap: () => navigateTo(context, const Restaurants()),
             ),
           ],
         ),
@@ -111,10 +110,5 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
         ),
       ),
     );
-  }
-
-  void _navigateTo(BuildContext context, Widget page) {
-    Navigator.push(context, CupertinoPageRoute(builder: (context) => page));
-    HapticFeedback.vibrate();
   }
 }

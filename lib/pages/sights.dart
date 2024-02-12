@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'sight_details_page.dart';
-import '../navigation/navigation_drawer.dart' as nav_drawer;
+import '../navigation/bottom_navigation.dart';
 import '../database_config/database_helper.dart';
 import '../text_to_speech/text_to_speech_config.dart';
 import '../maps_navigation/locator.dart';
@@ -27,7 +27,7 @@ class Sights extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: buildSightsDataWidget(context),
-      drawer: const nav_drawer.NavigationDrawer(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 

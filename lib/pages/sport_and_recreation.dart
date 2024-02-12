@@ -1,7 +1,5 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
@@ -11,16 +9,14 @@ class SportsAndRecreation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var headlineStyle = Theme.of(context).textTheme.headlineSmall?.copyWith(
-          fontSize: MediaQuery.of(context).size.width * 0.05,
-        );
-
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text(localization(context).sportRecreation, style: headlineStyle),
-        excludeHeaderSemantics: true,
-        toolbarTextStyle: Theme.of(context).primaryTextTheme.titleLarge,
+        title: Text(
+          localization(context).sportRecreation,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontSize: MediaQuery.of(context).size.width * 0.05,
+              ),
+        ),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getSportsDataFromDatabase(localization(context).localeName),
@@ -28,7 +24,7 @@ class SportsAndRecreation extends StatelessWidget {
           return DatabaseHelper.buildFutureState<List<Map<String, dynamic>>>(
             context: context,
             snapshot: snapshot,
-            onData: (data) => buildSportsUI(context, data),
+            onData: (data) => _buildSportsSlider(context, data),
           );
         },
       ),
@@ -36,97 +32,71 @@ class SportsAndRecreation extends StatelessWidget {
     );
   }
 
-  Widget buildSportsUI(BuildContext context, List<Map<String, dynamic>> data) {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-          _buildHorizontalListView(localization(context).sportFields, data,
-              MediaQuery.of(context).size),
-          _buildHorizontalListView(
-              localization(context).parks, data, MediaQuery.of(context).size),
-        ],
+  Widget _buildSportsSlider(
+      BuildContext context, List<Map<String, dynamic>> data) {
+    double viewportFraction =
+        MediaQuery.of(context).size.width < 600 ? 0.8 : 0.5;
+
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.3,
+      child: PageView.builder(
+        itemCount: data.length,
+        controller: PageController(viewportFraction: viewportFraction),
+        itemBuilder: (context, index) {
+          var item = data[index];
+          Uint8List imageBytes = item['sports_image_path'];
+          return _buildSportsItem(context, item['title'], imageBytes);
+        },
       ),
     );
   }
 
-  Widget _buildHorizontalListView(
-      String title, List<Map<String, dynamic>> data, Size screenSize) {
-    double itemHeight = screenSize.height * 0.3;
-    double itemWidth = screenSize.width * 0.8;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.02),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: screenSize.width * 0.04,
+  Widget _buildSportsItem(
+      BuildContext context, String title, Uint8List imageBytes) {
+    return Card(
+      margin: const EdgeInsets.all(10),
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20)),
+              child: Image.memory(
+                imageBytes,
+                fit: BoxFit.cover,
+              ),
             ),
-            // Provide semantics for the title for screen readers
-            semanticsLabel: '$title section',
           ),
-        ),
-        SizedBox(
-            height: itemHeight,
-            child: ListView.separated(
-              padding:
-                  EdgeInsets.symmetric(horizontal: screenSize.width * 0.02),
-              scrollDirection: Axis.horizontal,
-              itemCount: data.length,
-              separatorBuilder: (context, index) =>
-                  SizedBox(width: screenSize.width * 0.02),
-              itemBuilder: (BuildContext context, int index) {
-                var item = data[index];
-                Uint8List imageBytes = item['sports_image_path'];
-
-                return Container(
-                  width: itemWidth,
-                  margin:
-                      EdgeInsets.symmetric(vertical: screenSize.height * 0.01),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 1,
-                    ),
-                  ),
-                  child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            item['title'],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Expanded(
-                          child: Image.memory(
-                            imageBytes,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            )),
-      ],
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.teal[300],
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1, //Change to 2 if needed
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

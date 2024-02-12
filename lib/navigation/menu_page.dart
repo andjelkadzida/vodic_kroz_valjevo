@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
-import 'package:vodic_kroz_valjevo/navigation/navigation_drawer.dart';
-import 'package:vodic_kroz_valjevo/pages/about_city.dart';
-import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
-import 'package:vodic_kroz_valjevo/pages/sights.dart';
-import 'package:vodic_kroz_valjevo/pages/sport_and_recreation.dart';
+
+import '../pages/about_city.dart';
+import '../pages/hotels_and_restaurants.dart';
+import '../pages/sights.dart';
+import '../pages/sport_and_recreation.dart';
+import '../localization/supported_languages.dart';
 import 'bottom_navigation.dart';
+import 'navigation_helper.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);

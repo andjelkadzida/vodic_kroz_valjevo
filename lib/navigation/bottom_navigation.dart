@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
-import 'package:vodic_kroz_valjevo/navigation/navigation_drawer.dart';
-import 'package:vodic_kroz_valjevo/pages/home_page.dart';
 
 import '../localization/language.dart';
+import '../localization/supported_languages.dart';
+import '../pages/home_page.dart';
 import 'menu_page.dart';
+import 'navigation_helper.dart';
 
 class NavItem {
   final IconData icon;

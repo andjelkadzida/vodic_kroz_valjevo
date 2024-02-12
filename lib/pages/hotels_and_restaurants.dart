@@ -3,10 +3,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../navigation/bottom_navigation.dart';
 import 'hotels_and_restaurants/hotels.dart';
 import 'hotels_and_restaurants/restaurants.dart';
-import '../navigation/navigation_drawer.dart';
+import '../navigation/navigation_helper.dart';
+import '../navigation/bottom_navigation.dart';
 import '../localization/supported_languages.dart';
 
 class HotelsAndRestaurants extends StatefulWidget {

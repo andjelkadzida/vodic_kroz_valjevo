@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
+import '../navigation/bottom_navigation.dart';
 
 class SportsAndRecreation extends StatelessWidget {
   const SportsAndRecreation({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class SportsAndRecreation extends StatelessWidget {
           );
         },
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 

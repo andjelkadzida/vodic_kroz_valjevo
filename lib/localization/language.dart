@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vodic_kroz_valjevo/navigation/navigation_drawer.dart';
 
 import '../main.dart';
 import '../navigation/menu_page.dart';
+import '../navigation/navigation_helper.dart';
 import 'supported_languages.dart';
 
 class Language {

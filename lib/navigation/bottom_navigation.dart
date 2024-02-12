@@ -10,8 +10,8 @@ import 'navigation_helper.dart';
 class NavItem {
   final IconData icon;
   final IconData selectedIcon;
-  final String title;
-  final String tooltip;
+  final String Function(BuildContext) title;
+  final String Function(BuildContext) tooltip;
 
   NavItem(this.icon, this.selectedIcon, this.title, this.tooltip);
 }
@@ -52,44 +52,54 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final List<NavItem> navItems = [
-      NavItem(Icons.home, Icons.home_filled, localization(context).homePage,
-          localization(context).homePage),
-      NavItem(Icons.map, Icons.map_outlined, localization(context).mapPage,
-          localization(context).mapPage),
-      NavItem(Icons.menu, Icons.menu_open, localization(context).menu,
-          localization(context).menu),
+      NavItem(
+          Icons.home,
+          Icons.home_filled,
+          (context) => localization(context).homePage,
+          (context) => localization(context).homePage),
+      NavItem(
+          Icons.map,
+          Icons.map_outlined,
+          (context) => localization(context).mapPage,
+          (context) => localization(context).mapPage),
+      NavItem(
+          Icons.menu,
+          Icons.menu_open,
+          (context) => localization(context).menu,
+          (context) => localization(context).menu),
       NavItem(
           Icons.language,
           Icons.language_outlined,
-          localization(context).languageMenu,
-          localization(context).languageMenu),
+          (context) => localization(context).languageMenu,
+          (context) => localization(context).languageMenu),
     ];
 
     return BottomNavigationBar(
-      items: navItems
-          .asMap()
-          .map((index, NavItem navItem) {
-            return MapEntry(
-                index,
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    _selectedIndex == -1 || _selectedIndex != index
-                        ? navItem.icon
-                        : navItem.selectedIcon,
-                    size: MediaQuery.of(context).size.width * 0.07,
-                  ),
-                  label: navItem.title,
-                  tooltip: navItem.tooltip,
-                ));
-          })
-          .values
-          .toList(),
+      items: navItems.map((NavItem navItem) {
+        return BottomNavigationBarItem(
+          icon: Semantics(
+            label: navItem.title(context),
+            child: Icon(
+              _selectedIndex == -1 ||
+                      _selectedIndex != navItems.indexOf(navItem)
+                  ? navItem.icon
+                  : navItem.selectedIcon,
+              size: MediaQuery.of(context).size.width * 0.07,
+            ),
+          ),
+          label: navItem.title(context),
+          tooltip: navItem.tooltip(context),
+        );
+      }).toList(),
       currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
       selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: false,
       showSelectedLabels: false,
       onTap: _onNavItemTapped,
+      type: BottomNavigationBarType.fixed,
+      selectedFontSize: MediaQuery.of(context).textScaler.scale(14),
+      unselectedFontSize: MediaQuery.of(context).textScaler.scale(12),
     );
   }
 }

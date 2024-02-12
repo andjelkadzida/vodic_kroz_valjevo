@@ -15,6 +15,7 @@ void navigateTo(BuildContext context, Widget page) {
 
   // Only navigate if the current route is not the target route
   if (!isCurrentRouteTarget) {
+    HapticFeedback.lightImpact();
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -22,6 +23,5 @@ void navigateTo(BuildContext context, Widget page) {
         settings: RouteSettings(name: routeName),
       ),
     );
-    HapticFeedback.vibrate();
   }
 }

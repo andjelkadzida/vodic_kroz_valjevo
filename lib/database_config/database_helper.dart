@@ -73,6 +73,7 @@ class DatabaseHelper {
             title_sr TEXT,
             title_sr_Cyrl TEXT,
             title_sr_Latn TEXT,
+            website TEXT,
             noStars INT
             )
         ''');

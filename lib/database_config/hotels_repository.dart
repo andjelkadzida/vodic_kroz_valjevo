@@ -44,9 +44,10 @@ class HotelsRepository {
             title_sr, 
             title_sr_Cyrl, 
             title_sr_Latn, 
+            website,
             noStars
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
           imageBytes,
           imageBytes2,
@@ -58,6 +59,7 @@ class HotelsRepository {
           data['titles']['sr'],
           data['titles']['sr_Cyrl'],
           data['titles']['sr_Latn'],
+          data['website'],
           data['noStars'],
         ]);
       }
@@ -81,6 +83,7 @@ class HotelsRepository {
           'sr_Cyrl': 'Коначиште Бубица',
           'sr_Latn': 'Konačište Bubica',
         },
+        'website': 'https://bubica.co.rs',
         'noStars': '3',
       },
       {
@@ -96,6 +99,7 @@ class HotelsRepository {
           'sr_Cyrl': 'Хотел Гранд',
           'sr_Latn': 'Hotel Grand',
         },
+        'website': 'https://www.facebook.com/hotelgrandvaljevo/?locale=sr_RS',
         'noStars': '3',
       },
       {
@@ -111,6 +115,7 @@ class HotelsRepository {
           'sr_Cyrl': 'Хотел Омни',
           'sr_Latn': 'Hotel Omni',
         },
+        'website': 'https://omnicentar.rs/hotel-omni/',
         'noStars': '4',
       },
     ];

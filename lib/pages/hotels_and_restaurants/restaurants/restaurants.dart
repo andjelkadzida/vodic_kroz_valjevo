@@ -5,11 +5,11 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../database_config/database_helper.dart';
-import '../../localization/supported_languages.dart';
-import '../../maps_navigation/locator.dart';
-import '../../maps_navigation/map_builder.dart';
-import '../../styles/common_styles.dart';
+import '../../../database_config/database_helper.dart';
+import '../../../localization/supported_languages.dart';
+import '../../../maps_navigation/locator.dart';
+import '../../../maps_navigation/map_builder.dart';
+import '../../../styles/common_styles.dart';
 
 class Restaurants extends StatelessWidget {
   const Restaurants({Key? key}) : super(key: key);

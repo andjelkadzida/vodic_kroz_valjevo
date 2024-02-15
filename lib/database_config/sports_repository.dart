@@ -1,7 +1,4 @@
-import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'database_helper.dart';
 
 class SportsRepository {
   late Database _databaseInstance;
@@ -22,10 +19,6 @@ class SportsRepository {
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
       for (var data in dataList) {
-        // Load image as Uint8List
-        Uint8List imageBytes =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath']);
-
         // Add insert operation to the batch
         batch.rawInsert('''
           INSERT INTO SportsAndRecreation(
@@ -38,7 +31,7 @@ class SportsRepository {
           )
           VALUES(?, ?, ?, ?, ?, ?)
         ''', [
-          imageBytes,
+          data['sports_image_path'],
           data['titles']['en'],
           data['titles']['de'],
           data['titles']['sr'],
@@ -54,7 +47,7 @@ class SportsRepository {
   Future<void> sportsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
       {
-        'imagePath': 'images/muzejLogo.png',
+        'sports_image_path': 'images/muzejLogo.png',
         'titles': {
           'en': 'Park na Jadru (Park Vide Jocić)',
           'de': 'Titel auf Deutsch',
@@ -64,7 +57,7 @@ class SportsRepository {
         },
       },
       {
-        'imagePath': 'images/kulaNenadovica.jpg',
+        'sports_image_path': 'images/kulaNenadovica.jpg',
         'titles': {
           'en': 'Nenadovic\'s tower',
           'de': 'Nenadovics Turm',

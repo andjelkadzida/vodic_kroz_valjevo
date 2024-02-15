@@ -17,6 +17,7 @@ void main() {
         (WidgetTester tester) async {
       databaseFactory = databaseFactoryFfi;
       final db = await DatabaseHelper.instance.getNamedDatabase();
+      bool isFirstRun = true;
       late Locale defaultLocale;
 
       await tester.pumpWidget(
@@ -26,7 +27,7 @@ void main() {
           home: Builder(
             builder: (BuildContext buildContext) {
               defaultLocale = Localizations.localeOf(buildContext);
-              return VodicKrozValjevo(database: db);
+              return VodicKrozValjevo(database: db, isFirstRun: isFirstRun);
             },
           ),
         ),
@@ -44,12 +45,13 @@ void main() {
         (WidgetTester tester) async {
       databaseFactory = databaseFactoryFfi;
       final db = await DatabaseHelper.instance.getNamedDatabase();
+      bool isFirstRun = true;
 
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: VodicKrozValjevo(database: db),
+          home: VodicKrozValjevo(database: db, isFirstRun: isFirstRun),
         ),
       );
 

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 
 import '../text_to_speech/text_to_speech_config.dart';
@@ -7,13 +5,13 @@ import '../localization/supported_languages.dart';
 import '../styles/common_styles.dart';
 
 class SightDetailsPage extends StatefulWidget {
-  final Uint8List imageBytes;
+  final String imagePath;
   final String title;
   final String description;
 
   const SightDetailsPage({
     Key? key,
-    required this.imageBytes,
+    required this.imagePath,
     required this.title,
     required this.description,
   }) : super(key: key);
@@ -56,7 +54,7 @@ class SightDetailsPageState extends State<SightDetailsPage>
               MediaQuery.of(context).textScaler),
         ),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
@@ -68,8 +66,8 @@ class SightDetailsPageState extends State<SightDetailsPage>
               builder: (context, child) {
                 return Opacity(
                   opacity: _opacityAnimation.value,
-                  child: Image.memory(
-                    widget.imageBytes,
+                  child: Image.asset(
+                    widget.imagePath,
                     fit: BoxFit.cover,
                   ),
                 );

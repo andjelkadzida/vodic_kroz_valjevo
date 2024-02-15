@@ -1,28 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
-import '../navigation/navigation_drawer.dart' as nav_drawer;
-import '../localization/supported_languages.dart';
-import '../styles/common_styles.dart';
+import '../localization/language.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Semantics(
-              label: localization(context).homePage,
-              child: Text(localization(context).homePage,
-                  style: AppStyles.defaultAppBarTextStyle(
-                      MediaQuery.of(context).textScaler))),
-          excludeHeaderSemantics: true,
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          iconTheme:
-              const IconThemeData(color: Colors.white) // Color of drawer icon
-          ),
-      drawer: const nav_drawer.NavigationDrawer(),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        Image.asset(
+          'images/kulaNenadovica.jpg',
+          fit: BoxFit.cover,
+          semanticLabel: localization(context).valjevoCityImage,
+        ),
+        Column(
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(mediaQueryData.size.width * 0.05),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Explore.\nTravel.\nInspire.',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: mediaQueryData.size.width * 0.08,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                mediaQueryData.size.width * 0.05,
+                0,
+                mediaQueryData.size.width * 0.05,
+                mediaQueryData.size.height * 0.02,
+              ),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Semantics(
+                  button: true,
+                  label: 'Get Started Button',
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showLanguageMenuIfNeeded(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: mediaQueryData.size.width * 0.1,
+                        vertical: mediaQueryData.size.height * 0.02,
+                      ),
+                    ),
+                    child: Text(localization(context).getStarted),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

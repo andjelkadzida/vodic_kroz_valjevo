@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'database_config/database_helper.dart';
@@ -17,6 +18,13 @@ import 'text_to_speech/text_to_speech_config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
+
+  if (isFirstRun) {
+    await prefs.setBool('isFirstRun', true);
+  }
+
   // Set the orientation to portrait
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -25,13 +33,16 @@ void main() async {
 
   // Initialize the database
   final db = await DatabaseHelper.instance.getNamedDatabase();
-  runApp(VodicKrozValjevo(database: db));
+  runApp(VodicKrozValjevo(database: db, isFirstRun: isFirstRun));
 }
 
 class VodicKrozValjevo extends StatefulWidget {
   final Database database;
+  final bool isFirstRun;
 
-  const VodicKrozValjevo({Key? key, required this.database}) : super(key: key);
+  const VodicKrozValjevo(
+      {Key? key, required this.database, required this.isFirstRun})
+      : super(key: key);
 
   @override
   State<VodicKrozValjevo> createState() => _VodicKrozValjevo();
@@ -64,28 +75,21 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   }
 
   void _initializeData() async {
-    bool sportsExist = await sportsRepo.checkSportsDataExists();
-    bool sightsExist = await sightsRepo.checkSightsDataExist();
-    bool hotelsExist = await hotelsRepo.checkHotelsDataExist();
-    bool restaurantsExists = await restaurantsRepo.checkRestaurantsDataExist();
-
-    if (!sportsExist) {
+    if (!(await sportsRepo.checkSportsDataExists())) {
       await sportsRepo.sportsDataInsertion();
     }
 
-    if (!sightsExist) {
+    if (!(await sightsRepo.checkSightsDataExist())) {
       await sightsRepo.sightsDataInsertion();
     }
 
-    if (!hotelsExist) {
+    if (!(await hotelsRepo.checkHotelsDataExist())) {
       await hotelsRepo.hotelsDataInsertion();
     }
 
-    if (!restaurantsExists) {
+    if (!(await restaurantsRepo.checkRestaurantsDataExist())) {
       await restaurantsRepo.restaurantsDataInsertion();
     }
-
-    await widget.database.close();
   }
 
   setLanguage(Locale lang) {
@@ -102,6 +106,13 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   }
 
   @override
+  void dispose() {
+    _instance = null;
+    widget.database.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
@@ -115,6 +126,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // builder: (context, child) => AccessibilityTools(child: child),
       home: const HomePage(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../navigation/navigation_drawer.dart' as nav_drawer;
 import '../localization/supported_languages.dart';
+import '../navigation/bottom_navigation.dart';
 import '../styles/common_styles.dart';
 
 class AboutCity extends StatelessWidget {
@@ -18,12 +18,12 @@ class AboutCity extends StatelessWidget {
                     MediaQuery.of(context).textScaler))),
         excludeHeaderSemantics: true,
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(
           color: Colors.white,
         ), // Color of drawer icon
       ),
-      drawer: const nav_drawer.NavigationDrawer(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: Center(
         child: Image.asset(
           'images/grbValjeva.png',

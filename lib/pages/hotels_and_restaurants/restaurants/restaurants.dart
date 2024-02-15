@@ -27,7 +27,7 @@ class Restaurants extends StatelessWidget {
         ),
         excludeHeaderSemantics: true,
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(

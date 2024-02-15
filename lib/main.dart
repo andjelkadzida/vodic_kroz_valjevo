@@ -90,8 +90,6 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     if (!(await restaurantsRepo.checkRestaurantsDataExist())) {
       await restaurantsRepo.restaurantsDataInsertion();
     }
-
-    await widget.database.close();
   }
 
   setLanguage(Locale lang) {
@@ -105,6 +103,13 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   void didChangeDependencies() {
     getLocale().then((lang) => {setLanguage(lang)});
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _instance = null;
+    widget.database.close();
+    super.dispose();
   }
 
   @override

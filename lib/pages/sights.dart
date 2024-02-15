@@ -23,7 +23,7 @@ class Sights extends StatelessWidget {
             style: AppStyles.defaultAppBarTextStyle(
                 MediaQuery.of(context).textScaler)),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: buildSightsDataWidget(context),
@@ -82,8 +82,8 @@ class Sights extends StatelessWidget {
       double destLongitude,
       String description,
       BuildContext context) {
-    //Precache images to avoid screen flickering
-    // precacheImage(AssetImage(imagePath), context);
+    // Precache images to avoid screen flickering
+    precacheImage(AssetImage(imagePath), context);
 
     return GestureDetector(
       onLongPress: () {

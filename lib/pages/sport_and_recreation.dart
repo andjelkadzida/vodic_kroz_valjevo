@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
@@ -76,15 +75,15 @@ class SportsAndRecreation extends StatelessWidget {
         controller: PageController(viewportFraction: viewportFraction),
         itemBuilder: (context, index) {
           var item = data[index];
-          Uint8List imageBytes = item['sports_image_path'];
-          return _buildSportsItem(context, item['title'], imageBytes);
+          return _buildSportsItem(
+              context, item['title'], item['sports_image_path']);
         },
       ),
     );
   }
 
   Widget _buildSportsItem(
-      BuildContext context, String title, Uint8List imageBytes) {
+      BuildContext context, String title, String imagePath) {
     return Card(
       margin: const EdgeInsets.all(10),
       elevation: 5,
@@ -97,8 +96,8 @@ class SportsAndRecreation extends StatelessWidget {
             child: ClipRRect(
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(20)),
-              child: Image.memory(
-                imageBytes,
+              child: Image.asset(
+                imagePath,
                 fit: BoxFit.cover,
                 semanticLabel: localization(context).image + title,
               ),

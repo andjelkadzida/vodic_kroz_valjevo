@@ -54,7 +54,7 @@ class SightDetailsPageState extends State<SightDetailsPage>
               MediaQuery.of(context).textScaler),
         ),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(

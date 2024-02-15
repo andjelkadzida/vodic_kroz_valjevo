@@ -31,6 +31,7 @@ Widget buildMap() {
   );
 }
 
+// Map page
 class MapPage extends StatelessWidget {
   const MapPage({Key? key}) : super(key: key);
 
@@ -45,7 +46,7 @@ class MapPage extends StatelessWidget {
                     MediaQuery.of(context).textScaler))),
         excludeHeaderSemantics: true,
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(
           color: Colors.white,
         ), // Color of drawer icon

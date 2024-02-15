@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -149,11 +148,5 @@ class DatabaseHelper {
     }
     // Handle the case when data is available
     return onData(snapshot.data as T);
-  }
-
-  // Image loader
-  static Future<Uint8List> loadImageAsUint8List(String imagePath) async {
-    ByteData data = await rootBundle.load(imagePath);
-    return data.buffer.asUint8List();
   }
 }

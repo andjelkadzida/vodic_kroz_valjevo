@@ -1,14 +1,13 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-import 'hotels_and_restaurants/hotels.dart';
-import 'hotels_and_restaurants/restaurants.dart';
-import '../navigation/navigation_drawer.dart' as nav_drawer;
+import '../navigation/navigation_helper.dart';
+import '../navigation/bottom_navigation.dart';
 import '../localization/supported_languages.dart';
-import '../styles/common_styles.dart';
+import 'hotels_and_restaurants/hotels/hotels.dart';
+import 'hotels_and_restaurants/restaurants/restaurants.dart';
 
 class HotelsAndRestaurants extends StatefulWidget {
   const HotelsAndRestaurants({Key? key}) : super(key: key);
@@ -34,53 +33,37 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
 
   @override
   Widget build(BuildContext context) {
+    double padding = MediaQuery.of(context).size.width * 0.05;
     return Scaffold(
       appBar: AppBar(
-        title: Semantics(
-          label: localization(context).restaurantsAndHotels,
-          child: Text(
-            localization(context).restaurantsAndHotels,
-            style: AppStyles.defaultAppBarTextStyle(
-                MediaQuery.of(context).textScaler),
-          ),
+        title: Text(
+          localization(context).restaurantsAndHotels,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: MediaQuery.of(context).size.width * 0.05),
         ),
-        excludeHeaderSemantics: true,
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.teal,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      drawer: const nav_drawer.NavigationDrawer(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: EdgeInsets.all(padding),
+        child: ListView(
           children: [
             _buildItem(
               context,
               label: localization(context).hotels,
               icon: Icons.hotel,
               lottieAsset: 'animations/hotels.json',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Hotels()),
-                );
-                HapticFeedback.selectionClick();
-              },
+              onTap: () => navigateTo(context, const Hotels()),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             _buildItem(
               context,
               label: localization(context).restaurants,
               icon: Icons.restaurant,
               lottieAsset: 'animations/restaurants.json',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Restaurants()),
-                );
-                HapticFeedback.selectionClick();
-              },
+              onTap: () => navigateTo(context, const Restaurants()),
             ),
           ],
         ),
@@ -95,30 +78,35 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required String lottieAsset,
     required VoidCallback onTap,
   }) {
-    return Semantics(
-      label: localization(context).tapToView + label,
-      child: GestureDetector(
+    double size = MediaQuery.of(context).size.width * 0.1;
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.01),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: InkWell(
         onTap: onTap,
-        child: Card(
-          elevation: 4,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Lottie.asset(lottieAsset, width: 100, height: 100),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                Text(
+        borderRadius: BorderRadius.circular(20),
+        child: Padding(
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Lottie.asset(lottieAsset, width: size, height: size),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+              Expanded(
+                child: Text(
                   label,
-                  style: AppStyles.hotelsAndRestaurantsStyle(
-                      MediaQuery.of(context).textScaler),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.teal,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                      ),
                 ),
-                Icon(icon, size: MediaQuery.of(context).textScaler.scale(35)),
-              ],
-            ),
+              ),
+              Icon(icon,
+                  size: MediaQuery.of(context).size.width * 0.08,
+                  color: Colors.teal),
+            ],
           ),
         ),
       ),

@@ -47,6 +47,7 @@ dependencies:
   carousel_slider: ^4.2.1
   lottie: ^3.0.0
   flutter_staggered_grid_view: ^0.7.0
+  url_launcher: ^6.2.4
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -85,13 +86,10 @@ flutter:
     - images/grbValjeva.png
     - images/hotelsImages/bubicaSpolja.jpeg
     - images/hotelsImages/bubicaSoba.jpeg
-    - images/hotelsImages/bubicaKupatilo.jpeg
     - images/hotelsImages/grandSpolja.jpeg
     - images/hotelsImages/grandSoba.jpg
-    - images/hotelsImages/grandKupatilo.jpg
     - images/hotelsImages/omniSpolja.jpg
     - images/hotelsImages/omniSoba.jpg
-    - images/hotelsImages/omniKupatilo.jpg
     - images/restaurantsImages/paviljonNapolju.jpeg
     - images/restaurantsImages/paviljonPrizemlje.jpeg
     - images/restaurantsImages/paviljonSprat.jpeg
@@ -109,6 +107,7 @@ flutter:
     - images/restaurantsImages/laPiazzaHrana.jpeg
     - animations/hotels.json
     - animations/restaurants.json
+    - animations/menu_item.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

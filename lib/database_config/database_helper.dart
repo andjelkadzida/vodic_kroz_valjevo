@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -32,7 +31,7 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Sights (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            sights_image_path BLOB,
+            sights_image_path TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -51,7 +50,7 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS SportsAndRecreation (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            sports_image_path BLOB,
+            sports_image_path TEXT,
             title_en TEXT,
             title_de TEXT,
             title_sr TEXT,
@@ -63,9 +62,8 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Hotels (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hotel_image_path BLOB,
-            hotel_image_path2 BLOB,
-            hotel_image_path3 BLOB,
+            hotel_image_path TEXT,
+            hotel_image_path2 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -73,16 +71,16 @@ class DatabaseHelper {
             title_sr TEXT,
             title_sr_Cyrl TEXT,
             title_sr_Latn TEXT,
+            website TEXT,
             noStars INT
             )
         ''');
 
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Restaurants (
-            id  INTEGER PRIMARY KEY AUTOINCREMENT,
-            restaurant_image_path BLOB,
-            restaurant_image_path2 BLOB,
-            restaurant_image_path3 BLOB,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            restaurant_image_path TEXT,
+            restaurant_image_path2 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -112,10 +110,11 @@ class DatabaseHelper {
 
     currentVersion = await db.getVersion();
     if (currentVersion > newVersion) {
+      await db.close();
       if (await dbFile.exists()) {
         await dbFile.delete();
-        await db.close();
       }
+
       _onCreate(db, newVersion);
     }
   }
@@ -148,11 +147,5 @@ class DatabaseHelper {
     }
     // Handle the case when data is available
     return onData(snapshot.data as T);
-  }
-
-  // Image loader
-  static Future<Uint8List> loadImageAsUint8List(String imagePath) async {
-    ByteData data = await rootBundle.load(imagePath);
-    return data.buffer.asUint8List();
   }
 }

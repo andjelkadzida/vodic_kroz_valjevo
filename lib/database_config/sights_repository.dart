@@ -1,7 +1,4 @@
-import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'database_helper.dart';
 
 class SightsRepository {
   late Database _databaseInstance;
@@ -21,10 +18,6 @@ class SightsRepository {
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
       for (var data in dataList) {
-        // Load image as Uint8List
-        Uint8List imageBytes =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath']);
-
         // Add insert operation to the batch
         batch.rawInsert('''
           INSERT INTO Sights(
@@ -44,7 +37,7 @@ class SightsRepository {
           )
           VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
-          imageBytes,
+          data['sights_image_path'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -67,7 +60,7 @@ class SightsRepository {
   Future<void> sightsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
       {
-        'imagePath': 'images/muzejLogo.png',
+        'sights_image_path': 'images/muzejLogo.png',
         'latitude': 44.26925398584459,
         'longitude': 19.885692396117847,
         'titles': {
@@ -86,7 +79,7 @@ class SightsRepository {
         },
       },
       {
-        'imagePath': 'images/kulaNenadovica.jpg',
+        'sights_image_path': 'images/kulaNenadovica.jpg',
         'latitude': 44.27809742651686,
         'longitude': 19.88519586174966,
         'titles': {

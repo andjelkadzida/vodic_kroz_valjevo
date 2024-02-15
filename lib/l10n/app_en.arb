@@ -30,7 +30,9 @@
     "image": "Image of ",
     "loading": "Loading data, please wait...",
     "errorLoadingData": "Error occured during loading data.",
+    "errorLoadingImages": "Error occured during loading images.",
     "noDataAvailable": "No data available!",
+    "noImagesAvailable": "No images available!",
     "error": "Error",
     "tapForDetails": "Tap to view details.",
     "nameOfSight": "Landmark name:",
@@ -48,5 +50,13 @@
     "restaurantName": "Restaurant name: ",
     "tapToView": "Tap to open page: ",
     "distanceFromRestaurant": "Distance from the restaurant: ",
-    "distanceNotAvailable": "Unable to calculate the distance to the restaurant."
+    "distanceNotAvailable": "Unable to calculate the distance to the restaurant.",
+    "sportFields": "Sport fields",
+    "parks": "Parks",
+    "valjevoCityImage": "Image of the city of Valjevo",
+    "chooseLanguage": "Select language",
+    "menu": "Menu",
+    "getStarted": "Get Started",
+    "mapPage": "City map",
+    "website": "Website"
 }

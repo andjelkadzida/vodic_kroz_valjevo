@@ -30,7 +30,9 @@
     "image": "Слика ",
     "loading": "Учитавање података, молимо сачекајте...",
     "errorLoadingData": "Дошло је до грешке приликом учитавања података.",
+    "errorLoadingImages": "Дошло је до грешке приликом учитавања слика.",
     "noDataAvailable": "Подаци нису доступни!",
+    "noImagesAvailable": "Слике нису доступне!",
     "error": "Грешка",
     "tapForDetails": "Додирните за приказ детаља.",
     "nameOfSight": "Назив знаменитости: ",
@@ -48,5 +50,13 @@
     "restaurantName": "Назив ресторана: ",
     "tapToView": "Додирните да бисте отворили страницу: ",
     "distanceFromRestaurant": "Удаљеност од ресторана: ",
-    "distanceNotAvailable": "Није могуће израчунати удаљеност од ресторана."
+    "distanceNotAvailable": "Није могуће израчунати удаљеност од ресторана.",
+    "sportFields": "Спортски терени",
+    "parks": "Паркови",
+    "valjevoCityImage": "Слика града Ваљева",
+    "chooseLanguage": "Изаберите језик",
+    "menu": "Мени",
+    "getStarted": "Почни",
+    "mapPage": "Мапа града",
+    "website": "Веб-сајт"
 }

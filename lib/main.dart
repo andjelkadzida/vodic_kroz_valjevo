@@ -75,24 +75,19 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   }
 
   void _initializeData() async {
-    bool sportsExist = await sportsRepo.checkSportsDataExists();
-    bool sightsExist = await sightsRepo.checkSightsDataExist();
-    bool hotelsExist = await hotelsRepo.checkHotelsDataExist();
-    bool restaurantsExists = await restaurantsRepo.checkRestaurantsDataExist();
-
-    if (!sportsExist) {
+    if (!(await sportsRepo.checkSportsDataExists())) {
       await sportsRepo.sportsDataInsertion();
     }
 
-    if (!sightsExist) {
+    if (!(await sportsRepo.checkSportsDataExists())) {
       await sightsRepo.sightsDataInsertion();
     }
 
-    if (!hotelsExist) {
+    if (!(await hotelsRepo.checkHotelsDataExist())) {
       await hotelsRepo.hotelsDataInsertion();
     }
 
-    if (!restaurantsExists) {
+    if (!(await restaurantsRepo.checkRestaurantsDataExist())) {
       await restaurantsRepo.restaurantsDataInsertion();
     }
 

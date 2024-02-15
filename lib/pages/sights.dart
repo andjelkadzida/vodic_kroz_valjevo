@@ -83,7 +83,7 @@ class Sights extends StatelessWidget {
       String description,
       BuildContext context) {
     //Precache images to avoid screen flickering
-    precacheImage(AssetImage(imagePath), context);
+    // precacheImage(AssetImage(imagePath), context);
 
     return GestureDetector(
       onLongPress: () {

@@ -79,7 +79,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
       await sportsRepo.sportsDataInsertion();
     }
 
-    if (!(await sportsRepo.checkSportsDataExists())) {
+    if (!(await sightsRepo.checkSightsDataExist())) {
       await sightsRepo.sightsDataInsertion();
     }
 

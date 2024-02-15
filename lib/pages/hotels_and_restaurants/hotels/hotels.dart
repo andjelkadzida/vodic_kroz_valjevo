@@ -54,7 +54,7 @@ class Hotels extends StatelessWidget {
         width: MediaQuery.of(context).textScaler.scale(48),
         height: MediaQuery.of(context).textScaler.scale(48),
         child: GestureDetector(
-          onTap: () => showHotelDetails(context, hotelData),
+          onTap: () => _showHotelDetails(context, hotelData),
           child: Tooltip(
             message: '${hotelData['title']}',
             child: Icon(
@@ -71,7 +71,7 @@ class Hotels extends StatelessWidget {
     return buildMapWithMarkers(markers);
   }
 
-  void showHotelDetails(BuildContext context, Map<String, dynamic> hotelData) {
+  void _showHotelDetails(BuildContext context, Map<String, dynamic> hotelData) {
     Navigator.of(context).push(
       CupertinoPageRoute(
         builder: (context) => HotelDetailsPage(

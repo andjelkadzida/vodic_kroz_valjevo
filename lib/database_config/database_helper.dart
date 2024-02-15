@@ -80,7 +80,7 @@ class DatabaseHelper {
 
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Restaurants (
-            id  INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             restaurant_image_path TEXT,
             restaurant_image_path2 TEXT,
             restaurant_image_path3 TEXT,

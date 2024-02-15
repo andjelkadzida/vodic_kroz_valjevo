@@ -1,8 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:sqflite/sqflite.dart';
-
-import 'database_helper.dart';
 
 class HotelsRepository {
   late Database _databaseInstance;
@@ -23,14 +19,6 @@ class HotelsRepository {
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
       for (var data in hotelsList) {
-        // Load image as Uint8List
-        Uint8List imageBytes =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath']);
-        Uint8List imageBytes2 =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath2']);
-        Uint8List imageBytes3 =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath3']);
-
         // Add insert operation to the batch
         batch.rawInsert('''
           INSERT INTO Hotels(
@@ -49,9 +37,9 @@ class HotelsRepository {
           )
           VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
-          imageBytes,
-          imageBytes2,
-          imageBytes3,
+          data['hotel_image_path'],
+          data['hotel_image_path2'],
+          data['hotel_image_path3'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -71,9 +59,9 @@ class HotelsRepository {
   Future<void> hotelsDataInsertion() async {
     List<Map<String, dynamic>> hotelsList = [
       {
-        'imagePath': 'images/hotelsImages/bubicaSpolja.jpeg',
-        'imagePath2': 'images/hotelsImages/bubicaSoba.jpeg',
-        'imagePath3': 'images/hotelsImages/bubicaKupatilo.jpeg',
+        'hotel_image_path': 'images/hotelsImages/bubicaSpolja.jpeg',
+        'hotel_image_path2': 'images/hotelsImages/bubicaSoba.jpeg',
+        'hotel_image_path3': 'images/hotelsImages/bubicaKupatilo.jpeg',
         'latitude': 44.269317305096884,
         'longitude': 19.890976396550382,
         'titles': {
@@ -87,9 +75,9 @@ class HotelsRepository {
         'noStars': '3',
       },
       {
-        'imagePath': 'images/hotelsImages/grandSpolja.jpeg',
-        'imagePath2': 'images/hotelsImages/grandSoba.jpg',
-        'imagePath3': 'images/hotelsImages/grandKupatilo.jpg',
+        'hotel_image_path': 'images/hotelsImages/grandSpolja.jpeg',
+        'hotel_image_path2': 'images/hotelsImages/grandSoba.jpg',
+        'hotel_image_path3': 'images/hotelsImages/grandKupatilo.jpg',
         'latitude': 44.26931060511534,
         'longitude': 19.884675167713866,
         'titles': {
@@ -103,9 +91,9 @@ class HotelsRepository {
         'noStars': '3',
       },
       {
-        'imagePath': 'images/hotelsImages/omniSpolja.jpg',
-        'imagePath2': 'images/hotelsImages/omniSoba.jpg',
-        'imagePath3': 'images/hotelsImages/omniKupatilo.jpg',
+        'hotel_image_path': 'images/hotelsImages/omniSpolja.jpg',
+        'hotel_image_path2': 'images/hotelsImages/omniSoba.jpg',
+        'hotel_image_path3': 'images/hotelsImages/omniKupatilo.jpg',
         'latitude': 44.26323769320158,
         'longitude': 19.890492339708686,
         'titles': {

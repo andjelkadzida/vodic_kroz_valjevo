@@ -139,19 +139,19 @@ Future<void> showRestaurantDetailsDialog(
                 itemCount: 3,
                 itemBuilder:
                     (BuildContext context, int itemIndex, int pageViewIndex) {
-                  List<Uint8List> images = [
+                  List<String> images = [
                     restaurantData['restaurant_image_path'],
                     restaurantData['restaurant_image_path2'],
                     restaurantData['restaurant_image_path3'],
                   ];
 
                   //Precache images to avoid screen flickering
-                  precacheImage(MemoryImage(images[itemIndex]), context);
+                  precacheImage(AssetImage(images[itemIndex]), context);
 
                   return Semantics(
                     label: localization(context).hotelImage,
                     child: InteractiveViewer(
-                      child: Image.memory(
+                      child: Image.asset(
                         images[itemIndex],
                         fit: BoxFit.cover,
                       ),

@@ -1,8 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:sqflite/sqflite.dart';
-
-import 'database_helper.dart';
 
 class RestaurantsRepository {
   late Database _databaseInstance;
@@ -24,14 +20,6 @@ class RestaurantsRepository {
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
       for (var data in restaurantsList) {
-        // Load image as Uint8List
-        Uint8List imageBytes =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath']);
-        Uint8List imageBytes2 =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath2']);
-        Uint8List imageBytes3 =
-            await DatabaseHelper.loadImageAsUint8List(data['imagePath3']);
-
         // Add insert operation to the batch
         batch.rawInsert('''
           INSERT INTO Restaurants(
@@ -48,9 +36,9 @@ class RestaurantsRepository {
           )
           VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
-          imageBytes,
-          imageBytes2,
-          imageBytes3,
+          data['restaurant_image_path'],
+          data['restaurant_image_path2'],
+          data['restaurant_image_path3'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -68,9 +56,11 @@ class RestaurantsRepository {
   Future<void> restaurantsDataInsertion() async {
     List<Map<String, dynamic>> restaurantsList = [
       {
-        'imagePath': 'images/restaurantsImages/paviljonNapolju.jpeg',
-        'imagePath2': 'images/restaurantsImages/paviljonPrizemlje.jpeg',
-        'imagePath3': 'images/restaurantsImages/paviljonSprat.jpeg',
+        'restaurant_image_path':
+            'images/restaurantsImages/paviljonNapolju.jpeg',
+        'restaurant_image_path2':
+            'images/restaurantsImages/paviljonPrizemlje.jpeg',
+        'restaurant_image_path3': 'images/restaurantsImages/paviljonSprat.jpeg',
         'latitude': 44.26121378368397,
         'longitude': 19.878408885329353,
         'titles': {
@@ -82,9 +72,9 @@ class RestaurantsRepository {
         },
       },
       {
-        'imagePath': 'images/restaurantsImages/lovciNapolju.jpeg',
-        'imagePath2': 'images/restaurantsImages/lovciUnutra.jpeg',
-        'imagePath3': 'images/restaurantsImages/lovciHrana.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/lovciNapolju.jpeg',
+        'restaurant_image_path2': 'images/restaurantsImages/lovciUnutra.jpeg',
+        'restaurant_image_path3': 'images/restaurantsImages/lovciHrana.jpeg',
         'latitude': 44.26254034889633,
         'longitude': 19.870473925801104,
         'titles': {
@@ -96,9 +86,9 @@ class RestaurantsRepository {
         },
       },
       {
-        'imagePath': 'images/restaurantsImages/kucaSpolja.jpeg',
-        'imagePath2': 'images/restaurantsImages/kucaUnutra.jpeg',
-        'imagePath3': 'images/restaurantsImages/kucaHrana.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpeg',
+        'restaurant_image_path2': 'images/restaurantsImages/kucaUnutra.jpeg',
+        'restaurant_image_path3': 'images/restaurantsImages/kucaHrana.jpeg',
         'latitude': 44.270799571481014,
         'longitude': 19.891283525386942,
         'titles': {
@@ -110,9 +100,9 @@ class RestaurantsRepository {
         },
       },
       {
-        'imagePath': 'images/restaurantsImages/tavernaSpolja.jpeg',
-        'imagePath2': 'images/restaurantsImages/tavernaUnutra.jpeg',
-        'imagePath3': 'images/restaurantsImages/tavernaHrana.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/tavernaSpolja.jpeg',
+        'restaurant_image_path2': 'images/restaurantsImages/tavernaUnutra.jpeg',
+        'restaurant_image_path3': 'images/restaurantsImages/tavernaHrana.jpeg',
         'latitude': 44.27082751943143,
         'longitude': 19.8831951515897,
         'titles': {
@@ -124,9 +114,10 @@ class RestaurantsRepository {
         },
       },
       {
-        'imagePath': 'images/restaurantsImages/laPiazzaSpolja.jpeg',
-        'imagePath2': 'images/restaurantsImages/laPiazzaUnutra.jpeg',
-        'imagePath3': 'images/restaurantsImages/laPiazzaHrana.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/laPiazzaSpolja.jpeg',
+        'restaurant_image_path2':
+            'images/restaurantsImages/laPiazzaUnutra.jpeg',
+        'restaurant_image_path3': 'images/restaurantsImages/laPiazzaHrana.jpeg',
         'latitude': 44.27005106183441,
         'longitude': 19.884875712310876,
         'titles': {

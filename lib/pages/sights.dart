@@ -60,13 +60,13 @@ class Sights extends StatelessWidget {
             mainAxisSpacing: 8.0,
           ),
           itemBuilder: (BuildContext context, int index) {
-            final Uint8List imageBytes = sightsData[index]['sights_image_path'];
+            final String imagePath = sightsData[index]['sights_image_path'];
             final String title = sightsData[index]['title'];
             final String description = sightsData[index]['description'];
             final double destLatitude = sightsData[index]['latitude'];
             final double destLongitude = sightsData[index]['longitude'];
 
-            return buildGridItem(itemWidth, imageBytes, title, destLatitude,
+            return buildGridItem(itemWidth, imagePath, title, destLatitude,
                 destLongitude, description, context);
           },
         );
@@ -76,21 +76,19 @@ class Sights extends StatelessWidget {
 
   Widget buildGridItem(
       double itemWidth,
-      Uint8List imageBytes,
+      String imagePath,
       String title,
       double destLatitude,
       double destLongitude,
       String description,
       BuildContext context) {
     //Precache images to avoid screen flickering
-    precacheImage(MemoryImage(imageBytes), context);
-
-    Uint8List imagePlaceholder = Uint8List.fromList(imageBytes);
+    precacheImage(AssetImage(imagePath), context);
 
     return GestureDetector(
       onLongPress: () {
         HapticFeedback.vibrate();
-        _showImageDialog(context, imageBytes, title);
+        _showImageDialog(context, imagePath, title);
       },
       behavior: HitTestBehavior.translucent,
       child: Semantics(
@@ -110,7 +108,7 @@ class Sights extends StatelessWidget {
                     Navigator.of(context).push(
                       CupertinoPageRoute(
                           builder: (context) => SightDetailsPage(
-                              imageBytes: imageBytes,
+                              imagePath: imagePath,
                               title: title,
                               description: description)),
                     );
@@ -119,8 +117,8 @@ class Sights extends StatelessWidget {
                     image: true,
                     label: title,
                     child: FadeInImage(
-                      placeholder: MemoryImage(imagePlaceholder),
-                      image: MemoryImage(imageBytes),
+                      placeholder: AssetImage(imagePath),
+                      image: AssetImage(imagePath),
                       fit: BoxFit.cover,
                       imageSemanticLabel:
                           '${localization(context).sight}"$title"',
@@ -167,8 +165,7 @@ class Sights extends StatelessWidget {
     );
   }
 
-  void _showImageDialog(
-      BuildContext context, Uint8List imageBytes, String title) {
+  void _showImageDialog(BuildContext context, String imagePath, String title) {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
@@ -189,8 +186,8 @@ class Sights extends StatelessWidget {
                         '${localization(dialogContext).enlargedImage} $title',
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.memory(
-                        imageBytes,
+                      child: Image.asset(
+                        imagePath,
                         fit: BoxFit.contain,
                       ),
                     ),

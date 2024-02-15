@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +25,7 @@ class HotelDetailsPage extends StatelessWidget {
 
     MapScreen mapScreen = MapScreen();
 
-    List<Uint8List> images = [
+    List<String> images = [
       hotelData['hotel_image_path'],
       hotelData['hotel_image_path2'],
       hotelData['hotel_image_path3'],
@@ -54,10 +52,9 @@ class HotelDetailsPage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int itemIndex,
                         int pageViewIndex) {
                       return Semantics(
-                        label: 'Hotel Image ${itemIndex + 1}',
-                        child:
-                            Image.memory(images[itemIndex], fit: BoxFit.cover),
-                      );
+                          label: 'Hotel Image ${itemIndex + 1}',
+                          child: Image.asset(images[itemIndex],
+                              fit: BoxFit.cover));
                     },
                     options: CarouselOptions(
                       autoPlay: true,

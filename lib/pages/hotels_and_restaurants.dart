@@ -44,6 +44,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
         ),
         centerTitle: true,
         backgroundColor: Colors.teal,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: Padding(

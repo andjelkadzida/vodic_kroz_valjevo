@@ -64,7 +64,6 @@ class DatabaseHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             hotel_image_path TEXT,
             hotel_image_path2 TEXT,
-            hotel_image_path3 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -82,7 +81,6 @@ class DatabaseHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             restaurant_image_path TEXT,
             restaurant_image_path2 TEXT,
-            restaurant_image_path3 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -112,10 +110,11 @@ class DatabaseHelper {
 
     currentVersion = await db.getVersion();
     if (currentVersion > newVersion) {
+      await db.close();
       if (await dbFile.exists()) {
         await dbFile.delete();
-        await db.close();
       }
+
       _onCreate(db, newVersion);
     }
   }

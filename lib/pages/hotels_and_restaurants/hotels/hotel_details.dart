@@ -28,7 +28,6 @@ class HotelDetailsPage extends StatelessWidget {
     List<String> images = [
       hotelData['hotel_image_path'],
       hotelData['hotel_image_path2'],
-      hotelData['hotel_image_path3'],
     ];
 
     return Scaffold(

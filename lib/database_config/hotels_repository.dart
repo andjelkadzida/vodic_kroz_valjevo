@@ -24,7 +24,6 @@ class HotelsRepository {
           INSERT INTO Hotels(
             hotel_image_path, 
             hotel_image_path2, 
-            hotel_image_path3, 
             latitude,
             longitude,
             title_en, 
@@ -35,11 +34,10 @@ class HotelsRepository {
             website,
             noStars
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
           data['hotel_image_path'],
           data['hotel_image_path2'],
-          data['hotel_image_path3'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -61,7 +59,6 @@ class HotelsRepository {
       {
         'hotel_image_path': 'images/hotelsImages/bubicaSpolja.jpeg',
         'hotel_image_path2': 'images/hotelsImages/bubicaSoba.jpeg',
-        'hotel_image_path3': 'images/hotelsImages/bubicaKupatilo.jpeg',
         'latitude': 44.269317305096884,
         'longitude': 19.890976396550382,
         'titles': {
@@ -77,7 +74,6 @@ class HotelsRepository {
       {
         'hotel_image_path': 'images/hotelsImages/grandSpolja.jpeg',
         'hotel_image_path2': 'images/hotelsImages/grandSoba.jpg',
-        'hotel_image_path3': 'images/hotelsImages/grandKupatilo.jpg',
         'latitude': 44.26931060511534,
         'longitude': 19.884675167713866,
         'titles': {
@@ -93,7 +89,6 @@ class HotelsRepository {
       {
         'hotel_image_path': 'images/hotelsImages/omniSpolja.jpg',
         'hotel_image_path2': 'images/hotelsImages/omniSoba.jpg',
-        'hotel_image_path3': 'images/hotelsImages/omniKupatilo.jpg',
         'latitude': 44.26323769320158,
         'longitude': 19.890492339708686,
         'titles': {

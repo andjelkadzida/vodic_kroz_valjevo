@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../navigation/cutom_app_bar.dart';
-import '../text_to_speech/text_to_speech_config.dart';
-import '../localization/supported_languages.dart';
-import '../styles/common_styles.dart';
+import '../../localization/supported_languages.dart';
+import '../../navigation/cutom_app_bar.dart';
+import '../../styles/common_styles.dart';
+import '../../text_to_speech/text_to_speech_config.dart';
 
 class SightDetailsPage extends StatefulWidget {
   final String imagePath;

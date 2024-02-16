@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../navigation/cutom_app_bar.dart';
+import '../../database_config/database_helper.dart';
+import '../../localization/supported_languages.dart';
+import '../../maps_navigation/locator.dart';
+import '../../navigation/bottom_navigation.dart';
+import '../../navigation/cutom_app_bar.dart';
+import '../../styles/common_styles.dart';
+import '../../text_to_speech/text_to_speech_config.dart';
 import 'sight_details_page.dart';
-import '../navigation/bottom_navigation.dart';
-import '../database_config/database_helper.dart';
-import '../text_to_speech/text_to_speech_config.dart';
-import '../maps_navigation/locator.dart';
-import '../localization/supported_languages.dart';
-import '../styles/common_styles.dart';
 
 class Sights extends StatelessWidget {
   Sights({Key? key}) : super(key: key);

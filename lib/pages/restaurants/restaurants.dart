@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../../database_config/database_helper.dart';
-import '../../../localization/supported_languages.dart';
-import '../../../maps_navigation/map_builder.dart';
-import '../../../navigation/cutom_app_bar.dart';
+import '../../database_config/database_helper.dart';
+import '../../localization/supported_languages.dart';
+import '../../maps_navigation/map_builder.dart';
+import '../../navigation/cutom_app_bar.dart';
 import 'restaurant_details.dart';
 
 class Restaurants extends StatelessWidget {

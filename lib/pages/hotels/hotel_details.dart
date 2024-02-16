@@ -3,10 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../localization/supported_languages.dart';
-import '../../../maps_navigation/locator.dart';
-import '../../../navigation/bottom_navigation.dart';
-import '../../../navigation/cutom_app_bar.dart';
+import '../../localization/supported_languages.dart';
+import '../../maps_navigation/locator.dart';
+import '../../navigation/bottom_navigation.dart';
+import '../../navigation/cutom_app_bar.dart';
 
 class HotelDetailsPage extends StatelessWidget {
   final Map<String, dynamic> hotelData;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../../../localization/supported_languages.dart';
-import '../../../maps_navigation/locator.dart';
-import '../../../navigation/bottom_navigation.dart';
-import '../../../navigation/cutom_app_bar.dart';
+import '../../localization/supported_languages.dart';
+import '../../maps_navigation/locator.dart';
+import '../../navigation/bottom_navigation.dart';
+import '../../navigation/cutom_app_bar.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {
   final Map<String, dynamic> restaurantData;

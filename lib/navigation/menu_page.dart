@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../localization/supported_languages.dart';
 import '../pages/about_city.dart';
 import '../pages/hotels_and_restaurants.dart';
-import '../pages/sights.dart';
+import '../pages/sights/sights.dart';
 import '../pages/sport_and_recreation.dart';
-import '../localization/supported_languages.dart';
 import 'bottom_navigation.dart';
 import 'navigation_helper.dart';
 

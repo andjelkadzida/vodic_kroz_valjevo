@@ -40,7 +40,7 @@
     "enlargedImage": "Uvećana slika ",
     "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste pauzirali.",
     "doubleTapToStopHearing": "Dodirnite dva puta da zaustavite slušanje.",
-    "starCount": "{numberOfStars, plural, =1{1 zvezdiva} other{{numberOfStars} zvezdice}}",
+    "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "description": "Opis",
     "closeDialog": "Zatvori dijalog",
     "hotelImage": "Slika hotela",

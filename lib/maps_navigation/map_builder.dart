@@ -6,32 +6,6 @@ import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
 import '../styles/common_styles.dart';
 
-Widget buildMapWithMarkers(List<Marker> markers) {
-  return FlutterMap(
-    options: const MapOptions(
-      initialCenter: LatLng(44.267, 19.886),
-      initialZoom: 13.0,
-    ),
-    children: [
-      TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-      MarkerLayer(markers: markers),
-    ],
-  );
-}
-
-Widget buildMap() {
-  return FlutterMap(
-    options: const MapOptions(
-      initialCenter: LatLng(44.267, 19.886),
-      initialZoom: 13.0,
-    ),
-    children: [
-      TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-    ],
-  );
-}
-
-// Map page
 class MapPage extends StatelessWidget {
   const MapPage({Key? key}) : super(key: key);
 
@@ -55,4 +29,29 @@ class MapPage extends StatelessWidget {
       body: buildMap(),
     );
   }
+}
+
+Widget buildMapWithMarkers(List<Marker> markers) {
+  return FlutterMap(
+    options: const MapOptions(
+      initialCenter: LatLng(44.267, 19.886),
+      initialZoom: 13.0,
+    ),
+    children: [
+      TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
+      MarkerLayer(markers: markers),
+    ],
+  );
+}
+
+Widget buildMap() {
+  return FlutterMap(
+    options: const MapOptions(
+      initialCenter: LatLng(44.267, 19.886),
+      initialZoom: 13.0,
+    ),
+    children: [
+      TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
+    ],
+  );
 }

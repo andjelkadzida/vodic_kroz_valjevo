@@ -51,7 +51,7 @@ class HotelDetailsPage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int itemIndex,
                         int pageViewIndex) {
                       return Semantics(
-                          label: 'Hotel Image ${itemIndex + 1}',
+                          label: '${localization(context).hotelImage}"$title"',
                           child: Image.asset(images[itemIndex],
                               fit: BoxFit.cover));
                     },

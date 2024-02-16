@@ -34,6 +34,7 @@ class HotelDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: SingleChildScrollView(

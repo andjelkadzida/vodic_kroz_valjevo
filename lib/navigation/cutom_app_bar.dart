@@ -6,7 +6,9 @@ AppBar customAppBar(BuildContext context, String title) {
         label: title,
         child: Text(
           title,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+              ),
         )),
     excludeHeaderSemantics: true,
     centerTitle: true,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../navigation/cutom_app_bar.dart';
 import 'sight_details_page.dart';
 import '../navigation/bottom_navigation.dart';
 import '../database_config/database_helper.dart';
@@ -18,13 +19,9 @@ class Sights extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localization(context).sights,
-            style: AppStyles.defaultAppBarTextStyle(
-                MediaQuery.of(context).textScaler)),
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        iconTheme: const IconThemeData(color: Colors.white),
+      appBar: customAppBar(
+        context,
+        localization(context).sights,
       ),
       body: buildSightsDataWidget(context),
       bottomNavigationBar: const CustomBottomNavigationBar(),

@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 import '../../../database_config/database_helper.dart';
 import '../../../localization/supported_languages.dart';
 import '../../../maps_navigation/map_builder.dart';
-import '../../../styles/common_styles.dart';
+import '../../../navigation/cutom_app_bar.dart';
 import 'hotel_details.dart';
 
 class Hotels extends StatelessWidget {
@@ -15,19 +15,9 @@ class Hotels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Semantics(
-          label: localization(context).hotels,
-          child: Text(
-            localization(context).hotels,
-            style: AppStyles.defaultAppBarTextStyle(
-                MediaQuery.of(context).textScaler),
-          ),
-        ),
-        excludeHeaderSemantics: true,
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        iconTheme: const IconThemeData(color: Colors.white),
+      appBar: customAppBar(
+        context,
+        localization(context).hotels,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getHotelsDataFromDatabase(localization(context).localeName),

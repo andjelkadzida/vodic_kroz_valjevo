@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../../../localization/supported_languages.dart';
 import '../../../maps_navigation/locator.dart';
 import '../../../navigation/bottom_navigation.dart';
+import '../../../navigation/cutom_app_bar.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {
   final Map<String, dynamic> restaurantData;
@@ -30,10 +31,9 @@ class RestaurantDetailsPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
+      appBar: customAppBar(
+        context,
+        title,
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: SingleChildScrollView(

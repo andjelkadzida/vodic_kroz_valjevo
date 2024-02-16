@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
+import '../navigation/cutom_app_bar.dart';
 
 class SportsAndRecreation extends StatelessWidget {
   const SportsAndRecreation({Key? key}) : super(key: key);
@@ -9,20 +10,9 @@ class SportsAndRecreation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          localization(context).sportRecreation,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontSize: MediaQuery.of(context).size.width * 0.06,
-                color: Colors.white,
-              ),
-        ),
-        excludeHeaderSemantics: true,
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ), // Color of drawer icon
+      appBar: customAppBar(
+        context,
+        localization(context).sportRecreation,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getSportsDataFromDatabase(localization(context).localeName),

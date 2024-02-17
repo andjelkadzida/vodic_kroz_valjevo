@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../localization/supported_languages.dart';
-import '../../../maps_navigation/locator.dart';
-import '../../../navigation/bottom_navigation.dart';
+import '../../localization/supported_languages.dart';
+import '../../maps_navigation/locator.dart';
+import '../../navigation/bottom_navigation.dart';
+import '../../navigation/cutom_app_bar.dart';
 
-class RestaurantDetailsPage extends StatelessWidget {
-  final Map<String, dynamic> restaurantData;
+class HotelDetailsPage extends StatelessWidget {
+  final Map<String, dynamic> hotelData;
 
-  const RestaurantDetailsPage({Key? key, required this.restaurantData})
-      : super(key: key);
+  const HotelDetailsPage({Key? key, required this.hotelData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,22 +19,22 @@ class RestaurantDetailsPage extends StatelessWidget {
     final Size screenSize = MediaQuery.of(context).size;
     final double padding = screenSize.width * 0.04;
 
-    final String title = restaurantData['title'];
-    double latitude = restaurantData['latitude'];
-    double longitude = restaurantData['longitude'];
+    final String title = hotelData['title'];
+    final int noStars = hotelData['noStars'];
+    double latitude = hotelData['latitude'];
+    double longitude = hotelData['longitude'];
 
     MapScreen mapScreen = MapScreen();
 
     List<String> images = [
-      restaurantData['restaurant_image_path'],
-      restaurantData['restaurant_image_path2'],
-      restaurantData['restaurant_image_path3'],
+      hotelData['hotel_image_path'],
+      hotelData['hotel_image_path2'],
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
+      appBar: customAppBar(
+        context,
+        title,
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: SingleChildScrollView(
@@ -45,12 +47,13 @@ class RestaurantDetailsPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  SizedBox(height: padding),
                   CarouselSlider.builder(
                     itemCount: images.length,
                     itemBuilder: (BuildContext context, int itemIndex,
                         int pageViewIndex) {
                       return Semantics(
-                          label: 'Hotel Image ${itemIndex + 1}',
+                          label: '${localization(context).hotelImage}"$title"',
                           child: Image.asset(images[itemIndex],
                               fit: BoxFit.cover));
                     },
@@ -59,6 +62,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                       enlargeCenterPage: true,
                       viewportFraction: 0.9,
                       aspectRatio: 2.0,
+                      autoPlayAnimationDuration: const Duration(seconds: 2),
                     ),
                   ),
                   Padding(
@@ -73,6 +77,38 @@ class RestaurantDetailsPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: screenSize.height * 0.02),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                launchUrlString(hotelData['website']);
+                                HapticFeedback.lightImpact();
+                              },
+                              child: Text(
+                                localization(context).website,
+                                style: theme.textTheme.bodyLarge,
+                              ),
+                            ),
+                            Semantics(
+                              label: localization(context).starCount(noStars),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                    size: screenSize.width * 0.05,
+                                  ),
+                                  Text(
+                                    '$noStars',
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: screenSize.height * 0.03),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(

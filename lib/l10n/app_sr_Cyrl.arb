@@ -48,6 +48,7 @@
     "starRating": "Број звездица",
     "restaurants": "Ресторани",
     "restaurantName": "Назив ресторана: ",
+    "restaurantImage": "Слика ресторана",
     "tapToView": "Додирните да бисте отворили страницу: ",
     "distanceFromRestaurant": "Удаљеност од ресторана: ",
     "distanceNotAvailable": "Није могуће израчунати удаљеност од ресторана.",
@@ -58,5 +59,7 @@
     "menu": "Мени",
     "getStarted": "Почни",
     "mapPage": "Мапа града",
-    "website": "Веб-сајт"
+    "website": "Веб-сајт",
+    "menuItem": "Ставка менија: {item}",
+    "tapToOpen": "Додирни да отвориш {item}"
 }

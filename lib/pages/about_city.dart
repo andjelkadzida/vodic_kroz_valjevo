@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
-import '../styles/common_styles.dart';
+import '../navigation/cutom_app_bar.dart';
 
 class AboutCity extends StatelessWidget {
   const AboutCity({Key? key}) : super(key: key);
@@ -10,18 +10,9 @@ class AboutCity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Semantics(
-            label: localization(context).aboutCity,
-            child: Text(localization(context).aboutCity,
-                style: AppStyles.defaultAppBarTextStyle(
-                    MediaQuery.of(context).textScaler))),
-        excludeHeaderSemantics: true,
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ), // Color of drawer icon
+      appBar: customAppBar(
+        context,
+        localization(context).aboutCity,
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: Center(

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -17,8 +16,13 @@ class DatabaseHelper {
     String dbName = 'valjevo_tour_guide.db';
     String path = join(await getDatabasesPath(), dbName);
 
+    // Checking if the database is already open, if not, open it
+    if (_database != null) {
+      await _database!.close();
+      _database = null;
+    }
     _database = await openDatabase(path,
-        version: 1,
+        version: 9,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -27,7 +31,7 @@ class DatabaseHelper {
     return _database!;
   }
 
-  static void _onCreate(Database db, int version) async {
+  static Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Sights (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,21 +64,21 @@ class DatabaseHelper {
         ''');
 
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS Hotels (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hotel_image_path TEXT,
-            hotel_image_path2 TEXT,
-            latitude REAL NOT NULL,
-            longitude REAL NOT NULL,
-            title_en TEXT,
-            title_de TEXT,
-            title_sr TEXT,
-            title_sr_Cyrl TEXT,
-            title_sr_Latn TEXT,
-            website TEXT,
-            noStars INT
-            )
-        ''');
+        CREATE TABLE IF NOT EXISTS Hotels (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          hotel_image_path TEXT,
+          hotel_image_path2 TEXT,
+          latitude REAL NOT NULL,
+          longitude REAL NOT NULL,
+          title_en TEXT,
+          title_de TEXT,
+          title_sr TEXT,
+          title_sr_Cyrl TEXT,
+          title_sr_Latn TEXT,
+          website TEXT,
+          noStars INT
+        )
+    ''');
 
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Restaurants (
@@ -92,30 +96,33 @@ class DatabaseHelper {
         ''');
   }
 
-  static void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+  static Future<void> _onUpgrade(
+      Database db, int oldVersion, int newVersion) async {
     if (oldVersion < newVersion) {
-      await db.execute('''
-          DROP TABLE IF EXISTS Sights;
-          DROP TABLE IF EXISTS SportsAndRecreation;
-          DROP TABLE IF EXISTS Hotels;
-          DROP TABLE IF EXISTS Restaurants;
-        ''');
-      _onCreate(db, newVersion);
+      await db.execute('DROP TABLE IF EXISTS Sights');
+      await db.execute('DROP TABLE IF EXISTS SportsAndRecreation');
+      await db.execute('DROP TABLE IF EXISTS Hotels');
+      await db.execute('DROP TABLE IF EXISTS Restaurants');
+      await _onCreate(db, newVersion);
     }
   }
 
-  static void _onDowngrade(
-      Database db, int currentVersion, int newVersion) async {
-    File dbFile = File(db.path);
+  static Future<void> _onDowngrade(
+      Database db, int oldVersion, int newVersion) async {
+    if (oldVersion > newVersion) {
+      await deleteWholeDatabase();
 
-    currentVersion = await db.getVersion();
-    if (currentVersion > newVersion) {
-      await db.close();
-      if (await dbFile.exists()) {
-        await dbFile.delete();
-      }
+      await _onCreate(db, newVersion);
+    }
+  }
 
-      _onCreate(db, newVersion);
+  // Deleting the database
+  static Future<void> deleteWholeDatabase() async {
+    String dbName = 'valjevo_tour_guide.db';
+    String path = join(await getDatabasesPath(), dbName);
+    if (_database != null) {
+      await _database!.close();
+      await deleteDatabase(path);
     }
   }
 

@@ -40,7 +40,7 @@
     "enlargedImage": "Uvećana slika ",
     "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste pauzirali.",
     "doubleTapToStopHearing": "Dodirnite dva puta da zaustavite slušanje.",
-    "starCount": "{numberOfStars, plural, =1{1 zvezdiva} other{{numberOfStars} zvezdice}}",
+    "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "description": "Opis",
     "closeDialog": "Zatvori dijalog",
     "hotelImage": "Slika hotela",
@@ -48,6 +48,7 @@
     "starRating": "Broj zvezdica",
     "restaurants": "Restorani",
     "restaurantName": "Naziv restorana: ",
+    "restaurantImage": "Slika restorana",
     "tapToView": "Dodirnite da biste otvorili stranicu: ",
     "distanceFromRestaurant": "Udaljenost od restorana: ",
     "distanceNotAvailable": "Nije moguće izračunati udaljenost od restorana.",
@@ -58,5 +59,7 @@
     "menu": "Meni",
     "getStarted": "Počni",
     "mapPage": "Mapa grada",
-    "website": "Veb-sajt"
+    "website": "Veb-sajt",
+    "menuItem": "Stavka menija: {item}",
+    "tapToOpen": "Dodirni da otvoriš {item}"
 }

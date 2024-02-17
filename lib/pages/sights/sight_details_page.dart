@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../text_to_speech/text_to_speech_config.dart';
-import '../localization/supported_languages.dart';
-import '../styles/common_styles.dart';
+import '../../localization/supported_languages.dart';
+import '../../navigation/cutom_app_bar.dart';
+import '../../styles/common_styles.dart';
+import '../../text_to_speech/text_to_speech_config.dart';
 
 class SightDetailsPage extends StatefulWidget {
   final String imagePath;
@@ -47,15 +48,9 @@ class SightDetailsPageState extends State<SightDetailsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: AppStyles.defaultAppBarTextStyle(
-              MediaQuery.of(context).textScaler),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        iconTheme: const IconThemeData(color: Colors.white),
+      appBar: customAppBar(
+        context,
+        widget.title,
       ),
       body: SingleChildScrollView(
         child: Column(

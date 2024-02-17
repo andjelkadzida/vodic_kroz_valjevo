@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
+import '../localization/supported_languages.dart';
 import '../localization/language.dart';
 
 class HomePage extends StatelessWidget {

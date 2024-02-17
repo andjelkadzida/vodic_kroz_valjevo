@@ -36,7 +36,7 @@ class SportsRepository {
           data['titles']['de'],
           data['titles']['sr'],
           data['titles']['sr_Cyrl'],
-          data['titles']['sr_Latn']
+          data['titles']['sr_Latn'],
         ]);
       }
       // Commit the batch

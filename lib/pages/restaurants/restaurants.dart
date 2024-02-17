@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../../database_config/database_helper.dart';
-import '../../../localization/supported_languages.dart';
-import '../../../maps_navigation/map_builder.dart';
-import '../../../styles/common_styles.dart';
+import '../../database_config/database_helper.dart';
+import '../../localization/supported_languages.dart';
+import '../../maps_navigation/map_builder.dart';
+import '../../navigation/cutom_app_bar.dart';
 import 'restaurant_details.dart';
 
 class Restaurants extends StatelessWidget {
@@ -16,19 +16,9 @@ class Restaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Semantics(
-          label: localization(context).restaurants,
-          child: Text(
-            localization(context).restaurants,
-            style: AppStyles.defaultAppBarTextStyle(
-                MediaQuery.of(context).textScaler),
-          ),
-        ),
-        excludeHeaderSemantics: true,
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        iconTheme: const IconThemeData(color: Colors.white),
+      appBar: customAppBar(
+        context,
+        localization(context).restaurants,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getRestaurantsFromDatabase(localization(context).localeName),
@@ -92,7 +82,6 @@ class Restaurants extends StatelessWidget {
       SELECT 
         restaurant_image_path, 
         restaurant_image_path2,
-        restaurant_image_path3,
         title_$languageCode AS title, 
         latitude, 
         longitude

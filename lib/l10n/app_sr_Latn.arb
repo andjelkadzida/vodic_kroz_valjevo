@@ -61,5 +61,6 @@
     "mapPage": "Mapa grada",
     "website": "Veb-sajt",
     "menuItem": "Stavka menija: {item}",
-    "tapToOpen": "Dodirni da otvoriš {item}"
+    "tapToOpen": "Dodirni da otvoriš {item}",
+    "tapForSightDetails": "Dvaput dodirnite za detalje o znamenitosti"
 }

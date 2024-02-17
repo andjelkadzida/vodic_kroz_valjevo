@@ -61,5 +61,6 @@
     "mapPage": "Мапа града",
     "website": "Веб-сајт",
     "menuItem": "Ставка менија: {item}",
-    "tapToOpen": "Додирни да отвориш {item}"
+    "tapToOpen": "Додирни да отвориш {item}",
+    "tapForSightDetails": "Двапут додирните за детаље о знаменитости"
 }

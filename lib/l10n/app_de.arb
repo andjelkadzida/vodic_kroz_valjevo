@@ -61,5 +61,6 @@
     "mapPage": "Stadtkarte",
     "website": "Webseite",
     "menuItem": "Menüpunkt: {item}",
-    "tapToOpen": "Tippen, um zu öffnen {item}"
+    "tapToOpen": "Tippen, um zu öffnen {item}",
+    "tapForSightDetails": "Doppeltippen, um Details zu den Sehenswürdigkeiten zu öffnen"
 }

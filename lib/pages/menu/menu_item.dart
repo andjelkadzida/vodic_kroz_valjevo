@@ -42,11 +42,7 @@ class MenuItem extends StatelessWidget {
                       label,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: Colors.teal,
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .fontSize,
-                            letterSpacing: 1.5,
+                            letterSpacing: 1,
                           ),
                       textAlign: TextAlign.center,
                     ),

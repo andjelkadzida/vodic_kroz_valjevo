@@ -4,7 +4,7 @@ import '../localization/language.dart';
 import '../localization/supported_languages.dart';
 import '../maps_navigation/map_builder.dart';
 import '../pages/home_page.dart';
-import 'menu_page.dart';
+import '../pages/menu/menu_page.dart';
 import 'navigation_helper.dart';
 
 class NavItem {

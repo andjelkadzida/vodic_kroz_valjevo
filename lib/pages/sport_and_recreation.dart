@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';

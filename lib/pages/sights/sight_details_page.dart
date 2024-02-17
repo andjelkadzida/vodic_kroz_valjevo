@@ -3,6 +3,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../../localization/supported_languages.dart';
+import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';
 import '../../text_to_speech/text_to_speech_config.dart';
 
@@ -25,6 +26,7 @@ class SightDetailsPage extends StatelessWidget {
         context,
         title,
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(

@@ -63,5 +63,6 @@
     "menuItem": "Menüpunkt: {item}",
     "tapToOpen": "Tippen, um zu öffnen {item}",
     "tapForSightDetails": "Doppeltippen, um Details zu den Sehenswürdigkeiten zu öffnen",
-    "imageOfSight": "Bild der Sehenswürdigkeit {name}"
+    "imageOfSight": "Bild der Sehenswürdigkeit {name}",
+    "tapToHearSightName": "Berühren, um den Namen der Sehenswürdigkeit zu hören"
 }

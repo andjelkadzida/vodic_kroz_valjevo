@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 import '../../database_config/database_helper.dart';
 import '../../localization/supported_languages.dart';
+import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';
+import '../../text_to_speech/text_to_speech_config.dart';
 import 'sight_details_page.dart';
 
 class Sights extends StatelessWidget {
@@ -16,8 +18,9 @@ class Sights extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(
         context,
-        localization(context).restaurants,
+        localization(context).sights,
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getSightsFromDatabase(localization(context).localeName),
         builder: (context, snapshot) {
@@ -69,10 +72,29 @@ class Sights extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  sightData['title'],
-                  style: Theme.of(context).textTheme.titleMedium,
-                  textAlign: TextAlign.center,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          sightData['title'],
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () =>
+                          TextToSpeechConfig.instance.speak(sightData['title']),
+                      tooltip: localization(context).tapToHearSightName,
+                      icon: Icon(
+                        Icons.volume_up,
+                        semanticLabel: localization(context).tapToHearSightName,
+                        applyTextScaling: true,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(

@@ -63,5 +63,6 @@
     "menuItem": "Ставка менија: {item}",
     "tapToOpen": "Додирни да отвориш {item}",
     "tapForSightDetails": "Двапут додирните за детаље о знаменитости",
-    "imageOfSight": "Слика знаменитости {name}"
+    "imageOfSight": "Слика знаменитости {name}",
+    "tapToHearSightName":"Додирните да бисте чули назив знаменитости"
 }

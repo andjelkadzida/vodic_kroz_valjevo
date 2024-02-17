@@ -4,7 +4,7 @@
     "homePage": "Почетна",
     "aboutCity": "О граду",
     "sights": "Знаменитости",
-    "sight": "Знаменитост:",
+    "sight": "Знаменитост: {name}",
     "sportRecreation": "Спорт и рекреација",
     "restaurantsAndHotels": "Ресторани и преноћиште",
     "hotels": "Хотели",
@@ -38,7 +38,7 @@
     "nameOfSight": "Назив знаменитости: ",
     "hearLandmarkName": "Чујте име знаменитости.",
     "enlargedImage": "Увећана слика ",
-    "tapToHearDetails": "Додирните да бисте чули детаље о знаменитости. Додирните два пута, да бисте паузирали.",
+    "tapToHearDetails": "Додирните да бисте чули детаље о знаменитости. Додирните два пута, да бисте зауставили.",
     "doubleTapToStopHearing": "Додирните два пута да зауставите слушање.",
     "starCount": "{numberOfStars, plural, =1{1 звездица} other{{numberOfStars} звездице}}",
     "description": "Опис",
@@ -62,5 +62,6 @@
     "website": "Веб-сајт",
     "menuItem": "Ставка менија: {item}",
     "tapToOpen": "Додирни да отвориш {item}",
-    "tapForSightDetails": "Двапут додирните за детаље о знаменитости"
+    "tapForSightDetails": "Двапут додирните за детаље о знаменитости",
+    "imageOfSight": "Слика знаменитости {name}"
 }

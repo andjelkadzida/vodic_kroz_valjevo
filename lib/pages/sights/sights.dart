@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // For setting preferred orientations
+import 'package:flutter/services.dart';
 import 'package:vodic_kroz_valjevo/maps_navigation/locator.dart';
 import '../../database_config/database_helper.dart';
 import '../../localization/supported_languages.dart';
@@ -116,9 +116,7 @@ class Sights extends StatelessWidget {
   void _showSightDetails(BuildContext context, Map<String, dynamic> sightData) {
     Navigator.of(context).push(
       CupertinoPageRoute(
-        builder: (context) => SightDetailsPage(
-          sightData: sightData,
-        ),
+        builder: (context) => SightDetailsPage(sightData: sightData),
       ),
     );
   }

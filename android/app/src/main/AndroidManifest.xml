@@ -16,7 +16,9 @@
     <!--Vibration-->
     <uses-permission android:name="android.permission.VIBRATE" />
     <application
-        android:label="vodic_kroz_valjevo"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
+        android:label="Vodic kroz Valjevo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true">

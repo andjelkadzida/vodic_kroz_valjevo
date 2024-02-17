@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:open_store/open_store.dart';
 
 class MapScreen {
-  // Store current position
-  Position? currentPosition;
-
   MapScreen._privateConstructor();
   static final MapScreen _instance = MapScreen._privateConstructor();
   factory MapScreen() {

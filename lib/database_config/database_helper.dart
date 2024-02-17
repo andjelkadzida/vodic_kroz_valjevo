@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -27,7 +26,7 @@ class DatabaseHelper {
     return _database!;
   }
 
-  static void _onCreate(Database db, int version) async {
+  static Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Sights (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,21 +59,21 @@ class DatabaseHelper {
         ''');
 
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS Hotels (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hotel_image_path TEXT,
-            hotel_image_path2 TEXT,
-            latitude REAL NOT NULL,
-            longitude REAL NOT NULL,
-            title_en TEXT,
-            title_de TEXT,
-            title_sr TEXT,
-            title_sr_Cyrl TEXT,
-            title_sr_Latn TEXT,
-            website TEXT,
-            noStars INT
-            )
-        ''');
+        CREATE TABLE IF NOT EXISTS Hotels (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          hotel_image_path TEXT,
+          hotel_image_path2 TEXT,
+          latitude REAL NOT NULL,
+          longitude REAL NOT NULL,
+          title_en TEXT,
+          title_de TEXT,
+          title_sr TEXT,
+          title_sr_Cyrl TEXT,
+          title_sr_Latn TEXT,
+          website TEXT,
+          noStars INT
+        )
+    ''');
 
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Restaurants (
@@ -92,32 +91,32 @@ class DatabaseHelper {
         ''');
   }
 
-  static void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+  static Future<void> _onUpgrade(
+      Database db, int oldVersion, int newVersion) async {
     if (oldVersion < newVersion) {
-      await db.execute('''
-          DROP TABLE IF EXISTS Sights;
-          DROP TABLE IF EXISTS SportsAndRecreation;
-          DROP TABLE IF EXISTS Hotels;
-          DROP TABLE IF EXISTS Restaurants;
-        ''');
-      _onCreate(db, newVersion);
+      await db.delete('Sights');
+      await db.delete('SportsAndRecreation');
+      await db.delete('Hotels');
+      await db.delete('Restaurants');
+
+      await _onCreate(db, newVersion);
     }
   }
 
-  static void _onDowngrade(
-      Database db, int currentVersion, int newVersion) async {
-    File dbFile = File(db.path);
-
-    currentVersion = await db.getVersion();
-    if (currentVersion > newVersion) {
+  static Future<void> _onDowngrade(
+      Database db, int oldVersion, int newVersion) async {
+    if (oldVersion > newVersion) {
       await db.close();
-      if (await dbFile.exists()) {
-        await dbFile.delete();
-      }
-
-      _onCreate(db, newVersion);
+      await deleteDatabase('valjevo_tour_guide.db');
+      print('Database deleted');
+      await _onCreate(db, newVersion);
+      print('Database recreated');
     }
   }
+
+  // Deleting the database
+  static Future<void> deleteDatabase(String path) =>
+      databaseFactory.deleteDatabase(path);
 
   // Checking database connection
   static Widget buildFutureState<T>({

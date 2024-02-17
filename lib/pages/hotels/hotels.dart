@@ -80,12 +80,13 @@ class Hotels extends StatelessWidget {
       SELECT 
         hotel_image_path, 
         hotel_image_path2,
-        title_$languageCode AS title, 
+        title_$languageCode AS title,
+        latitude,
+        longitude,
         website,
-        latitude, 
-        longitude, 
-        noStars 
-      FROM Hotels
+        noStars
+      FROM 
+        Hotels
     ''');
     return data;
   }

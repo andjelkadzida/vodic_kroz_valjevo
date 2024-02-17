@@ -16,8 +16,13 @@ class DatabaseHelper {
     String dbName = 'valjevo_tour_guide.db';
     String path = join(await getDatabasesPath(), dbName);
 
+    // Checking if the database is already open, if not, open it
+    if (_database != null) {
+      await _database!.close();
+      _database = null;
+    }
     _database = await openDatabase(path,
-        version: 1,
+        version: 9,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -94,11 +99,10 @@ class DatabaseHelper {
   static Future<void> _onUpgrade(
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion < newVersion) {
-      await db.delete('Sights');
-      await db.delete('SportsAndRecreation');
-      await db.delete('Hotels');
-      await db.delete('Restaurants');
-
+      await db.execute('DROP TABLE IF EXISTS Sights');
+      await db.execute('DROP TABLE IF EXISTS SportsAndRecreation');
+      await db.execute('DROP TABLE IF EXISTS Hotels');
+      await db.execute('DROP TABLE IF EXISTS Restaurants');
       await _onCreate(db, newVersion);
     }
   }
@@ -106,17 +110,21 @@ class DatabaseHelper {
   static Future<void> _onDowngrade(
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion > newVersion) {
-      await db.close();
-      await deleteDatabase('valjevo_tour_guide.db');
-      print('Database deleted');
+      await deleteWholeDatabase();
+
       await _onCreate(db, newVersion);
-      print('Database recreated');
     }
   }
 
   // Deleting the database
-  static Future<void> deleteDatabase(String path) =>
-      databaseFactory.deleteDatabase(path);
+  static Future<void> deleteWholeDatabase() async {
+    String dbName = 'valjevo_tour_guide.db';
+    String path = join(await getDatabasesPath(), dbName);
+    if (_database != null) {
+      await _database!.close();
+      await deleteDatabase(path);
+    }
+  }
 
   // Checking database connection
   static Widget buildFutureState<T>({

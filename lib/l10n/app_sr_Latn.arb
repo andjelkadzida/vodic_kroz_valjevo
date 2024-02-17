@@ -59,5 +59,7 @@
     "menu": "Meni",
     "getStarted": "Počni",
     "mapPage": "Mapa grada",
-    "website": "Veb-sajt"
+    "website": "Veb-sajt",
+    "menuItem": "Stavka menija: {item}",
+    "tapToOpen": "Dodirni da otvoriš {item}"
 }

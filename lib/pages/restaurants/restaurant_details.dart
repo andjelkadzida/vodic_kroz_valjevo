@@ -27,7 +27,6 @@ class RestaurantDetailsPage extends StatelessWidget {
     List<String> images = [
       restaurantData['restaurant_image_path'],
       restaurantData['restaurant_image_path2'],
-      restaurantData['restaurant_image_path3'],
     ];
 
     return Scaffold(
@@ -46,6 +45,7 @@ class RestaurantDetailsPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  SizedBox(height: padding),
                   CarouselSlider.builder(
                     itemCount: images.length,
                     itemBuilder: (BuildContext context, int itemIndex,
@@ -61,6 +61,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                       enlargeCenterPage: true,
                       viewportFraction: 0.9,
                       aspectRatio: 2.0,
+                      autoPlayAnimationDuration: const Duration(seconds: 2),
                     ),
                   ),
                   Padding(

@@ -59,5 +59,7 @@
     "menu": "Menü",
     "getStarted": "Loslegen",
     "mapPage": "Stadtkarte",
-    "website": "Webseite"
+    "website": "Webseite",
+    "menuItem": "Menüpunkt: {item}",
+    "tapToOpen": "Tippen, um zu öffnen {item}"
 }

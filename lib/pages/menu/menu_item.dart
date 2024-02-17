@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 class MenuItem extends StatelessWidget {
   final String label;
@@ -20,7 +21,10 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: label,
+      label: localization(context).menuItem(label),
+      button: true,
+      enabled: true,
+      onTapHint: localization(context).tapToOpen(label),
       child: Card(
         elevation: 4,
         margin: const EdgeInsets.all(4),

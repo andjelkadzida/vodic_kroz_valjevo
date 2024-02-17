@@ -82,7 +82,6 @@ class Restaurants extends StatelessWidget {
       SELECT 
         restaurant_image_path, 
         restaurant_image_path2,
-        restaurant_image_path3,
         title_$languageCode AS title, 
         latitude, 
         longitude

@@ -59,5 +59,7 @@
     "menu": "Мени",
     "getStarted": "Почни",
     "mapPage": "Мапа града",
-    "website": "Веб-сајт"
+    "website": "Веб-сајт",
+    "menuItem": "Ставка менија: {item}",
+    "tapToOpen": "Додирни да отвориш {item}"
 }

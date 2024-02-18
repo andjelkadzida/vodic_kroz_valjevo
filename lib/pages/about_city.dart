@@ -29,38 +29,56 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildAboutCityContent(
       BuildContext context, List<Map<String, dynamic>> data) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: MediaQuery.of(context).size.width > 600 ? 20.0 : 10.0,
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.symmetric(
+            vertical: 10.0,
+            horizontal: MediaQuery.of(context).size.width > 600 ? 20.0 : 10.0,
+          ),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Image.asset('images/vaPogled.jpg', fit: BoxFit.cover),
+                const SizedBox(height: 20.0),
+                _buildResponsiveDataTable(context),
+                const SizedBox(height: 20.0),
+                ...data.map((legend) => _buildExpansionTile(context, legend)),
+              ],
+            ),
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset('images/grbValjeva.png', fit: BoxFit.cover),
-            const SizedBox(height: 20.0),
-            _buildResponsiveDataTable(context),
-            const SizedBox(height: 20.0),
-            ...data.map((legend) => _buildExpansionTile(context, legend)),
-          ],
-        ),
-      ),
+      ],
     );
   }
 
   Widget _buildResponsiveDataTable(BuildContext context) {
-    // Wrap the DataTable in a SingleChildScrollView for horizontal scrolling
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
-        columns: const [
-          DataColumn(label: Text('Indicator')),
-          DataColumn(label: Text('Value')),
+        columns: [
+          DataColumn(
+              label: Icon(
+                Icons.people,
+                semanticLabel: 'Indicator',
+                size: MediaQuery.of(context).size.width * 0.07,
+              ),
+              tooltip: 'Indicator'),
+          DataColumn(
+              label: Icon(
+                Icons.attribution,
+                semanticLabel: localization(context).value,
+                size: MediaQuery.of(context).size.width * 0.07,
+              ),
+              tooltip: localization(context).value),
         ],
         rows: const [
           DataRow(cells: [
             DataCell(Text('Total Population')),
+            DataCell(Text('1.2 million')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('Povrsina')),
             DataCell(Text('1.2 million')),
           ]),
         ],
@@ -70,14 +88,19 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildExpansionTile(
       BuildContext context, Map<String, dynamic> legend) {
-    return ExpansionTile(
-      title:
-          Text(legend['title'], style: Theme.of(context).textTheme.titleMedium),
-      children: [
-        ListTile(
-          title: Text(legend['description'],
-              style: Theme.of(context).textTheme.bodyMedium),
-          trailing: Semantics(
+    return Card(
+      child: ExpansionTile(
+        title: Text(
+          legend['title'],
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        children: [
+          ListTile(
+            title: Text(
+              legend['description'],
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            trailing: Semantics(
               label: 'Play explanation about ${legend['title']}',
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
@@ -89,9 +112,11 @@ class AboutCity extends StatelessWidget {
                   },
                   tooltip: localization(context).tapToHearLegend,
                 ),
-              )),
-        ),
-      ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

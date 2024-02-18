@@ -65,5 +65,6 @@
     "tapToOpen": "Tap to open {item}",
     "tapForSightDetails": "Double tap to open sight details",
     "imageOfSight": "Image of sight {name}",
-    "tapToHearSightName": "Touch to hear the name of the sight"
+    "tapToHearSightName": "Touch to hear the name of the sight",
+    "value": "Value"
 }

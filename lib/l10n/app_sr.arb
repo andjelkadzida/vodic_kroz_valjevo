@@ -65,5 +65,6 @@
     "tapToOpen": "Dodirni da otvoriš {item}",
     "tapForSightDetails": "Dvaput dodirnite za detalje o znamenitosti",
     "imageOfSight": "Slika znamenitosti {name}",
-    "tapToHearSightName": "Dodirnite da biste čuli naziv znamenitosti"
+    "tapToHearSightName": "Dodirnite da biste čuli naziv znamenitosti",
+    "value": "Vrednost"
 }

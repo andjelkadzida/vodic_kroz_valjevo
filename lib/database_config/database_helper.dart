@@ -22,7 +22,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 2,
+        version: 5,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -95,6 +95,20 @@ class DatabaseHelper {
             title_sr_Latn TEXT
             )
         ''');
+
+    await db.execute('''CREATE TABLE IF NOT EXISTS AboutCity (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        legend_title_en TEXT,
+        legend_title_de TEXT,
+        legend_title_sr TEXT,
+        legend_title_sr_Cyrl TEXT,
+        legend_title_sr_Latn TEXT,
+        legend_description_en TEXT,
+        legend_description_de TEXT,
+        legend_description_sr TEXT,
+        legend_description_sr_Cyrl TEXT,
+        legend_description_sr_Latn TEXT
+      )''');
   }
 
   static Future<void> _onUpgrade(
@@ -104,6 +118,7 @@ class DatabaseHelper {
       await db.execute('DROP TABLE IF EXISTS SportsAndRecreation');
       await db.execute('DROP TABLE IF EXISTS Hotels');
       await db.execute('DROP TABLE IF EXISTS Restaurants');
+      await db.execute('DROP TABLE IF EXISTS AboutCity');
       await _onCreate(db, newVersion);
     }
   }

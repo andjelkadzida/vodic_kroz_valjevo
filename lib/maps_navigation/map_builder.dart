@@ -25,6 +25,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
     options: const MapOptions(
       initialCenter: LatLng(44.267, 19.886),
       initialZoom: 13.0,
+      minZoom: 10.0,
+      maxZoom: 18.0,
     ),
     children: [
       TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),

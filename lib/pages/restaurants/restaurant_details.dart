@@ -14,13 +14,7 @@ class RestaurantDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final Size screenSize = MediaQuery.of(context).size;
-    final double padding = screenSize.width * 0.04;
-
-    final String title = restaurantData['title'];
-    double latitude = restaurantData['latitude'];
-    double longitude = restaurantData['longitude'];
+    final double padding = MediaQuery.of(context).size.width * 0.04;
 
     MapScreen mapScreen = MapScreen();
 
@@ -32,7 +26,7 @@ class RestaurantDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(
         context,
-        title,
+        restaurantData['title'],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: SingleChildScrollView(
@@ -52,7 +46,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                         int pageViewIndex) {
                       return Semantics(
                           label:
-                              '${localization(context).restaurantImage}"$title"',
+                              '${localization(context).restaurantImage}"${restaurantData['title']}"',
                           child: Image.asset(images[itemIndex],
                               fit: BoxFit.cover));
                     },
@@ -70,22 +64,25 @@ class RestaurantDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          restaurantData['title'],
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
-                        SizedBox(height: screenSize.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: theme.primaryColor,
+                              backgroundColor: Theme.of(context).primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: screenSize.height * 0.015),
+                                  vertical: MediaQuery.of(context).size.height *
+                                      0.015),
                             ),
                             child: Text(
                               localization(context).startNavigation,
@@ -96,7 +93,8 @@ class RestaurantDetailsPage extends StatelessWidget {
                             ),
                             onPressed: () {
                               mapScreen.navigateToDestination(
-                                  latitude, longitude);
+                                  restaurantData['latitude'],
+                                  restaurantData['longitude']);
                             },
                           ),
                         ),

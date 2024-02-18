@@ -19,12 +19,10 @@ class SightDetailsPage extends StatelessWidget {
       sightData['sight_image_path2'],
     ];
 
-    String title = sightData['title'];
-
     return Scaffold(
       appBar: customAppBar(
         context,
-        title,
+        sightData['title'],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: LayoutBuilder(
@@ -36,7 +34,7 @@ class SightDetailsPage extends StatelessWidget {
               children: [
                 Semantics(
                   image: true,
-                  label: localization(context).imageOfSight(title),
+                  label: localization(context).imageOfSight(sightData['title']),
                   child: SizedBox(
                     height: constraints.maxWidth > 600 ? 400 : 200,
                     child: PhotoViewGallery.builder(

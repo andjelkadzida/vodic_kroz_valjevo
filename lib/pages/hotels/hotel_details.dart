@@ -15,14 +15,9 @@ class HotelDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final Size screenSize = MediaQuery.of(context).size;
-    final double padding = screenSize.width * 0.04;
+    final double padding = MediaQuery.of(context).size.width * 0.04;
 
-    final String title = hotelData['title'];
     final int noStars = hotelData['noStars'];
-    double latitude = hotelData['latitude'];
-    double longitude = hotelData['longitude'];
 
     MapScreen mapScreen = MapScreen();
 
@@ -34,7 +29,7 @@ class HotelDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(
         context,
-        title,
+        hotelData['title'],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: SingleChildScrollView(
@@ -53,7 +48,8 @@ class HotelDetailsPage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int itemIndex,
                         int pageViewIndex) {
                       return Semantics(
-                          label: '${localization(context).hotelImage}"$title"',
+                          label:
+                              '${localization(context).hotelImage}"${hotelData['title']}',
                           child: Image.asset(images[itemIndex],
                               fit: BoxFit.cover));
                     },
@@ -71,12 +67,14 @@ class HotelDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          hotelData['title'],
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
-                        SizedBox(height: screenSize.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -87,7 +85,7 @@ class HotelDetailsPage extends StatelessWidget {
                               },
                               child: Text(
                                 localization(context).website,
-                                style: theme.textTheme.bodyLarge,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
                             Semantics(
@@ -97,28 +95,32 @@ class HotelDetailsPage extends StatelessWidget {
                                   Icon(
                                     Icons.star,
                                     color: Colors.amber,
-                                    size: screenSize.width * 0.05,
+                                    size: MediaQuery.of(context).size.width *
+                                        0.05,
                                   ),
                                   Text(
                                     '$noStars',
-                                    style: theme.textTheme.bodyLarge,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: screenSize.height * 0.03),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: theme.primaryColor,
+                              backgroundColor: Theme.of(context).primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: screenSize.height * 0.015),
+                                  vertical: MediaQuery.of(context).size.height *
+                                      0.015),
                             ),
                             child: Text(
                               localization(context).startNavigation,
@@ -129,7 +131,8 @@ class HotelDetailsPage extends StatelessWidget {
                             ),
                             onPressed: () {
                               mapScreen.navigateToDestination(
-                                  latitude, longitude);
+                                  hotelData['latitude'],
+                                  hotelData['longitude']);
                             },
                           ),
                         ),

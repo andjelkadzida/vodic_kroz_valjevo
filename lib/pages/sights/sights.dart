@@ -119,7 +119,7 @@ class Sights extends StatelessWidget {
                     return PhotoViewGalleryPageOptions(
                       imageProvider: AssetImage(images[index]),
                       maxScale: PhotoViewComputedScale.contained * 3,
-                      initialScale: PhotoViewComputedScale.contained * 0.8,
+                      initialScale: PhotoViewComputedScale.covered * 0.8,
                       filterQuality: FilterQuality.high,
                       heroAttributes:
                           PhotoViewHeroAttributes(tag: images[index]),

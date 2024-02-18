@@ -132,7 +132,7 @@ class SportsAndRecreation extends StatelessWidget {
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT
-        sports_image_path,
+        sport_image_path,
         title_$languageCode AS title
       FROM SportsAndRecreation
     ''');

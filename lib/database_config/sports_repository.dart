@@ -22,7 +22,7 @@ class SportsRepository {
         // Add insert operation to the batch
         batch.rawInsert('''
           INSERT INTO SportsAndRecreation(
-            sports_image_path,
+            sport_image_path,
             title_en,
             title_de,
             title_sr,
@@ -31,7 +31,7 @@ class SportsRepository {
           )
           VALUES(?, ?, ?, ?, ?, ?)
         ''', [
-          data['sports_image_path'],
+          data['sport_image_path'],
           data['titles']['en'],
           data['titles']['de'],
           data['titles']['sr'],
@@ -47,7 +47,7 @@ class SportsRepository {
   Future<void> sportsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
       {
-        'sports_image_path': 'images/muzejLogo.png',
+        'sport_image_path': 'images/muzejLogo.png',
         'titles': {
           'en': 'Park na Jadru (Park Vide Jocić)',
           'de': 'Titel auf Deutsch',
@@ -57,7 +57,7 @@ class SportsRepository {
         },
       },
       {
-        'sports_image_path': 'images/kulaNenadovica.jpg',
+        'sport_image_path': 'images/kulaNenadovica.jpg',
         'titles': {
           'en': 'Nenadovic\'s tower',
           'de': 'Nenadovics Turm',

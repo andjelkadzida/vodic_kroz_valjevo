@@ -15,8 +15,8 @@ class SightDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> images = [
-      sightData['sights_image_path'],
-      // sightData['sight_image_path2'],
+      sightData['sight_image_path'],
+      sightData['sight_image_path2'],
     ];
 
     String title = sightData['title'];
@@ -45,6 +45,7 @@ class SightDetailsPage extends StatelessWidget {
                         return PhotoViewGalleryPageOptions(
                           imageProvider: AssetImage(images[index]),
                           initialScale: PhotoViewComputedScale.contained,
+                          maxScale: PhotoViewComputedScale.contained * 10,
                           heroAttributes:
                               PhotoViewHeroAttributes(tag: images[index]),
                           filterQuality: FilterQuality.high,

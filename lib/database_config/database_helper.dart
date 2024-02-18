@@ -22,7 +22,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 9,
+        version: 2,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -35,7 +35,8 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS Sights (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            sights_image_path TEXT,
+            sight_image_path TEXT,
+            sight_image_path2 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -54,7 +55,7 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS SportsAndRecreation (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            sports_image_path TEXT,
+            sport_image_path TEXT,
             title_en TEXT,
             title_de TEXT,
             title_sr TEXT,

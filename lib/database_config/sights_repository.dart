@@ -21,7 +21,8 @@ class SightsRepository {
         // Add insert operation to the batch
         batch.rawInsert('''
           INSERT INTO Sights(
-            sights_image_path, 
+            sight_image_path, 
+            sight_image_path2,
             latitude,
             longitude,
             title_en, 
@@ -35,9 +36,10 @@ class SightsRepository {
             description_sr_Cyrl, 
             description_sr_Latn
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
-          data['sights_image_path'],
+          data['sight_image_path'],
+          data['sight_image_path2'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -60,7 +62,8 @@ class SightsRepository {
   Future<void> sightsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
       {
-        'sights_image_path': 'images/muzejLogo.png',
+        'sight_image_path': 'images/muzejLogo.png',
+        'sight_image_path2': 'images/muzejLogo.png',
         'latitude': 44.26925398584459,
         'longitude': 19.885692396117847,
         'titles': {
@@ -79,7 +82,8 @@ class SightsRepository {
         },
       },
       {
-        'sights_image_path': 'images/kulaNenadovica.jpg',
+        'sight_image_path': 'images/kulaNenadovica.jpg',
+        'sight_image_path2': 'images/kulaNenadovica.jpg',
         'latitude': 44.27809742651686,
         'longitude': 19.88519586174966,
         'titles': {

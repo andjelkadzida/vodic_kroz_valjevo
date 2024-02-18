@@ -135,26 +135,33 @@ class AboutCity extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
-          GestureDetector(
-            onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
-            child: IconButton(
-              icon: Icon(Icons.volume_up,
-                  size: MediaQuery.of(context).size.width * 0.07),
-              onPressed: () {
-                TextToSpeechConfig.instance.speak(aboutCityData['history']);
-              },
-              tooltip: localization(context).tapToHearHistory,
-            ),
-          ),
         ],
       ),
       children: [
-        Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
-          child: Text(
-            aboutCityData['history'],
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+                child: Text(
+                  aboutCityData['history'],
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
+              child: IconButton(
+                icon: Icon(Icons.volume_up,
+                    size: MediaQuery.of(context).size.width * 0.07),
+                onPressed: () {
+                  TextToSpeechConfig.instance.speak(aboutCityData['history']);
+                },
+                tooltip: localization(context).tapToHearHistory,
+              ),
+            ),
+          ],
         ),
       ],
     );

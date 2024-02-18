@@ -22,7 +22,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 5,
+        version: 9,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -107,7 +107,12 @@ class DatabaseHelper {
         legend_description_de TEXT,
         legend_description_sr TEXT,
         legend_description_sr_Cyrl TEXT,
-        legend_description_sr_Latn TEXT
+        legend_description_sr_Latn TEXT,
+        history_en TEXT,
+        history_de TEXT,
+        history_sr TEXT,
+        history_sr_Cyrl TEXT,
+        history_sr_Latn TEXT
       )''');
   }
 

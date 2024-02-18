@@ -14,8 +14,8 @@ class AboutCityRepository {
     return aboutCity.isNotEmpty;
   }
 
-  Future<void> bulkInsertAboutCityData(
-      List<Map<String, dynamic>> aboutCityData) async {
+  Future<void> bulkInsertAboutCityData(List<Map<String, dynamic>> aboutCityData,
+      Map<String, dynamic> history) async {
     // Begin the transaction
     await _databaseInstance.transaction((txn) async {
       var batch = txn.batch();
@@ -51,11 +51,11 @@ class AboutCityRepository {
           data['legend_description']['sr'],
           data['legend_description']['sr_Cyrl'],
           data['legend_description']['sr_Latn'],
-          data['history']['en'],
-          data['history']['de'],
-          data['history']['sr'],
-          data['history']['sr_Cyrl'],
-          data['history']['sr_Latn'],
+          history['en'],
+          history['de'],
+          history['sr'],
+          history['sr_Cyrl'],
+          history['sr_Latn'],
         ]);
       }
       // Commit the batch
@@ -80,13 +80,6 @@ class AboutCityRepository {
           'sr_Cyrl': 'Опис 1',
           'sr_Latn': 'Opis 1'
         },
-        'history': {
-          'en': 'History 1',
-          'de': 'Geschichte 1',
-          'sr': 'Istorija 1',
-          'sr_Cyrl': 'Историја 1',
-          'sr_Latn': 'Istorija 1'
-        },
       },
       {
         'legend_title': {
@@ -102,13 +95,6 @@ class AboutCityRepository {
           'sr': 'Opis 2',
           'sr_Cyrl': 'Опис 2',
           'sr_Latn': 'Opis 2'
-        },
-        'history': {
-          'en': 'History 2',
-          'de': 'Geschichte 2',
-          'sr': 'Istorija 2',
-          'sr_Cyrl': 'Историја 2',
-          'sr_Latn': 'Istorija 2'
         },
       },
       {
@@ -126,16 +112,17 @@ class AboutCityRepository {
           'sr_Cyrl': 'Опис 3',
           'sr_Latn': 'Opis 3'
         },
-        'history': {
-          'en': 'History 3',
-          'de': 'Geschichte 3',
-          'sr': 'Istorija 3',
-          'sr_Cyrl': 'Историја 3',
-          'sr_Latn': 'Istorija 3'
-        },
       },
     ];
 
-    await bulkInsertAboutCityData(aboutCityData);
+    Map<String, dynamic> history = {
+      'en': 'History 1',
+      'de': 'Geschichte 1',
+      'sr': 'Istorija 1',
+      'sr_Cyrl': 'Историја 1',
+      'sr_Latn': 'Istorija 1'
+    };
+
+    await bulkInsertAboutCityData(aboutCityData, history);
   }
 }

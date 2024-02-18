@@ -29,6 +29,8 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildAboutCityContent(
       BuildContext context, List<Map<String, dynamic>> data) {
+    precacheImage(const AssetImage('images/vaPogled.jpg'), context);
+
     return CustomScrollView(
       slivers: [
         SliverPadding(
@@ -43,7 +45,7 @@ class AboutCity extends StatelessWidget {
                 const SizedBox(height: 20.0),
                 _buildResponsiveDataTable(context),
                 const SizedBox(height: 20.0),
-                _buildHistoryCard(context),
+                _buildHistoryCard(context, data.first),
                 ...data.map((legend) => _buildExpansionTile(context, legend)),
               ],
             ),

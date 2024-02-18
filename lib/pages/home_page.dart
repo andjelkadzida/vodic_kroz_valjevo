@@ -8,8 +8,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
@@ -22,7 +20,8 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(mediaQueryData.size.width * 0.05),
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -30,7 +29,7 @@ class HomePage extends StatelessWidget {
                       'Explore.\nTravel.\nInspire.',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: mediaQueryData.size.width * 0.08,
+                        fontSize: MediaQuery.of(context).size.width * 0.08,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
@@ -41,10 +40,10 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                mediaQueryData.size.width * 0.05,
+                MediaQuery.of(context).size.width * 0.05,
                 0,
-                mediaQueryData.size.width * 0.05,
-                mediaQueryData.size.height * 0.02,
+                MediaQuery.of(context).size.width * 0.05,
+                MediaQuery.of(context).size.height * 0.02,
               ),
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -62,8 +61,8 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: EdgeInsets.symmetric(
-                        horizontal: mediaQueryData.size.width * 0.1,
-                        vertical: mediaQueryData.size.height * 0.02,
+                        horizontal: MediaQuery.of(context).size.width * 0.1,
+                        vertical: MediaQuery.of(context).size.height * 0.02,
                       ),
                     ),
                     child: Text(localization(context).getStarted),

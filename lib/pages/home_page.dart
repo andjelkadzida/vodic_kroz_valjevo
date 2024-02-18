@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Semantics(
                   button: true,
-                  label: 'Get Started Button',
+                  label: localization(context).getStarted,
                   child: ElevatedButton(
                     onPressed: () {
                       showLanguageMenuIfNeeded(context);

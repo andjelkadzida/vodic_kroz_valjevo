@@ -15,7 +15,6 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double gridPadding = 8;
     double spacing = 8;
     int crossAxisCount = 2;
     var lottieAsset = 'animations/menu_item.json';
@@ -24,7 +23,7 @@ class MenuPage extends StatelessWidget {
       appBar: customAppBar(context, localization(context).menu),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: GridView.count(
-        padding: EdgeInsets.all(gridPadding),
+        padding: const EdgeInsets.all(8),
         crossAxisCount: crossAxisCount,
         childAspectRatio: 1,
         crossAxisSpacing: spacing,

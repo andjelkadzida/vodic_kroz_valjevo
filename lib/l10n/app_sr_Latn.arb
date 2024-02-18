@@ -4,7 +4,7 @@
     "homePage": "Početna",
     "aboutCity": "O gradu",
     "sights": "Znamenitosti",
-    "sight": "Znamenitost:",
+    "sight": "Znamenitost: {name}",
     "sportRecreation": "Sport i rekreacija",
     "restaurantsAndHotels": "Restorani i prenoćište",
     "hotels": "Hoteli",
@@ -38,7 +38,7 @@
     "nameOfSight": "Naziv znamenitosti: ",
     "hearLandmarkName": "Čujte ime znamenitosti.",
     "enlargedImage": "Uvećana slika ",
-    "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste pauzirali.",
+    "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste zaustavili.",
     "doubleTapToStopHearing": "Dodirnite dva puta da zaustavite slušanje.",
     "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "description": "Opis",
@@ -61,5 +61,8 @@
     "mapPage": "Mapa grada",
     "website": "Veb-sajt",
     "menuItem": "Stavka menija: {item}",
-    "tapToOpen": "Dodirni da otvoriš {item}"
+    "tapToOpen": "Dodirni da otvoriš {item}",
+    "tapForSightDetails": "Dvaput dodirnite za detalje o znamenitosti",
+    "imageOfSight": "Slika znamenitosti {name}",
+    "tapToHearSightName": "Dodirnite da biste čuli naziv znamenitosti"
 }

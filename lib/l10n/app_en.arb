@@ -4,7 +4,7 @@
     "homePage": "Home",
     "aboutCity": "About city",
     "sights": "Sights",
-    "sight": "Sight:",
+    "sight": "Sight: {name}",
     "sportRecreation": "Sport & recreation",
     "restaurantsAndHotels": "Hotels & restaurants",
     "hotels": "Hotels",
@@ -38,7 +38,7 @@
     "nameOfSight": "Landmark name:",
     "hearLandmarkName": "Listen to the name of the landmark.",
     "enlargedImage": "Enlarged image of ",
-    "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to pause.",
+    "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to stop.",
     "doubleTapToStopHearing": "Double tap to stop hearing.",
     "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
     "description": "Description",
@@ -61,5 +61,8 @@
     "mapPage": "City map",
     "website": "Website",
     "menuItem": "Menu Item: {item}",
-    "tapToOpen": "Tap to open {item}"
+    "tapToOpen": "Tap to open {item}",
+    "tapForSightDetails": "Double tap to open sight details",
+    "imageOfSight": "Image of sight {name}",
+    "tapToHearSightName": "Touch to hear the name of the sight"
 }

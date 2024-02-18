@@ -40,6 +40,7 @@
     "enlargedImage": "Uvećana slika ",
     "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste zaustavili.",
     "tapToHearLegend": "Dodirnite da biste čuli legendu o imenu grada. Dodirnite dva puta, da biste zaustavili.",
+    "tapToHearHistory": "Dodirnite da čujete istoriju grada. Dodirnite dva puta, da biste zaustavili.",
     "doubleTapToStopHearing": "Dodirnite dva puta da zaustavite slušanje.",
     "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "description": "Opis",  
@@ -66,5 +67,6 @@
     "tapForSightDetails": "Dvaput dodirnite za detalje o znamenitosti",
     "imageOfSight": "Slika znamenitosti {name}",
     "tapToHearSightName": "Dodirnite da biste čuli naziv znamenitosti",
-    "value": "Vrednost"
+    "value": "Vrednost",
+    "historyOfTheCity": "Istorija grada"
 }

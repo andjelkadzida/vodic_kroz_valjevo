@@ -32,9 +32,14 @@ class AboutCityRepository {
           legend_description_de,
           legend_description_sr,
           legend_description_sr_Cyrl,
-          legend_description_sr_Latn
+          legend_description_sr_Latn,
+          history_en,
+          history_de,
+          history_sr,
+          history_sr_Cyrl,
+          history_sr_Latn
         )
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ''', [
           data['legend_title']['en'],
           data['legend_title']['de'],
@@ -45,7 +50,12 @@ class AboutCityRepository {
           data['legend_description']['de'],
           data['legend_description']['sr'],
           data['legend_description']['sr_Cyrl'],
-          data['legend_description']['sr_Latn']
+          data['legend_description']['sr_Latn'],
+          data['history']['en'],
+          data['history']['de'],
+          data['history']['sr'],
+          data['history']['sr_Cyrl'],
+          data['history']['sr_Latn'],
         ]);
       }
       // Commit the batch
@@ -70,6 +80,13 @@ class AboutCityRepository {
           'sr_Cyrl': 'Опис 1',
           'sr_Latn': 'Opis 1'
         },
+        'history': {
+          'en': 'History 1',
+          'de': 'Geschichte 1',
+          'sr': 'Istorija 1',
+          'sr_Cyrl': 'Историја 1',
+          'sr_Latn': 'Istorija 1'
+        },
       },
       {
         'legend_title': {
@@ -86,6 +103,13 @@ class AboutCityRepository {
           'sr_Cyrl': 'Опис 2',
           'sr_Latn': 'Opis 2'
         },
+        'history': {
+          'en': 'History 2',
+          'de': 'Geschichte 2',
+          'sr': 'Istorija 2',
+          'sr_Cyrl': 'Историја 2',
+          'sr_Latn': 'Istorija 2'
+        },
       },
       {
         'legend_title': {
@@ -101,6 +125,13 @@ class AboutCityRepository {
           'sr': 'Opis 3',
           'sr_Cyrl': 'Опис 3',
           'sr_Latn': 'Opis 3'
+        },
+        'history': {
+          'en': 'History 3',
+          'de': 'Geschichte 3',
+          'sr': 'Istorija 3',
+          'sr_Cyrl': 'Историја 3',
+          'sr_Latn': 'Istorija 3'
         },
       },
     ];

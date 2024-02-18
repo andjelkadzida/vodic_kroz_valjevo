@@ -43,6 +43,7 @@ class AboutCity extends StatelessWidget {
                 const SizedBox(height: 20.0),
                 _buildResponsiveDataTable(context),
                 const SizedBox(height: 20.0),
+                _buildHistoryCard(context),
                 ...data.map((legend) => _buildExpansionTile(context, legend)),
               ],
             ),
@@ -87,28 +88,29 @@ class AboutCity extends StatelessWidget {
   }
 
   Widget _buildExpansionTile(
-      BuildContext context, Map<String, dynamic> legend) {
+      BuildContext context, Map<String, dynamic> aboutCityData) {
     return Card(
       child: ExpansionTile(
         title: Text(
-          legend['title'],
+          aboutCityData['title'],
           style: Theme.of(context).textTheme.titleLarge,
         ),
         children: [
           ListTile(
             title: Text(
-              legend['description'],
+              aboutCityData['description'],
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             trailing: Semantics(
-              label: 'Play explanation about ${legend['title']}',
+              label: 'Play explanation about ${aboutCityData['title']}',
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
                 child: IconButton(
                   icon: Icon(Icons.volume_up,
                       size: MediaQuery.of(context).size.width * 0.07),
                   onPressed: () {
-                    TextToSpeechConfig.instance.speak(legend['description']);
+                    TextToSpeechConfig.instance
+                        .speak(aboutCityData['description']);
                   },
                   tooltip: localization(context).tapToHearLegend,
                 ),
@@ -120,13 +122,50 @@ class AboutCity extends StatelessWidget {
     );
   }
 
+  Widget _buildHistoryCard(
+      BuildContext context, Map<String, dynamic> aboutCityData) {
+    return ExpansionTile(
+      title: Row(
+        children: [
+          Expanded(
+            child: Text(
+              localization(context).historyOfTheCity,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          GestureDetector(
+            onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
+            child: IconButton(
+              icon: Icon(Icons.volume_up,
+                  size: MediaQuery.of(context).size.width * 0.07),
+              onPressed: () {
+                TextToSpeechConfig.instance.speak(aboutCityData['history']);
+              },
+              tooltip: localization(context).tapToHearHistory,
+            ),
+          ),
+        ],
+      ),
+      children: [
+        Padding(
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+          child: Text(
+            aboutCityData['history'],
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<List<Map<String, dynamic>>> _getAboutCityFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
     return await db.rawQuery('''
       SELECT 
         legend_title_$languageCode AS title,
-        legend_description_$languageCode AS description        
+        legend_description_$languageCode AS description,
+        history_$languageCode AS history       
       FROM AboutCity
     ''');
   }

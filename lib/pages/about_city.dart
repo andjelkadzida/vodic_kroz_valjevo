@@ -36,7 +36,10 @@ class AboutCity extends StatelessWidget {
           horizontal: MediaQuery.of(context).size.width > 600 ? 20.0 : 10.0,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Image.asset('images/grbValjeva.png', fit: BoxFit.cover),
+            const SizedBox(height: 20.0),
             _buildResponsiveDataTable(context),
             const SizedBox(height: 20.0),
             ...data.map((legend) => _buildExpansionTile(context, legend)),
@@ -47,56 +50,46 @@ class AboutCity extends StatelessWidget {
   }
 
   Widget _buildResponsiveDataTable(BuildContext context) {
-    // Fallback to a more responsive layout for smaller screens
-    if (MediaQuery.of(context).size.width < 600) {
-      return ListView(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          ListTile(
-            title: Text('Indicator'),
-            subtitle: Text('Total Population'),
-            trailing: Text('1.2 million'),
-          ),
+    // Wrap the DataTable in a SingleChildScrollView for horizontal scrolling
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columns: const [
+          DataColumn(label: Text('Indicator')),
+          DataColumn(label: Text('Value')),
         ],
-      );
-    }
-
-    return DataTable(
-      columns: const [
-        DataColumn(label: Text('Indicator')),
-        DataColumn(label: Text('Value')),
-      ],
-      rows: const [
-        DataRow(cells: [
-          DataCell(Text('Total Population')),
-          DataCell(Text('1.2 million')),
-        ]),
-      ],
+        rows: const [
+          DataRow(cells: [
+            DataCell(Text('Total Population')),
+            DataCell(Text('1.2 million')),
+          ]),
+        ],
+      ),
     );
   }
 
   Widget _buildExpansionTile(
       BuildContext context, Map<String, dynamic> legend) {
     return ExpansionTile(
-      title: Text(legend['title'] as String,
-          style: Theme.of(context).textTheme.subtitle1),
+      title:
+          Text(legend['title'], style: Theme.of(context).textTheme.titleMedium),
       children: [
         ListTile(
-          title: Text(
-            legend['description'] as String,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
+          title: Text(legend['description'],
+              style: Theme.of(context).textTheme.bodyMedium),
           trailing: Semantics(
-            label: 'Play explanation about ${legend['title']}',
-            button: true,
-            child: IconButton(
-              icon: const Icon(Icons.volume_up),
-              onPressed: () => TextToSpeechConfig.instance
-                  .speak(legend['description'] as String),
-              tooltip: 'Play explanation', // Tooltip for additional context
-            ),
-          ),
+              label: 'Play explanation about ${legend['title']}',
+              child: GestureDetector(
+                onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
+                child: IconButton(
+                  icon: Icon(Icons.volume_up,
+                      size: MediaQuery.of(context).size.width * 0.07),
+                  onPressed: () {
+                    TextToSpeechConfig.instance.speak(legend['description']);
+                  },
+                  tooltip: localization(context).tapToHearLegend,
+                ),
+              )),
         ),
       ],
     );

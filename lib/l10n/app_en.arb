@@ -39,6 +39,7 @@
     "hearLandmarkName": "Listen to the name of the landmark.",
     "enlargedImage": "Enlarged image of ",
     "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to stop.",
+    "tapToHearLegend": "Tap to hear the legend of the city name. Tap twice to stop.",
     "doubleTapToStopHearing": "Double tap to stop hearing.",
     "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
     "description": "Description",

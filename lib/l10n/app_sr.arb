@@ -39,6 +39,7 @@
     "hearLandmarkName": "Čujte ime znamenitosti.",
     "enlargedImage": "Uvećana slika ",
     "tapToHearDetails": "Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste zaustavili.",
+    "tapToHearLegend": "Dodirnite da biste čuli legendu o imenu grada. Dodirnite dva puta, da biste zaustavili.",
     "doubleTapToStopHearing": "Dodirnite dva puta da zaustavite slušanje.",
     "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "description": "Opis",  

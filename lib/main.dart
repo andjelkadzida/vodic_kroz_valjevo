@@ -98,6 +98,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
       locale: _lang,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Roboto',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

@@ -25,3 +25,12 @@ void navigateTo(BuildContext context, Widget page) {
     );
   }
 }
+
+void showDetailsPage(BuildContext context, Widget page) {
+  Navigator.of(context).push(
+    CupertinoPageRoute(
+      builder: (context) => page,
+    ),
+  );
+  HapticFeedback.lightImpact();
+}

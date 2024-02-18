@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -9,6 +8,7 @@ import '../../maps_navigation/locator.dart';
 import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';
 import '../../database_config/database_helper.dart';
+import '../../navigation/navigation_helper.dart';
 import '../../text_to_speech/text_to_speech_config.dart';
 import 'sight_details_page.dart';
 
@@ -68,7 +68,8 @@ class Sights extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () => _showSightDetails(context, sightData),
+        onTap: () =>
+            showDetailsPage(context, SightDetailsPage(sightData: sightData)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -160,15 +161,6 @@ class Sights extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _showSightDetails(BuildContext context, Map<String, dynamic> sightData) {
-    Navigator.of(context).push(
-      CupertinoPageRoute(
-        builder: (context) => SightDetailsPage(sightData: sightData),
-      ),
-    );
-    HapticFeedback.lightImpact();
   }
 
   Future<List<Map<String, dynamic>>> _getSightsFromDatabase(

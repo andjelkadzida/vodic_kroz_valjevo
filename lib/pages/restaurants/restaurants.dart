@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -8,6 +6,7 @@ import '../../database_config/database_helper.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_builder.dart';
 import '../../navigation/cutom_app_bar.dart';
+import '../../navigation/navigation_helper.dart';
 import 'restaurant_details.dart';
 
 class Restaurants extends StatelessWidget {
@@ -46,8 +45,8 @@ class Restaurants extends StatelessWidget {
           height: MediaQuery.of(context).textScaler.scale(48),
           child: GestureDetector(
             onTap: () => {
-              _showRestaurantDetails(context, restaurantData),
-              HapticFeedback.selectionClick()
+              showDetailsPage(context,
+                  RestaurantDetailsPage(restaurantData: restaurantData))
             },
             child: Tooltip(
               message: '${restaurantData['title']}',
@@ -62,17 +61,6 @@ class Restaurants extends StatelessWidget {
     }).toList();
 
     return buildMapWithMarkers(markers);
-  }
-
-  void _showRestaurantDetails(
-      BuildContext context, Map<String, dynamic> restaurantData) {
-    Navigator.of(context).push(
-      CupertinoPageRoute(
-        builder: (context) => RestaurantDetailsPage(
-          restaurantData: restaurantData,
-        ),
-      ),
-    );
   }
 
   Future<List<Map<String, dynamic>>> _getRestaurantsFromDatabase(

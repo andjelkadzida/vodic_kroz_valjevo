@@ -78,9 +78,40 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/muzejLogo.png
-    - images/kulaNenadovica.jpg
     - images/vaPogled.jpg
+    - images/sightsImages/kulaNenadovica/kulaNenadovica1.jpg
+    - images/sightsImages/kulaNenadovica/kulaNenadovica2.jpg
+    - images/sightsImages/kulaNenadovica/kulaNenadovica3.jpg
+    - images/sightsImages/muzej/muzej1.jpg
+    - images/sightsImages/muzej/muzej2.jpg
+    - images/sightsImages/muzej/muzej3.jpeg
+    - images/sightsImages/gimnazija/gimnazija1.jpg
+    - images/sightsImages/gimnazija/gimnazija2.jpg
+    - images/sightsImages/gimnazija/gimnazija3.jpg
+    - images/sightsImages/hram/hram1.jpg
+    - images/sightsImages/hram/hram2.jpg
+    - images/sightsImages/hram/hram3.jpg
+    - images/sightsImages/paviljon/paviljon1.jpg
+    - images/sightsImages/paviljon/paviljon2.jpg
+    - images/sightsImages/stevan/stevan1.jpg
+    - images/sightsImages/stevan/stevan2.jpg
+    - images/sightsImages/stevan/stevan3.jpg
+    - images/sightsImages/tesnjar/tesnjar1.jpg
+    - images/sightsImages/tesnjar/tesnjar2.jpg
+    - images/sightsImages/tesnjar/tesnjar3.jpg
+    - images/sightsImages/zivojin/zivojin1.jpg
+    - images/sightsImages/zivojin/zivojin2.jpg
+    - images/sightsImages/zivojin/zivojin3.jpg
+    - images/parksImages/jadar/jadar1.jpg
+    - images/parksImages/jadar/jadar2.jpg
+    - images/parksImages/jadar/jadar3.jpg
+    - images/parksImages/pecina/pecina1.jpg
+    - images/parksImages/pecina/pecina2.jpg
+    - images/parksImages/pecina/pecina3.jpg
+    - images/parksImages/petiPuk/petiPuk1.jpg
+    - images/parksImages/petiPuk/petiPuk2.jpg
+    - images/parksImages/petiPuk/petiPuk3.jpg
+    - images/parksImages/petiPuk/petiPuk4.jpg
     - images/hotelsImages/bubicaSpolja.jpeg
     - images/hotelsImages/bubicaSoba.jpeg
     - images/hotelsImages/grandSpolja.jpeg

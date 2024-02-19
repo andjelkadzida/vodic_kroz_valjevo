@@ -59,7 +59,8 @@ class Sights extends StatelessWidget {
   Widget buildGridItem(BuildContext context, Map<String, dynamic> sightData) {
     List<String> images = [
       sightData['sight_image_path'],
-      sightData['sight_image_path2']
+      sightData['sight_image_path2'],
+      sightData['sight_image_path3']
     ];
 
     return Card(
@@ -170,6 +171,7 @@ class Sights extends StatelessWidget {
       SELECT 
         sight_image_path, 
         sight_image_path2, 
+        sight_image_path3,
         title_$languageCode AS title, 
         description_$languageCode AS description,
         latitude, 

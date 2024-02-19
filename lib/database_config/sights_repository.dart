@@ -23,6 +23,7 @@ class SightsRepository {
           INSERT INTO Sights(
             sight_image_path, 
             sight_image_path2,
+            sight_image_path3,
             latitude,
             longitude,
             title_en, 
@@ -36,10 +37,11 @@ class SightsRepository {
             description_sr_Cyrl, 
             description_sr_Latn
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
           data['sight_image_path'],
           data['sight_image_path2'],
+          data['sight_image_path3'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -61,9 +63,11 @@ class SightsRepository {
 
   Future<void> sightsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
+      // Valjevski muzej
       {
-        'sight_image_path': 'images/muzejLogo.png',
-        'sight_image_path2': 'images/muzejLogo.png',
+        'sight_image_path': 'images/sightsImages/muzej/muzej1.jpg',
+        'sight_image_path2': 'images/sightsImages/muzej/muzej2.jpg',
+        'sight_image_path3': 'images/sightsImages/muzej/muzej3.jpeg',
         'latitude': 44.26925398584459,
         'longitude': 19.885692396117847,
         'titles': {
@@ -81,9 +85,14 @@ class SightsRepository {
           'sr_Latn': 'Opis na srpskom latinicom',
         },
       },
+      // Kula Nenadovica
       {
-        'sight_image_path': 'images/kulaNenadovica.jpg',
-        'sight_image_path2': 'images/kulaNenadovica.jpg',
+        'sight_image_path':
+            'images/sightsImages/kulaNenadovica/kulaNenadovica1.jpg',
+        'sight_image_path2':
+            'images/sightsImages/kulaNenadovica/kulaNenadovica2.jpg',
+        'sight_image_path3':
+            'images/sightsImages/kulaNenadovica/kulaNenadovica3.jpg',
         'latitude': 44.27809742651686,
         'longitude': 19.88519586174966,
         'titles': {
@@ -99,6 +108,138 @@ class SightsRepository {
           'sr': 'Kula opis',
           'sr_Cyrl': 'Кула опис',
           'sr_Latn': 'Kula opis',
+        },
+      },
+      // Valjevska gimnazija
+      {
+        'sight_image_path': 'images/sightsImages/gimnazija/gimnazija1.jpg',
+        'sight_image_path2': 'images/sightsImages/gimnazija/gimnazija2.jpg',
+        'sight_image_path3': 'images/sightsImages/gimnazija/gimnazija3.jpg',
+        'latitude': 44.27835736293161,
+        'longitude': 19.8847572164086,
+        'titles': {
+          'en': 'Valjevo Gymnasium',
+          'de': 'Gymnasium von Valjevo',
+          'sr': 'Valjevska gimnazija',
+          'sr_Cyrl': 'Ваљевска гимназија',
+          'sr_Latn': 'Valjevska gimnazija',
+        },
+        'descriptions': {
+          'en': 'Gymnasium description',
+          'de': 'Gymnasium Beschreibung',
+          'sr': 'Gimnazija opis',
+          'sr_Cyrl': 'Гимназија опис',
+          'sr_Latn': 'Gimnazija opis',
+        },
+      },
+      // Srpska pravoslavna crkva Vaskrsenja Gospodnjeg
+      {
+        'sight_image_path': 'images/sightsImages/hram/hram1.jpg',
+        'sight_image_path2': 'images/sightsImages/hram/hram2.jpg',
+        'sight_image_path3': 'images/sightsImages/hram/hram3.jpg',
+        'latitude': 44.274172769846494,
+        'longitude': 19.889581685484366,
+        'titles': {
+          'en': 'Serbian Orthodox Church of the Resurrection of the Lord',
+          'de': 'Serbisch-orthodoxe Kirche der Auferstehung des Herrn',
+          'sr': 'Srpska pravoslavna crkva Vaskrsenja Gospodnjeg',
+          'sr_Cyrl': 'Српска православна црква Васкрсења Господњег',
+          'sr_Latn': 'Srpska pravoslavna crkva Vaskrsenja Gospodnjeg',
+        },
+        'descriptions': {
+          'en': 'Church description',
+          'de': 'Kirche Beschreibung',
+          'sr': 'Crkva opis',
+          'sr_Cyrl': 'Црква опис',
+          'sr_Latn': 'Crkva opis',
+        },
+      },
+      // Markova stolica
+      {
+        'sight_image_path': 'images/sightsImages/paviljon/paviljon1.jpg',
+        'sight_image_path2': 'images/sightsImages/paviljon/paviljon2.jpg',
+        'sight_image_path3': 'images/sightsImages/paviljon/paviljon3.jpg',
+        'latitude': 44.27981454262845,
+        'longitude': 19.877936945116286,
+        'titles': {
+          'en': 'Markova Stolica',
+          'de': 'Markova Stolica',
+          'sr': 'Markova Stolica',
+          'sr_Cyrl': 'Маркова Столица',
+          'sr_Latn': 'Markova Stolica',
+        },
+        'descriptions': {
+          'en': 'Markova Stolica description',
+          'de': 'Markova Stolica Beschreibung',
+          'sr': 'Markova Stolica opis',
+          'sr_Cyrl': 'Маркова Столица опис',
+          'sr_Latn': 'Markova Stolica opis',
+        },
+      },
+      // Stevan
+      {
+        'sight_image_path': 'images/sightsImages/stevan/stevan1.jpg',
+        'sight_image_path2': 'images/sightsImages/stevan/stevan2.jpg',
+        'sight_image_path3': 'images/sightsImages/stevan/stevan3.jpg',
+        'latitude': 44.276073,
+        'longitude': 19.891073,
+        'titles': {
+          'en': 'Stevan Filipovic',
+          'de': 'Stevan Filipovic',
+          'sr': 'Stevan Filipovic',
+          'sr_Cyrl': 'Стеван Филиповић',
+          'sr_Latn': 'Stevan Filipovic',
+        },
+        'descriptions': {
+          'en': 'Stevan Filipovic description',
+          'de': 'Stevan Filipovic Beschreibung',
+          'sr': 'Stevan Filipovic opis',
+          'sr_Cyrl': 'Стеван Филиповић опис',
+          'sr_Latn': 'Stevan Filipovic opis',
+        },
+      },
+      // Tesnjar
+      {
+        'sight_image_path': 'images/sightsImages/tesnjar/tesnjar1.jpg',
+        'sight_image_path2': 'images/sightsImages/tesnjar/tesnjar2.jpg',
+        'sight_image_path3': 'images/sightsImages/tesnjar/tesnjar3.jpg',
+        'latitude': 44.29062866176497,
+        'longitude': 19.876563654330376,
+        'titles': {
+          'en': 'Tesnjar',
+          'de': 'Tesnjar',
+          'sr': 'Tešnjar',
+          'sr_Cyrl': 'Тешњар',
+          'sr_Latn': 'Tešnjar',
+        },
+        'descriptions': {
+          'en': 'Tesnjar description',
+          'de': 'Tesnjar Beschreibung',
+          'sr': 'Tešnjar opis',
+          'sr_Cyrl': 'Тешњар опис',
+          'sr_Latn': 'Tešnjar opis',
+        },
+      },
+      // Zivojin Misic
+      {
+        'sight_image_path': 'images/sightsImages/zivojin/zivojin1.jpg',
+        'sight_image_path2': 'images/sightsImages/zivojin/zivojin2.jpg',
+        'sight_image_path3': 'images/sightsImages/zivojin/zivojin3.jpg',
+        'latitude': 44.29052905178508,
+        'longitude': 19.884803402764618,
+        'titles': {
+          'en': 'Zivojin Misic',
+          'de': 'Zivojin Misic',
+          'sr': 'Živojin Mišić',
+          'sr_Cyrl': 'Живојин Мишић',
+          'sr_Latn': 'Živojin Mišić',
+        },
+        'descriptions': {
+          'en': 'Zivojin Misic description',
+          'de': 'Zivojin Misic Beschreibung',
+          'sr': 'Živojin Mišić opis',
+          'sr_Cyrl': 'Живојин Мишић опис',
+          'sr_Latn': 'Živojin Mišić opis',
         },
       },
     ];

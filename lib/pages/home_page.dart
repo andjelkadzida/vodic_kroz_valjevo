@@ -12,8 +12,8 @@ class HomePage extends StatelessWidget {
       fit: StackFit.expand,
       children: <Widget>[
         Image.asset(
-          'images/kulaNenadovica.jpg',
-          fit: BoxFit.cover,
+          'images/pogled.jpg',
+          fit: BoxFit.contain,
           semanticLabel: localization(context).valjevoCityImage,
         ),
         Column(

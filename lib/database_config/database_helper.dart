@@ -22,7 +22,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 9,
+        version: 2,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -37,6 +37,7 @@ class DatabaseHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sight_image_path TEXT,
             sight_image_path2 TEXT,
+            sight_image_path3 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,

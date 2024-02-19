@@ -17,6 +17,7 @@ class SightDetailsPage extends StatelessWidget {
     List<String> images = [
       sightData['sight_image_path'],
       sightData['sight_image_path2'],
+      sightData['sight_image_path3'],
     ];
 
     return Scaffold(
@@ -35,18 +36,21 @@ class SightDetailsPage extends StatelessWidget {
                 Semantics(
                   image: true,
                   label: localization(context).imageOfSight(sightData['title']),
-                  child: SizedBox(
+                  child: Container(
+                    color: Colors.transparent,
                     height: constraints.maxWidth > 600 ? 400 : 200,
                     child: PhotoViewGallery.builder(
                       itemCount: images.length,
                       builder: (context, index) {
                         return PhotoViewGalleryPageOptions(
                           imageProvider: AssetImage(images[index]),
+                          maxScale: PhotoViewComputedScale.contained * 5,
+                          minScale: PhotoViewComputedScale.contained,
                           initialScale: PhotoViewComputedScale.contained,
-                          maxScale: PhotoViewComputedScale.contained * 10,
+                          basePosition: Alignment.center,
+                          filterQuality: FilterQuality.high,
                           heroAttributes:
                               PhotoViewHeroAttributes(tag: images[index]),
-                          filterQuality: FilterQuality.high,
                         );
                       },
                       scrollPhysics: const BouncingScrollPhysics(),

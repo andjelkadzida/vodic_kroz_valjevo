@@ -64,14 +64,16 @@ class AboutCity extends StatelessWidget {
               label: Icon(
                 Icons.people,
                 semanticLabel: 'Indicator',
-                size: MediaQuery.of(context).size.width * 0.07,
+                size: Theme.of(context).iconTheme.size,
+                applyTextScaling: true,
               ),
               tooltip: 'Indicator'),
           DataColumn(
               label: Icon(
                 Icons.attribution,
                 semanticLabel: localization(context).value,
-                size: MediaQuery.of(context).size.width * 0.07,
+                size: Theme.of(context).iconTheme.size,
+                applyTextScaling: true,
               ),
               tooltip: localization(context).value),
         ],
@@ -108,8 +110,11 @@ class AboutCity extends StatelessWidget {
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
                 child: IconButton(
-                  icon: Icon(Icons.volume_up,
-                      size: MediaQuery.of(context).size.width * 0.07),
+                  icon: Icon(
+                    Icons.volume_up,
+                    size: Theme.of(context).iconTheme.size,
+                    applyTextScaling: true,
+                  ),
                   onPressed: () {
                     TextToSpeechConfig.instance
                         .speak(aboutCityData['description']);
@@ -153,8 +158,11 @@ class AboutCity extends StatelessWidget {
             GestureDetector(
               onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
               child: IconButton(
-                icon: Icon(Icons.volume_up,
-                    size: MediaQuery.of(context).size.width * 0.07),
+                icon: Icon(
+                  Icons.volume_up,
+                  size: MediaQuery.of(context).size.width * 0.07,
+                  applyTextScaling: true,
+                ),
                 onPressed: () {
                   TextToSpeechConfig.instance.speak(aboutCityData['history']);
                 },

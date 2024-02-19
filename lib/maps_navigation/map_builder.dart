@@ -58,6 +58,7 @@ Widget buildWithMarkers(
             size: MediaQuery.of(context).textScaler.scale(35),
             semanticLabel: '${itemData['title']}',
             color: Colors.blue,
+            applyTextScaling: true,
           ),
         ),
       ),

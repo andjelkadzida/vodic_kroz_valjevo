@@ -56,6 +56,7 @@ class MenuItem extends StatelessWidget {
                   icon,
                   size: size * 0.2,
                   color: Colors.teal,
+                  applyTextScaling: true,
                 ),
               ),
             ],

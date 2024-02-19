@@ -26,11 +26,13 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Explore.\nTravel.\nInspire.',
+                      localization(context).slogan,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: MediaQuery.of(context).size.width * 0.08,
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.teal,
                       ),
                       textAlign: TextAlign.center,
                     ),

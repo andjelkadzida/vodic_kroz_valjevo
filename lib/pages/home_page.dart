@@ -67,7 +67,11 @@ class HomePage extends StatelessWidget {
                         vertical: MediaQuery.of(context).size.height * 0.02,
                       ),
                     ),
-                    child: Text(localization(context).getStarted),
+                    child: Text(
+                      localization(context).getStarted,
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05r),
+                    ),
                   ),
                 ),
               ),

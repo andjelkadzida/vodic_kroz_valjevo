@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       localization(context).getStarted,
                       style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.05r),
+                          fontSize: MediaQuery.of(context).size.width * 0.05),
                     ),
                   ),
                 ),

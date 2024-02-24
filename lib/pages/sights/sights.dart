@@ -56,12 +56,6 @@ class Sights extends StatelessWidget {
   }
 
   Widget buildGridItem(BuildContext context, Map<String, dynamic> sightData) {
-    List<String> images = [
-      sightData['sight_image_path'],
-      sightData['sight_image_path2'],
-      sightData['sight_image_path3']
-    ];
-
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Card(
@@ -122,7 +116,7 @@ class Sights extends StatelessWidget {
                         child: FittedBox(
                           fit: BoxFit.contain,
                           child: Image.asset(
-                            images[0],
+                            sightData['sight_image_path'],
                             fit: BoxFit.contain,
                             filterQuality: FilterQuality.high,
                             excludeFromSemantics: true,

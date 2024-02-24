@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/locator.dart';
@@ -15,136 +16,157 @@ class HotelDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double padding = MediaQuery.of(context).size.width * 0.04;
-
     final int noStars = hotelData['noStars'];
-
     MapScreen mapScreen = MapScreen();
-
     List<String> images = [
       hotelData['hotel_image_path'],
       hotelData['hotel_image_path2'],
     ];
-
+    precacheImages(context, images);
     return Scaffold(
       appBar: customAppBar(
         context,
         hotelData['title'],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Card(
-              margin: EdgeInsets.all(padding),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: padding),
-                  CarouselSlider.builder(
-                    itemCount: images.length,
-                    itemBuilder: (BuildContext context, int itemIndex,
-                        int pageViewIndex) {
-                      return Semantics(
-                          label:
-                              '${localization(context).hotelImage}"${hotelData['title']}',
-                          child: Image.asset(images[itemIndex],
-                              fit: BoxFit.cover));
-                    },
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      viewportFraction: 0.9,
-                      aspectRatio: 2.0,
-                      autoPlayAnimationDuration: const Duration(seconds: 2),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(padding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          hotelData['title'],
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                launchUrlString(hotelData['website']);
-                                HapticFeedback.lightImpact();
-                              },
-                              child: Text(
-                                localization(context).website,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ),
-                            Semantics(
-                              label: localization(context).starCount(noStars),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                    size: MediaQuery.of(context).size.width *
-                                        0.05,
-                                  ),
-                                  Text(
-                                    '$noStars',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: MediaQuery.of(context).size.height *
-                                      0.015),
-                            ),
-                            child: Text(
-                              localization(context).startNavigation,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.05),
-                            ),
-                            onPressed: () {
-                              mapScreen.navigateToDestination(
-                                  hotelData['latitude'],
-                                  hotelData['longitude']);
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final double padding = constraints.maxWidth * 0.04;
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Card(
+                      margin: EdgeInsets.all(padding),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: padding),
+                          CarouselSlider.builder(
+                            itemCount: images.length,
+                            itemBuilder: (BuildContext context, int itemIndex,
+                                int pageViewIndex) {
+                              return Semantics(
+                                  label:
+                                      '${localization(context).hotelImage}"${hotelData['title']}',
+                                  child: Image.asset(images[itemIndex],
+                                      fit: BoxFit.cover));
                             },
+                            options: CarouselOptions(
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.9,
+                              aspectRatio: 2.0,
+                              autoPlayAnimationDuration:
+                                  const Duration(seconds: 2),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: padding),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.all(padding),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  hotelData['title'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                                SizedBox(height: constraints.maxHeight * 0.02),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        launchUrlString(hotelData['website']);
+                                        HapticFeedback.lightImpact();
+                                      },
+                                      child: Text(
+                                        localization(context).website,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
+                                      ),
+                                    ),
+                                    Semantics(
+                                      label: localization(context)
+                                          .starCount(noStars),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                            size: constraints.maxWidth * 0.05,
+                                          ),
+                                          Text(
+                                            '$noStars',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: constraints.maxHeight * 0.03),
+                                FractionallySizedBox(
+                                  widthFactor: 1,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Theme.of(context).primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(18),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              constraints.maxHeight * 0.015),
+                                    ),
+                                    child: Text(
+                                      localization(context).startNavigation,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: Colors.white,
+                                            fontSize:
+                                                constraints.maxWidth * 0.05,
+                                          ),
+                                    ),
+                                    onPressed: () {
+                                      mapScreen.navigateToDestination(
+                                          hotelData['latitude'],
+                                          hotelData['longitude']);
+                                    },
+                                  ),
+                                ),
+                                SizedBox(height: padding),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

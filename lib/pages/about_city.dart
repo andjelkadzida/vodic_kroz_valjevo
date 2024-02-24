@@ -31,28 +31,35 @@ class AboutCity extends StatelessWidget {
       BuildContext context, List<Map<String, dynamic>> data) {
     precacheImage(const AssetImage('images/vaPogled.jpg'), context);
 
-    return CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: MediaQuery.of(context).size.width > 600 ? 20.0 : 10.0,
-          ),
-          sliver: SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Image.asset('images/vaPogled.jpg', fit: BoxFit.cover),
-                const SizedBox(height: 20.0),
-                _buildResponsiveDataTable(context),
-                const SizedBox(height: 20.0),
-                _buildHistoryCard(context, data.first),
-                ...data.map((legend) => _buildExpansionTile(context, legend)),
-              ],
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      return OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: constraints.maxWidth > 600 ? 20.0 : 10.0,
+              ),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Image.asset('images/vaPogled.jpg', fit: BoxFit.contain),
+                    const SizedBox(height: 20.0),
+                    _buildResponsiveDataTable(context),
+                    const SizedBox(height: 20.0),
+                    _buildHistoryCard(context, data.first),
+                    ...data
+                        .map((legend) => _buildExpansionTile(context, legend)),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
-    );
+          ],
+        );
+      });
+    });
   }
 
   Widget _buildResponsiveDataTable(BuildContext context) {

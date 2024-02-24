@@ -86,5 +86,7 @@
     "bugTitleLabel": "Bug title input field",
     "bugDescriptionLabel": "Bug description input field",
     "osLabel": "Operating system dropdown",
-    "fileUploadLabel": "File upload button"
+    "fileUploadLabel": "File upload button",
+    "changeLanguageLabel": "Change language to {lang}",
+    "selectLanguageLabel": "Select {lang}"
 }

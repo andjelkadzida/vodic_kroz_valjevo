@@ -86,5 +86,7 @@
     "bugTitleLabel": "Eingabefeld für Fehlertitel",
     "bugDescriptionLabel": "Eingabefeld für Fehlerbeschreibung",
     "osLabel": "Betriebssystem-Dropdown",
-    "fileUploadLabel": "Datei-Upload-Button"
+    "fileUploadLabel": "Datei-Upload-Button",
+    "changeLanguageLabel": "Sprache ändern in {lang}",
+    "selectLanguageLabel": "Wähle {lang}"
 }

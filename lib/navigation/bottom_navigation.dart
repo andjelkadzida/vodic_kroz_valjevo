@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vodic_kroz_valjevo/pages/bug_report.dart';
 
 import '../localization/language.dart';
 import '../localization/supported_languages.dart';
@@ -44,6 +45,9 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       case 3:
         showLanguageMenu(context, calledFromNavBar: true);
         break;
+      case 4:
+        navigateTo(context, const BugReportPage());
+        break;
       default:
         break;
     }
@@ -72,6 +76,11 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           Icons.language_outlined,
           (context) => localization(context).languageMenu,
           (context) => localization(context).languageMenu),
+      NavItem(
+          Icons.bug_report,
+          Icons.bug_report_outlined,
+          (context) => localization(context).bugReport,
+          (context) => localization(context).bugReport),
     ];
 
     return BottomNavigationBar(

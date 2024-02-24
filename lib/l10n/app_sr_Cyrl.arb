@@ -86,5 +86,7 @@
     "bugTitleLabel": "Поље за унос наслова грешке",
     "bugDescriptionLabel": "Поље за унос описа грешке",
     "osLabel": "Падајући мени за оперативни систем",
-    "fileUploadLabel": "Дугме за отпремање датотеке"
+    "fileUploadLabel": "Дугме за отпремање датотеке",
+    "changeLanguageLabel": "Промени језик на {lang}",
+    "selectLanguageLabel": "Изаберите {lang}"
 }

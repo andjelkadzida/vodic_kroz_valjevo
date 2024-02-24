@@ -34,7 +34,6 @@ class BugReportPageState extends State<BugReportPage> {
   }
 
   Future<void> initData() async {
-    await dotenv.load();
     final keyApplicationId = dotenv.env['KEY_APPLICATION_ID'].toString();
     final keyClientKey = dotenv.env['KEY_CLIENT_KEY'].toString();
     final keyParseServerUrl = dotenv.env['KEY_PARSE_SERVER_URL'].toString();
@@ -137,6 +136,9 @@ class BugReportPageState extends State<BugReportPage> {
                             iconSize: MediaQuery.of(context).size.width * 0.08,
                             decoration: InputDecoration(
                               filled: true,
+                              labelText: localization(context).selectOS,
+                              labelStyle:
+                                  Theme.of(context).textTheme.bodyMedium,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(40),
                                 borderSide: const BorderSide(
@@ -241,6 +243,7 @@ class BugReportPageState extends State<BugReportPage> {
                                 try {
                                   sendReport(bugTitle, bugDescription,
                                       operatingSystem, file);
+                                  operatingSystem = null;
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(localization(context)
@@ -294,8 +297,10 @@ class BugReportPageState extends State<BugReportPage> {
   }
 }
 
-void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
-    PlatformFile? file) async {
+// TODO: Implement the localized message
+Future<String> sendReport(String bugTitle, String bugDescription,
+    String? operatingSystem, PlatformFile? file) async {
+  String message = '';
   var bugReport = ParseObject('BugReport')
     ..set('title', bugTitle)
     ..set('description', bugDescription)
@@ -311,8 +316,9 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
   var response = await bugReport.save();
 
   if (response.success) {
-    print('Bug Report Saved Successfully');
+    message = 'Bug Report Saved Successfully';
   } else {
-    print('Failed to Save Bug Report: ${response.error!.message}');
+    message = 'Failed to Save Bug Report: ${response.error!.message}';
   }
+  return message;
 }

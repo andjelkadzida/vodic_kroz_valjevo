@@ -16,5 +16,6 @@ AppBar customAppBar(BuildContext context, String title) {
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),
+    elevation: (MediaQuery.of(context).size.width / 150).clamp(0.0, 6.0),
   );
 }

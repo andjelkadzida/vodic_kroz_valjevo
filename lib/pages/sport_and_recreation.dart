@@ -13,67 +13,80 @@ class SportsAndRecreation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(
-        context,
-        localization(context).sportRecreation,
-      ),
-      body: Column(
-        children: [
-          Semantics(
-            header: true,
-            child: Text(
-              localization(context).parks,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.07,
-                fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(
+          builder: (context, orientation) {
+            return Scaffold(
+              appBar: customAppBar(
+                context,
+                localization(context).sportRecreation,
               ),
-            ),
-          ),
-          FutureBuilder<List<Map<String, dynamic>>>(
-            future: _getParksDataFromDatabase(localization(context).localeName),
-            builder: (context, snapshot) {
-              return DatabaseHelper.buildFutureState<
-                  List<Map<String, dynamic>>>(
-                context: context,
-                snapshot: snapshot,
-                onData: (data) => _buildSportsSlider(context, data),
-              );
-            },
-          ),
-          const SizedBox(height: 20),
-          Semantics(
-            header: true,
-            child: Text(
-              localization(context).sportFields,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.07,
-                fontWeight: FontWeight.bold,
+              body: Column(
+                children: [
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      localization(context).parks,
+                      style: TextStyle(
+                        fontSize: constraints.maxWidth * 0.07,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _getParksDataFromDatabase(
+                        localization(context).localeName),
+                    builder: (context, snapshot) {
+                      return DatabaseHelper.buildFutureState<
+                          List<Map<String, dynamic>>>(
+                        context: context,
+                        snapshot: snapshot,
+                        onData: (data) => _buildSportsSlider(
+                            context, data, constraints, orientation),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      localization(context).sportFields,
+                      style: TextStyle(
+                        fontSize: constraints.maxWidth * 0.07,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _getSportsDataFromDatabase(
+                        localization(context).localeName),
+                    builder: (context, snapshot) {
+                      return DatabaseHelper.buildFutureState<
+                          List<Map<String, dynamic>>>(
+                        context: context,
+                        snapshot: snapshot,
+                        onData: (data) => _buildSportsSlider(
+                            context, data, constraints, orientation),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-          ),
-          FutureBuilder<List<Map<String, dynamic>>>(
-            future:
-                _getSportsDataFromDatabase(localization(context).localeName),
-            builder: (context, snapshot) {
-              return DatabaseHelper.buildFutureState<
-                  List<Map<String, dynamic>>>(
-                context: context,
-                snapshot: snapshot,
-                onData: (data) => _buildSportsSlider(context, data),
-              );
-            },
-          ),
-        ],
-      ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(),
+            );
+          },
+        );
+      },
     );
   }
 
   Widget _buildSportsSlider(
-      BuildContext context, List<Map<String, dynamic>> data) {
-    double viewportFraction =
-        MediaQuery.of(context).size.width < 600 ? 0.8 : 0.5;
+      BuildContext context,
+      List<Map<String, dynamic>> data,
+      BoxConstraints constraints,
+      Orientation orientation) {
+    double viewportFraction = constraints.maxWidth < 600 ? 0.8 : 0.5;
 
     return Expanded(
       child: PageView.builder(
@@ -81,13 +94,14 @@ class SportsAndRecreation extends StatelessWidget {
         controller: PageController(viewportFraction: viewportFraction),
         itemBuilder: (context, index) {
           var item = data[index];
-          return _buildSportsItem(context, item);
+          return _buildSportsItem(context, item, constraints, orientation);
         },
       ),
     );
   }
 
-  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data) {
+  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data,
+      BoxConstraints constraints, Orientation orientation) {
     return Card(
       margin: const EdgeInsets.all(10),
       elevation: 5,
@@ -130,13 +144,13 @@ class SportsAndRecreation extends StatelessWidget {
                 child: Text(
                   data['title'],
                   style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    fontSize: constraints.maxWidth * 0.05,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1, //Change to 2 if needed
+                  maxLines: orientation == Orientation.portrait ? 2 : 1,
                 ),
               ),
             ),

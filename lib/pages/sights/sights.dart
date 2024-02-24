@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../localization/supported_languages.dart';
-import '../../maps_navigation/locator.dart';
+import '../../maps_navigation/map_screen.dart';
 import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';
 import '../../database_config/database_helper.dart';

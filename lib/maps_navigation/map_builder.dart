@@ -12,10 +12,18 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(context, localization(context).mapPage),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
-      body: buildMap(),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Scaffold(
+              appBar: customAppBar(context, localization(context).mapPage),
+              bottomNavigationBar: const CustomBottomNavigationBar(),
+              body: buildMap(),
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -47,18 +55,21 @@ Widget buildWithMarkers(
 
     return Marker(
       point: position,
-      width: MediaQuery.of(context).textScaler.scale(48),
-      height: MediaQuery.of(context).textScaler.scale(48),
+      width: MediaQuery.of(context).size.width * 0.1,
+      height: MediaQuery.of(context).size.height * 0.1,
       child: GestureDetector(
         onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
-        child: Tooltip(
-          message: '${itemData['title']}',
-          child: Icon(
-            Icons.location_pin,
-            size: MediaQuery.of(context).textScaler.scale(35),
-            semanticLabel: '${itemData['title']}',
-            color: Colors.blue,
-            applyTextScaling: true,
+        child: Semantics(
+          label: '${itemData['title']}',
+          child: Tooltip(
+            message: '${itemData['title']}',
+            child: Icon(
+              Icons.location_pin,
+              size: MediaQuery.of(context).size.width * 0.07,
+              semanticLabel: '${itemData['title']}',
+              color: Colors.blue,
+              applyTextScaling: true,
+            ),
           ),
         ),
       ),

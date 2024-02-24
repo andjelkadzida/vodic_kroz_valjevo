@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 import '../localization/supported_languages.dart';
+import '../navigation/bottom_navigation.dart';
 import '../navigation/cutom_app_bar.dart';
 
 class BugReportPage extends StatefulWidget {
@@ -47,6 +48,7 @@ class BugReportPageState extends State<BugReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context, localization(context).bugReport),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
@@ -98,17 +100,56 @@ class BugReportPageState extends State<BugReportPage> {
                       },
                       maxLines: 4,
                     ),
-                    const SizedBox(height: 16.0),
+                    const SizedBox(height: 8.0),
                     Text(
                       localization(context).operatingSystem,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    DropdownButtonFormField(
+                    const SizedBox(height: 16.0),
+                    DropdownButtonFormField<String>(
+                      icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                      iconDisabledColor: Colors.grey,
+                      iconEnabledColor: Colors.teal,
+                      iconSize: 24,
+                      decoration: InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(40),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(40),
+                          borderSide: const BorderSide(
+                            color: Colors.teal,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
                       value: operatingSystem,
                       items: operatingSystems.map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Text(
+                              value,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color: Colors.black,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    letterSpacing: 1,
+                                  ),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
                         );
                       }).toList(),
                       onChanged: (value) {

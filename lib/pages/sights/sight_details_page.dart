@@ -38,7 +38,7 @@ class SightDetailsPage extends StatelessWidget {
                   label: localization(context).imageOfSight(sightData['title']),
                   child: Container(
                     color: Colors.transparent,
-                    height: constraints.maxWidth > 600 ? 400 : 200,
+                    height: constraints.maxHeight * 0.3,
                     child: PhotoViewGallery.builder(
                       itemCount: images.length,
                       builder: (context, index) {
@@ -63,46 +63,38 @@ class SightDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 ExpansionTile(
                   expandedAlignment: Alignment.bottomCenter,
                   enableFeedback: true,
                   initiallyExpanded: false,
                   title: Row(
                     children: [
-                      Text(
-                        localization(context).description,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(
-                              color: Colors.black,
-                              fontSize: constraints.maxWidth * 0.06,
-                              fontWeight: FontWeight.w600,
-                            ),
+                      Flexible(
+                        child: Text(
+                          localization(context).description,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                color: Colors.black,
+                                fontSize: constraints.maxWidth * 0.06,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
                       ),
-                      const SizedBox(width: 8),
                       SizedBox(
-                        width: constraints.maxWidth * 0.06 > 48
-                            ? constraints.maxWidth * 0.06
-                            : 48,
-                        height: constraints.maxWidth * 0.06 > 48
-                            ? constraints.maxWidth * 0.06
-                            : 48,
-                        child: GestureDetector(
-                          onDoubleTap: () =>
-                              TextToSpeechConfig.instance.stopSpeaking(),
-                          child: IconButton(
-                            onPressed: () => TextToSpeechConfig.instance
-                                .speak(sightData['description']),
-                            tooltip: localization(context).tapToHearDetails,
-                            icon: Icon(
-                              Icons.volume_up,
-                              semanticLabel:
-                                  localization(context).tapToHearDetails,
-                              size: constraints.maxWidth * 0.065,
-                              applyTextScaling: true,
-                            ),
+                        width: constraints.maxWidth * 0.1,
+                        height: constraints.maxHeight * 0.1,
+                        child: IconButton(
+                          onPressed: () => TextToSpeechConfig.instance
+                              .speak(sightData['description']),
+                          tooltip: localization(context).tapToHearDetails,
+                          icon: Icon(
+                            Icons.volume_up,
+                            semanticLabel:
+                                localization(context).tapToHearDetails,
+                            size: constraints.maxWidth * 0.065,
+                            applyTextScaling: true,
                           ),
                         ),
                       )

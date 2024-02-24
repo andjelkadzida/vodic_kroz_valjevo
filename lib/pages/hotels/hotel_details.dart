@@ -127,8 +127,7 @@ class HotelDetailsPage extends StatelessWidget {
                                   widthFactor: 1,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColor,
+                                      backgroundColor: Colors.teal,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(18),
                                       ),
@@ -148,7 +147,6 @@ class HotelDetailsPage extends StatelessWidget {
                                           ),
                                     ),
                                     onPressed: () {
-                                      HapticFeedback.selectionClick();
                                       mapScreen.navigateToDestination(
                                           hotelData['latitude'],
                                           hotelData['longitude']);

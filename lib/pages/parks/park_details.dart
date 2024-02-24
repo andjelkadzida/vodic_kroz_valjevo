@@ -6,6 +6,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
 import '../../localization/supported_languages.dart';
+import '../../maps_navigation/map_screen.dart';
 import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';
 import '../../text_to_speech/text_to_speech_config.dart';
@@ -17,6 +18,8 @@ class ParkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MapScreen mapScreen = MapScreen();
+
     List<String> images = [
       parkData['park_image_path'],
       parkData['park_image_path2'],
@@ -68,6 +71,32 @@ class ParkDetailsPage extends StatelessWidget {
                             child: CircularProgressIndicator(),
                           ),
                         ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: constraints.maxWidth * 0.015),
+                        ),
+                        child: Text(
+                          localization(context).startNavigation,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontSize: constraints.maxWidth * 0.05,
+                                  ),
+                        ),
+                        onPressed: () {
+                          mapScreen.navigateToDestination(
+                              parkData['latitude'], parkData['longitude']);
+                        },
                       ),
                     ),
                     const SizedBox(height: 20),

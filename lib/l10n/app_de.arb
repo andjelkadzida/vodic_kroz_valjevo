@@ -81,5 +81,6 @@
     "enterDescription": "Bitte geben Sie eine Beschreibung des Problems ein.",
     "enterTitle": "Bitte geben Sie einen Titel für das Problem ein.",
     "submissionFailed": "Fehler beim Einreichen des Fehlerberichts...",
-    "reportSubmittedSuccessfully": "Fehlerbericht erfolgreich eingereicht!"
+    "reportSubmittedSuccessfully": "Fehlerbericht erfolgreich eingereicht!",
+    "noFileSelected": "Keine Datei ausgewählt"
 }

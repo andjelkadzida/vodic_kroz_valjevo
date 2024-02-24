@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
@@ -23,6 +24,7 @@ class BugReportPageState extends State<BugReportPage> {
   String? operatingSystem;
   List<String> operatingSystems = ['Android', 'iOS', 'HarmonyOS'];
   PlatformFile? file;
+  String? fileName;
   bool _isLoading = false;
 
   @override
@@ -99,7 +101,7 @@ class BugReportPageState extends State<BugReportPage> {
                     const SizedBox(height: 16.0),
                     Text(
                       localization(context).operatingSystem,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     DropdownButtonFormField(
                       value: operatingSystem,
@@ -122,55 +124,99 @@ class BugReportPageState extends State<BugReportPage> {
                       },
                     ),
                     const SizedBox(height: 16.0),
-                    TextButton(
-                      onPressed: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
-
+                    GestureDetector(
+                      onTap: () async {
+                        FilePickerResult? result = await FilePicker.platform
+                            .pickFiles(type: FileType.any);
                         if (result != null) {
                           setState(() {
-                            file = result.files.first;
+                            file = result.files.single;
+                            fileName = file!.name;
                           });
-                        } else {
-                          // User canceled the picker
                         }
                       },
-                      child: Text(localization(context).uploadFile),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.attach_file,
+                            semanticLabel: localization(context).uploadFile,
+                            size: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .fontSize,
+                            applyTextScaling: true,
+                          ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(localization(context).uploadFile,
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
                     ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(fileName ?? localization(context).noFileSelected),
                     const SizedBox(height: 16.0),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          try {
-                            sendReport(bugTitle, bugDescription,
-                                operatingSystem, file);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    localization(context).submittingReport),
+                    SizedBox(
+                      width: double.infinity,
+                      child: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          return ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+                                try {
+                                  sendReport(bugTitle, bugDescription,
+                                      operatingSystem, file);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(localization(context)
+                                          .submittingReport),
+                                    ),
+                                  );
+                                  _formKey.currentState!.reset();
+                                  _titleFocus.unfocus();
+                                  _descriptionFocus.unfocus();
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(localization(context)
+                                          .submissionFailed),
+                                    ),
+                                  );
+                                } finally {
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.teal,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
                               ),
-                            );
-                            _formKey.currentState!.reset();
-                            _titleFocus.unfocus();
-                            _descriptionFocus.unfocus();
-                          } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    localization(context).submissionFailed),
-                              ),
-                            );
-                          } finally {
-                            setState(() {
-                              _isLoading = false;
-                            });
-                          }
-                        }
-                      },
-                      child: Text(localization(context).submit),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: constraints.maxWidth * 0.015),
+                            ),
+                            child: Text(
+                              localization(context).submit,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: Colors.white,
+                                    fontSize: constraints.maxWidth * 0.05,
+                                  ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

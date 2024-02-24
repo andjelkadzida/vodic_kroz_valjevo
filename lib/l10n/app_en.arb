@@ -81,5 +81,6 @@
     "enterDescription": "Please enter a description of the issue.",
     "enterTitle": "Please enter a title for the issue.",
     "submissionFailed": "Failed to submit bug report...",
-    "reportSubmittedSuccessfully": "Bug report submitted successfully!"
+    "reportSubmittedSuccessfully": "Bug report submitted successfully!",
+    "noFileSelected": "No file selected"
 }

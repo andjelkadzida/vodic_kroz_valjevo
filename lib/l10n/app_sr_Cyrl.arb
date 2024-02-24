@@ -81,5 +81,6 @@
     "enterDescription": "Молимо унесите опис проблема.",
     "enterTitle": "Молимо унесите наслов проблема.",
     "submissionFailed": "Није успело слање извештаја о грешци...",
-    "reportSubmittedSuccessfully": "Извештај о грешци успешно послат!"
+    "reportSubmittedSuccessfully": "Извештај о грешци успешно послат!",
+    "noFileSelected": "Ниједна датотека није одабрана"
 }

@@ -82,5 +82,9 @@
     "enterTitle": "Bitte geben Sie einen Titel für das Problem ein.",
     "submissionFailed": "Fehler beim Einreichen des Fehlerberichts...",
     "reportSubmittedSuccessfully": "Fehlerbericht erfolgreich eingereicht!",
-    "noFileSelected": "Keine Datei ausgewählt"
+    "noFileSelected": "Keine Datei ausgewählt",
+    "bugTitleLabel": "Eingabefeld für Fehlertitel",
+    "bugDescriptionLabel": "Eingabefeld für Fehlerbeschreibung",
+    "osLabel": "Betriebssystem-Dropdown",
+    "fileUploadLabel": "Datei-Upload-Button"
 }

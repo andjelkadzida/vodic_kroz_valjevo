@@ -82,5 +82,9 @@
     "enterTitle": "Please enter a title for the issue.",
     "submissionFailed": "Failed to submit bug report...",
     "reportSubmittedSuccessfully": "Bug report submitted successfully!",
-    "noFileSelected": "No file selected"
+    "noFileSelected": "No file selected",
+    "bugTitleLabel": "Bug title input field",
+    "bugDescriptionLabel": "Bug description input field",
+    "osLabel": "Operating system dropdown",
+    "fileUploadLabel": "File upload button"
 }

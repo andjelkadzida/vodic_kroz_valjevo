@@ -101,6 +101,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
         fontFamily: 'Roboto',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        canvasColor: Colors.transparent,
       ),
       // builder: (context, child) => AccessibilityTools(child: child),
       home: const HomePage(),

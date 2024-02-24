@@ -130,9 +130,9 @@ class Sights extends StatelessWidget {
                   padding: EdgeInsets.all(constraints.maxWidth * 0.02),
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.selectionClick();
                       mapScreen.navigateToDestination(
                           sightData['latitude'], sightData['longitude']);
-                      HapticFeedback.lightImpact();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,

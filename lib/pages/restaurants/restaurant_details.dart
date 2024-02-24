@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/services.dart';
 import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
 import '../../localization/supported_languages.dart';
@@ -110,6 +111,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                                                 constraints.maxWidth * 0.05),
                                       ),
                                       onPressed: () {
+                                        HapticFeedback.selectionClick();
                                         mapScreen.navigateToDestination(
                                             restaurantData['latitude'],
                                             restaurantData['longitude']);

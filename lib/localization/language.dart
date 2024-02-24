@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
@@ -48,6 +49,7 @@ class LanguageButton extends StatelessWidget {
         setSelectedLanguage(language);
         if (calledFromNavBar) {
           Navigator.pop(context);
+          HapticFeedback.selectionClick();
         } else {
           navigateTo(context, const MenuPage());
         }
@@ -107,7 +109,7 @@ void showLanguageMenuIfNeeded(BuildContext context) {
   });
 }
 
-// Set different bahaviopur for language menu based on where it was called from
+// Set different bahaviour for language menu based on where it was called from
 void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
   showModalBottomSheet(
     context: context,

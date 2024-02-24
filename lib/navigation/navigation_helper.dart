@@ -6,16 +6,16 @@ void navigateTo(BuildContext context, Widget page) {
 
   // Check if the current route is the same as the target route
   bool isCurrentRouteTarget = false;
-  Navigator.popUntil(context, (route) {
-    if (route.settings.name == routeName) {
+  if (Navigator.canPop(context)) {
+    final currentRoute = ModalRoute.of(context);
+    if (currentRoute?.settings.name == routeName) {
       isCurrentRouteTarget = true;
     }
-    return true;
-  });
+  }
 
   // Only navigate if the current route is not the target route
   if (!isCurrentRouteTarget) {
-    HapticFeedback.lightImpact();
+    HapticFeedback.mediumImpact();
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -28,7 +28,7 @@ void navigateTo(BuildContext context, Widget page) {
 
 // Show details page
 void showDetailsPage(BuildContext context, Widget page) {
-  HapticFeedback.lightImpact();
+  HapticFeedback.mediumImpact();
   Navigator.of(context).push(
     CupertinoPageRoute(
       builder: (context) => page,

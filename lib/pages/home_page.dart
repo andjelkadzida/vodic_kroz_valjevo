@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../localization/supported_languages.dart';
 import '../localization/language.dart';
@@ -54,6 +55,7 @@ class HomePage extends StatelessWidget {
                   label: localization(context).getStarted,
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.selectionClick();
                       showLanguageMenuIfNeeded(context);
                     },
                     style: ElevatedButton.styleFrom(

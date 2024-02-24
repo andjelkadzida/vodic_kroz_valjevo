@@ -86,7 +86,7 @@ class HotelDetailsPage extends StatelessWidget {
                                     InkWell(
                                       onTap: () {
                                         launchUrlString(hotelData['website']);
-                                        HapticFeedback.lightImpact();
+                                        HapticFeedback.selectionClick();
                                       },
                                       child: Text(
                                         localization(context).website,
@@ -148,6 +148,7 @@ class HotelDetailsPage extends StatelessWidget {
                                           ),
                                     ),
                                     onPressed: () {
+                                      HapticFeedback.selectionClick();
                                       mapScreen.navigateToDestination(
                                           hotelData['latitude'],
                                           hotelData['longitude']);

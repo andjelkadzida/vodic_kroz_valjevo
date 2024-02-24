@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
 import '../../localization/supported_languages.dart';
 import '../../navigation/bottom_navigation.dart';
@@ -17,7 +18,10 @@ class SightDetailsPage extends StatelessWidget {
     List<String> images = [
       sightData['sight_image_path'],
       sightData['sight_image_path2'],
+      sightData['sight_image_path3'],
     ];
+
+    precacheImages(context, images);
 
     return Scaffold(
       appBar: customAppBar(
@@ -35,18 +39,21 @@ class SightDetailsPage extends StatelessWidget {
                 Semantics(
                   image: true,
                   label: localization(context).imageOfSight(sightData['title']),
-                  child: SizedBox(
-                    height: constraints.maxWidth > 600 ? 400 : 200,
+                  child: Container(
+                    color: Colors.transparent,
+                    height: constraints.maxHeight * 0.3,
                     child: PhotoViewGallery.builder(
                       itemCount: images.length,
                       builder: (context, index) {
                         return PhotoViewGalleryPageOptions(
                           imageProvider: AssetImage(images[index]),
+                          maxScale: PhotoViewComputedScale.contained * 5,
+                          minScale: PhotoViewComputedScale.contained,
                           initialScale: PhotoViewComputedScale.contained,
-                          maxScale: PhotoViewComputedScale.contained * 10,
+                          basePosition: Alignment.center,
+                          filterQuality: FilterQuality.high,
                           heroAttributes:
                               PhotoViewHeroAttributes(tag: images[index]),
-                          filterQuality: FilterQuality.high,
                         );
                       },
                       scrollPhysics: const BouncingScrollPhysics(),
@@ -59,46 +66,38 @@ class SightDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 ExpansionTile(
                   expandedAlignment: Alignment.bottomCenter,
                   enableFeedback: true,
                   initiallyExpanded: false,
                   title: Row(
                     children: [
-                      Text(
-                        localization(context).description,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(
-                              color: Colors.black,
-                              fontSize: constraints.maxWidth * 0.06,
-                              fontWeight: FontWeight.w600,
-                            ),
+                      Flexible(
+                        child: Text(
+                          localization(context).description,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                color: Colors.black,
+                                fontSize: constraints.maxWidth * 0.06,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
                       ),
-                      const SizedBox(width: 8),
                       SizedBox(
-                        width: constraints.maxWidth * 0.06 > 48
-                            ? constraints.maxWidth * 0.06
-                            : 48,
-                        height: constraints.maxWidth * 0.06 > 48
-                            ? constraints.maxWidth * 0.06
-                            : 48,
-                        child: GestureDetector(
-                          onDoubleTap: () =>
-                              TextToSpeechConfig.instance.stopSpeaking(),
-                          child: IconButton(
-                            onPressed: () => TextToSpeechConfig.instance
-                                .speak(sightData['description']),
-                            tooltip: localization(context).tapToHearDetails,
-                            icon: Icon(
-                              Icons.volume_up,
-                              semanticLabel:
-                                  localization(context).tapToHearDetails,
-                              size: constraints.maxWidth * 0.065,
-                              applyTextScaling: true,
-                            ),
+                        width: constraints.maxWidth * 0.1,
+                        height: constraints.maxHeight * 0.1,
+                        child: IconButton(
+                          onPressed: () => TextToSpeechConfig.instance
+                              .speak(sightData['description']),
+                          tooltip: localization(context).tapToHearDetails,
+                          icon: Icon(
+                            Icons.volume_up,
+                            semanticLabel:
+                                localization(context).tapToHearDetails,
+                            size: constraints.maxWidth * 0.065,
+                            applyTextScaling: true,
                           ),
                         ),
                       )

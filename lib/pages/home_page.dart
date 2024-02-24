@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../localization/supported_languages.dart';
 import '../localization/language.dart';
@@ -12,8 +13,8 @@ class HomePage extends StatelessWidget {
       fit: StackFit.expand,
       children: <Widget>[
         Image.asset(
-          'images/kulaNenadovica.jpg',
-          fit: BoxFit.cover,
+          'images/pogled.jpg',
+          fit: BoxFit.contain,
           semanticLabel: localization(context).valjevoCityImage,
         ),
         Column(
@@ -26,11 +27,13 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Explore.\nTravel.\nInspire.',
+                      localization(context).slogan,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: MediaQuery.of(context).size.width * 0.08,
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.teal,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -52,6 +55,7 @@ class HomePage extends StatelessWidget {
                   label: localization(context).getStarted,
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.selectionClick();
                       showLanguageMenuIfNeeded(context);
                     },
                     style: ElevatedButton.styleFrom(
@@ -65,7 +69,11 @@ class HomePage extends StatelessWidget {
                         vertical: MediaQuery.of(context).size.height * 0.02,
                       ),
                     ),
-                    child: Text(localization(context).getStarted),
+                    child: Text(
+                      localization(context).getStarted,
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05),
+                    ),
                   ),
                 ),
               ),

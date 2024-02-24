@@ -39,6 +39,8 @@
     "hearLandmarkName": "Listen to the name of the landmark.",
     "enlargedImage": "Enlarged image of ",
     "tapToHearDetails": "Tap to hear details about the landmark. Tap twice to stop.",
+    "tapToHearLegend": "Tap to hear the legend of the city name. Tap twice to stop.",
+    "tapToHearHistory": "Tap to hear the city's history. Tap twice to stop.",
     "doubleTapToStopHearing": "Double tap to stop hearing.",
     "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
     "description": "Description",
@@ -64,5 +66,8 @@
     "tapToOpen": "Tap to open {item}",
     "tapForSightDetails": "Double tap to open sight details",
     "imageOfSight": "Image of sight {name}",
-    "tapToHearSightName": "Touch to hear the name of the sight"
+    "tapToHearSightName": "Touch to hear the name of the sight",
+    "value": "Value",
+    "historyOfTheCity": "City History",
+    "slogan": "Embrace the Beat!\nShape Your Adventure!"
 }

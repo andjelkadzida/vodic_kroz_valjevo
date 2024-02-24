@@ -32,7 +32,6 @@ dependencies:
     sdk: flutter
   map_launcher: ^3.1.0
   open_store: ^0.5.0
-  permission_handler: ^11.3.0
   accessibility_tools: ^1.0.1
   flutter_tts: ^3.8.5
   sqflite: ^2.3.2
@@ -43,9 +42,9 @@ dependencies:
   latlong2: ^0.9.0
   carousel_slider: ^4.2.1
   lottie: ^3.0.0
-  flutter_staggered_grid_view: ^0.7.0
   url_launcher: ^6.2.4
   photo_view: ^0.14.0
+  auto_size_text: ^3.0.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -78,9 +77,42 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/muzejLogo.png
-    - images/kulaNenadovica.jpg
-    - images/grbValjeva.png
+    - images/vaPogled.jpg
+    - images/pogled.jpg
+    - images/sightsImages/kulaNenadovica/kulaNenadovica1.jpg
+    - images/sightsImages/kulaNenadovica/kulaNenadovica2.jpg
+    - images/sightsImages/kulaNenadovica/kulaNenadovica3.jpg
+    - images/sightsImages/muzej/muzej1.jpg
+    - images/sightsImages/muzej/muzej2.jpg
+    - images/sightsImages/muzej/muzej3.jpeg
+    - images/sightsImages/gimnazija/gimnazija1.jpg
+    - images/sightsImages/gimnazija/gimnazija2.jpg
+    - images/sightsImages/gimnazija/gimnazija3.jpg
+    - images/sightsImages/hram/hram1.jpg
+    - images/sightsImages/hram/hram2.jpg
+    - images/sightsImages/hram/hram3.jpg
+    - images/sightsImages/paviljon/paviljon1.jpg
+    - images/sightsImages/paviljon/paviljon2.jpg
+    - images/sightsImages/paviljon/paviljon3.jpg
+    - images/sightsImages/stevan/stevan1.jpg
+    - images/sightsImages/stevan/stevan2.jpg
+    - images/sightsImages/stevan/stevan3.jpg
+    - images/sightsImages/tesnjar/tesnjar1.jpg
+    - images/sightsImages/tesnjar/tesnjar2.jpg
+    - images/sightsImages/tesnjar/tesnjar3.jpg
+    - images/sightsImages/zivojin/zivojin1.jpg
+    - images/sightsImages/zivojin/zivojin2.jpg
+    - images/sightsImages/zivojin/zivojin3.jpg
+    - images/parksImages/jadar/jadar1.jpg
+    - images/parksImages/jadar/jadar2.jpg
+    - images/parksImages/jadar/jadar3.jpg
+    - images/parksImages/pecina/pecina1.jpg
+    - images/parksImages/pecina/pecina2.jpg
+    - images/parksImages/pecina/pecina3.jpg
+    - images/parksImages/petiPuk/petiPuk1.jpg
+    - images/parksImages/petiPuk/petiPuk2.jpg
+    - images/parksImages/petiPuk/petiPuk3.jpg
+    - images/parksImages/petiPuk/petiPuk4.jpg
     - images/hotelsImages/bubicaSpolja.jpeg
     - images/hotelsImages/bubicaSoba.jpeg
     - images/hotelsImages/grandSpolja.jpeg

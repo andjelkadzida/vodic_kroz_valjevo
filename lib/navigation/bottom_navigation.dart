@@ -75,6 +75,7 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     ];
 
     return BottomNavigationBar(
+      backgroundColor: Colors.white,
       items: navItems.map((NavItem navItem) {
         return BottomNavigationBarItem(
           icon: Semantics(

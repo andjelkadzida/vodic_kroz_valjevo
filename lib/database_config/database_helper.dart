@@ -37,6 +37,7 @@ class DatabaseHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sight_image_path TEXT,
             sight_image_path2 TEXT,
+            sight_image_path3 TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,
@@ -53,14 +54,44 @@ class DatabaseHelper {
         ''');
 
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS SportsAndRecreation (
+          CREATE TABLE IF NOT EXISTS Sports (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sport_image_path TEXT,
+            sport_image_path2 TEXT,
+            sport_image_path3 TEXT,
             title_en TEXT,
             title_de TEXT,
             title_sr TEXT,
             title_sr_Cyrl TEXT,
-            title_sr_Latn TEXT
+            title_sr_Latn TEXT,
+            latitude REAL NOT NULL,
+            longitude REAL NOT NULL,
+            description_en TEXT,
+            description_de TEXT,
+            description_sr TEXT,
+            description_sr_Cyrl TEXT,
+            description_sr_Latn TEXT
+          )
+        ''');
+
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS Parks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            park_image_path TEXT,
+            park_image_path2 TEXT,
+            park_image_path3 TEXT,
+            title_en TEXT,
+            title_de TEXT,
+            title_sr TEXT,
+            title_sr_Cyrl TEXT,
+            title_sr_Latn TEXT,
+            latitude REAL NOT NULL,
+            longitude REAL NOT NULL,
+            description_en TEXT,
+            description_de TEXT,
+            description_sr TEXT,
+            description_sr_Cyrl TEXT,
+            description_sr_Latn TEXT
           )
         ''');
 
@@ -95,15 +126,36 @@ class DatabaseHelper {
             title_sr_Latn TEXT
             )
         ''');
+
+    await db.execute('''CREATE TABLE IF NOT EXISTS AboutCity (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        legend_title_en TEXT,
+        legend_title_de TEXT,
+        legend_title_sr TEXT,
+        legend_title_sr_Cyrl TEXT,
+        legend_title_sr_Latn TEXT,
+        legend_description_en TEXT,
+        legend_description_de TEXT,
+        legend_description_sr TEXT,
+        legend_description_sr_Cyrl TEXT,
+        legend_description_sr_Latn TEXT,
+        history_en TEXT,
+        history_de TEXT,
+        history_sr TEXT,
+        history_sr_Cyrl TEXT,
+        history_sr_Latn TEXT
+      )''');
   }
 
   static Future<void> _onUpgrade(
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion < newVersion) {
       await db.execute('DROP TABLE IF EXISTS Sights');
-      await db.execute('DROP TABLE IF EXISTS SportsAndRecreation');
+      await db.execute('DROP TABLE IF EXISTS Sports');
+      await db.execute('DROP TABLE IF EXISTS Parks');
       await db.execute('DROP TABLE IF EXISTS Hotels');
       await db.execute('DROP TABLE IF EXISTS Restaurants');
+      await db.execute('DROP TABLE IF EXISTS AboutCity');
       await _onCreate(db, newVersion);
     }
   }

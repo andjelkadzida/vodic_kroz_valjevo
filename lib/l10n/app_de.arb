@@ -39,6 +39,8 @@
     "hearLandmarkName": "Höre den Namen der Sehenswürdigkeit.",
     "enlargedImage": "Vergrößertes Bild von ",
     "tapToHearDetails": "Tippen Sie, um Details über die Sehenswürdigkeit zu hören. Tippen Sie zweimal, um zu stoppen.",
+    "tapToHearLegend": "Tippen Sie, um die Legende des Stadtnamens zu hören. Tippen Sie zweimal, um zu stoppen.",
+    "tapToHearHistory": "Tippen Sie, um die Stadtgeschichte zu hören. Tippen Sie zweimal, um zu stoppen.",
     "doubleTapToStopHearing": "Doppeltippen, um das Hören zu beenden.",
     "starCount": "{numberOfStars, plural, =1{1 Stern} other{{numberOfStars} Sterne}}",
     "description": "Beschreibung",
@@ -64,5 +66,8 @@
     "tapToOpen": "Tippen, um zu öffnen {item}",
     "tapForSightDetails": "Doppeltippen, um Details zu den Sehenswürdigkeiten zu öffnen",
     "imageOfSight": "Bild der Sehenswürdigkeit {name}",
-    "tapToHearSightName": "Berühren, um den Namen der Sehenswürdigkeit zu hören"
+    "tapToHearSightName": "Berühren, um den Namen der Sehenswürdigkeit zu hören",
+    "value": "Wert",
+    "historyOfTheCity": "Stadtgeschichte",
+    "slogan": "Erlebe den Rhythmus!\nGestalte dein Abenteuer!"
 }

@@ -34,34 +34,44 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
 
   @override
   Widget build(BuildContext context) {
-    double padding = MediaQuery.of(context).size.width * 0.05;
-    return Scaffold(
-      appBar: customAppBar(
-        context,
-        localization(context).restaurantsAndHotels,
-      ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
-      body: Padding(
-        padding: EdgeInsets.all(padding),
-        child: ListView(
-          children: [
-            _buildItem(
-              context,
-              label: localization(context).hotels,
-              icon: Icons.hotel,
-              lottieAsset: 'animations/hotels.json',
-              onTap: () => navigateTo(context, const Hotels()),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double width = constraints.maxWidth;
+        double height = constraints.maxHeight;
+
+        return Scaffold(
+          appBar: customAppBar(
+            context,
+            localization(context).restaurantsAndHotels,
+          ),
+          bottomNavigationBar: const CustomBottomNavigationBar(),
+          body: Padding(
+            padding: EdgeInsets.all(width * 0.05),
+            child: ListView(
+              children: [
+                _buildItem(
+                  context,
+                  label: localization(context).hotels,
+                  icon: Icons.hotel,
+                  lottieAsset: 'animations/hotels.json',
+                  onTap: () => navigateTo(context, const Hotels()),
+                  width: width,
+                  height: height,
+                ),
+                _buildItem(
+                  context,
+                  label: localization(context).restaurants,
+                  icon: Icons.restaurant,
+                  lottieAsset: 'animations/restaurants.json',
+                  onTap: () => navigateTo(context, const Restaurants()),
+                  width: width,
+                  height: height,
+                ),
+              ],
             ),
-            _buildItem(
-              context,
-              label: localization(context).restaurants,
-              icon: Icons.restaurant,
-              lottieAsset: 'animations/restaurants.json',
-              onTap: () => navigateTo(context, const Restaurants()),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -71,34 +81,40 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required IconData icon,
     required String lottieAsset,
     required VoidCallback onTap,
+    required double width,
+    required double height,
   }) {
-    double size = MediaQuery.of(context).size.width * 0.1;
     return Card(
       elevation: 5,
-      margin: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.01),
+      margin: EdgeInsets.symmetric(vertical: height * 0.01),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(20),
         child: Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+          padding: EdgeInsets.all(width * 0.04),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Lottie.asset(lottieAsset, width: size, height: size),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+              Lottie.asset(
+                lottieAsset,
+                width: width * 0.1,
+                height: width * 0.1,
+                fit: BoxFit.contain,
+              ),
+              SizedBox(width: width * 0.05),
               Expanded(
                 child: Text(
                   label,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         color: Colors.teal,
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        letterSpacing: 1,
                       ),
                 ),
               ),
               Icon(icon,
-                  size: MediaQuery.of(context).size.width * 0.08,
+                  size: width * 0.08,
+                  applyTextScaling: true,
                   color: Colors.teal),
             ],
           ),

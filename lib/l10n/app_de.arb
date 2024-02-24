@@ -69,5 +69,17 @@
     "tapToHearSightName": "Berühren, um den Namen der Sehenswürdigkeit zu hören",
     "value": "Wert",
     "historyOfTheCity": "Stadtgeschichte",
-    "slogan": "Erlebe den Rhythmus!\nGestalte dein Abenteuer!"
+    "slogan": "Erlebe den Rhythmus!\nGestalte dein Abenteuer!",
+    "bugReport": "Fehlerberichtsformular",
+    "bugTitle": "Fehlerbezeichnung",
+    "bugDescription": "Fehlerbeschreibung",
+    "operatingSystem": "Betriebssystem",
+    "selectOS": "Please select an operating system",
+    "uploadFile": "Datei hochladen",
+    "submit": "Einreichen",
+    "submittingReport": "Fehlerbericht wird eingereicht...",
+    "enterDescription": "Bitte geben Sie eine Beschreibung des Problems ein.",
+    "enterTitle": "Bitte geben Sie einen Titel für das Problem ein.",
+    "submissionFailed": "Fehler beim Einreichen des Fehlerberichts...",
+    "reportSubmittedSuccessfully": "Fehlerbericht erfolgreich eingereicht!"
 }

@@ -69,5 +69,17 @@
     "tapToHearSightName": "Dodirnite da biste čuli naziv znamenitosti",
     "value": "Vrednost",
     "historyOfTheCity": "Istorija grada",
-    "slogan": "Oseti ritam!\nStvori svoju avanturu!"
+    "slogan": "Oseti ritam!\nStvori svoju avanturu!",
+    "bugReport": "Formular za prijavu grešaka",
+    "bugTitle": "Naslov greške",
+    "bugDescription": "Opis greške",
+    "operatingSystem": "Operativni sistem",
+    "selectOS": "Molimo vas da odaberete operativni sistem",
+    "uploadFile": "Otpremi datoteku",
+    "submit": "Pošalji",
+    "submittingReport": "Slanje izveštaja o grešci...",
+    "enterDescription": "Molimo unesite opis problema.",
+    "enterTitle": "Molimo unesite naslov problema.",
+    "submissionFailed": "Nije uspelo slanje izveštaja o grešci...",
+    "reportSubmittedSuccessfully": "Izveštaj o grešci uspešno poslat!"
 }

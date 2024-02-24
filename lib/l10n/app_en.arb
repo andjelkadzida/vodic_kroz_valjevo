@@ -69,5 +69,17 @@
     "tapToHearSightName": "Touch to hear the name of the sight",
     "value": "Value",
     "historyOfTheCity": "City History",
-    "slogan": "Embrace the Beat!\nShape Your Adventure!"
+    "slogan": "Embrace the Beat!\nShape Your Adventure!",
+    "bugReport": "Bug Report Form",
+    "bugTitle": "Bug Title",
+    "bugDescription": "Bug Description",
+    "operatingSystem": "Operating System",
+    "selectOS": "Please select an operating system",
+    "uploadFile": "Upload File",
+    "submit": "Submit",
+    "submittingReport": "Submitting bug report...",
+    "enterDescription": "Please enter a description of the issue.",
+    "enterTitle": "Please enter a title for the issue.",
+    "submissionFailed": "Failed to submit bug report...",
+    "reportSubmittedSuccessfully": "Bug report submitted successfully!"
 }

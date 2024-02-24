@@ -34,7 +34,6 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
 
   @override
   Widget build(BuildContext context) {
-    double padding = MediaQuery.of(context).size.width * 0.05;
     return Scaffold(
       appBar: customAppBar(
         context,
@@ -42,7 +41,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: Padding(
-        padding: EdgeInsets.all(padding),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
         child: ListView(
           children: [
             _buildItem(
@@ -72,7 +71,6 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required String lottieAsset,
     required VoidCallback onTap,
   }) {
-    double size = MediaQuery.of(context).size.width * 0.1;
     return Card(
       elevation: 5,
       margin: EdgeInsets.symmetric(
@@ -86,7 +84,12 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Lottie.asset(lottieAsset, width: size, height: size),
+              Lottie.asset(
+                lottieAsset,
+                width: MediaQuery.of(context).size.width * 0.1,
+                height: MediaQuery.of(context).size.width * 0.1,
+                fit: BoxFit.contain,
+              ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.05),
               Expanded(
                 child: Text(

@@ -30,9 +30,14 @@ class SportsRepository {
             title_sr_Cyrl,
             title_sr_Latn,
             latitude,
-            longitude
+            longitude,
+            description_en,
+            description_de,
+            description_sr,
+            description_sr_Cyrl,
+            description_sr_Latn
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
           data['sport_image_path'],
           data['sport_image_path2'],
@@ -44,6 +49,11 @@ class SportsRepository {
           data['titles']['sr_Latn'],
           data['latitude'],
           data['longitude'],
+          data['description']['en'],
+          data['description']['de'],
+          data['description']['sr'],
+          data['description']['sr_Cyrl'],
+          data['description']['sr_Latn'],
         ]);
       }
       // Commit the batch
@@ -67,6 +77,13 @@ class SportsRepository {
         },
         'latitude': 44.26955379468345,
         'longitude': 19.879072700675714,
+        'description': {
+          'en': 'Description in English',
+          'de': 'Beschreibung auf Deutsch',
+          'sr': 'Опис на српском',
+          'sr_Cyrl': 'Опис на српском ћирилицом',
+          'sr_Latn': 'Opis na srpskom latinicom',
+        },
       },
       // Pecina
       {
@@ -82,6 +99,13 @@ class SportsRepository {
         },
         'latitude': 44.262610342861635,
         'longitude': 19.873701632737493,
+        'description': {
+          'en': 'Description in English',
+          'de': 'Beschreibung auf Deutsch',
+          'sr': 'Опис на српском',
+          'sr_Cyrl': 'Опис на српском ћирилицом',
+          'sr_Latn': 'Opis na srpskom latinicom',
+        },
       },
       // Peti Puk
       {
@@ -97,6 +121,13 @@ class SportsRepository {
         },
         'latitude': 44.282386269219636,
         'longitude': 19.89021169469568,
+        'description': {
+          'en': 'Description in English',
+          'de': 'Beschreibung auf Deutsch',
+          'sr': 'Опис на српском',
+          'sr_Cyrl': 'Опис на српском ћирилицом',
+          'sr_Latn': 'Opis na srpskom latinicom',
+        },
       },
     ];
 

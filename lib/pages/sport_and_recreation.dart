@@ -158,7 +158,8 @@ class SportsAndRecreation extends StatelessWidget {
         sport_image_path3,
         title_$languageCode AS title,
         latitude,
-        longitude
+        longitude,
+        description_$languageCode AS description
       FROM Sports
     ''');
     return data;
@@ -176,7 +177,8 @@ class SportsAndRecreation extends StatelessWidget {
         park_image_path3,
         title_$languageCode AS title,
         latitude,
-        longitude
+        longitude,
+        description_$languageCode AS description
       FROM Parks
     ''');
     return data;

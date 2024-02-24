@@ -22,7 +22,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 1,
+        version: 2,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -65,7 +65,12 @@ class DatabaseHelper {
             title_sr_Cyrl TEXT,
             title_sr_Latn TEXT,
             latitude REAL NOT NULL,
-            longitude REAL NOT NULL
+            longitude REAL NOT NULL,
+            description_en TEXT,
+            description_de TEXT,
+            description_sr TEXT,
+            description_sr_Cyrl TEXT,
+            description_sr_Latn TEXT
           )
         ''');
 
@@ -81,7 +86,12 @@ class DatabaseHelper {
             title_sr_Cyrl TEXT,
             title_sr_Latn TEXT,
             latitude REAL NOT NULL,
-            longitude REAL NOT NULL
+            longitude REAL NOT NULL,
+            description_en TEXT,
+            description_de TEXT,
+            description_sr TEXT,
+            description_sr_Cyrl TEXT,
+            description_sr_Latn TEXT
           )
         ''');
 

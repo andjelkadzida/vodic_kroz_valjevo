@@ -1,5 +1,3 @@
-import 'package:app_settings/app_settings.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -21,15 +19,6 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
   @override
   void initState() {
     super.initState();
-    checkConnectivity();
-  }
-
-  // Checking network connectivity
-  Future<void> checkConnectivity() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      AppSettings.openAppSettings(type: AppSettingsType.wireless);
-    }
   }
 
   @override

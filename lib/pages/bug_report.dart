@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +29,36 @@ class BugReportPageState extends State<BugReportPage> {
   PlatformFile? file;
   String? fileName;
   bool _isLoading = false;
+  ValueNotifier<bool?> internetConnectionStatus = ValueNotifier<bool?>(null);
+  StreamSubscription<bool>? internetConnectionSubscription;
+  bool? _hasInternet;
 
   @override
   void initState() {
     super.initState();
     initData();
+    internetConnectionSubscription =
+        hasInternetConnection().listen((hasInternet) {
+      if (!hasInternet) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(localization(context).noInternetConnection),
+            action: SnackBarAction(
+              onPressed: () {
+                AppSettings.openAppSettings(type: AppSettingsType.wireless);
+              },
+              label: localization(context).settings,
+            ),
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    internetConnectionSubscription?.cancel();
+    super.dispose();
   }
 
   Future<void> initData() async {
@@ -47,7 +73,8 @@ class BugReportPageState extends State<BugReportPage> {
   void attemptToSendReport() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      hasInternetConnection().then((hasInternet) {
+      checkInitialInternetConnection().then((hasInternet) {
+        _hasInternet = hasInternet;
         if (!hasInternet) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

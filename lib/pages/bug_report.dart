@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:app_settings/app_settings.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -42,6 +44,46 @@ class BugReportPageState extends State<BugReportPage> {
         clientKey: keyClientKey, debug: true);
   }
 
+  Future<bool> hasInternetConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
+  }
+
+  void attemptToSendReport() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      hasInternetConnection().then((hasInternet) {
+        if (!hasInternet) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(localization(context).noInternetConnection),
+              action: SnackBarAction(
+                onPressed: () {
+                  AppSettings.openAppSettings(type: AppSettingsType.wireless);
+                },
+                label: localization(context).openSettings,
+              ),
+            ),
+          );
+        } else {
+          setState(() {
+            _isLoading = true;
+          });
+          sendReport(bugTitle, bugDescription, operatingSystem, file, context);
+          _formKey.currentState!.reset();
+          _titleFocus.unfocus();
+          _descriptionFocus.unfocus();
+          setState(() {
+            _isLoading = false;
+            file = null;
+            fileName = null;
+            operatingSystem = null;
+          });
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,225 +95,205 @@ class BugReportPageState extends State<BugReportPage> {
               padding: const EdgeInsets.all(16.0),
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-                  return Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          localization(context).bugTitle,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        Semantics(
-                          label: localization(context).bugTitleLabel,
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.teal),
-                              ),
-                            ),
-                            style: TextStyle(
-                                fontSize: constraints.maxWidth * 0.04),
-                            focusNode: _titleFocus,
-                            validator: (value) {
-                              if (value?.isEmpty ?? true) {
-                                return localization(context).enterTitle;
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                bugTitle = value;
-                              });
-                            },
-                            onFieldSubmitted: (_) {
-                              _titleFocus.unfocus();
-                              FocusScope.of(context)
-                                  .requestFocus(_descriptionFocus);
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 16.0),
-                        Text(
-                          localization(context).bugDescription,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        Semantics(
-                          label: localization(context).bugDescriptionLabel,
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.teal),
-                              ),
-                            ),
-                            style: TextStyle(
-                                fontSize: constraints.maxWidth * 0.04),
-                            focusNode: _descriptionFocus,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return localization(context).enterDescription;
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                bugDescription = value;
-                              });
-                            },
-                            maxLines: 4,
-                          ),
-                        ),
-                        const SizedBox(height: 16.0),
-                        Text(
-                          localization(context).operatingSystem,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(height: 8.0),
-                        Semantics(
-                          label: localization(context).osLabel,
-                          child: DropdownButtonFormField<String>(
-                            icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                            iconDisabledColor: Colors.grey,
-                            iconEnabledColor: Colors.teal,
-                            iconSize: MediaQuery.of(context).size.width * 0.08,
-                            decoration: InputDecoration(
-                              filled: true,
-                              labelText: localization(context).selectOS,
-                              labelStyle:
-                                  Theme.of(context).textTheme.bodyMedium,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40),
-                                borderSide: const BorderSide(
-                                  color: Colors.black,
-                                  width: 2,
+                  return SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Semantics(
+                                label: localization(context).bugTitleLabel,
+                                child: TextFormField(
+                                  focusNode: _titleFocus,
+                                  decoration: InputDecoration(
+                                    labelText: localization(context).bugTitle,
+                                  ),
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.04),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return localization(context).enterTitle;
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    bugTitle = value!;
+                                  },
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40),
-                                borderSide: const BorderSide(
-                                  color: Colors.teal,
-                                  width: 3,
+                              Semantics(
+                                label:
+                                    localization(context).bugDescriptionLabel,
+                                child: TextFormField(
+                                  focusNode: _descriptionFocus,
+                                  decoration: InputDecoration(
+                                    labelText:
+                                        localization(context).bugDescription,
+                                    focusedBorder: const UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.teal),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.04),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return localization(context)
+                                          .enterDescription;
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    bugDescription = value!;
+                                  },
+                                  maxLines: 5,
                                 ),
                               ),
-                            ),
-                            dropdownColor: Colors.white,
-                            value: operatingSystem,
-                            items: operatingSystems.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: SizedBox(
-                                  width: constraints.maxWidth * 0.6,
+                              const SizedBox(height: 16.0),
+                              Semantics(
+                                label: localization(context).osLabel,
+                                child: DropdownButtonFormField<String>(
+                                  icon: const Icon(
+                                      Icons.keyboard_arrow_down_rounded),
+                                  iconDisabledColor: Colors.grey,
+                                  iconEnabledColor: Colors.teal,
+                                  iconSize:
+                                      MediaQuery.of(context).size.width * 0.08,
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    labelText: localization(context).selectOS,
+                                    labelStyle:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                        color: Colors.black,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                        color: Colors.teal,
+                                        width: 3,
+                                      ),
+                                    ),
+                                  ),
+                                  dropdownColor: Colors.white,
+                                  value: operatingSystem,
+                                  items: operatingSystems.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: SizedBox(
+                                        width: constraints.maxWidth * 0.6,
+                                        child: Text(
+                                          value,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                color: Colors.black,
+                                                fontSize:
+                                                    constraints.maxWidth * 0.04,
+                                                letterSpacing: 1,
+                                              ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return localization(context).selectOS;
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      operatingSystem = newValue;
+                                    });
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                              Semantics(
+                                label: localization(context).uploadFile,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
+
+                                    if (result != null) {
+                                      setState(() {
+                                        file = result.files.first;
+                                        fileName = file!.name;
+                                      });
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Tooltip(
+                                        message: localization(context)
+                                            .fileUploadLabel,
+                                        child: Icon(
+                                          Icons.attach_file,
+                                          semanticLabel:
+                                              localization(context).uploadFile,
+                                          size: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.07,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      Text(localization(context).uploadFile,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              Text(fileName ??
+                                  localization(context).noFileSelected),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: attemptToSendReport,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.teal,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: constraints.maxWidth * 0.015),
+                                  ),
                                   child: Text(
-                                    value,
+                                    localization(context).submit,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Colors.black,
-                                          fontSize: constraints.maxWidth * 0.04,
-                                          letterSpacing: 1,
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                          fontSize: constraints.maxWidth * 0.05,
                                         ),
-                                    textAlign: TextAlign.justify,
                                   ),
                                 ),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                operatingSystem = value.toString();
-                              });
-                            },
-                            validator: (value) {
-                              if (value == null) {
-                                return localization(context).selectOS;
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 16.0),
-                        Semantics(
-                          label: localization(context).fileUploadLabel,
-                          child: GestureDetector(
-                            onTap: () async {
-                              FilePickerResult? result = await FilePicker
-                                  .platform
-                                  .pickFiles(type: FileType.any);
-                              if (result != null) {
-                                setState(() {
-                                  file = result.files.single;
-                                  fileName = file!.name;
-                                });
-                              }
-                            },
-                            child: Row(
-                              children: [
-                                Tooltip(
-                                  message:
-                                      localization(context).fileUploadLabel,
-                                  child: Icon(
-                                    Icons.attach_file,
-                                    semanticLabel:
-                                        localization(context).uploadFile,
-                                    size: MediaQuery.of(context).size.width *
-                                        0.07,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10.0,
-                                ),
-                                Text(localization(context).uploadFile,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        Text(fileName ?? localization(context).noFileSelected),
-                        const SizedBox(height: 16.0),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-                                sendReport(bugTitle, bugDescription,
-                                    operatingSystem, file, context);
-                                operatingSystem = null;
-                                _formKey.currentState!.reset();
-                                _titleFocus.unfocus();
-                                _descriptionFocus.unfocus();
-                                setState(() {
-                                  _isLoading = false;
-                                });
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: constraints.maxWidth * 0.015),
-                            ),
-                            child: Text(
-                              localization(context).submit,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
-                                    color: Colors.white,
-                                    fontSize: constraints.maxWidth * 0.05,
-                                  ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   );
                 },
@@ -299,8 +321,11 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
     if (response.success) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(localization(context).bugReportSent),
-        ),
+            content: Text(localization(context).bugReportSent),
+            action: SnackBarAction(
+              label: localization(context).ok,
+              onPressed: () {},
+            )),
       );
     }
   }).catchError((error) {

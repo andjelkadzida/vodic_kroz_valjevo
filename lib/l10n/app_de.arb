@@ -87,5 +87,7 @@
     "fileUploadLabel": "Datei-Upload-Button",
     "changeLanguageLabel": "Sprache ändern in {lang}",
     "selectLanguageLabel": "Wähle {lang}",
-    "bugReportSent": "Fehlerbericht erfolgreich gesendet."
+    "bugReportSent": "Fehlerbericht erfolgreich gesendet.",
+    "ok": "OK",
+    "noInternetConnection": "Keine Internetverbindung!"
 }

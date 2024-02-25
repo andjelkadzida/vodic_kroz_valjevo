@@ -87,5 +87,7 @@
     "fileUploadLabel": "File upload button",
     "changeLanguageLabel": "Change language to {lang}",
     "selectLanguageLabel": "Select {lang}",
-    "bugReportSent": "Bug report successfully sent."
+    "bugReportSent": "Bug report successfully sent.",
+    "ok": "OK",
+    "noInternetConnection": "No Internet Connection!"
 }

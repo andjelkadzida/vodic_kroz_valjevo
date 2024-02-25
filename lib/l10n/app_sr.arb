@@ -87,5 +87,7 @@
     "fileUploadLabel": "Dugme za otpremanje datoteke",
     "changeLanguageLabel": "Promeni jezik na {lang}",
     "selectLanguageLabel": "Izaberite {lang}",
-    "bugReportSent": "Izveštaj o grešci uspešno poslat."
+    "bugReportSent": "Izveštaj o grešci uspešno poslat.",
+    "ok": "OK",
+    "noInternetConnection": "Nema internet konekcije!"
 }

@@ -87,5 +87,7 @@
     "fileUploadLabel": "Дугме за отпремање датотеке",
     "changeLanguageLabel": "Промени језик на {lang}",
     "selectLanguageLabel": "Изаберите {lang}",
-    "bugReportSent": "Извештај о грешци успешно послат."
+    "bugReportSent": "Извештај о грешци успешно послат.",
+    "ok": "ОК",
+    "noInternetConnection": "Нема интернет конекције!"
 }

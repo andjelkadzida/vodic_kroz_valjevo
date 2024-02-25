@@ -58,10 +58,26 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                   maxZoom: 18.0,
                 ),
                 children: [
-                  TileLayer(
-                      urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-                  MarkerLayer(markers: markers),
+                  Stack(
+                    children: [
+                      TileLayer(
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      ),
+                      MarkerLayer(markers: markers),
+                      Positioned(
+                        bottom: 5.0,
+                        right: 5.0,
+                        child: Container(
+                          color: Colors.white,
+                          child: const Text(
+                            '© OpenStreetMap contributors',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               );
             }
@@ -134,9 +150,25 @@ Widget buildMap() {
                   initialZoom: 13.0,
                 ),
                 children: [
-                  TileLayer(
-                      urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
+                  Stack(
+                    children: [
+                      TileLayer(
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      ),
+                      Positioned(
+                        bottom: 5.0,
+                        right: 5.0,
+                        child: Container(
+                          color: Colors.white,
+                          child: const Text(
+                            '© OpenStreetMap contributors',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               );
             }

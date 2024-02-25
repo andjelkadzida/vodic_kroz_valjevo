@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
+import '../helper/internet_connectivity.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
 import '../navigation/cutom_app_bar.dart';
@@ -44,11 +44,6 @@ class BugReportPageState extends State<BugReportPage> {
         clientKey: keyClientKey, debug: true);
   }
 
-  Future<bool> hasInternetConnection() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    return connectivityResult != ConnectivityResult.none;
-  }
-
   void attemptToSendReport() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -61,7 +56,7 @@ class BugReportPageState extends State<BugReportPage> {
                 onPressed: () {
                   AppSettings.openAppSettings(type: AppSettingsType.wireless);
                 },
-                label: localization(context).openSettings,
+                label: localization(context).settings,
               ),
             ),
           );

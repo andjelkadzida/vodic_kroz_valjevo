@@ -77,16 +77,15 @@
     "selectOS": "Please select an operating system",
     "uploadFile": "Datei hochladen",
     "submit": "Einreichen",
-    "submittingReport": "Fehlerbericht wird eingereicht...",
     "enterDescription": "Bitte geben Sie eine Beschreibung des Problems ein.",
     "enterTitle": "Bitte geben Sie einen Titel für das Problem ein.",
     "submissionFailed": "Fehler beim Einreichen des Fehlerberichts...",
-    "reportSubmittedSuccessfully": "Fehlerbericht erfolgreich eingereicht!",
     "noFileSelected": "Keine Datei ausgewählt",
     "bugTitleLabel": "Eingabefeld für Fehlertitel",
     "bugDescriptionLabel": "Eingabefeld für Fehlerbeschreibung",
     "osLabel": "Betriebssystem-Dropdown",
     "fileUploadLabel": "Datei-Upload-Button",
     "changeLanguageLabel": "Sprache ändern in {lang}",
-    "selectLanguageLabel": "Wähle {lang}"
+    "selectLanguageLabel": "Wähle {lang}",
+    "bugReportSent": "Fehlerbericht erfolgreich gesendet."
 }

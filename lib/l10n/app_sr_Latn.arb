@@ -77,16 +77,15 @@
     "selectOS": "Molimo vas da odaberete operativni sistem",
     "uploadFile": "Otpremi datoteku",
     "submit": "Pošalji",
-    "submittingReport": "Slanje izveštaja o grešci...",
     "enterDescription": "Molimo unesite opis problema.",
     "enterTitle": "Molimo unesite naslov problema.",
     "submissionFailed": "Nije uspelo slanje izveštaja o grešci...",
-    "reportSubmittedSuccessfully": "Izveštaj o grešci uspešno poslat!",
     "noFileSelected": "Nijedna datoteka nije odabrana",
     "bugTitleLabel": "Polje za unos naslova greške",
     "bugDescriptionLabel": "Polje za unos opisa greške",
     "osLabel": "Padajući meni za operativni sistem",
     "fileUploadLabel": "Dugme za otpremanje datoteke",
     "changeLanguageLabel": "Promeni jezik na {lang}",
-    "selectLanguageLabel": "Izaberite {lang}"
+    "selectLanguageLabel": "Izaberite {lang}",
+    "bugReportSent": "Izveštaj o grešci uspešno poslat."
 }

@@ -240,31 +240,15 @@ class BugReportPageState extends State<BugReportPage> {
                                 setState(() {
                                   _isLoading = true;
                                 });
-                                try {
-                                  sendReport(bugTitle, bugDescription,
-                                      operatingSystem, file);
-                                  operatingSystem = null;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(localization(context)
-                                          .submittingReport),
-                                    ),
-                                  );
-                                  _formKey.currentState!.reset();
-                                  _titleFocus.unfocus();
-                                  _descriptionFocus.unfocus();
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(localization(context)
-                                          .submissionFailed),
-                                    ),
-                                  );
-                                } finally {
-                                  setState(() {
-                                    _isLoading = false;
-                                  });
-                                }
+                                sendReport(bugTitle, bugDescription,
+                                    operatingSystem, file, context);
+                                operatingSystem = null;
+                                _formKey.currentState!.reset();
+                                _titleFocus.unfocus();
+                                _descriptionFocus.unfocus();
+                                setState(() {
+                                  _isLoading = false;
+                                });
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -297,10 +281,8 @@ class BugReportPageState extends State<BugReportPage> {
   }
 }
 
-// TODO: Implement the localized message
-Future<String> sendReport(String bugTitle, String bugDescription,
-    String? operatingSystem, PlatformFile? file) async {
-  String message = '';
+void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
+    PlatformFile? file, BuildContext context) {
   var bugReport = ParseObject('BugReport')
     ..set('title', bugTitle)
     ..set('description', bugDescription)
@@ -313,12 +295,19 @@ Future<String> sendReport(String bugTitle, String bugDescription,
     bugReport.set('file', parseFile);
   }
 
-  var response = await bugReport.save();
-
-  if (response.success) {
-    message = 'Bug Report Saved Successfully';
-  } else {
-    message = 'Failed to Save Bug Report: ${response.error!.message}';
-  }
-  return message;
+  bugReport.save().then((response) {
+    if (response.success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(localization(context).bugReportSent),
+        ),
+      );
+    }
+  }).catchError((error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(localization(context).submissionFailed),
+      ),
+    );
+  });
 }

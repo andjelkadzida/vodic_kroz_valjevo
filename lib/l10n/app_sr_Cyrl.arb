@@ -77,16 +77,15 @@
     "selectOS": "Молимо вас да одаберете оперативни систем",
     "uploadFile": "Отпреми датотеку",
     "submit": "Пошаљи",
-    "submittingReport": "Слање извештаја о грешци...",
     "enterDescription": "Молимо унесите опис проблема.",
     "enterTitle": "Молимо унесите наслов проблема.",
     "submissionFailed": "Није успело слање извештаја о грешци...",
-    "reportSubmittedSuccessfully": "Извештај о грешци успешно послат!",
     "noFileSelected": "Ниједна датотека није одабрана",
     "bugTitleLabel": "Поље за унос наслова грешке",
     "bugDescriptionLabel": "Поље за унос описа грешке",
     "osLabel": "Падајући мени за оперативни систем",
     "fileUploadLabel": "Дугме за отпремање датотеке",
     "changeLanguageLabel": "Промени језик на {lang}",
-    "selectLanguageLabel": "Изаберите {lang}"
+    "selectLanguageLabel": "Изаберите {lang}",
+    "bugReportSent": "Извештај о грешци успешно послат."
 }

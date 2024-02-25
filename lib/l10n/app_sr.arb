@@ -92,11 +92,34 @@
     "ok": "OK",
     "noInternetConnection": "Nema internet konekcije!",
     "aboutApp": "O aplikaciji",
-    "appAuthor": "© 2024 Anđelka Džida"
+    "appAuthor": "© 2024 Anđelka Džida",
     "appLogo": "Logo aplikacije",
     "aboutAppLocalization": "Lokalizacija: Naša aplikacija je dizajnirana za globalnu dostupnost, nudeći višejezičnu podršku koja obuhvata engleski, nemački i srpski jezik, uključujući i latinično i ćirilično pismo.",
     "aboutAppAccessibility": "Pristupačnost: Posvećeni smo tome da našu aplikaciju učinimo dostupnom svima, uključujući korisnike sa invaliditetom. Naša aplikacija sadrži funkcije kao što su podrška za čitače ekrana i prilagodljive veličine teksta.",
     "aboutAppDescription": "Istražite bez napora sa našom Tour Guide aplikacijom, vašim džepnim stručnjakom za putovanja. Zaronite u suštinu svake destinacije sa detaljnim vodičima za znamenitosti, hotele, restorane, parkove i sportske objekte. Navigacija je jednostavna, a uz bogate narative o vašem okruženju svako putovanje postaje doživljaj za pamćenje. Dizajnirana za pristupačnost, naša aplikacija osigurava besprekorno iskustvo za sve putnike. Krenite na put otkrića i dozvolite nam da vas vodimo do čuda sveta, sve iz dlana vaše ruke.",
     "privacyPolicy": "Politika privatnosti",
-    "tearmsOfUse": "Uslovi korišćenja"
+
+
+
+    "termsOfUse": "Uslovi korišćenja",
+    "infoByYou": "Informacije koje ste pružili",
+    "infoByYouContent": "Kada stupate u interakciju s nama kontaktiranjem, davanjem povratnih informacija ili popunjavanjem obrazaca, Vodič Kroz Valjevo može sakupiti dodatne podatke kao što su vaša lokacija, detalji o internet konekciji i više.",
+    "autoCollectedData": "Informacije koje automatski sakuplja Vodič Kroz Valjevo",
+    "autoCollectedDataContent": "Vodič Kroz Valjevo automatski sakuplja podatke kao što su vaša IP adresa, metrike interakcija i informacije o uređaju kada koristite naše usluge ili aplikacije.",
+    "localStorage": "Napomena o lokalnom skladištenju",
+    "localStorageContent": "Da bi poboljšao naše usluge i stekao uvid u vaše obrasce interakcije, Vodič Kroz Valjevo koristi tehnologije za lokalno skladištenje. Molimo vas da imate u vidu da se vaše postavke i preferencije čuvaju direktno na vašem uređaju jer ne koristimo kolačiće.",
+    "useOfInfo": "Korišćenje informacija",
+    "useOfInfoContent": "Vodič Kroz Valjevo može koristiti vaše informacije za poboljšanje i pružanje naših usluga, praćenje vaših aktivnosti, komunikaciju sa vama, pružanje podrške korisnicima i osiguranje sigurnosti naših uslova i pravila.",
+    "thirdParty": "Pristup trećih strana vašim informacijama",
+    "thirdPartyContent": "Vaši podaci mogu biti podeljeni sa trećim stranama iz raznih razloga, uključujući, ali ne ograničavajući se na, saradnju sa pružaocima usluga i pridržavanje zakona, u skladu sa našim uslovima i pravilima.",
+    "tearmsOfAnd": "Uslovi korišćenja i pravila o privatnosti trećih strana",
+    "tearmsOfAndContent": "Priznajete da Vodič Kroz Valjevo koristi usluge trećih strana koje mi ne upravljamo niti obezbeđujemo, i vaša je odgovornost da pregledate njihove politike.",
+    "law": "Sprovođenje zakona",
+    "lawContent": "Vodič Kroz Valjevo može otkriti vaše informacije pod sudskim nalogom ili ako sumnjamo na kršenje naših uslova i pravila.",
+    "ongoingAmend": "Tekuće izmene",
+    "ongoingAmendContent": "Vodič Kroz Valjevo zadržava pravo da menja ovu politiku privatnosti, pri čemu izmene stupaju na snagu odmah po objavljivanju. Nastavkom korišćenja naše usluge nakon izmene, prihvatate te izmene.",
+    "contact": "Kontakt",
+    "contactContent": "Ako imate pitanja ili zabrinutosti u vezi sa ovom politikom privatnosti, molimo vas da nas kontaktirate putem e-pošte.",
+    "mapCredits": "Zasluge za mape",
+    "mapCreditsContent": "Priznajemo doprinose projekata poput Open Street Map u pružanju skalabilnih podataka o mapama."
 }

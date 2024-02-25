@@ -92,11 +92,34 @@
     "ok": "OK",
     "noInternetConnection": "Keine Internetverbindung!",
     "aboutApp": "Über die App",
-    "appAuthor": "© 2024 Andjelka Dzida"
+    "appAuthor": "© 2024 Andjelka Dzida",
     "appLogo": "Anwendungslogo",
     "aboutAppLocalization": "Lokalisierung: Unsere Anwendung ist für globale Zugänglichkeit konzipiert und bietet mehrsprachige Unterstützung, die Englisch, Deutsch und Serbisch umfasst, einschließlich der lateinischen und kyrillischen Schriftsysteme.",
     "aboutAppAccessibility": "Zugänglichkeit: Wir setzen uns dafür ein, unsere App für jeden zugänglich zu machen, einschließlich Nutzern mit Behinderungen. Unsere App beinhaltet Funktionen wie Screenreader-Unterstützung und anpassbare Textgrößen.",
     "aboutAppDescription": "Erkunden Sie mühelos mit unserer Tour Guide App, Ihrem Taschenreiseexperten. Tauchen Sie ein in das Wesen jedes Ziels mit detaillierten Führern zu Sehenswürdigkeiten, Hotels, Restaurants, Parks und Sportanlagen. Navigieren Sie mit Leichtigkeit und hören Sie sich reiche Erzählungen über Ihre Umgebung an, die jede Reise zu einem immersiven Erlebnis machen. Unsere App ist für Barrierefreiheit konzipiert und gewährleistet ein nahtloses Erlebnis für alle Reisenden. Begeben Sie sich auf eine Entdeckungsreise und lassen Sie sich von uns zu den Wundern der Welt führen, alles aus der Handfläche.",
     "privacyPolicy": "Datenschutzrichtlinie",
-    "tearmsOfUse": "Nutzungsbedingungen"
+
+
+
+    "termsOfUse": "Nutzungsbedingungen",
+    "infoByYou": "Von Ihnen bereitgestellte Informationen",
+    "infoByYouContent": "Wenn Sie mit uns interagieren, indem Sie uns kontaktieren, Feedback geben oder Formulare ausfüllen, kann Vodič Kroz Valjevo zusätzliche Daten wie Ihren Standort, Internetverbindungsdetails und mehr sammeln.",
+    "autoCollectedData": "Automatisch von Vodič Kroz Valjevo gesammelte Informationen",
+    "autoCollectedDataContent": "Vodič Kroz Valjevo sammelt automatisch Daten wie Ihre IP-Adresse, Interaktionsmetriken und Geräteinformationen, wenn Sie unsere Dienste oder Apps nutzen.",
+    "localStorage": "Hinweis zum lokalen Speicher",
+    "localStorageContent": "Um unsere Dienste zu verbessern und Einblicke in Ihre Interaktionsmuster zu gewinnen, verwendet Vodič Kroz Valjevo Technologien für lokalen Speicher. Bitte beachten Sie, dass Ihre Einstellungen und Präferenzen direkt auf Ihrem Gerät gespeichert werden, da wir keine Cookies verwenden.",
+    "useOfInfo": "Nutzung der Informationen",
+    "useOfInfoContent": "Vodič Kroz Valjevo kann Ihre Informationen nutzen, um unsere Dienste zu verbessern und bereitzustellen, Ihre Aktivitäten zu überwachen, mit Ihnen zu kommunizieren, Kundenunterstützung anzubieten und die Sicherheit unserer Bedingungen und Richtlinien zu gewährleisten.",
+    "thirdParty": "Zugriff Dritter auf Ihre Informationen",
+    "thirdPartyContent": "Ihre Daten können aus verschiedenen Gründen, einschließlich, aber nicht beschränkt auf, Zusammenarbeit mit Dienstleistern und rechtliche Einhaltung, gemäß unseren Bedingungen und Richtlinien mit Dritten geteilt werden.",
+    "tearmsOfAnd": "Nutzungsbedingungen und Datenschutzrichtlinien Dritter",
+    "tearmsOfAndContent": "Sie erkennen an, dass Vodič Kroz Valjevo Dienste Dritter nutzt, die wir nicht verwalten oder sichern, und es liegt in Ihrer Verantwortung, deren Richtlinien zu überprüfen.",
+    "law": "Strafverfolgung",
+    "lawContent": "Vodič Kroz Valjevo kann Ihre Informationen unter Gerichtsbeschlüssen offenlegen oder wenn wir einen Verstoß gegen unsere Bedingungen und Richtlinien vermuten.",
+    "ongoingAmend": "Laufende Änderungen",
+    "ongoingAmendContent": "Vodič Kroz Valjevo behält sich das Recht vor, diese Datenschutzrichtlinie zu ändern, wobei Änderungen sofort nach der Veröffentlichung in Kraft treten. Die fortgesetzte Nutzung unseres Dienstes nach einer Änderung impliziert Ihre Zustimmung zu den Änderungen.",
+    "contact": "Kontakt",
+    "contactContent": "Bei Fragen oder Bedenken bezüglich dieser Datenschutzrichtlinie wenden Sie sich bitte per E-Mail an uns.",
+    "mapCredits": "Kartencredits",
+    "mapCreditsContent": "Wir erkennen die Beiträge von Projekten wie Open Street Map bei der Bereitstellung skalierbarer Kartendaten an."
 }

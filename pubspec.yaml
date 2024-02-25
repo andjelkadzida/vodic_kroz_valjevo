@@ -108,6 +108,9 @@ flutter:
     - images/sightsImages/zivojin/zivojin1.jpg
     - images/sightsImages/zivojin/zivojin2.jpg
     - images/sightsImages/zivojin/zivojin3.jpg
+    - images/sightsImages/vuk/vuk1.jpg
+    - images/sightsImages/vuk/vuk2.jpg
+    - images/sightsImages/vuk/vuk3.jpg
     - images/parksImages/jadar/jadar1.jpg
     - images/parksImages/jadar/jadar2.jpg
     - images/parksImages/jadar/jadar3.jpg
@@ -118,6 +121,11 @@ flutter:
     - images/parksImages/petiPuk/petiPuk2.jpg
     - images/parksImages/petiPuk/petiPuk3.jpg
     - images/parksImages/petiPuk/petiPuk4.jpg
+    - images/sportsImages/petiPuk/radnicki1.jpg
+    - images/sportsImages/petiPuk/radnicki2.jpg
+    - images/sportsImages/petiPuk/radnicki3.jpg
+    - images/sportsImages/tenis/tenis1.jpg
+    - images/sportsImages/tenis/tenis2.jpg
     - images/hotelsImages/bubicaSpolja.jpeg
     - images/hotelsImages/bubicaSoba.jpeg
     - images/hotelsImages/grandSpolja.jpeg

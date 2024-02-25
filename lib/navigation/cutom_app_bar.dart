@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
+import '../policies/privacy_policy.dart';
+
 AppBar customAppBar(BuildContext context, String title) {
   return AppBar(
     title: Semantics(
@@ -110,38 +112,6 @@ AppBar customAppBar(BuildContext context, String title) {
   );
 }
 
-// Function to show Privacy Policy
-void showPrivacyPolicy(BuildContext context) {
-  showDialog(
-    barrierDismissible: false,
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(localization(context).privacyPolicy),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('Your Privacy Policy content goes here...'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          Semantics(
-            button: true,
-            label: localization(context).closeDialog,
-            child: TextButton(
-              child: Text(localization(context).close),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
-
 // Function to show Terms of Use
 void showTermsOfUse(BuildContext context) {
   showDialog(
@@ -153,7 +123,7 @@ void showTermsOfUse(BuildContext context) {
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text('Your Terms of Use content goes here...'),
+              Text(localization(context).termsOfUse),
             ],
           ),
         ),

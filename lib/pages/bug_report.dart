@@ -31,7 +31,6 @@ class BugReportPageState extends State<BugReportPage> {
   bool _isLoading = false;
   ValueNotifier<bool?> internetConnectionStatus = ValueNotifier<bool?>(null);
   StreamSubscription<bool>? internetConnectionSubscription;
-  bool? _hasInternet;
 
   @override
   void initState() {
@@ -73,9 +72,8 @@ class BugReportPageState extends State<BugReportPage> {
   void attemptToSendReport() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      checkInitialInternetConnection().then((hasInternet) {
-        _hasInternet = hasInternet;
-        if (!hasInternet) {
+      checkInitialInternetConnection().then((bool? hasInternet) {
+        if (!hasInternet!) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(localization(context).noInternetConnection),

@@ -90,5 +90,13 @@
     "selectLanguageLabel": "Wähle {lang}",
     "bugReportSent": "Fehlerbericht erfolgreich gesendet.",
     "ok": "OK",
-    "noInternetConnection": "Keine Internetverbindung!"
+    "noInternetConnection": "Keine Internetverbindung!",
+    "aboutApp": "Über die App",
+    "appAuthor": "© 2024 Andjelka Dzida"
+    "appLogo": "Anwendungslogo",
+    "aboutAppLocalization": "Lokalisierung: Unsere Anwendung ist für globale Zugänglichkeit konzipiert und bietet mehrsprachige Unterstützung, die Englisch, Deutsch und Serbisch umfasst, einschließlich der lateinischen und kyrillischen Schriftsysteme.",
+    "aboutAppAccessibility": "Zugänglichkeit: Wir setzen uns dafür ein, unsere App für jeden zugänglich zu machen, einschließlich Nutzern mit Behinderungen. Unsere App beinhaltet Funktionen wie Screenreader-Unterstützung und anpassbare Textgrößen.",
+    "aboutAppDescription": "Erkunden Sie mühelos mit unserer Tour Guide App, Ihrem Taschenreiseexperten. Tauchen Sie ein in das Wesen jedes Ziels mit detaillierten Führern zu Sehenswürdigkeiten, Hotels, Restaurants, Parks und Sportanlagen. Navigieren Sie mit Leichtigkeit und hören Sie sich reiche Erzählungen über Ihre Umgebung an, die jede Reise zu einem immersiven Erlebnis machen. Unsere App ist für Barrierefreiheit konzipiert und gewährleistet ein nahtloses Erlebnis für alle Reisenden. Begeben Sie sich auf eine Entdeckungsreise und lassen Sie sich von uns zu den Wundern der Welt führen, alles aus der Handfläche.",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "tearmsOfUse": "Nutzungsbedingungen"
 }

@@ -70,9 +70,12 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         right: 5.0,
                         child: Container(
                           color: Colors.white,
-                          child: const Text(
+                          child: Text(
                             '© OpenStreetMap contributors',
-                            style: TextStyle(fontSize: 16.0),
+                            style: TextStyle(
+                                fontSize: MediaQuery.of(context)
+                                    .textScaler
+                                    .scale(16.0)),
                           ),
                         ),
                       ),
@@ -161,9 +164,12 @@ Widget buildMap() {
                         right: 5.0,
                         child: Container(
                           color: Colors.white,
-                          child: const Text(
+                          child: Text(
                             '© OpenStreetMap contributors',
-                            style: TextStyle(fontSize: 16.0),
+                            style: TextStyle(
+                                fontSize: MediaQuery.of(context)
+                                    .textScaler
+                                    .scale(16.0)),
                           ),
                         ),
                       ),

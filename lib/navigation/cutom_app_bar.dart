@@ -23,6 +23,7 @@ AppBar customAppBar(BuildContext context, String title) {
         ),
         onPressed: () {
           showAboutDialog(
+            barrierDismissible: false,
             context: context,
             applicationIcon: Semantics(
               label: localization(context).appLogo,

@@ -27,10 +27,13 @@ void showPrivacyPolicy(BuildContext context) {
             button: true,
             label: localization(context).closeDialog,
             child: TextButton(
-              child: Text(localization(context).close),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.teal,
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
+              child: Text(localization(context).close),
             ),
           ),
         ],

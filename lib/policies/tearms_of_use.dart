@@ -25,6 +25,9 @@ void showTermsOfUse(BuildContext context) {
             button: true,
             label: localization(context).closeDialog,
             child: TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.teal,
+              ),
               child: Text(localization(context).close),
               onPressed: () {
                 Navigator.of(context).pop();

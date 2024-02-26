@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 import '../policies/privacy_policy.dart';
+import '../policies/tearms_of_use.dart';
 
 AppBar customAppBar(BuildContext context, String title) {
   return AppBar(
@@ -109,37 +110,5 @@ AppBar customAppBar(BuildContext context, String title) {
       color: Colors.white,
     ),
     elevation: (MediaQuery.of(context).size.width / 150).clamp(0.0, 6.0),
-  );
-}
-
-// Function to show Terms of Use
-void showTermsOfUse(BuildContext context) {
-  showDialog(
-    barrierDismissible: false,
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(localization(context).termsOfUse),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(localization(context).termsOfUse),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          Semantics(
-            button: true,
-            label: localization(context).closeDialog,
-            child: TextButton(
-              child: Text(localization(context).close),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        ],
-      );
-    },
   );
 }

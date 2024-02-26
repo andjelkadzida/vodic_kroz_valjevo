@@ -45,3 +45,6 @@ app.*.map.json
 
 # Env
 .env
+
+# Unstranslated files
+untranslated_messages.json

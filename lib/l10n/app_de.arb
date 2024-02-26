@@ -121,5 +121,35 @@
     "contact": "Kontakt",
     "contactContent": "Bei Fragen oder Bedenken bezüglich dieser Datenschutzrichtlinie wenden Sie sich bitte per E-Mail an uns.",
     "mapCredits": "Kartencredits",
-    "mapCreditsContent": "Wir erkennen die Beiträge von Projekten wie Open Street Map bei der Bereitstellung skalierbarer Kartendaten an."
+    "mapCreditsContent": "Wir erkennen die Beiträge von Projekten wie Open Street Map bei der Bereitstellung skalierbarer Kartendaten an.",
+
+
+
+    "lastUpdated": "Zuletzt aktualisiert am {date}",
+    "termsContent": "Willkommen bei Vodic Kroz Valjevo, einer mobilen Anwendung, die von Andjelka Dzida entwickelt und gepflegt wird („wir“, „uns“ oder „unser“). Durch das Herunterladen, Zugreifen oder Benutzen unserer mobilen Anwendung erklären Sie sich mit diesen Nutzungsbedingungen („Bedingungen“) einverstanden. Wenn Sie diesen Bedingungen nicht zustimmen, verwenden Sie bitte unsere Anwendung nicht.",
+    "acceptanceTerms": "Akzeptanz der Bedingungen",
+    "acceptanceTermsContent": "Sie erklären sich damit einverstanden, dass Sie durch den Zugriff auf oder die Nutzung unserer App diesen Bedingungen und unserer Datenschutzrichtlinie zustimmen.",
+    "termsChanges": "Änderungen der Nutzungsbedingungen",
+    "termsChangesContent": "Wir behalten uns das Recht vor, diese Bedingungen jederzeit zu ändern. Ihre fortgesetzte Nutzung der App nach Änderungen bedeutet Ihre Akzeptanz der neuen Bedingungen.",
+    "privacyContent": "Unsere Datenschutzrichtlinie beschreibt, wie wir die Informationen, die Sie uns bei der Nutzung unserer App zur Verfügung stellen, behandeln. Durch die Nutzung unserer App stimmen Sie der Erfassung und Verwendung von Informationen in Übereinstimmung mit unserer Datenschutzrichtlinie zu.",
+    "userConduct": "Benutzerverhalten",
+    "userConductContent": "Sie erklären sich damit einverstanden, kein rechtswidriges Verhalten zu zeigen, das die Rechte anderer verletzt oder in anderer Weise anstößig ist.",
+    "intellectualProperty": "Geistiges Eigentum",
+    "intellectualPropertyContent": "Die App und ihre ursprünglichen Inhalte, Funktionen und Funktionalitäten sind und bleiben das ausschließliche Eigentum von Andjelka Dzida und seinen Lizenzgebern.",
+    "userGen": "Von Benutzern erzeugte Inhalte",
+    "userGenContent": "Sie können Inhalte über die App einreichen. Sie behalten alle Rechte an Ihren Inhalten, gewähren uns jedoch eine nicht-exklusive, gebührenfreie Lizenz, Ihre Inhalte in Verbindung mit der App zu verwenden, zu reproduzieren, zu ändern und anzuzeigen.",
+    "thirdPartServices": "Links und Dienste Dritter",
+    "thirdPartServicesContent": "Unsere App kann Links zu Websites oder Diensten Dritter enthalten, die nicht uns gehören oder von uns kontrolliert werden. Wir sind nicht verantwortlich für den Inhalt, die Datenschutzrichtlinien oder die Praktiken von Websites oder Diensten Dritter.",
+    "termination": "Beendigung",
+    "terminationContent": "Wir können Ihren Zugang zu unserer App sofort, ohne vorherige Ankündigung oder Haftung, aus irgendeinem Grund kündigen oder sperren, einschließlich, aber nicht beschränkt auf einen Verstoß gegen die Bedingungen.",
+    "disclaimer": "Haftungsausschluss",
+    "disclaimerContent": "Die App wird auf einer „WIE BESEHEN“ und „WIE VERFÜGBAR“ Basis bereitgestellt. Wir lehnen alle Garantien und Bedingungen jeglicher Art, ob ausdrücklich oder stillschweigend, ab.",
+    "limitiations": "Haftungsbeschränkung",
+    "limitiationsContent": "In keinem Fall haften Andjelka Dzida, noch seine Direktoren, Mitarbeiter, Partner, Agenten, Lieferanten oder Verbündeten, für indirekte, zufällige, besondere, folgenschwere oder strafende Schäden, einschließlich, ohne Einschränkung, Verlust von Gewinnen, Daten, Nutzung, Goodwill oder anderen immateriellen Verlusten, die sich aus Ihrem Zugang zu oder Ihrer Nutzung von oder der Unfähigkeit, auf die App zuzugreifen oder sie zu nutzen, ergeben.",
+    "governingLaw": "Geltendes Recht",
+    "governingLawContent": "Diese Bedingungen unterliegen den Gesetzen Serbiens und werden in Übereinstimmung mit diesen ausgelegt, ohne Rücksicht auf die Bestimmungen des Kollisionsrechts.",
+    "appChanges": "Änderungen an unserer App",
+    "appChangesContent": "Wir behalten uns das Recht vor, die App oder einen Dienst, mit dem sie verbunden ist, zeitweise oder dauerhaft zu ändern oder einzustellen, mit oder ohne Ankündigung und ohne Haftung Ihnen gegenüber.",
+    "contactUs": "Kontaktieren Sie uns",
+    "contactUsContent": "Wenn Sie Fragen zu diesen Bedingungen haben, kontaktieren Sie uns bitte unter "
 }

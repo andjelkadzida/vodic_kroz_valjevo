@@ -35,7 +35,7 @@ dependencies:
   accessibility_tools: ^1.0.1
   flutter_tts: ^3.8.5
   sqflite: ^2.3.2
-  path: ^1.8.3
+  path: ^1.9.0
   connectivity_plus: ^5.0.2
   app_settings: ^5.1.1
   flutter_map: ^6.1.0
@@ -45,6 +45,9 @@ dependencies:
   url_launcher: ^6.2.4
   photo_view: ^0.14.0
   auto_size_text: ^3.0.0
+  file_picker: ^6.1.1
+  parse_server_sdk_flutter: ^7.0.1
+  flutter_dotenv: ^5.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -66,6 +69,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
 
+dependency_overrides:
+  http: ^0.13.5
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
@@ -103,6 +108,15 @@ flutter:
     - images/sightsImages/zivojin/zivojin1.jpg
     - images/sightsImages/zivojin/zivojin2.jpg
     - images/sightsImages/zivojin/zivojin3.jpg
+    - images/sightsImages/vuk/vuk1.jpg
+    - images/sightsImages/vuk/vuk2.jpg
+    - images/sightsImages/vuk/vuk3.jpg
+    - images/sightsImages/desanka/desanka1.jpg
+    - images/sightsImages/desanka/desanka2.jpg
+    - images/sightsImages/desanka/desanka3.jpg
+    - images/sightsImages/muselimovKonak/muselimovKonak1.jpeg
+    - images/sightsImages/muselimovKonak/muselimovKonak2.jpeg
+    - images/sightsImages/muselimovKonak/muselimovKonak3.jpeg
     - images/parksImages/jadar/jadar1.jpg
     - images/parksImages/jadar/jadar2.jpg
     - images/parksImages/jadar/jadar3.jpg
@@ -113,6 +127,15 @@ flutter:
     - images/parksImages/petiPuk/petiPuk2.jpg
     - images/parksImages/petiPuk/petiPuk3.jpg
     - images/parksImages/petiPuk/petiPuk4.jpg
+    - images/sportsImages/petiPuk/radnicki1.jpg
+    - images/sportsImages/petiPuk/radnicki2.jpg
+    - images/sportsImages/petiPuk/radnicki3.jpg
+    - images/sportsImages/tenis/tenis1.jpg
+    - images/sportsImages/tenis/tenis2.jpg
+    - images/sportsImages/tenis/tenis3.jpg
+    - images/sportsImages/gradskiStadion/gradskiStadion1.jpg
+    - images/sportsImages/gradskiStadion/gradskiStadion2.jpg
+    - images/sportsImages/gradskiStadion/gradskiStadion3.jpg
     - images/hotelsImages/bubicaSpolja.jpeg
     - images/hotelsImages/bubicaSoba.jpeg
     - images/hotelsImages/grandSpolja.jpeg
@@ -137,6 +160,7 @@ flutter:
     - animations/hotels.json
     - animations/restaurants.json
     - animations/menu_item.json
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

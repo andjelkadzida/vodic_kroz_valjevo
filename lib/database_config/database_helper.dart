@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -22,7 +24,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 2,
+        version: 1,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -164,7 +166,6 @@ class DatabaseHelper {
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion > newVersion) {
       await deleteWholeDatabase();
-
       await _onCreate(db, newVersion);
     }
   }
@@ -172,10 +173,17 @@ class DatabaseHelper {
   // Deleting the database
   static Future<void> deleteWholeDatabase() async {
     String dbName = 'valjevo_tour_guide.db';
-    String path = join(await getDatabasesPath(), dbName);
+    String databasesPath = await getDatabasesPath();
+    String fullPath = join(databasesPath, dbName);
+
     if (_database != null) {
       await _database!.close();
-      await deleteDatabase(path);
+      _database = null;
+    }
+
+    var file = File(fullPath);
+    if (await file.exists()) {
+      await file.delete();
     }
   }
 

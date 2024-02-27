@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -32,6 +33,7 @@ void main() async {
   final db = await DatabaseHelper.instance.getNamedDatabase();
   final databaseInitializer = DatabaseInitializer(db);
   await databaseInitializer.initializeData();
+  await dotenv.load();
 
   runApp(VodicKrozValjevo(database: db, isFirstRun: isFirstRun));
 }

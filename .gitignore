@@ -42,3 +42,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /.vscode
+
+# Env
+.env
+
+# Unstranslated files
+untranslated_messages.json

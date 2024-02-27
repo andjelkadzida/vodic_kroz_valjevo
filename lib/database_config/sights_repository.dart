@@ -228,11 +228,11 @@ class SightsRepository {
         'latitude': 44.29052905178508,
         'longitude': 19.884803402764618,
         'titles': {
-          'en': 'Zivojin Misic',
-          'de': 'Zivojin Misic',
-          'sr': 'Živojin Mišić',
-          'sr_Cyrl': 'Живојин Мишић',
-          'sr_Latn': 'Živojin Mišić',
+          'en': 'Monument of Zivojin Misic',
+          'de': 'Denkmal von Zivojin Misic',
+          'sr': 'Spomenik Živojinu Mišiću',
+          'sr_Cyrl': 'Споменик Живојину Мишићу',
+          'sr_Latn': 'Spomenik Živojinu Mišiću',
         },
         'descriptions': {
           'en': 'Zivojin Misic description',
@@ -242,6 +242,75 @@ class SightsRepository {
           'sr_Latn': 'Živojin Mišić opis',
         },
       },
+      // Vuk Karadzic
+      {
+        'sight_image_path': 'images/sightsImages/vuk/vuk1.jpg',
+        'sight_image_path2': 'images/sightsImages/vuk/vuk2.jpg',
+        'sight_image_path3': 'images/sightsImages/vuk/vuk3.jpg',
+        'latitude': 44.27408341006808,
+        'longitude': 19.886016295773146,
+        'titles': {
+          'en': 'Monument of Vuk Karadžić',
+          'de': 'Denkmal von Vuk Karadžić',
+          'sr': 'Spomenik Vuku Karadžiću',
+          'sr_Cyrl': 'Споменик Вуку Караџићу',
+          'sr_Latn': 'Spomenik Vuku Karadžiću',
+        },
+        'descriptions': {
+          'en': 'Vuk Karadzic description',
+          'de': 'Vuk Karadzic Beschreibung',
+          'sr': 'Vuk Karadzic opis',
+          'sr_Cyrl': 'Вук Караџић опис',
+          'sr_Latn': 'Vuk Karadzic opis',
+        },
+      },
+      // Desanka Maksimovic
+      {
+        'sight_image_path': 'images/sightsImages/desanka/desanka1.jpg',
+        'sight_image_path2': 'images/sightsImages/desanka/desanka2.jpg',
+        'sight_image_path3': 'images/sightsImages/desanka/desanka3.jpg',
+        'latitude': 44.270027255683395,
+        'longitude': 19.884004638877375,
+        'titles': {
+          'en': 'Monument of Desanka Maksimović',
+          'de': 'Denkmal von Desanka Maksimović',
+          'sr': 'Spomenik Desanke Maksimović',
+          'sr_Cyrl': 'Споменик Десанке Максимовић',
+          'sr_Latn': 'Spomenik Desanke Maksimović',
+        },
+        'descriptions': {
+          'en': 'Desanka Maksimovic description',
+          'de': 'Desanka Maksimovic Beschreibung',
+          'sr': 'Desanka Maksimovic opis',
+          'sr_Cyrl': 'Десанка Максимовић опис',
+          'sr_Latn': 'Desanka Maksimovic opis',
+        },
+      },
+      // Muselimov konak
+      {
+        'sight_image_path':
+            'images/sightsImages/muselimovKonak/muselimovKonak1.jpeg',
+        'sight_image_path2':
+            'images/sightsImages/muselimovKonak/muselimovKonak2.jpeg',
+        'sight_image_path3':
+            'images/sightsImages/muselimovKonak/muselimovKonak3.jpeg',
+        'latitude': 44.26973928761971,
+        'longitude': 19.88489479391643,
+        'titles': {
+          'en': 'Muselimov konak',
+          'de': 'Muselimov konak',
+          'sr': 'Muselimov konak',
+          'sr_Cyrl': 'Муселимов конак',
+          'sr_Latn': 'Muselimov konak',
+        },
+        'descriptions': {
+          'en': 'Muselimov konak description',
+          'de': 'Muselimov konak Beschreibung',
+          'sr': 'Muselimov konak opis',
+          'sr_Cyrl': 'Муселимов конак опис',
+          'sr_Latn': 'Muselimov konak opis',
+        },
+      }
     ];
 
     await bulkInsertSightsData(dataList);

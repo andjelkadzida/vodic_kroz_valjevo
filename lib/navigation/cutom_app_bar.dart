@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
 import '../policies/privacy_policy.dart';
-import '../policies/tearms_of_use.dart';
+import '../policies/terms_of_use.dart';
 
 AppBar customAppBar(BuildContext context, String title) {
   return AppBar(

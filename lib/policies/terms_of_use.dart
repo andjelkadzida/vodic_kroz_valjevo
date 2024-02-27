@@ -13,7 +13,9 @@ void showTermsOfUse(BuildContext context) {
           header: true,
           child: Text(
             localization(context).privacyPolicy,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: MediaQuery.of(context).size.width * 0.06,
+                ),
           ),
         ),
         content: SingleChildScrollView(
@@ -45,10 +47,10 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
   return [
     Text(localization(context).lastUpdated('24-02-2024'),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: MediaQuery.of(context).textScaler.scale(24.0),
+              fontSize: MediaQuery.of(context).size.width * 0.05,
               fontWeight: FontWeight.bold,
             )),
-    const SizedBox(height: 4.0),
+    const SizedBox(height: 6.0),
     _buildSection(context, localization(context).acceptanceTerms,
         localization(context).acceptanceTermsContent),
     _buildSection(context, localization(context).termsChanges,
@@ -67,7 +69,9 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
         localization(context).appChangesContent),
     Text(
       localization(context).contactUs,
-      style: Theme.of(context).textTheme.titleLarge,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontSize: MediaQuery.of(context).size.width * 0.06,
+          ),
     ),
     GestureDetector(
       onTap: () {
@@ -84,7 +88,7 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
           text: TextSpan(
             text: localization(context).contactUsContent,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: MediaQuery.of(context).textScaler.scale(14.0),
+                  fontSize: MediaQuery.of(context).size.width * 0.035,
                 ),
             children: const <TextSpan>[
               TextSpan(
@@ -111,7 +115,7 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: MediaQuery.of(context).textScaler.scale(18.0),
+                fontSize: MediaQuery.of(context).size.width * 0.045,
                 fontWeight: FontWeight.bold,
               ),
         ),
@@ -119,7 +123,7 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: MediaQuery.of(context).textScaler.scale(14.0),
+                fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
         ),
         const SizedBox(height: 16.0),

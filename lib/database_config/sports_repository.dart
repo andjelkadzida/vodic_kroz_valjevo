@@ -63,64 +63,67 @@ class SportsRepository {
 
   Future<void> sportsDataInsertion() async {
     List<Map<String, dynamic>> dataList = [
-      // Jadar
-      {
-        'sport_image_path': 'images/parksImages/jadar/jadar1.jpg',
-        'sport_image_path2': 'images/parksImages/jadar/jadar2.jpg',
-        'sport_image_path3': 'images/parksImages/jadar/jadar3.jpg',
-        'titles': {
-          'en': 'Park Vide Jocić',
-          'de': 'Titel auf Deutsch',
-          'sr': 'Park Vide Jocić',
-          'sr_Cyrl': 'Парк Виде Јоцић',
-          'sr_Latn': 'Park Vide Jocić',
-        },
-        'latitude': 44.26955379468345,
-        'longitude': 19.879072700675714,
-        'description': {
-          'en': 'Description in English',
-          'de': 'Beschreibung auf Deutsch',
-          'sr': 'Опис на српском',
-          'sr_Cyrl': 'Опис на српском ћирилицом',
-          'sr_Latn': 'Opis na srpskom latinicom',
-        },
-      },
-      // Pecina
-      {
-        'sport_image_path': 'images/parksImages/pecina/pecina1.jpg',
-        'sport_image_path2': 'images/parksImages/pecina/pecina2.jpg',
-        'sport_image_path3': 'images/parksImages/pecina/pecina3.jpg',
-        'titles': {
-          'en': 'Pećina',
-          'de': 'Pećina',
-          'sr': 'Pećina',
-          'sr_Cyrl': 'Пећина',
-          'sr_Latn': 'Pećina',
-        },
-        'latitude': 44.262610342861635,
-        'longitude': 19.873701632737493,
-        'description': {
-          'en': 'Description in English',
-          'de': 'Beschreibung auf Deutsch',
-          'sr': 'Опис на српском',
-          'sr_Cyrl': 'Опис на српском ћирилицом',
-          'sr_Latn': 'Opis na srpskom latinicom',
-        },
-      },
       // Peti Puk
       {
-        'sport_image_path': 'images/parksImages/petiPuk/petiPuk1.jpg',
-        'sport_image_path2': 'images/parksImages/petiPuk/petiPuk2.jpg',
-        'sport_image_path3': 'images/parksImages/petiPuk/petiPuk3.jpg',
+        'sport_image_path': 'images/sportsImages/petiPuk/petiPuk1.jpg',
+        'sport_image_path2': 'images/sportsImages/petiPuk/petiPuk2.jpg',
+        'sport_image_path3': 'images/sportsImages/petiPuk/petiPuk3.jpg',
         'titles': {
-          'en': 'Peti Puk',
-          'de': 'Peti Puk',
-          'sr': 'Peti Puk',
-          'sr_Cyrl': 'Пети Пук',
-          'sr_Latn': 'Peti Puk',
+          'en': 'Stadium of the FC Radnički Valjevo',
+          'de': 'Stadion des FC Radnički Valjevo',
+          'sr': 'Stadion FK Radnički Valjevo',
+          'sr_Cyrl': 'Стадион ФК Раднички Ваљево',
+          'sr_Latn': 'Stadion FK Radnički Valjevo',
         },
-        'latitude': 44.282386269219636,
-        'longitude': 19.89021169469568,
+        'latitude': 44.28262046857639,
+        'longitude': 19.891158538859084,
+        'description': {
+          'en': 'Description in English',
+          'de': 'Beschreibung auf Deutsch',
+          'sr': 'Опис на српском',
+          'sr_Cyrl': 'Опис на српском ћирилицом',
+          'sr_Latn': 'Opis na srpskom latinicom',
+        },
+      },
+      // Gradski stadion
+      {
+        'sport_image_path':
+            'images/sportsImages/gradskiStadion/gradskiStadion1.jpg',
+        'sport_image_path2':
+            'images/sportsImages/gradskiStadion/gradskiStadion2.jpg',
+        'sport_image_path3':
+            'images/sportsImages/gradskiStadion/gradskiStadion3.jpg',
+        'titles': {
+          'en': 'Stadium of the FC Budućnost',
+          'de': 'Stadion des FC Budućnost',
+          'sr': 'Stadion FK Budućnost',
+          'sr_Cyrl': 'Стадион ФК Будућност',
+          'sr_Latn': 'Stadion FK Budućnost',
+        },
+        'latitude': 44.261982888560105,
+        'longitude': 19.874679134004655,
+        'description': {
+          'en': 'Description in English',
+          'de': 'Beschreibung auf Deutsch',
+          'sr': 'Опис на српском',
+          'sr_Cyrl': 'Опис на српском ћирилицом',
+          'sr_Latn': 'Opis na srpskom latinicom',
+        },
+      },
+      // Tenis
+      {
+        'sport_image_path': 'images/sportsImages/tenis/tenis1.jpg',
+        'sport_image_path2': 'images/sportsImages/tenis/tenis2.jpg',
+        'sport_image_path3': 'images/sportsImages/tenis/tenis3.jpg',
+        'titles': {
+          'en': 'Tennis court',
+          'de': 'Tennisplatz',
+          'sr': 'Teniski teren',
+          'sr_Cyrl': 'Тениски терен',
+          'sr_Latn': 'Teniski teren',
+        },
+        'latitude': 44.26262278827975,
+        'longitude': 19.876072656330674,
         'description': {
           'en': 'Description in English',
           'de': 'Beschreibung auf Deutsch',

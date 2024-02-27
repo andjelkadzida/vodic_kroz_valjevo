@@ -19,7 +19,7 @@ void showTermsOfUse(BuildContext context) {
           ),
         ),
         content: SingleChildScrollView(
-          child: ListBody(
+          child: Column(
             children: _buildTermsOfUseContent(context),
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../localization/supported_languages.dart';
 
 void showPrivacyPolicy(BuildContext context) {
@@ -12,7 +11,9 @@ void showPrivacyPolicy(BuildContext context) {
           header: true,
           child: Text(
             localization(context).privacyPolicy,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: MediaQuery.of(context).size.width * 0.06,
+                ),
           ),
         ),
         content: SingleChildScrollView(
@@ -74,7 +75,7 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: MediaQuery.of(context).textScaler.scale(18.0),
+                fontSize: MediaQuery.of(context).size.width * 0.06,
                 fontWeight: FontWeight.bold,
               ),
         ),
@@ -82,7 +83,7 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: MediaQuery.of(context).textScaler.scale(14.0),
+                fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
         ),
         const SizedBox(height: 16.0),

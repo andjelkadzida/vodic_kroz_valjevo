@@ -83,33 +83,40 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           (context) => localization(context).bugReport),
     ];
 
-    return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      items: navItems.map((NavItem navItem) {
-        return BottomNavigationBarItem(
-          icon: Semantics(
-            label: navItem.title(context),
-            child: Icon(
-              _selectedIndex == -1 ||
-                      _selectedIndex != navItems.indexOf(navItem)
-                  ? navItem.icon
-                  : navItem.selectedIcon,
-              size: MediaQuery.of(context).size.width * 0.07,
+    return Semantics(
+      namesRoute: true,
+      label: localization(context).bottomNavigation,
+      child: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        items: navItems.map((NavItem navItem) {
+          return BottomNavigationBarItem(
+            icon: Tooltip(
+              message: navItem.tooltip(context),
+              child: Semantics(
+                label: navItem.title(context),
+                child: Icon(
+                  _selectedIndex == -1 ||
+                          _selectedIndex != navItems.indexOf(navItem)
+                      ? navItem.icon
+                      : navItem.selectedIcon,
+                  size: MediaQuery.of(context).size.width * 0.07,
+                ),
+              ),
             ),
-          ),
-          label: navItem.title(context),
-          tooltip: navItem.tooltip(context),
-        );
-      }).toList(),
-      currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
-      selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
-      unselectedItemColor: Colors.grey,
-      showUnselectedLabels: false,
-      showSelectedLabels: false,
-      onTap: _onNavItemTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedFontSize: MediaQuery.of(context).textScaler.scale(14),
-      unselectedFontSize: MediaQuery.of(context).textScaler.scale(12),
+            label: navItem.title(context),
+            tooltip: navItem.tooltip(context),
+          );
+        }).toList(),
+        currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
+        selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: false,
+        showSelectedLabels: false,
+        onTap: _onNavItemTapped,
+        type: BottomNavigationBarType.fixed,
+        selectedFontSize: MediaQuery.of(context).size.width * 0.03,
+        unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
+      ),
     );
   }
 }

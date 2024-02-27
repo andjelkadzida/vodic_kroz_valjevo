@@ -111,6 +111,12 @@ flutter:
     - images/sightsImages/vuk/vuk1.jpg
     - images/sightsImages/vuk/vuk2.jpg
     - images/sightsImages/vuk/vuk3.jpg
+    - images/sightsImages/desanka/desanka1.jpg
+    - images/sightsImages/desanka/desanka2.jpg
+    - images/sightsImages/desanka/desanka3.jpg
+    - images/sightsImages/muselimovKonak/muselimovKonak1.jpeg
+    - images/sightsImages/muselimovKonak/muselimovKonak2.jpeg
+    - images/sightsImages/muselimovKonak/muselimovKonak3.jpeg
     - images/parksImages/jadar/jadar1.jpg
     - images/parksImages/jadar/jadar2.jpg
     - images/parksImages/jadar/jadar3.jpg
@@ -126,6 +132,10 @@ flutter:
     - images/sportsImages/petiPuk/radnicki3.jpg
     - images/sportsImages/tenis/tenis1.jpg
     - images/sportsImages/tenis/tenis2.jpg
+    - images/sportsImages/tenis/tenis3.jpg
+    - images/sportsImages/gradskiStadion/gradskiStadion1.jpg
+    - images/sportsImages/gradskiStadion/gradskiStadion2.jpg
+    - images/sportsImages/gradskiStadion/gradskiStadion3.jpg
     - images/hotelsImages/bubicaSpolja.jpeg
     - images/hotelsImages/bubicaSoba.jpeg
     - images/hotelsImages/grandSpolja.jpeg

@@ -24,16 +24,18 @@ class HomePage extends StatelessWidget {
                 padding:
                     EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
                     Text(
                       localization(context).slogan,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width * 0.08,
+                        fontSize: MediaQuery.of(context).size.width * 0.055,
                         fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.teal,
+                        decoration: TextDecoration.none,
                       ),
                       textAlign: TextAlign.center,
                     ),

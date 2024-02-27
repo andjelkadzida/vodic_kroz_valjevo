@@ -105,7 +105,7 @@
     "infoByYou": "Informacije koje ste pružili",
     "infoByYouContent": "Kada stupate u interakciju s nama kontaktiranjem, davanjem povratnih informacija ili popunjavanjem obrazaca, Vodič Kroz Valjevo može sakupiti dodatne podatke kao što su vaša lokacija, detalji o internet konekciji i više.",
     "autoCollectedData": "Informacije koje automatski sakuplja Vodič Kroz Valjevo",
-    "autoCollectedDataContent": "Vodič Kroz Valjevo automatski sakuplja podatke kao što su vaša IP adresa, metrike interakcija i informacije o uređaju kada koristite naše usluge ili aplikacije.",
+    "autoCollectedDataContent": "Vodič Kroz Valjevo automatski sakuplja podatke kao što su informacije o uređaju kada koristite naše usluge ili aplikacije.",
     "localStorage": "Napomena o lokalnom skladištenju",
     "localStorageContent": "Da bi poboljšao naše usluge i stekao uvid u vaše obrasce interakcije, Vodič Kroz Valjevo koristi tehnologije za lokalno skladištenje. Molimo vas da imate u vidu da se vaše postavke i preferencije čuvaju direktno na vašem uređaju jer ne koristimo kolačiće.",
     "useOfInfo": "Korišćenje informacija",

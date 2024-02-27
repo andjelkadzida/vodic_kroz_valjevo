@@ -65,9 +65,9 @@ class SportsRepository {
     List<Map<String, dynamic>> dataList = [
       // Peti Puk
       {
-        'sport_image_path': 'images/sportsImages/petiPuk/petiPuk1.jpg',
-        'sport_image_path2': 'images/sportsImages/petiPuk/petiPuk2.jpg',
-        'sport_image_path3': 'images/sportsImages/petiPuk/petiPuk3.jpg',
+        'sport_image_path': 'images/sportsImages/petiPuk/radnicki1.jpg',
+        'sport_image_path2': 'images/sportsImages/petiPuk/radnicki1.jpg',
+        'sport_image_path3': 'images/sportsImages/petiPuk/radnicki1.jpg',
         'titles': {
           'en': 'Stadium of the FC Radnički Valjevo',
           'de': 'Stadion des FC Radnički Valjevo',

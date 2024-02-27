@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../localization/supported_languages.dart';
 
@@ -68,24 +69,33 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
       localization(context).contactUs,
       style: Theme.of(context).textTheme.titleLarge,
     ),
-    Semantics(
-      link: true,
-      label: localization(context).contactUsContent,
-      child: RichText(
-        text: TextSpan(
-          text: localization(context).contactUsContent,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: MediaQuery.of(context).textScaler.scale(14.0),
+    GestureDetector(
+      onTap: () {
+        final Uri emailLaunchUri = Uri(
+          scheme: 'mailto',
+          path: 'andjelkadzida@gmail.com',
+        );
+        launchUrlString(emailLaunchUri.toString());
+      },
+      child: Semantics(
+        link: true,
+        label: localization(context).contactUsContent,
+        child: RichText(
+          text: TextSpan(
+            text: localization(context).contactUsContent,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: MediaQuery.of(context).textScaler.scale(14.0),
+                ),
+            children: const <TextSpan>[
+              TextSpan(
+                text: 'andjelkadzida@gmail.com',
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
               ),
-          children: const <TextSpan>[
-            TextSpan(
-              text: 'andjelkadzida@gmail.com',
-              style: TextStyle(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     ),

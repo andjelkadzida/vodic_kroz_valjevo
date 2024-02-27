@@ -56,8 +56,6 @@ List<Widget> _buildPrivacyPolicyContent(BuildContext context) {
         localization(context).thirdPartyContent),
     _buildSection(context, localization(context).tearmsOfAnd,
         localization(context).tearmsOfAndContent),
-    _buildSection(
-        context, localization(context).law, localization(context).lawContent),
     _buildSection(context, localization(context).ongoingAmend,
         localization(context).ongoingAmendContent),
     _buildSection(context, localization(context).contact,

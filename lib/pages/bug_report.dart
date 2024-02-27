@@ -36,6 +36,12 @@ class BugReportPageState extends State<BugReportPage> {
   void initState() {
     super.initState();
     initData();
+    // Set operating system to the current platform
+    if (Platform.isAndroid) {
+      operatingSystem = 'Android';
+    } else if (Platform.isIOS) {
+      operatingSystem = 'iOS';
+    }
     internetConnectionSubscription =
         hasInternetConnection().listen((hasInternet) {
       if (!hasInternet) {

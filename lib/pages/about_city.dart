@@ -69,11 +69,11 @@ class AboutCity extends StatelessWidget {
           DataColumn(
               label: Icon(
                 Icons.people,
-                semanticLabel: 'Indicator',
+                semanticLabel: localization(context).indicator,
                 size: Theme.of(context).iconTheme.size,
                 applyTextScaling: true,
               ),
-              tooltip: 'Indicator'),
+              tooltip: localization(context).indicator),
           DataColumn(
               label: Icon(
                 Icons.attribution,

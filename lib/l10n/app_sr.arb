@@ -100,6 +100,15 @@
     "bottomNavigation": "Donja traka navigacije",
     "buttonFor": "Dugme za {label}",
     "sloganLabel": "Stihovi Matije Bećkovića iz pesme 'Kad dođeš u bilo koji grad'",
+    "surface": "Površina",
+    "elevation": "Nadmorska visina",
+    "populationDensity": "Gustina naseljenosti",
+    "population": "Broj stanovnika",
+    "district": "Okrug",
+    "cityDay": "Dan grada",
+    "saint": "Slava grada",
+    "kolubaraDistrict": "Kolubarski okrug",
+    "saintName": "Trojice (Duhovi)",
 
 
 

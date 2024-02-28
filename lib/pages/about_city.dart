@@ -11,6 +11,7 @@ class AboutCity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage('images/vaPogled.jpg'), context);
     return Scaffold(
       appBar: customAppBar(context, localization(context).aboutCity),
       bottomNavigationBar: const CustomBottomNavigationBar(),
@@ -29,8 +30,6 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildAboutCityContent(
       BuildContext context, List<Map<String, dynamic>> data) {
-    precacheImage(const AssetImage('images/vaPogled.jpg'), context);
-
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       return OrientationBuilder(
@@ -87,9 +86,52 @@ class AboutCity extends StatelessWidget {
         rows: [
           DataRow(cells: [
             DataCell(Semantics(
-                label: 'Total Population', child: Text('Total Population'))),
-            DataCell(
-                Semantics(label: '1.2 million', child: Text('1.2 million'))),
+                label: localization(context).surface,
+                child: Text(localization(context).surface))),
+            DataCell(Semantics(label: '2256 ha', child: const Text('2256 ha'))),
+          ]),
+          DataRow(cells: [
+            DataCell(Semantics(
+                label: localization(context).elevation,
+                child: Text(localization(context).elevation))),
+            DataCell(Semantics(label: '185 m', child: const Text('185 m'))),
+          ]),
+          DataRow(cells: [
+            DataCell(Semantics(
+                label: localization(context).populationDensity,
+                child: Text(localization(context).populationDensity))),
+            DataCell(Semantics(
+                label: '90,79 st/km\u00B2 (2022.)',
+                child: const Text('90,79 st/km\u00B2 (2022.)'))),
+          ]),
+          DataRow(cells: [
+            DataCell(Semantics(
+                label: localization(context).population,
+                child: Text(localization(context).population))),
+            DataCell(Semantics(
+                label: '82.541 (2022.)', child: const Text('82.541 (2022.)'))),
+          ]),
+          DataRow(cells: [
+            DataCell(Semantics(
+                label: localization(context).district,
+                child: Text(localization(context).district))),
+            DataCell(Semantics(
+                label: localization(context).kolubaraDistrict,
+                child: Text(localization(context).kolubaraDistrict))),
+          ]),
+          DataRow(cells: [
+            DataCell(Semantics(
+                label: localization(context).cityDay,
+                child: Text(localization(context).cityDay))),
+            DataCell(Semantics(label: '20.3.', child: const Text('20.3.'))),
+          ]),
+          DataRow(cells: [
+            DataCell(Semantics(
+                label: localization(context).saint,
+                child: Text(localization(context).saint))),
+            DataCell(Semantics(
+                label: localization(context).saintName,
+                child: Text(localization(context).saintName))),
           ]),
         ],
       ),
@@ -102,7 +144,9 @@ class AboutCity extends StatelessWidget {
       child: ExpansionTile(
         title: Text(
           aboutCityData['title'],
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.normal,
+              ),
         ),
         children: [
           ListTile(

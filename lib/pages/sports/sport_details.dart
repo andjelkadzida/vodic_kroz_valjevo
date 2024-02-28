@@ -36,7 +36,6 @@ class SportDetailsPage extends StatelessWidget {
         builder: (context, orientation) {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              double width = constraints.maxWidth;
               return SingleChildScrollView(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -48,7 +47,7 @@ class SportDetailsPage extends StatelessWidget {
                           .imageOfSight(sportData['title']),
                       child: Container(
                         color: Colors.transparent,
-                        height: width * 0.6,
+                        height: constraints.maxWidth * 0.6,
                         child: PhotoViewGallery.builder(
                           itemCount: images.length,
                           builder: (context, index) {
@@ -113,14 +112,14 @@ class SportDetailsPage extends StatelessWidget {
                                 .headlineMedium
                                 ?.copyWith(
                                   color: Colors.black,
-                                  fontSize: width * 0.06,
+                                  fontSize: constraints.maxWidth * 0.06,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           const SizedBox(width: 8),
                           SizedBox(
-                            width: max(width * 0.06, 48),
-                            height: max(width * 0.06, 48),
+                            width: max(constraints.maxWidth * 0.06, 48),
+                            height: max(constraints.maxWidth * 0.06, 48),
                             child: GestureDetector(
                               onDoubleTap: () =>
                                   TextToSpeechConfig.instance.stopSpeaking(),
@@ -132,7 +131,7 @@ class SportDetailsPage extends StatelessWidget {
                                   Icons.volume_up,
                                   semanticLabel:
                                       localization(context).tapToHearDetails,
-                                  size: width * 0.065,
+                                  size: constraints.maxWidth * 0.065,
                                   applyTextScaling: true,
                                 ),
                               ),
@@ -149,7 +148,7 @@ class SportDetailsPage extends StatelessWidget {
                               .bodyMedium
                               ?.copyWith(
                                   color: Colors.black,
-                                  fontSize: width * 0.065,
+                                  fontSize: constraints.maxWidth * 0.065,
                                   fontWeight: FontWeight.w400),
                         ),
                       ],

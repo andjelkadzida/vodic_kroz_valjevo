@@ -67,66 +67,87 @@ class AboutCityRepository {
     List<Map<String, dynamic>> aboutCityData = [
       {
         'legend_title': {
-          'en': 'Legend 1',
-          'de': 'Legende 1',
-          'sr': 'Legenda 1',
-          'sr_Cyrl': 'Легенда 1',
-          'sr_Latn': 'Legenda 1'
+          'en': "Valjevo: Home of Refugees After the Battle of Kosovo",
+          'de':
+              "Valjevo: Zuflucht der Flüchtlinge nach der Schlacht auf dem Amselfeld",
+          'sr': "Valjevo: Dom izbeglica posle Kosovskog boja",
+          'sr_Cyrl': "Ваљево: Дом избеглица после Косовског боја",
+          'sr_Latn': "Valjevo: Dom izbeglica posle Kosovskog boja"
         },
         'legend_description': {
-          'en': 'Description 1',
-          'de': 'Beschreibung 1',
-          'sr': 'Opis 1',
-          'sr_Cyrl': 'Опис 1',
-          'sr_Latn': 'Opis 1'
+          'en':
+              "Immediately after the Battle of Kosovo, a throng of Serbian refugees, fleeing from the Turkish invasion, collapsed into the valley of Valjevo, where they settled, exhausted from the long flight, and named the town Valjevo.",
+          'de':
+              "Unmittelbar nach der Schlacht auf dem Amselfeld ergoss sich ein Strom serbischer Flüchtlinge, die vor dem Einfall der Türken flohen, in das Tal von Valjevo, wo sie sich erschöpft von der langen Flucht niederließen und die Stadt Valjevo nannten.",
+          'sr':
+              "Neposredno posle Kosovskog boja zbeg srpskih izbeglica, bežeći ispred najezde Turaka svaljao se u valjevsku kotlinu, gde su se nastanili iznemogli od dugog bežanja, nazvali grad Valjevo.",
+          'sr_Cyrl':
+              "Непосредно после Косовског боја збег српских избеглица, бежећи испред најезде Турака свалио се у ваљевску котлину, где су се настанили изнемогли од дугог бежања, назвали град Ваљево.",
+          'sr_Latn':
+              "Neposredno posle Kosovskog boja zbeg srpskih izbeglica, bežeći ispred najezde Turaka svaljao se u valjevsku kotlinu, gde su se nastanili iznemogli od dugog bežanja, nazvali grad Valjevo.",
         },
       },
       {
         'legend_title': {
-          'en': 'Legend 2',
-          'de': 'Legende 2',
-          'sr': 'Legenda 2',
-          'sr_Cyrl': 'Легенда 2',
-          'sr_Latn': 'Legenda 2'
+          'en': "Valjevo: City of Fulling Mills",
+          'de': "Valjevo: Stadt der Walkmühlen",
+          'sr': "Valjevo: Grad valjarica",
+          'sr_Cyrl': "Ваљево: Град ваљарица",
+          'sr_Latn': "Valjevo: Grad valjarica"
         },
         'legend_description': {
-          'en': 'Description 2',
-          'de': 'Beschreibung 2',
-          'sr': 'Opis 2',
-          'sr_Cyrl': 'Опис 2',
-          'sr_Latn': 'Opis 2'
+          'en':
+              "The city owes its name to the numerous fulling mills that were supposedly scattered along the banks of the Kolubara river in the past, where cloth was rolled day and night. A more complex version is that oxen brought wool to the fulling mills for rolling, and the finished cloth was taken away. The combination of the words for fulling mill ('valjarica') and ox ('vo') created the name Valjevo.",
+          'de':
+              "Die Stadt verdankt ihren Namen den zahlreichen Walkmühlen, die einst entlang der Ufer des Flusses Kolubara verstreut gewesen sein sollen, wo Tag und Nacht Stoff gewalkt wurde. Eine komplexere Version besagt, dass Ochsen Wolle zu den Walkmühlen zum Walken brachten und das fertige Tuch abtransportiert wurde. Die Kombination der Wörter für Walkmühle ('valjarica') und Ochse ('vo') ergab den Namen Valjevo.",
+          'sr':
+              "Grad svoje ime duguje brojnim valjaricama koje su u prošlosti, navodno, bile načičkane duže obale Kolubare i u kojima se danonoćno valjalo sukno. Složenija varijanta je, da su se volovima do valjarica dovlačila vuna za valjanje, a odvlačilo gotovo sukno. Kombinacijom reči valjarica i vo nastalo je Valjevo.",
+          'sr_Cyrl':
+              "Град своје име дугује бројним ваљарицама које су у прошлости, наводно, биле начичкане дуж обале Колубаре и у којима се даноноћно ваљало сукно. Сложенија варијанта је, да су се воловима до ваљарица довлачила вуна за ваљање, а одвлачило готово сукно. Комбинацијом речи ваљарица и во настало је Ваљево.",
+          'sr_Latn':
+              "Grad svoje ime duguje brojnim valjaricama koje su u prošlosti, navodno, bile načičkane duže obale Kolubare i u kojima se danonoćno valjalo sukno. Složenija varijanta je, da su se volovima do valjarica dovlačila vuna za valjanje, a odvlačilo gotovo sukno. Kombinacijom reči valjarica i vo nastalo je Valjevo.",
         },
       },
       {
         'legend_title': {
-          'en': 'Legend 3',
-          'de': 'Legende 3',
-          'sr': 'Legenda 3',
-          'sr_Cyrl': 'Легенда 3',
-          'sr_Latn': 'Legenda 3'
+          'en': "Valjevo: The city of cultivated land and people.",
+          'de': "Valjevo: Stadt des bearbeiteten Landes und der Menschen",
+          'sr': "Valjevo: Grad valjane zemlje i ljudi",
+          'sr_Cyrl': "Ваљево: Град ваљане земље и људи",
+          'sr_Latn': "Valjevo: Grad valjane zemlje i ljudi"
         },
         'legend_description': {
-          'en': 'Description 3',
-          'de': 'Beschreibung 3',
-          'sr': 'Opis 3',
-          'sr_Cyrl': 'Опис 3',
-          'sr_Latn': 'Opis 3'
+          'en':
+              "Valjevo got its name from the rolled land in its surroundings and the worthy people who cultivate it.",
+          'de':
+              "Valjevo verdankt seinen Namen dem bearbeiteten Land in seiner Umgebung und den tüchtigen Menschen, die es bestellen.",
+          'sr':
+              "Valjevo je dobilo ime po valjanoj zemlji u svojoj okolini i valjanim ljudima koji je obrađuju.",
+          'sr_Cyrl':
+              "Ваљево је добило име по ваљаној земљи у својој околини и ваљаним људима који је обрађују.",
+          'sr_Latn':
+              "Valjevo je dobilo ime po valjanoj zemlji u svojoj okolini i valjanim ljudima koji je obrađuju.",
         },
       },
       {
         'legend_title': {
-          'en': 'Legend 4',
-          'de': 'Legende 4',
-          'sr': 'Legenda 4',
-          'sr_Cyrl': 'Легенда 4',
-          'sr_Latn': 'Legenda 4'
+          'en': "Philosophical Assumption of the City's Name",
+          'de': "Philosophische Annahme des Stadtnamens",
+          'sr': "Filozofska pretpostavka imena grada",
+          'sr_Cyrl': "Филозофска претпоставка имена града",
+          'sr_Latn': "Filozofska pretpostavka imena grada"
         },
         'legend_description': {
-          'en': 'Description 4',
-          'de': 'Beschreibung 4',
-          'sr': 'Opis 4',
-          'sr_Cyrl': 'Опис 4',
-          'sr_Latn': 'Opis 4'
+          'en':
+              "Philosophical Assumption\nValjevo owes its name to the valley surrounded by hills in which it is located, because the Latin word \"Vallis\" denotes a valley.",
+          'de':
+              "Philosophische Annahme\nValjevo verdankt seinen Namen dem von Hügeln umgebenen Tal, in dem es liegt, denn das lateinische Wort \"Vallis\" bedeutet Tal.",
+          'sr':
+              "Filozofska pretpostavka\nValjevo svoje ime duguje dolini okruženoj brdima u kojoj je smešteno, jer latinska reč \"Vallis\" označava dolinu.",
+          'sr_Cyrl':
+              "Филозофска претпоставка\nВаљево своје име дугује долини окруженој брдима у којој је смештено, јер латинска реч \"Vallis\" означава долину.",
+          'sr_Latn':
+              "Filozofska pretpostavka\nValjevo svoje ime duguje dolini okruženoj brdima u kojoj je smešteno, jer latinska reč \"Vallis\" označava dolinu.",
         },
       },
     ];

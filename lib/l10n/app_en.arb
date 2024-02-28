@@ -100,6 +100,15 @@
     "bottomNavigation": "Bottom Navigation Bar",
     "buttonFor": "Button for {label}",
     "sloganLabel": "Verses by Matija Bećković from the poem 'When You Come to Any City'",
+    "surface": "Surface",
+    "elevation": "Elevation above sea level",
+    "populationDensity": "Population density",
+    "population": "Population",
+    "district": "District",
+    "cityDay": "City Day",
+    "saint": "City Patron Saint Day",
+    "kolubaraDistrict": "Kolubara District",
+    "saintName": "Trojice (Duhovi)",
 
 
 

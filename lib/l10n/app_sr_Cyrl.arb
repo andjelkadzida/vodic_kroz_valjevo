@@ -101,6 +101,15 @@
     "bottomNavigation": "Доња трака навигације",
     "buttonFor": "Дугме за {label}",
     "sloganLabel": "Стихови Матије Бећковића из песме 'Кад дођеш у било који град'",
+    "surface": "Површина",
+    "elevation": "Надморска висина",
+    "populationDensity": "Густина насељености",
+    "population": "Број становника",
+    "district": "Округ",
+    "cityDay": "Дан града",
+    "saint": "Слава града",
+    "kolubaraDistrict": "Колубарски округ",
+    "saintName": "Тројице (Духови)",
 
 
 

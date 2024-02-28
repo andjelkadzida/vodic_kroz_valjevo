@@ -71,18 +71,23 @@ class SightsRepository {
         'latitude': 44.26925398584459,
         'longitude': 19.885692396117847,
         'titles': {
-          'en': 'Valjevo Museum',
-          'de': 'Museum von Valjevo',
-          'sr': 'Valjevski muzej',
-          'sr_Cyrl': 'Ваљевски музеј',
-          'sr_Latn': 'Valjevski muzej',
+          'en': 'National Museum Valjevo',
+          'de': 'Nationalmuseum Valjevo',
+          'sr': 'Narodni muzej Valjevo',
+          'sr_Cyrl': 'Народни музеј Ваљево',
+          'sr_Latn': 'Narodni muzej Valjevo',
         },
         'descriptions': {
-          'en': 'Description in English',
-          'de': 'Beschreibung auf Deutsch',
-          'sr': 'Opis na srpskom latinicom',
-          'sr_Cyrl': 'Опис на српском ћирилицом',
-          'sr_Latn': 'Opis na srpskom latinicom',
+          'en':
+              "Museum building began in 1869, with the purpose of being a primary school. Following the ending of the construction in 1870, the newly established Valjevo Grammar school was also situated in the building.\nDuring World War I, this building, like most public structures in the city, was used for the needs of the Valjevo Hospital where numerous foregin medical misionswere helping Serbian doctors in suppressing a large epidemic of typhus.\nIn the following decades, secondary schools of economics and technical education, as well as a primary school were all situated here. The building became the home of the National Museum of Valjevo in 1969. Currently, there are a permanent exhibition (The Third Dimension of the Past - a Look from the Future), a gallery for occasional themed exhibits and the museum club in the building. The National Museum represents a valuable architectural structure In Valjevo, which was among the first buldings that were designed under the infuence of the Western Architecture. As such, it is classified among the Cultural Monuments of Exceptional Importance.",
+          'de':
+              "Der Museumsbau begann 1869 mit dem Ziel, eine Grundschule zu errichten. Nach Abschluss der Bauarbeiten im Jahr 1870 wurde auch das neu gegründete Valjevo Gymnasium in dem Gebäude untergebracht.\nWährend des Ersten Weltkriegs wurde dieses Gebäude, wie die meisten öffentlichen Einrichtungen in der Stadt, für die Bedürfnisse des Valjevo Krankenhauses genutzt, wo zahlreiche ausländische medizinische Missionen serbischen Ärzten halfen, eine große Typhusepidemie einzudämmen.\nIn den folgenden Jahrzehnten waren hier eine Sekundarschule für Wirtschaft und technische Bildung sowie eine Grundschule untergebracht. Das Gebäude wurde 1969 zum Sitz des Nationalmuseums Valjevo. Derzeit gibt es dort eine Dauerausstellung (Die dritte Dimension der Vergangenheit - ein Blick aus der Zukunft), eine Galerie für gelegentliche thematische Ausstellungen und den Museumsclub.\nDas Nationalmuseum stellt ein wertvolles architektonisches Bauwerk in Valjevo dar, das zu den ersten Gebäuden gehörte, die unter dem Einfluss der westlichen Architektur entworfen wurden. Als solches ist es unter den Kulturdenkmälern von außergewöhnlicher Bedeutung eingestuft.",
+          'sr':
+              "Izgradnja sadašnje zgrade Narodnog muzeja započeta je 1869. godine za potrebe gradske osnovne škole. Po završetku gradnje 1870. godine u njoj je bila smeštena i novosnovana Valjevska gimnazija.\nTokom Prvog svetskog rata zgrada je, kao i većina javnih objekata u gradu, korišćena za potrebe Valjevske bolnice, gde su brojne inostrane sanitetske misije pomagale srpskim lekarima u suzbijanju velike epidemije tifusa.\nU narednim decenijama ovde su bile smeštene Ekonomska, Tehnička i osnovna škola. Zgrada je postala dom Narodnog muzeja Valjevo 1969. godine. Danas se u ovoj zgradi nalazi stalna postavka muzeja 'Treća dimenzija prošlosti - pogled iz budućnosti', galerija za povremene tematske izložbe, kao i muzejski klub.\nZgrada Narodnog muzeja predstavlja vredan arhitektonski objekat u Valjevu, koji je među prvim u ovom gradu bio sazidan pod uticajem zapadnoevropske arhitekture. Kao takav, svrstan je među spomenike kulture od velikog značaja.",
+          'sr_Cyrl':
+              "Изградња садашње зграде Народног музеја започета је 1869., године за потребе градске основне школе. Позавршетку градње 1870. године у њој је била смештена и новоснована Ваљевска гимназија.\nТoком Првог светског рата зградаје, као и већина јавних објеката у граду, коришћена за потребе Ваљевске болнице, где су бројне иностране санитетске мисије помагале српским лекарима у сузбијању велике епидемије тифуса.\nУ наредним деценијама овдесу биле смештене Економска, Техничка и основна школа. Зграда је постала дом Народног музеја Ваљево 1069. године. Данас се у овој згради налази стална поставка музеја 'Тређа димензија прошлости погледшва будућности' галерија за повремене тематске изложбе, као и музејски клуб. Зграда Народног музеја представља вредан архитектонски објекат у Ваљеву, који је међу првима у овом граду био сазидан под утицајем западноевропске архитектуре. Као такав, сврстан је међу споменике културе од великог значаја",
+          'sr_Latn':
+              "Izgradnja sadašnje zgrade Narodnog muzeja započeta je 1869. godine za potrebe gradske osnovne škole. Po završetku gradnje 1870. godine u njoj je bila smeštena i novosnovana Valjevska gimnazija.\nTokom Prvog svetskog rata zgrada je, kao i većina javnih objekata u gradu, korišćena za potrebe Valjevske bolnice, gde su brojne inostrane sanitetske misije pomagale srpskim lekarima u suzbijanju velike epidemije tifusa.\nU narednim decenijama ovde su bile smeštene Ekonomska, Tehnička i osnovna škola. Zgrada je postala dom Narodnog muzeja Valjevo 1969. godine. Danas se u ovoj zgradi nalazi stalna postavka muzeja 'Treća dimenzija prošlosti - pogled iz budućnosti', galerija za povremene tematske izložbe, kao i muzejski klub.\nZgrada Narodnog muzeja predstavlja vredan arhitektonski objekat u Valjevu, koji je među prvim u ovom gradu bio sazidan pod uticajem zapadnoevropske arhitekture. Kao takav, svrstan je među spomenike kulture od velikog značaja.",
         },
       },
       // Kula Nenadovica

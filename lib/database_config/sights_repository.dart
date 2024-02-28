@@ -265,11 +265,11 @@ class SightsRepository {
         'latitude': 44.29062866176497,
         'longitude': 19.876563654330376,
         'titles': {
-          'en': 'Tesnjar',
-          'de': 'Tesnjar',
-          'sr': 'Tešnjar',
-          'sr_Cyrl': 'Тешњар',
-          'sr_Latn': 'Tešnjar',
+          'en': 'Tešnjar (Turkish town on the right bank of the Kolubara)',
+          'de': 'Tešnjar (Türkisches Viertel am rechten Ufer der Kolubara)',
+          'sr': 'Tešnjar (Turska kasaba na desnoj obali Kolubare)',
+          'sr_Cyrl': 'Тешњар (Турска касаба на десној обали Колубаре)',
+          'sr_Latn': 'Tešnjar (Turska kasaba na desnoj obali Kolubare)',
         },
         'descriptions': {
           'en':
@@ -284,7 +284,7 @@ class SightsRepository {
               "Ima jednu ulicu koja prati tok reke Kolubare i nekoliko manjih strmih uličica koje se niz brdo spuštaju ka njoj. U njoj su se nalazile prodavnice, zanatske radionice, trgovački magacini zbog čega je Tešnjar predstavljao trgovinsko-zanatsku četvrt Valjeva ,čaršiju. Veći deo kuća je nastao u 19.veku ali se poštovao zatečeni stil. Svoju namenu zadržavao je vekovima, tačnije do polovine 20. veka,kada gubi tu svoju namenu. Poslednjih decenija 20. veka započeo je proces restauracije i konzervacije koji i danas traje.\n\nDanas je Tešnjar turistička atrakcija. Tu su snimane scene za mnoge filmove. Npr. \"Zona Zamfirova\", \"Šešir profesora Koste Vujića\", \"Beležnica profesora Miškovića\", \"Toma\"..",
         },
       },
-      // Zivojin Misic
+      // Živojin Misić
       {
         'sight_image_path': 'images/sightsImages/zivojin/zivojin1.jpg',
         'sight_image_path2': 'images/sightsImages/zivojin/zivojin2.jpg',

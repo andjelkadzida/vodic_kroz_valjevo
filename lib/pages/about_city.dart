@@ -84,14 +84,12 @@ class AboutCity extends StatelessWidget {
               ),
               tooltip: localization(context).value),
         ],
-        rows: const [
+        rows: [
           DataRow(cells: [
-            DataCell(Text('Total Population')),
-            DataCell(Text('1.2 million')),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('Povrsina')),
-            DataCell(Text('1.2 million')),
+            DataCell(Semantics(
+                label: 'Total Population', child: Text('Total Population'))),
+            DataCell(
+                Semantics(label: '1.2 million', child: Text('1.2 million'))),
           ]),
         ],
       ),

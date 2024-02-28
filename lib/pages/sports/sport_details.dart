@@ -146,7 +146,7 @@ class SportDetailsPage extends StatelessWidget {
                           textAlign: TextAlign.justify,
                           style: Theme.of(context)
                               .primaryTextTheme
-                              .displayMedium
+                              .bodyMedium
                               ?.copyWith(
                                   color: Colors.black,
                                   fontSize: width * 0.065,

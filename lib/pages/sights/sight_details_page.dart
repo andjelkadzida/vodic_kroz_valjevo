@@ -109,7 +109,7 @@ class SightDetailsPage extends StatelessWidget {
                       textAlign: TextAlign.justify,
                       style: Theme.of(context)
                           .primaryTextTheme
-                          .displayMedium
+                          .bodyMedium
                           ?.copyWith(
                               color: Colors.black,
                               fontSize: constraints.maxWidth * 0.065,

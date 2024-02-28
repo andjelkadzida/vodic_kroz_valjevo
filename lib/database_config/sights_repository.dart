@@ -90,6 +90,36 @@ class SightsRepository {
               "Izgradnja sadašnje zgrade Narodnog muzeja započeta je 1869. godine za potrebe gradske osnovne škole. Po završetku gradnje 1870. godine u njoj je bila smeštena i novosnovana Valjevska gimnazija.\nTokom Prvog svetskog rata zgrada je, kao i većina javnih objekata u gradu, korišćena za potrebe Valjevske bolnice, gde su brojne inostrane sanitetske misije pomagale srpskim lekarima u suzbijanju velike epidemije tifusa.\nU narednim decenijama ovde su bile smeštene Ekonomska, Tehnička i osnovna škola. Zgrada je postala dom Narodnog muzeja Valjevo 1969. godine. Danas se u ovoj zgradi nalazi stalna postavka muzeja 'Treća dimenzija prošlosti - pogled iz budućnosti', galerija za povremene tematske izložbe, kao i muzejski klub.\nZgrada Narodnog muzeja predstavlja vredan arhitektonski objekat u Valjevu, koji je među prvim u ovom gradu bio sazidan pod uticajem zapadnoevropske arhitekture. Kao takav, svrstan je među spomenike kulture od velikog značaja.",
         },
       },
+      // Muselimov konak
+      {
+        'sight_image_path':
+            'images/sightsImages/muselimovKonak/muselimovKonak1.jpeg',
+        'sight_image_path2':
+            'images/sightsImages/muselimovKonak/muselimovKonak2.jpeg',
+        'sight_image_path3':
+            'images/sightsImages/muselimovKonak/muselimovKonak3.jpeg',
+        'latitude': 44.26973928761971,
+        'longitude': 19.88489479391643,
+        'titles': {
+          'en': "Muselim's Residence",
+          'de': "Muselims Residenz",
+          'sr': 'Muselimov konak',
+          'sr_Cyrl': 'Муселимов конак',
+          'sr_Latn': 'Muselimov konak',
+        },
+        'descriptions': {
+          'en':
+              "The oldest preserved building in Valjevo, erected at the end of the 18th century to serve as a residence to Muselim, the Turkish governor of the Valjevo nahiyah.\n\nThe ground floor was used for governmental purposes, while in the basement there was a dungeon. It was due to these prison rooms that this building has become a well-known and significan memento of Serbian history.\n\nThe dungeon in the basement was the place where the prominent. knezes Aleksa Nenadović and lija Birčanin were detained in 1804. From there they were taken to the banks of Kolubara and executed. Their heads were impaled and highlighted on the residence roof.\nThis event is remembered in history as the Slaughter of the Knezes ('knez'was a title: borne by local Serbian chiefs under the Ottoman Empire) and itis considered to-have been the direct cause of the First Serbian Uprising and the liberation of Serbia from the centuries-long Turkish rule. Although this action saw dozens of prominent Serbs being executed, Aleksa Nenadović and Ilija Birčanin have remained the main symbols of the Slaughter of the Knezes\n\nMuselim's Residence building has served as the National Museum of Valjevo since 1951.\nCurrently, there is a permanent exhibition in the basement - The Slaughter of the Knezes, and the exhibition on the ground floor-Valjevo Nahiyahin the First and the Second Serbian Uprising",
+          'de':
+              "Das älteste erhaltene Gebäude in Valjevo wurde Ende des 18. Jahrhunderts errichtet, um als Residenz für Muselim, den türkischen Gouverneur der Nahiye Valjevo, zu dienen.\n\nDas Erdgeschoss wurde für Regierungszwecke genutzt, während im Keller ein Kerker war. Es waren diese Gefängnisräume, die dieses Gebäude zu einem bekannten und bedeutenden Denkmal der serbischen Geschichte gemacht haben.\n\nDer Kerker im Keller war der Ort, an dem die prominenten Kneze Aleksa Nenadović und Ilija Birčanin 1804 festgehalten wurden. Von dort wurden sie an die Ufer der Kolubara gebracht und hingerichtet. Ihre Köpfe wurden aufgespießt und auf dem Dach der Residenz zur Schau gestellt. Dieses Ereignis bleibt in der Geschichte als das Massaker an den Knezen in Erinnerung ('Knez' war ein Titel, der von lokalen serbischen Anführern unter dem Osmanischen Reich getragen wurde) und gilt als direkte Ursache des Ersten Serbischen Aufstands und der Befreiung Serbiens von der jahrhundertelangen türkischen Herrschaft. Obwohl bei dieser Aktion Dutzende prominente Serben hingerichtet wurden, sind Aleksa Nenadović und Ilija Birčanin die Hauptsymbole des Massakers an den Knezen geblieben.\n\nDas Gebäude der Muselims Residenz dient seit 1951 als Nationalmuseum von Valjevo. Derzeit gibt es im Keller eine Dauerausstellung - Das Massaker an den Knezen, und die Ausstellung im Erdgeschoss - Die Nahiye Valjevo während des Ersten und Zweiten Serbischen Aufstands.",
+          'sr':
+              "Najstarija sačuvana zgrada u Valjevu, podignuta krajem 18. veka za potrebe Muselima, turskog upravnika Valjevske nahije.\n\nPrizemlje objekta bilo je rezervisano za administrativne prostorije, dok se u podrumu nalazila tamnica. Upravo je po ovim zatvorskim prostorijama zgrada postala poznata i zaslužila značajno mesto u srpskoj istoriji.\n\nPodrumska apsana bila je mesto gde su početkom 1804. godine bili zatočeni istaknuti kneževi Valjevske nahije Aleksa Nenadović i Ilija Birčanin. Odavde su odvedeni na obalu Kolubare, gde su pogubljeni. Nakon ubijanja njihove glave nabijene su na kolac i istaknute na krovu konaka. Ovaj događaj ostao je zapamćen u istoriji kao Seča knezova i smatra se neposrednim povodom za izbijanje Prvog srpskog ustanka i oslobođenja Srbije od vekovne turske prevlasti. Premda je u ovoj akciji dahija širom Srbije pogubljeno više desetina viđenijih Srba, Aleksa Nenadović i Ilija Birčanin ostali su upamćeni kao glavni simboli Seče knezova.\n\nZgrada Muselimovog konaka se od 1951. koristi za potrebe Narodnog muzeja Valjevo. Danas se u podrumu nalazi stalna izložba 'Seča knezova', a u prizemlju izložba 'Valjevska nahija i Valjevci u Prvom i Drugom srpskom ustanku'.",
+          'sr_Cyrl':
+              "Најстарија сачувана зграда у Ваљеву, подигнута крајем 18. века за потребе Муселима, турског управника Ваљевске нахије.\n\nПриземље објекта било је резервисано за административне просторије, док се у подруму налазила тамница. Управо је по овим затворским просторијима зграда постала позната и заслужила значајно место у српској историји\n\nПодрумска апсана била је место где су почетком 1804. године били заточени истакнути кнежеви Ваљевске нахије Алекса Ненадовић и Илија Бирчанин. Одавде су одведени на обалу Колубаре, где су погубљени. Након убијања њихове главе набијене су на колац и истакнуте на крову конака.\nОвај догађај остао је запамћен у историји као Сеча кнезова и сматра се непосредним поводом за избијање Првог српског устанка и ослобођења Србије од вековне турске превласти. Премда је у овој акцији дахија широм Србије погубљено више десетина виђенијих Срба, Алекса Ненадовић и Илија Бирчанин остали су упамћени као главни симболи Сече кнезова.\n\nЗграда Муселимовог конака се од 1951. користи за потребе Народног музеја Ваљево. Данас се у подруму налази стална изложба 'Сеча кнезова', а у приземљу изложба 'Ваљевска нахија и Ваљевци у Првом и Другом српском устанку'.",
+          'sr_Latn':
+              "Najstarija sačuvana zgrada u Valjevu, podignuta krajem 18. veka za potrebe Muselima, turskog upravnika Valjevske nahije.\n\nPrizemlje objekta bilo je rezervisano za administrativne prostorije, dok se u podrumu nalazila tamnica. Upravo je po ovim zatvorskim prostorijama zgrada postala poznata i zaslužila značajno mesto u srpskoj istoriji.\n\nPodrumska apsana bila je mesto gde su početkom 1804. godine bili zatočeni istaknuti kneževi Valjevske nahije Aleksa Nenadović i Ilija Birčanin. Odavde su odvedeni na obalu Kolubare, gde su pogubljeni. Nakon ubijanja njihove glave nabijene su na kolac i istaknute na krovu konaka. Ovaj događaj ostao je zapamćen u istoriji kao Seča knezova i smatra se neposrednim povodom za izbijanje Prvog srpskog ustanka i oslobođenja Srbije od vekovne turske prevlasti. Premda je u ovoj akciji dahija širom Srbije pogubljeno više desetina viđenijih Srba, Aleksa Nenadović i Ilija Birčanin ostali su upamćeni kao glavni simboli Seče knezova.\n\nZgrada Muselimovog konaka se od 1951. koristi za potrebe Narodnog muzeja Valjevo. Danas se u podrumu nalazi stalna izložba 'Seča knezova', a u prizemlju izložba 'Valjevska nahija i Valjevci u Prvom i Drugom srpskom ustanku'.",
+        },
+      },
       // Kula Nenadovica
       {
         'sight_image_path':
@@ -296,31 +326,6 @@ class SightsRepository {
           'sr_Latn': 'Desanka Maksimovic opis',
         },
       },
-      // Muselimov konak
-      {
-        'sight_image_path':
-            'images/sightsImages/muselimovKonak/muselimovKonak1.jpeg',
-        'sight_image_path2':
-            'images/sightsImages/muselimovKonak/muselimovKonak2.jpeg',
-        'sight_image_path3':
-            'images/sightsImages/muselimovKonak/muselimovKonak3.jpeg',
-        'latitude': 44.26973928761971,
-        'longitude': 19.88489479391643,
-        'titles': {
-          'en': 'Muselimov konak',
-          'de': 'Muselimov konak',
-          'sr': 'Muselimov konak',
-          'sr_Cyrl': 'Муселимов конак',
-          'sr_Latn': 'Muselimov konak',
-        },
-        'descriptions': {
-          'en': 'Muselimov konak description',
-          'de': 'Muselimov konak Beschreibung',
-          'sr': 'Muselimov konak opis',
-          'sr_Cyrl': 'Муселимов конак опис',
-          'sr_Latn': 'Muselimov konak opis',
-        },
-      }
     ];
 
     await bulkInsertSightsData(dataList);

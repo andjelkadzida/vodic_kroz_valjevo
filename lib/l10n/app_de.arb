@@ -23,6 +23,8 @@
     "navigateToDestination": "Navigieren Sie zum Ziel",
     "startNavigation": "Navigation starten",
     "navigateTo": "Navigieren zu",
+    "navigateToRestaurant": "Navigieren Sie zum Restaurant.",
+    "navigateToHotel": "Navigieren Sie zum Hotel.",
     "locationUnavailable": "Standort nicht verfügbar",
     "locationUnavailableMsg": "Oops! Wir können Ihren Standort im Moment nicht erkennen. Bitte überprüfen Sie Ihre Einstellungen oder versuchen Sie es später erneut.",
     "cancel": "Abbrechen",
@@ -75,7 +77,7 @@
     "bugDescription": "Fehlerbeschreibung",
     "operatingSystem": "Betriebssystem",
     "selectOS": "Bitte wählen Sie ein Betriebssystem aus.",
-    "selectOSLabel": "Drücken Sie, um das Betriebssystem auszuwählen."
+    "selectOSLabel": "Drücken Sie, um das Betriebssystem auszuwählen.",
     "uploadFile": "Datei hochladen",
     "submit": "Einreichen",
     "enterDescription": "Bitte geben Sie eine Beschreibung des Problems ein.",
@@ -111,6 +113,7 @@
     "kolubaraDistrict": "Kolubara Bezirk",
     "saintName": "Trojice (Duhovi)",
     "indicator": "Anzeige",
+    "openAboutDialog": "Öffnen Sie den Info-Dialog.",
 
 
 

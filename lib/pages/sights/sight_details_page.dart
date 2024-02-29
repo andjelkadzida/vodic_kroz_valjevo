@@ -32,7 +32,7 @@ class SightDetailsPage extends StatelessWidget {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(constraints.maxWidth * 0.02),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -60,8 +60,13 @@ class SightDetailsPage extends StatelessWidget {
                       backgroundDecoration: BoxDecoration(
                         color: Theme.of(context).canvasColor,
                       ),
-                      loadingBuilder: (context, event) => const Center(
-                        child: CircularProgressIndicator(),
+                      loadingBuilder: (context, event) => Center(
+                        child: Tooltip(
+                          message: localization(context).loading,
+                          child: CircularProgressIndicator(
+                            semanticsLabel: localization(context).loading,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -112,7 +117,7 @@ class SightDetailsPage extends StatelessWidget {
                           .bodyMedium
                           ?.copyWith(
                               color: Colors.black,
-                              fontSize: constraints.maxWidth * 0.065,
+                              fontSize: constraints.maxWidth * 0.05,
                               fontWeight: FontWeight.w400),
                     ),
                   ],

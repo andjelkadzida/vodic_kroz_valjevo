@@ -165,6 +165,7 @@ class DatabaseHelper {
   static Future<void> _onDowngrade(
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion > newVersion) {
+      await db.close();
       await deleteWholeDatabase();
       await _onCreate(db, newVersion);
     }
@@ -175,11 +176,6 @@ class DatabaseHelper {
     String dbName = 'valjevo_tour_guide.db';
     String databasesPath = await getDatabasesPath();
     String fullPath = join(databasesPath, dbName);
-
-    if (_database != null) {
-      await _database!.close();
-      _database = null;
-    }
 
     var file = File(fullPath);
     if (await file.exists()) {
@@ -196,7 +192,13 @@ class DatabaseHelper {
     if (snapshot.connectionState == ConnectionState.waiting) {
       return Semantics(
         label: localization(context).loading,
-        child: const Center(child: CircularProgressIndicator()),
+        child: Center(
+          child: Tooltip(
+            message: localization(context).loading,
+            child: CircularProgressIndicator(
+                semanticsLabel: localization(context).loading),
+          ),
+        ),
       );
     } else if (snapshot.hasError) {
       return Semantics(

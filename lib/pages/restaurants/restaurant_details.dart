@@ -34,27 +34,30 @@ class RestaurantDetailsPage extends StatelessWidget {
         builder: (context, orientation) {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              final double padding = constraints.maxWidth * 0.04;
               return SingleChildScrollView(
                 child: Column(
                   children: [
                     Card(
-                      margin: EdgeInsets.all(padding),
+                      margin: EdgeInsets.all(constraints.maxWidth * 0.04),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         children: [
-                          SizedBox(height: padding),
+                          SizedBox(height: constraints.maxWidth * 0.04),
                           CarouselSlider.builder(
                             itemCount: images.length,
                             itemBuilder: (BuildContext context, int itemIndex,
                                 int pageViewIndex) {
                               return Semantics(
-                                  label:
-                                      '${localization(context).restaurantImage}"${restaurantData['title']}"',
-                                  child: Image.asset(images[itemIndex],
-                                      fit: BoxFit.cover));
+                                image: true,
+                                label:
+                                    '${localization(context).restaurantImage}"${restaurantData['title']}"',
+                                child: Image.asset(
+                                  images[itemIndex],
+                                  fit: BoxFit.cover,
+                                ),
+                              );
                             },
                             options: CarouselOptions(
                               autoPlay: true,
@@ -66,7 +69,8 @@ class RestaurantDetailsPage extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(padding),
+                            padding:
+                                EdgeInsets.all(constraints.maxWidth * 0.04),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -86,8 +90,8 @@ class RestaurantDetailsPage extends StatelessWidget {
                                 Semantics(
                                   button: true,
                                   enabled: true,
-                                  onTapHint:
-                                      localization(context).startNavigation,
+                                  onTapHint: localization(context)
+                                      .navigateToRestaurant,
                                   child: SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
@@ -116,7 +120,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: padding),
+                                SizedBox(height: constraints.maxWidth * 0.04),
                               ],
                             ),
                           ),

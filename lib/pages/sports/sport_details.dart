@@ -37,7 +37,7 @@ class SportDetailsPage extends StatelessWidget {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return SingleChildScrollView(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(constraints.maxWidth * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -66,13 +66,18 @@ class SportDetailsPage extends StatelessWidget {
                           backgroundDecoration: BoxDecoration(
                             color: Theme.of(context).canvasColor,
                           ),
-                          loadingBuilder: (context, event) => const Center(
-                            child: CircularProgressIndicator(),
+                          loadingBuilder: (context, event) => Center(
+                            child: Tooltip(
+                              message: localization(context).loading,
+                              child: CircularProgressIndicator(
+                                semanticsLabel: localization(context).loading,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -82,7 +87,8 @@ class SportDetailsPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18),
                           ),
                           padding: EdgeInsets.symmetric(
-                              vertical: constraints.maxWidth * 0.015),
+                            vertical: constraints.maxWidth * 0.015,
+                          ),
                         ),
                         child: Text(
                           localization(context).startNavigation,
@@ -98,7 +104,7 @@ class SportDetailsPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.20),
                     ExpansionTile(
                       expandedAlignment: Alignment.bottomCenter,
                       enableFeedback: true,
@@ -116,7 +122,8 @@ class SportDetailsPage extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.02),
                           SizedBox(
                             width: max(constraints.maxWidth * 0.06, 48),
                             height: max(constraints.maxWidth * 0.06, 48),
@@ -148,7 +155,7 @@ class SportDetailsPage extends StatelessWidget {
                               .bodyMedium
                               ?.copyWith(
                                   color: Colors.black,
-                                  fontSize: constraints.maxWidth * 0.065,
+                                  fontSize: constraints.maxWidth * 0.05,
                                   fontWeight: FontWeight.w400),
                         ),
                       ],

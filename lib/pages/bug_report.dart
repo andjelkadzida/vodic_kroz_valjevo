@@ -116,7 +116,14 @@ class BugReportPageState extends State<BugReportPage> {
       appBar: customAppBar(context, localization(context).bugReport),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: Tooltip(
+                message: localization(context).loading,
+                child: CircularProgressIndicator(
+                  semanticsLabel: localization(context).loading,
+                ),
+              ),
+            )
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: LayoutBuilder(
@@ -140,7 +147,8 @@ class BugReportPageState extends State<BugReportPage> {
                                     labelText: localization(context).bugTitle,
                                   ),
                                   style: TextStyle(
-                                      fontSize: constraints.maxWidth * 0.04),
+                                    fontSize: constraints.maxWidth * 0.04,
+                                  ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return localization(context).enterTitle;
@@ -166,7 +174,8 @@ class BugReportPageState extends State<BugReportPage> {
                                     ),
                                   ),
                                   style: TextStyle(
-                                      fontSize: constraints.maxWidth * 0.04),
+                                    fontSize: constraints.maxWidth * 0.04,
+                                  ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return localization(context)
@@ -184,8 +193,13 @@ class BugReportPageState extends State<BugReportPage> {
                               Semantics(
                                 label: localization(context).osLabel,
                                 child: DropdownButtonFormField<String>(
-                                  icon: const Icon(
-                                      Icons.keyboard_arrow_down_rounded),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    size: MediaQuery.of(context).size.width *
+                                        0.08,
+                                    semanticLabel:
+                                        localization(context).selectOSLabel,
+                                  ),
                                   iconDisabledColor: Colors.grey,
                                   iconEnabledColor: Colors.teal,
                                   iconSize:
@@ -302,7 +316,8 @@ class BugReportPageState extends State<BugReportPage> {
                                       borderRadius: BorderRadius.circular(18),
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                        vertical: constraints.maxWidth * 0.015),
+                                      vertical: constraints.maxWidth * 0.015,
+                                    ),
                                   ),
                                   child: Text(
                                     localization(context).submit,

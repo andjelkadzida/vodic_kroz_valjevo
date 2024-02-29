@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
@@ -9,7 +10,7 @@ AppBar customAppBar(BuildContext context, String title) {
     title: Semantics(
         header: true,
         label: title,
-        child: Text(
+        child: AutoSizeText(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Colors.white,
@@ -20,8 +21,9 @@ AppBar customAppBar(BuildContext context, String title) {
       Semantics(
         button: true,
         enabled: true,
-        onTapHint: 'Open about dialog',
+        onTapHint: localization(context).openAboutDialog,
         child: IconButton(
+          tooltip: localization(context).aboutApp,
           icon: Icon(
             Icons.info_outline,
             semanticLabel: localization(context).aboutApp,

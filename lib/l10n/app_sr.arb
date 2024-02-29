@@ -23,6 +23,8 @@
     "navigateToDestination": "Navigacija do odredišta",
     "startNavigation": "Pokrenite navigaciju",
     "navigateTo": "Vodi me do",
+    "navigateToRestaurant": "Vodi me do restorana.",
+    "navigateToHotel": "Vodi me do hotela.",
     "locationUnavailable": "Lokacija nije dostupna",
     "locationUnavailableMsg": "Uups! Trenutno ne možemo da detektujemo Vašu lokaciju. Proverite podešavanja ili pokušajte kasnije.",
     "cancel": "Otkaži",
@@ -111,6 +113,7 @@
     "kolubaraDistrict": "Kolubarski okrug",
     "saintName": "Trojice (Duhovi)",
     "indicator": "Indikator",
+    "openAboutDialog": "Otvori dijalog o programu.",
 
 
 

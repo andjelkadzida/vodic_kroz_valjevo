@@ -36,8 +36,11 @@ Widget buildMapWithMarkers(List<Marker> markers) {
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(
-          semanticsLabel: localization(context).loading,
+        return Tooltip(
+          message: localization(context).loading,
+          child: CircularProgressIndicator(
+            semanticsLabel: localization(context).loading,
+          ),
         );
       } else {
         return StreamBuilder<bool>(
@@ -152,8 +155,11 @@ Widget buildMap() {
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(
-          semanticsLabel: localization(context).loading,
+        return Tooltip(
+          message: localization(context).loading,
+          child: CircularProgressIndicator(
+            semanticsLabel: localization(context).loading,
+          ),
         );
       } else {
         return StreamBuilder<bool>(

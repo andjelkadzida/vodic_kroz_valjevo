@@ -155,7 +155,7 @@ class AboutCity extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             trailing: Semantics(
-              label: 'Play explanation about ${aboutCityData['title']}',
+              label: localization(context).tapToHearLegend,
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
                 child: IconButton(

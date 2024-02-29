@@ -23,6 +23,8 @@
     "navigateToDestination": "Навигација до одредишта",
     "startNavigation": "Покрените навигацију",
     "navigateTo": "Води ме до",
+    "navigateToRestaurant": "Води ме до ресторана.",
+    "navigateToHotel": "Води ме до хотела.",
     "locationUnavailable": "Локација није доступна",
     "locationUnavailableMsg": "Упс! Тренутно не можемо да детектујемо Вашу локацију. Проверите подешавања или покушајте касније.",
     "cancel": "Откажи",
@@ -112,6 +114,7 @@
     "kolubaraDistrict": "Колубарски округ",
     "saintName": "Тројице (Духови)",
     "indicator": "Индикатор",
+    "openAboutDialog": "Отвори дијалог о програму.",
 
 
 

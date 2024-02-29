@@ -74,7 +74,8 @@
     "bugTitle": "Fehlerbezeichnung",
     "bugDescription": "Fehlerbeschreibung",
     "operatingSystem": "Betriebssystem",
-    "selectOS": "Please select an operating system",
+    "selectOS": "Bitte wählen Sie ein Betriebssystem aus.",
+    "selectOSLabel": "Drücken Sie, um das Betriebssystem auszuwählen."
     "uploadFile": "Datei hochladen",
     "submit": "Einreichen",
     "enterDescription": "Bitte geben Sie eine Beschreibung des Problems ein.",

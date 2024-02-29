@@ -75,6 +75,7 @@
     "bugDescription": "Opis greške",
     "operatingSystem": "Operativni sistem",
     "selectOS": "Molimo vas da odaberete operativni sistem",
+    "selectOSLabel": "Pritisnite da izaberete operativni sistem.",
     "uploadFile": "Otpremi datoteku",
     "submit": "Pošalji",
     "enterDescription": "Molimo unesite opis problema.",

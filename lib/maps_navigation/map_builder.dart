@@ -74,8 +74,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         right: 5.0,
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(
-                            minWidth: 48,
-                            minHeight: 48,
+                            minWidth: 50,
+                            minHeight: 50,
                           ),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.6,
@@ -202,8 +202,8 @@ Widget buildMap() {
                         right: 5.0,
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(
-                            minWidth: 48,
-                            minHeight: 48,
+                            minWidth: 50,
+                            minHeight: 50,
                           ),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.6,

@@ -131,8 +131,8 @@ class ParkDetailsPage extends StatelessWidget {
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.02),
                           SizedBox(
-                            width: max(constraints.maxWidth * 0.06, 48),
-                            height: max(constraints.maxWidth * 0.06, 48),
+                            width: max(constraints.maxWidth * 0.06, 50),
+                            height: max(constraints.maxWidth * 0.06, 50),
                             child: GestureDetector(
                               onDoubleTap: () =>
                                   TextToSpeechConfig.instance.stopSpeaking(),

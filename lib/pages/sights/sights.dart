@@ -136,7 +136,7 @@ class Sights extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
-                      minimumSize: Size(constraints.maxWidth, 48),
+                      minimumSize: Size(constraints.maxWidth, 50),
                     ),
                     child: Text(
                       localization(context).startNavigation,

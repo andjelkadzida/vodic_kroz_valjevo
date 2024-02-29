@@ -75,45 +75,52 @@ AppBar customAppBar(BuildContext context, String title) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        showPrivacyPolicy(context);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.02),
-                        child: Text(
-                          localization(context).privacyPolicy,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03,
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                              ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: 100, minHeight: 50),
+                      child: InkWell(
+                        onTap: () {
+                          showPrivacyPolicy(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.02),
+                          child: Text(
+                            localization(context).privacyPolicy,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.03,
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        showTermsOfUse(context);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.02),
-                        child: Text(
-                          localization(context).termsOfUse,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03,
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                              ),
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(minWidth: 50, minHeight: 50),
+                      child: InkWell(
+                        onTap: () {
+                          showTermsOfUse(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.02),
+                          child: Text(
+                            localization(context).termsOfUse,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.03,
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
                         ),
                       ),
                     ),

@@ -65,7 +65,7 @@ class LanguageButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          minimumSize: const Size(48, 48),
+          minimumSize: const Size(50, 50),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/pages/parks/park_details.dart';
 
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
 import '../navigation/cutom_app_bar.dart';
 import '../navigation/navigation_helper.dart';
+import 'parks/park_details.dart';
 import 'sports/sport_details.dart';
 
 class SportsAndRecreation extends StatelessWidget {
@@ -47,7 +47,7 @@ class SportsAndRecreation extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: constraints.maxHeight * 0.02),
                   Semantics(
                     header: true,
                     child: Text(
@@ -103,7 +103,7 @@ class SportsAndRecreation extends StatelessWidget {
   Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data,
       BoxConstraints constraints, Orientation orientation) {
     return Card(
-      margin: const EdgeInsets.all(10),
+      margin: EdgeInsets.all(constraints.maxWidth * 0.02),
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Column(
@@ -130,7 +130,7 @@ class SportsAndRecreation extends StatelessWidget {
             ),
           )),
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(constraints.maxWidth * 0.02),
             decoration: BoxDecoration(
               color: Colors.teal[300],
               borderRadius: const BorderRadius.only(

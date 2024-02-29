@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../localization/supported_languages.dart';
 
 void showPrivacyPolicy(BuildContext context) {
@@ -79,14 +80,14 @@ Widget _buildSection(BuildContext context, String title, String content) {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        const SizedBox(height: 8.0),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
         ),
-        const SizedBox(height: 16.0),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
       ],
     ),
   );

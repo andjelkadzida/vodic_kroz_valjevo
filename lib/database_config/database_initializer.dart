@@ -1,8 +1,8 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:vodic_kroz_valjevo/database_config/parks_repository.dart';
 
 import 'about_city_repository.dart';
 import 'hotels_repository.dart';
+import 'parks_repository.dart';
 import 'sights_repository.dart';
 import 'sports_repository.dart';
 import 'restaurants_repository.dart';

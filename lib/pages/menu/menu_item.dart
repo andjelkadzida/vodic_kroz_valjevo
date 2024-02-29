@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
+
+import '../../localization/supported_languages.dart';
 
 class MenuItem extends StatelessWidget {
   final String label;

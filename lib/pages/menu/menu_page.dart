@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/navigation/cutom_app_bar.dart';
 
 import '../../localization/supported_languages.dart';
+import '../../navigation/cutom_app_bar.dart';
 import '../about_city.dart';
 import '../hotels_and_restaurants.dart';
 import '../sights/sights.dart';

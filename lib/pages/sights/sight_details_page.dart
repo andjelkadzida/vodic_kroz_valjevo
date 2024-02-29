@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
+import '../../helper/images_loader_helper.dart';
 import '../../localization/supported_languages.dart';
 import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';

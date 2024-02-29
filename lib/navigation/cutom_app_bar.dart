@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
 
+import '../localization/supported_languages.dart';
 import '../policies/privacy_policy.dart';
 import '../policies/terms_of_use.dart';
 

@@ -125,7 +125,7 @@ class BugReportPageState extends State<BugReportPage> {
               ),
             )
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return SingleChildScrollView(
@@ -189,7 +189,9 @@ class BugReportPageState extends State<BugReportPage> {
                                   maxLines: 5,
                                 ),
                               ),
-                              const SizedBox(height: 16.0),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.02),
                               Semantics(
                                 label: localization(context).osLabel,
                                 child: DropdownButtonFormField<String>(
@@ -233,6 +235,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         width: constraints.maxWidth * 0.6,
                                         child: Text(
                                           value,
+                                          semanticsLabel: value,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!
@@ -260,7 +263,9 @@ class BugReportPageState extends State<BugReportPage> {
                                   },
                                 ),
                               ),
-                              const SizedBox(height: 16.0),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.02),
                               Semantics(
                                 label: localization(context).uploadFile,
                                 child: GestureDetector(
@@ -290,9 +295,11 @@ class BugReportPageState extends State<BugReportPage> {
                                               0.07,
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 10.0,
-                                      ),
+                                      SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02),
                                       Text(localization(context).uploadFile,
                                           style: Theme.of(context)
                                               .textTheme
@@ -301,8 +308,8 @@ class BugReportPageState extends State<BugReportPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 10.0,
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
                               ),
                               Text(fileName ??
                                   localization(context).noFileSelected),
@@ -316,7 +323,9 @@ class BugReportPageState extends State<BugReportPage> {
                                       borderRadius: BorderRadius.circular(18),
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                      vertical: constraints.maxWidth * 0.015,
+                                      vertical:
+                                          MediaQuery.of(context).size.height *
+                                              0.01,
                                     ),
                                   ),
                                   child: Text(
@@ -326,7 +335,10 @@ class BugReportPageState extends State<BugReportPage> {
                                         .bodyLarge
                                         ?.copyWith(
                                           color: Colors.white,
-                                          fontSize: constraints.maxWidth * 0.05,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                         ),
                                   ),
                                 ),

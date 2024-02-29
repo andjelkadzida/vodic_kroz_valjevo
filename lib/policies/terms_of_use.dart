@@ -50,7 +50,7 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
               fontSize: MediaQuery.of(context).size.width * 0.05,
               fontWeight: FontWeight.bold,
             )),
-    const SizedBox(height: 6.0),
+    SizedBox(height: MediaQuery.of(context).size.height * 0.01),
     _buildSection(context, localization(context).acceptanceTerms,
         localization(context).acceptanceTermsContent),
     _buildSection(context, localization(context).termsChanges,
@@ -119,14 +119,14 @@ Widget _buildSection(BuildContext context, String title, String content) {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        const SizedBox(height: 8.0),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
         ),
-        const SizedBox(height: 16.0),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
       ],
     ),
   );

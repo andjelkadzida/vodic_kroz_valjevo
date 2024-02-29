@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:vodic_kroz_valjevo/navigation/cutom_app_bar.dart';
 
 import '../helper/internet_connectivity.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
+import '../navigation/cutom_app_bar.dart';
 import '../navigation/navigation_helper.dart';
 
 class MapPage extends StatelessWidget {

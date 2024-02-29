@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/pages/bug_report.dart';
 
 import '../localization/language.dart';
 import '../localization/supported_languages.dart';
 import '../maps_navigation/map_builder.dart';
+import '../pages/bug_report.dart';
 import '../pages/home_page.dart';
 import '../pages/menu/menu_page.dart';
 import 'navigation_helper.dart';

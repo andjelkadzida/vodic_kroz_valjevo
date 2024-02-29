@@ -19,9 +19,6 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final highContrast =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
-
     return Semantics(
       label: localization(context).menuItem(label),
       button: true,
@@ -50,7 +47,7 @@ class MenuItem extends StatelessWidget {
                     child: Text(
                       label,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: highContrast ? Colors.white : Colors.teal,
+                            color: Colors.teal,
                             fontSize: MediaQuery.of(context).size.width * 0.05,
                             letterSpacing: 1,
                           ),
@@ -61,7 +58,7 @@ class MenuItem extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: MediaQuery.of(context).size.width * 0.12,
-                  color: highContrast ? Colors.white : Colors.teal,
+                  color: Colors.teal,
                   applyTextScaling: true,
                 ),
               ),

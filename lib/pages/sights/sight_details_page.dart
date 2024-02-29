@@ -111,10 +111,10 @@ class SightDetailsPage extends StatelessWidget {
                   children: [
                     Text(
                       sightData['description'],
-                      textAlign: TextAlign.justify,
+                      textAlign: TextAlign.left,
                       style: Theme.of(context)
                           .primaryTextTheme
-                          .bodyMedium
+                          .bodySmall
                           ?.copyWith(
                               color: Colors.black,
                               fontSize: constraints.maxWidth * 0.05,

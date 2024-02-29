@@ -38,16 +38,22 @@ class AboutCity extends StatelessWidget {
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: constraints.maxWidth > 600 ? 20.0 : 10.0,
+                vertical: MediaQuery.of(context).size.height * 0.01,
+                horizontal: MediaQuery.of(context).size.width * 0.05,
               ),
               sliver: SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Image.asset('images/vaPogled.jpg', fit: BoxFit.contain),
-                    const SizedBox(height: 20.0),
+                    Semantics(
+                      label: localization(context).aboutCity,
+                      child: Image.asset(
+                        'images/vaPogled.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     _buildResponsiveDataTable(context),
-                    const SizedBox(height: 20.0),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     _buildHistoryCard(context, data.first),
                     ...data
                         .map((legend) => _buildExpansionTile(context, legend)),
@@ -87,51 +93,114 @@ class AboutCity extends StatelessWidget {
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).surface,
-                child: Text(localization(context).surface))),
-            DataCell(Semantics(label: '2256 ha', child: const Text('2256 ha'))),
+                child: Text(
+                  localization(context).surface,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
+            DataCell(Semantics(
+                label: '2256 ha',
+                child: Text(
+                  '2256 ha',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).elevation,
-                child: Text(localization(context).elevation))),
-            DataCell(Semantics(label: '185 m', child: const Text('185 m'))),
+                child: Text(
+                  localization(context).elevation,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
+            DataCell(Semantics(
+                label: '185 m',
+                child: Text(
+                  '185 m',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).populationDensity,
-                child: Text(localization(context).populationDensity))),
+                child: Text(
+                  localization(context).populationDensity,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
             DataCell(Semantics(
                 label: '90,79 st/km\u00B2 (2022.)',
-                child: const Text('90,79 st/km\u00B2 (2022.)'))),
+                child: Text(
+                  '90,79 st/km\u00B2 (2022.)',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).population,
-                child: Text(localization(context).population))),
+                child: Text(
+                  localization(context).population,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
             DataCell(Semantics(
-                label: '82.541 (2022.)', child: const Text('82.541 (2022.)'))),
+                label: '82.541 (2022.)',
+                child: Text(
+                  '82.541 (2022.)',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).district,
-                child: Text(localization(context).district))),
+                child: Text(
+                  localization(context).district,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
             DataCell(Semantics(
                 label: localization(context).kolubaraDistrict,
-                child: Text(localization(context).kolubaraDistrict))),
+                child: Text(
+                  localization(context).kolubaraDistrict,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).cityDay,
-                child: Text(localization(context).cityDay))),
-            DataCell(Semantics(label: '20.3.', child: const Text('20.3.'))),
+                child: Text(
+                  localization(context).cityDay,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
+            DataCell(Semantics(
+                label: '20.3.',
+                child: Text(
+                  '20.3.',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
           DataRow(cells: [
             DataCell(Semantics(
                 label: localization(context).saint,
-                child: Text(localization(context).saint))),
+                child: Text(
+                  localization(context).saint,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
             DataCell(Semantics(
                 label: localization(context).saintName,
-                child: Text(localization(context).saintName))),
+                child: Text(
+                  localization(context).saintName,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ))),
           ]),
         ],
       ),
@@ -161,6 +230,7 @@ class AboutCity extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(
                     Icons.volume_up,
+                    semanticLabel: localization(context).tapToHearLegend,
                     size: Theme.of(context).iconTheme.size,
                     applyTextScaling: true,
                   ),
@@ -209,6 +279,7 @@ class AboutCity extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.volume_up,
+                  semanticLabel: localization(context).tapToHearHistory,
                   size: MediaQuery.of(context).size.width * 0.07,
                   applyTextScaling: true,
                 ),

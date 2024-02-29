@@ -72,31 +72,37 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                       Positioned(
                         bottom: 5.0,
                         right: 5.0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          color: Colors.white,
-                          child: GestureDetector(
-                            onTap: () {
-                              launchUrlString(
-                                'https://www.openstreetmap.org/',
-                              );
-                            },
-                            child: Semantics(
-                              link: true,
-                              label: localization(context).mapCredits,
-                              child: Text(
-                                '© OpenStreetMap contributors',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.04,
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.blue,
-                                    ),
-                                textAlign: TextAlign.center,
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minWidth: 48,
+                            minHeight: 48,
+                          ),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            color: Colors.white,
+                            child: GestureDetector(
+                              onTap: () {
+                                launchUrlString(
+                                  'https://www.openstreetmap.org/',
+                                );
+                              },
+                              child: Semantics(
+                                link: true,
+                                label: localization(context).mapCredits,
+                                child: Text(
+                                  '© OpenStreetMap contributors',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue,
+                                      ),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
@@ -128,18 +134,24 @@ Widget buildWithMarkers(
       point: position,
       width: MediaQuery.of(context).size.width * 0.1,
       height: MediaQuery.of(context).size.height * 0.1,
-      child: GestureDetector(
-        onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
-        child: Semantics(
-          label: '${itemData['title']}',
-          child: Tooltip(
-            message: '${itemData['title']}',
-            child: Icon(
-              Icons.location_pin,
-              size: MediaQuery.of(context).size.width * 0.07,
-              semanticLabel: '${itemData['title']}',
-              color: Colors.blue,
-              applyTextScaling: true,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          minWidth: 44.0,
+          minHeight: 44.0,
+        ),
+        child: GestureDetector(
+          onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
+          child: Semantics(
+            label: '${itemData['title']}',
+            child: Tooltip(
+              message: '${itemData['title']}',
+              child: Icon(
+                Icons.location_pin,
+                size: MediaQuery.of(context).size.width * 0.07,
+                semanticLabel: '${itemData['title']}',
+                color: Colors.blue,
+                applyTextScaling: true,
+              ),
             ),
           ),
         ),
@@ -188,31 +200,37 @@ Widget buildMap() {
                       Positioned(
                         bottom: 5.0,
                         right: 5.0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          color: Colors.white,
-                          child: GestureDetector(
-                            onTap: () {
-                              launchUrlString(
-                                'https://www.openstreetmap.org/',
-                              );
-                            },
-                            child: Semantics(
-                              link: true,
-                              label: localization(context).mapCredits,
-                              child: Text(
-                                '© OpenStreetMap contributors',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.04,
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.blue,
-                                    ),
-                                textAlign: TextAlign.center,
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minWidth: 48,
+                            minHeight: 48,
+                          ),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            color: Colors.white,
+                            child: GestureDetector(
+                              onTap: () {
+                                launchUrlString(
+                                  'https://www.openstreetmap.org/',
+                                );
+                              },
+                              child: Semantics(
+                                link: true,
+                                label: localization(context).mapCredits,
+                                child: Text(
+                                  '© OpenStreetMap contributors',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue,
+                                      ),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),

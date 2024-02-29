@@ -2,6 +2,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vodic_kroz_valjevo/navigation/cutom_app_bar.dart';
 
 import '../helper/internet_connectivity.dart';
@@ -69,13 +70,32 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
                           color: Colors.white,
-                          child: Text(
-                            '© OpenStreetMap contributors',
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context)
-                                    .textScaler
-                                    .scale(16.0)),
+                          child: GestureDetector(
+                            onTap: () {
+                              launchUrlString(
+                                'https://www.openstreetmap.org/',
+                              );
+                            },
+                            child: Semantics(
+                              link: true,
+                              label: localization(context).mapCredits,
+                              child: Text(
+                                '© OpenStreetMap contributors',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.04,
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.blue,
+                                    ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -163,13 +183,32 @@ Widget buildMap() {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
                           color: Colors.white,
-                          child: Text(
-                            '© OpenStreetMap contributors',
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context)
-                                    .textScaler
-                                    .scale(16.0)),
+                          child: GestureDetector(
+                            onTap: () {
+                              launchUrlString(
+                                'https://www.openstreetmap.org/',
+                              );
+                            },
+                            child: Semantics(
+                              link: true,
+                              label: localization(context).mapCredits,
+                              child: Text(
+                                '© OpenStreetMap contributors',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.04,
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.blue,
+                                    ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -194,6 +233,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
         children: [
           SizedBox(height: constraints.maxHeight * 0.1),
           Semantics(
+            liveRegion: true,
             label: localization(context).noInternetConnection,
             child: Align(
               alignment: Alignment.topCenter,
@@ -207,12 +247,16 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
             ),
           ),
           Semantics(
-            child: Icon(
-              Icons.wifi_off_outlined,
-              semanticLabel: localization(context).noInternetConnection,
-              size: constraints.maxWidth * 0.3,
-            ),
-          ),
+              liveRegion: true,
+              child: Tooltip(
+                message: localization(context).noInternetConnection,
+                child: Icon(
+                  Icons.wifi_off_outlined,
+                  semanticLabel: localization(context).noInternetConnection,
+                  size: constraints.maxWidth * 0.3,
+                  applyTextScaling: true,
+                ),
+              )),
           Semantics(
             button: true,
             enabled: true,

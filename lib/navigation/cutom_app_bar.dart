@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -7,16 +9,22 @@ import '../policies/terms_of_use.dart';
 
 AppBar customAppBar(BuildContext context, String title) {
   return AppBar(
-    title: Semantics(
-        header: true,
-        label: title,
-        child: AutoSizeText(
-          title,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.width * 0.05,
-              ),
-        )),
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Semantics(
+          header: true,
+          label: title,
+          child: AutoSizeText(
+            title,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                ),
+          ),
+        ),
+      ],
+    ),
     actions: <Widget>[
       Semantics(
         button: true,
@@ -72,18 +80,22 @@ AppBar customAppBar(BuildContext context, String title) {
                         ),
                   ),
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(minWidth: 100, minHeight: 50),
+                    SizedBox(
+                      width: max(50, MediaQuery.of(context).size.width * 0.3),
+                      height:
+                          max(50, MediaQuery.of(context).size.height * 0.05),
                       child: InkWell(
                         onTap: () {
                           showPrivacyPolicy(context);
                         },
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.02),
+                        child: Align(
+                          alignment: Alignment.center,
                           child: Text(
                             localization(context).privacyPolicy,
                             style: Theme.of(context)
@@ -99,16 +111,16 @@ AppBar customAppBar(BuildContext context, String title) {
                         ),
                       ),
                     ),
-                    ConstrainedBox(
-                      constraints:
-                          const BoxConstraints(minWidth: 50, minHeight: 50),
+                    SizedBox(
+                      width: max(50, MediaQuery.of(context).size.width * 0.3),
+                      height:
+                          max(50, MediaQuery.of(context).size.height * 0.05),
                       child: InkWell(
                         onTap: () {
                           showTermsOfUse(context);
                         },
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.02),
+                        child: Align(
+                          alignment: Alignment.center,
                           child: Text(
                             localization(context).termsOfUse,
                             style: Theme.of(context)

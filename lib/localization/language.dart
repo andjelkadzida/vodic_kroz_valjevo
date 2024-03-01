@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +40,6 @@ class LanguageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Semantics(
       label: localization(context).changeLanguageLabel(language.name),
       child: ElevatedButton(
@@ -56,16 +57,19 @@ class LanguageButton extends StatelessWidget {
           foregroundColor: Colors.white,
           textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: size.width * 0.04,
+                fontSize: MediaQuery.of(context).size.width * 0.04,
               ),
           padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.08,
-            vertical: size.width * 0.02,
+            horizontal: MediaQuery.of(context).size.width * 0.08,
+            vertical: MediaQuery.of(context).size.width * 0.02,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          minimumSize: const Size(50, 50),
+          minimumSize: Size(
+            max(50, MediaQuery.of(context).size.width * 0.2),
+            max(50, MediaQuery.of(context).size.height * 0.1),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,14 +78,14 @@ class LanguageButton extends StatelessWidget {
             Text(
               language.flag,
               style: TextStyle(
-                fontSize: size.width * 0.04,
+                fontSize: MediaQuery.of(context).size.width * 0.04,
               ),
             ),
-            SizedBox(width: size.width * 0.02),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.02),
             Text(
               language.name,
               style: TextStyle(
-                fontSize: size.width * 0.04,
+                fontSize: MediaQuery.of(context).size.width * 0.04,
               ),
             ),
           ],

@@ -104,7 +104,7 @@ class SportDetailsPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.20),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     ExpansionTile(
                       expandedAlignment: Alignment.bottomCenter,
                       enableFeedback: true,
@@ -123,7 +123,7 @@ class SportDetailsPage extends StatelessWidget {
                                 ),
                           ),
                           SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.02),
+                              height: MediaQuery.of(context).size.width * 0.03),
                           SizedBox(
                             width: max(constraints.maxWidth * 0.06, 50),
                             height: max(constraints.maxWidth * 0.06, 50),

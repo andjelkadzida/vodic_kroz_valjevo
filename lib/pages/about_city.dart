@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../database_config/database_helper.dart';
@@ -227,18 +229,21 @@ class AboutCity extends StatelessWidget {
               label: localization(context).tapToHearLegend,
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.volume_up,
-                    semanticLabel: localization(context).tapToHearLegend,
-                    size: Theme.of(context).iconTheme.size,
-                    applyTextScaling: true,
+                child: SizedBox(
+                  width: max(50, MediaQuery.of(context).size.width * 0.1),
+                  height: max(50, MediaQuery.of(context).size.width * 0.1),
+                  child: IconButton(
+                    onPressed: () {
+                      TextToSpeechConfig.instance
+                          .speak(aboutCityData['description']);
+                    },
+                    icon: Icon(
+                      Icons.volume_up,
+                      semanticLabel: localization(context).tapToHearLegend,
+                      size: MediaQuery.of(context).size.width * 0.07,
+                      applyTextScaling: true,
+                    ),
                   ),
-                  onPressed: () {
-                    TextToSpeechConfig.instance
-                        .speak(aboutCityData['description']);
-                  },
-                  tooltip: localization(context).tapToHearLegend,
                 ),
               ),
             ),
@@ -276,17 +281,21 @@ class AboutCity extends StatelessWidget {
             ),
             GestureDetector(
               onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
-              child: IconButton(
-                icon: Icon(
-                  Icons.volume_up,
-                  semanticLabel: localization(context).tapToHearHistory,
-                  size: MediaQuery.of(context).size.width * 0.07,
-                  applyTextScaling: true,
+              child: SizedBox(
+                width: max(50, MediaQuery.of(context).size.width * 0.1),
+                height: max(50, MediaQuery.of(context).size.width * 0.1),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.volume_up,
+                    semanticLabel: localization(context).tapToHearHistory,
+                    size: MediaQuery.of(context).size.width * 0.07,
+                    applyTextScaling: true,
+                  ),
+                  onPressed: () {
+                    TextToSpeechConfig.instance.speak(aboutCityData['history']);
+                  },
+                  tooltip: localization(context).tapToHearHistory,
                 ),
-                onPressed: () {
-                  TextToSpeechConfig.instance.speak(aboutCityData['history']);
-                },
-                tooltip: localization(context).tapToHearHistory,
               ),
             ),
           ],

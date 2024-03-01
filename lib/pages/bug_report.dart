@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -285,14 +286,27 @@ class BugReportPageState extends State<BugReportPage> {
                                       Tooltip(
                                         message: localization(context)
                                             .fileUploadLabel,
-                                        child: Icon(
-                                          Icons.attach_file,
-                                          semanticLabel:
-                                              localization(context).uploadFile,
-                                          size: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.07,
+                                        child: SizedBox(
+                                          width: max(
+                                            50,
+                                            MediaQuery.of(context).size.width *
+                                                0.05,
+                                          ),
+                                          height: max(
+                                              50,
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.05),
+                                          child: Icon(
+                                            Icons.attach_file,
+                                            semanticLabel: localization(context)
+                                                .uploadFile,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.07,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -309,7 +323,7 @@ class BugReportPageState extends State<BugReportPage> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.02,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                               Text(fileName ??
                                   localization(context).noFileSelected),

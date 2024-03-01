@@ -63,6 +63,7 @@
     "menu": "Menu",
     "getStarted": "Get Started",
     "mapPage": "City map",
+    "map": "Map of the city of Valjevo",
     "website": "Website",
     "menuItem": "Menu Item: {item}",
     "tapToOpen": "Tap to open {item}",

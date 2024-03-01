@@ -79,7 +79,7 @@ class ParkDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.20),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     SizedBox(
                       width: double.infinity,
                       child: Semantics(
@@ -110,7 +110,7 @@ class ParkDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.20),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     ExpansionTile(
                       expandedAlignment: Alignment.bottomCenter,
                       enableFeedback: true,

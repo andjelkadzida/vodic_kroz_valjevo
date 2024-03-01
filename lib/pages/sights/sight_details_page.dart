@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -71,6 +73,7 @@ class SightDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: constraints.maxHeight * 0.03),
                 ExpansionTile(
                   expandedAlignment: Alignment.bottomCenter,
                   enableFeedback: true,
@@ -91,18 +94,22 @@ class SightDetailsPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: constraints.maxWidth * 0.1,
-                        height: constraints.maxHeight * 0.1,
-                        child: IconButton(
-                          onPressed: () => TextToSpeechConfig.instance
-                              .speak(sightData['description']),
-                          tooltip: localization(context).tapToHearDetails,
-                          icon: Icon(
-                            Icons.volume_up,
-                            semanticLabel:
-                                localization(context).tapToHearDetails,
-                            size: constraints.maxWidth * 0.065,
-                            applyTextScaling: true,
+                        width: max(50, constraints.maxWidth * 0.1),
+                        height: max(50, constraints.maxHeight * 0.1),
+                        child: GestureDetector(
+                          onDoubleTap: () =>
+                              TextToSpeechConfig.instance.stopSpeaking(),
+                          child: IconButton(
+                            onPressed: () => TextToSpeechConfig.instance
+                                .speak(sightData['description']),
+                            tooltip: localization(context).tapToHearDetails,
+                            icon: Icon(
+                              Icons.volume_up,
+                              semanticLabel:
+                                  localization(context).tapToHearDetails,
+                              size: constraints.maxWidth * 0.065,
+                              applyTextScaling: true,
+                            ),
                           ),
                         ),
                       )

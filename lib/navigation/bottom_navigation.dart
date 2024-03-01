@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../localization/language.dart';
@@ -94,12 +96,16 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               message: navItem.tooltip(context),
               child: Semantics(
                 label: navItem.title(context),
-                child: Icon(
-                  _selectedIndex == -1 ||
-                          _selectedIndex != navItems.indexOf(navItem)
-                      ? navItem.icon
-                      : navItem.selectedIcon,
-                  size: MediaQuery.of(context).size.width * 0.07,
+                child: SizedBox(
+                  width: max(MediaQuery.of(context).size.width * 0.1, 50),
+                  height: max(MediaQuery.of(context).size.height * 0.03, 50),
+                  child: Icon(
+                    _selectedIndex == -1 ||
+                            _selectedIndex != navItems.indexOf(navItem)
+                        ? navItem.icon
+                        : navItem.selectedIcon,
+                    size: MediaQuery.of(context).size.width * 0.07,
+                  ),
                 ),
               ),
             ),

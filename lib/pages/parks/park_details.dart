@@ -18,6 +18,7 @@ class ParkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     MapScreen mapScreen = MapScreen();
 
     List<String> images = [
@@ -79,7 +80,7 @@ class ParkDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    SizedBox(height: screenWidth * 0.03),
                     SizedBox(
                       width: double.infinity,
                       child: Semantics(
@@ -110,7 +111,7 @@ class ParkDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    SizedBox(height: screenWidth * 0.03),
                     ExpansionTile(
                       expandedAlignment: Alignment.bottomCenter,
                       enableFeedback: true,
@@ -128,8 +129,7 @@ class ParkDetailsPage extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.02),
+                          SizedBox(width: screenWidth * 0.02),
                           SizedBox(
                             width: max(constraints.maxWidth * 0.06, 50),
                             height: max(constraints.maxWidth * 0.06, 50),

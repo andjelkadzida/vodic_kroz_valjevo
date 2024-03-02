@@ -32,6 +32,8 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildAboutCityContent(
       BuildContext context, List<Map<String, dynamic>> data) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return OrientationBuilder(
@@ -40,8 +42,8 @@ class AboutCity extends StatelessWidget {
               slivers: [
                 SliverPadding(
                   padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * 0.01,
-                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                    vertical: screenHeight * 0.01,
+                    horizontal: screenWidth * 0.05,
                   ),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate(
@@ -53,14 +55,11 @@ class AboutCity extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(height: screenHeight * 0.02),
                         _buildResponsiveDataTable(context),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(height: screenHeight * 0.02),
                         _buildHistoryCard(context, data.first),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(height: screenHeight * 0.02),
                         ExpansionTile(
                           title: Text(localization(context).legendOfTheCity,
                               style: Theme.of(context).textTheme.titleLarge),
@@ -82,6 +81,7 @@ class AboutCity extends StatelessWidget {
   }
 
   Widget _buildResponsiveDataTable(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: DataTable(
         columns: [
@@ -108,15 +108,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).surface,
                 child: Text(
                   localization(context).surface,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: '2256 ha',
                 child: Text(
                   '2256 ha',
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
           DataRow(cells: [
@@ -124,15 +122,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).elevation,
                 child: Text(
                   localization(context).elevation,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: '185 m',
                 child: Text(
                   '185 m',
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
           DataRow(cells: [
@@ -140,15 +136,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).populationDensity,
                 child: Text(
                   localization(context).populationDensity,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: '90,79 st/km\u00B2 (2022.)',
                 child: Text(
                   '90,79 st/km\u00B2 (2022.)',
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
           DataRow(cells: [
@@ -156,15 +150,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).population,
                 child: Text(
                   localization(context).population,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: '82.541 (2022.)',
                 child: Text(
                   '82.541 (2022.)',
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
           DataRow(cells: [
@@ -172,15 +164,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).district,
                 child: Text(
                   localization(context).district,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: localization(context).kolubaraDistrict,
                 child: Text(
                   localization(context).kolubaraDistrict,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
           DataRow(cells: [
@@ -188,15 +178,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).cityDay,
                 child: Text(
                   localization(context).cityDay,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: localization(context).cityDayDate,
                 child: Text(
                   localization(context).cityDayDate,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
           DataRow(cells: [
@@ -204,15 +192,13 @@ class AboutCity extends StatelessWidget {
                 label: localization(context).saint,
                 child: Text(
                   localization(context).saint,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
             DataCell(Semantics(
                 label: localization(context).saintName,
                 child: Text(
                   localization(context).saintName,
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                  style: TextStyle(fontSize: screenWidth * 0.04),
                 ))),
           ]),
         ],
@@ -222,6 +208,7 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildExpansionTile(
       BuildContext context, Map<String, dynamic> aboutCityData) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return Card(
       child: ExpansionTile(
         title: Text(
@@ -241,8 +228,8 @@ class AboutCity extends StatelessWidget {
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
                 child: SizedBox(
-                  width: max(50, MediaQuery.of(context).size.width * 0.1),
-                  height: max(50, MediaQuery.of(context).size.width * 0.1),
+                  width: max(50, screenWidth * 0.1),
+                  height: max(50, screenWidth * 0.1),
                   child: IconButton(
                     tooltip: localization(context).tapToHearLegend,
                     onPressed: () {
@@ -252,7 +239,7 @@ class AboutCity extends StatelessWidget {
                     icon: Icon(
                       Icons.volume_up,
                       semanticLabel: localization(context).tapToHearLegend,
-                      size: MediaQuery.of(context).size.width * 0.07,
+                      size: screenWidth * 0.07,
                       applyTextScaling: true,
                     ),
                   ),
@@ -267,6 +254,7 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildHistoryCard(
       BuildContext context, Map<String, dynamic> aboutCityData) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return ExpansionTile(
       title: Row(
         children: [
@@ -283,8 +271,7 @@ class AboutCity extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+                padding: EdgeInsets.all(screenWidth * 0.05),
                 child: Text(
                   aboutCityData['history'],
                   style: Theme.of(context).textTheme.bodyMedium,
@@ -294,13 +281,13 @@ class AboutCity extends StatelessWidget {
             GestureDetector(
               onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
               child: SizedBox(
-                width: max(50, MediaQuery.of(context).size.width * 0.1),
-                height: max(50, MediaQuery.of(context).size.width * 0.1),
+                width: max(50, screenWidth * 0.1),
+                height: max(50, screenWidth * 0.1),
                 child: IconButton(
                   icon: Icon(
                     Icons.volume_up,
                     semanticLabel: localization(context).tapToHearHistory,
-                    size: MediaQuery.of(context).size.width * 0.07,
+                    size: screenWidth * 0.07,
                     applyTextScaling: true,
                   ),
                   onPressed: () {

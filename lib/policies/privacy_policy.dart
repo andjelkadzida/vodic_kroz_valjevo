@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../localization/supported_languages.dart';
 
 void showPrivacyPolicy(BuildContext context) {
+  var screenWidth = MediaQuery.of(context).size.width;
   showDialog(
     barrierDismissible: false,
     context: context,
@@ -13,7 +14,7 @@ void showPrivacyPolicy(BuildContext context) {
           child: Text(
             localization(context).privacyPolicy,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: MediaQuery.of(context).size.width * 0.06,
+                  fontSize: screenWidth * 0.06,
                 ),
           ),
         ),
@@ -68,6 +69,8 @@ List<Widget> _buildPrivacyPolicyContent(BuildContext context) {
 }
 
 Widget _buildSection(BuildContext context, String title, String content) {
+  var screenWidth = MediaQuery.of(context).size.width;
+  var screenHeight = MediaQuery.of(context).size.height;
   return Semantics(
     header: true,
     child: Column(
@@ -76,18 +79,18 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: MediaQuery.of(context).size.width * 0.06,
+                fontSize: screenWidth * 0.06,
                 fontWeight: FontWeight.bold,
               ),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+        SizedBox(height: screenHeight * 0.01),
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: MediaQuery.of(context).size.width * 0.035,
+                fontSize: screenWidth * 0.035,
               ),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+        SizedBox(height: screenHeight * 0.02),
       ],
     ),
   );

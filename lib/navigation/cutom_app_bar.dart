@@ -8,6 +8,8 @@ import '../policies/privacy_policy.dart';
 import '../policies/terms_of_use.dart';
 
 AppBar customAppBar(BuildContext context, String title) {
+  var screenWidth = MediaQuery.of(context).size.width;
+  var screenHeight = MediaQuery.of(context).size.height;
   return AppBar(
     title: Center(
       child: Row(
@@ -22,7 +24,7 @@ AppBar customAppBar(BuildContext context, String title) {
                 title,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                      fontSize: screenWidth * 0.05,
                     ),
                 textAlign: TextAlign.center,
               ),
@@ -49,8 +51,7 @@ AppBar customAppBar(BuildContext context, String title) {
               applicationIcon: Semantics(
                 image: true,
                 label: localization(context).appLogo,
-                child:
-                    FlutterLogo(size: MediaQuery.of(context).size.width * 0.1),
+                child: FlutterLogo(size: screenWidth * 0.1),
               ),
               applicationName: localization(context).appTitle,
               applicationVersion: '1.0.0',
@@ -62,7 +63,7 @@ AppBar customAppBar(BuildContext context, String title) {
                   child: Text(
                     localization(context).aboutAppDescription,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: MediaQuery.of(context).size.width * 0.03,
+                          fontSize: screenWidth * 0.03,
                         ),
                   ),
                 ),
@@ -72,7 +73,7 @@ AppBar customAppBar(BuildContext context, String title) {
                   child: Text(
                     localization(context).aboutAppLocalization,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: MediaQuery.of(context).size.width * 0.03,
+                          fontSize: screenWidth * 0.03,
                         ),
                   ),
                 ),
@@ -82,7 +83,7 @@ AppBar customAppBar(BuildContext context, String title) {
                   child: Text(
                     localization(context).aboutAppAccessibility,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: MediaQuery.of(context).size.width * 0.03,
+                          fontSize: screenWidth * 0.03,
                         ),
                   ),
                 ),
@@ -93,9 +94,8 @@ AppBar customAppBar(BuildContext context, String title) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: max(50, MediaQuery.of(context).size.width * 0.3),
-                      height:
-                          max(50, MediaQuery.of(context).size.height * 0.05),
+                      width: max(50, screenWidth * 0.3),
+                      height: max(50, screenHeight * 0.05),
                       child: InkWell(
                         onTap: () {
                           showPrivacyPolicy(context);
@@ -104,23 +104,19 @@ AppBar customAppBar(BuildContext context, String title) {
                           alignment: Alignment.center,
                           child: Text(
                             localization(context).privacyPolicy,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge
-                                ?.copyWith(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.03,
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontSize: screenWidth * 0.03,
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                    ),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      width: max(50, MediaQuery.of(context).size.width * 0.3),
-                      height:
-                          max(50, MediaQuery.of(context).size.height * 0.05),
+                      width: max(50, screenWidth * 0.3),
+                      height: max(50, screenHeight * 0.05),
                       child: InkWell(
                         onTap: () {
                           showTermsOfUse(context);
@@ -129,15 +125,12 @@ AppBar customAppBar(BuildContext context, String title) {
                           alignment: Alignment.center,
                           child: Text(
                             localization(context).termsOfUse,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge
-                                ?.copyWith(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.03,
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontSize: screenWidth * 0.03,
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                    ),
                           ),
                         ),
                       ),
@@ -156,6 +149,6 @@ AppBar customAppBar(BuildContext context, String title) {
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),
-    elevation: (MediaQuery.of(context).size.width / 150).clamp(0.0, 6.0),
+    elevation: (screenWidth / 150).clamp(0.0, 6.0),
   );
 }

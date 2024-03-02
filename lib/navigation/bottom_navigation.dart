@@ -57,6 +57,8 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     final List<NavItem> navItems = [
       NavItem(
           Icons.home,
@@ -97,14 +99,14 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               child: Semantics(
                 label: navItem.title(context),
                 child: SizedBox(
-                  width: max(MediaQuery.of(context).size.width * 0.1, 50),
-                  height: max(MediaQuery.of(context).size.height * 0.03, 50),
+                  width: max(screenWidth * 0.1, 50),
+                  height: max(screenHeight * 0.03, 50),
                   child: Icon(
                     _selectedIndex == -1 ||
                             _selectedIndex != navItems.indexOf(navItem)
                         ? navItem.icon
                         : navItem.selectedIcon,
-                    size: MediaQuery.of(context).size.width * 0.07,
+                    size: screenWidth * 0.07,
                   ),
                 ),
               ),

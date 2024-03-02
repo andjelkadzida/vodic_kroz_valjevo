@@ -19,6 +19,7 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return Semantics(
       label: localization(context).menuItem(label),
       button: true,
@@ -26,7 +27,7 @@ class MenuItem extends StatelessWidget {
       onTapHint: localization(context).tapToOpen(label),
       child: Card(
         elevation: 4,
-        margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
+        margin: EdgeInsets.all(screenWidth * 0.01),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: InkWell(
           onTap: onTap,
@@ -37,18 +38,16 @@ class MenuItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Lottie.asset(lottieAsset,
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.width * 0.2),
+                    width: screenWidth * 0.2, height: screenWidth * 0.2),
               ),
               Padding(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+                  padding: EdgeInsets.all(screenWidth * 0.02),
                   child: Center(
                     child: Text(
                       label,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: Colors.teal,
-                            fontSize: MediaQuery.of(context).size.width * 0.05,
+                            fontSize: screenWidth * 0.05,
                             letterSpacing: 1,
                           ),
                       textAlign: TextAlign.center,
@@ -57,7 +56,7 @@ class MenuItem extends StatelessWidget {
               Center(
                 child: Icon(
                   icon,
-                  size: MediaQuery.of(context).size.width * 0.12,
+                  size: screenWidth * 0.12,
                   color: Colors.teal,
                   applyTextScaling: true,
                 ),

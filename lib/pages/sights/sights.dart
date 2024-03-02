@@ -56,6 +56,7 @@ class Sights extends StatelessWidget {
   }
 
   Widget buildGridItem(BuildContext context, Map<String, dynamic> sightData) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Card(
@@ -97,7 +98,7 @@ class Sights extends StatelessWidget {
                                 semanticLabel:
                                     localization(context).tapToHearSightName),
                             tooltip: localization(context).tapToHearSightName,
-                            iconSize: MediaQuery.of(context).size.width * 0.06,
+                            iconSize: screenWidth * 0.06,
                           ),
                         )
                       ],

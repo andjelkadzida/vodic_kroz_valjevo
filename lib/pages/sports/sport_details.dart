@@ -18,6 +18,7 @@ class SportDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     MapScreen mapScreen = MapScreen();
 
     List<String> images = [
@@ -77,7 +78,7 @@ class SportDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.20),
+                    SizedBox(width: screenWidth * 0.20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -104,7 +105,7 @@ class SportDetailsPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    SizedBox(height: screenWidth * 0.03),
                     ExpansionTile(
                       expandedAlignment: Alignment.bottomCenter,
                       enableFeedback: true,
@@ -122,8 +123,7 @@ class SportDetailsPage extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
-                          SizedBox(
-                              height: MediaQuery.of(context).size.width * 0.03),
+                          SizedBox(height: screenWidth * 0.03),
                           SizedBox(
                             width: max(constraints.maxWidth * 0.06, 50),
                             height: max(constraints.maxWidth * 0.06, 50),

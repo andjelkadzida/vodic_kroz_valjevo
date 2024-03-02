@@ -40,6 +40,8 @@ class LanguageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Semantics(
       label: localization(context).changeLanguageLabel(language.name),
       child: ElevatedButton(
@@ -57,18 +59,18 @@ class LanguageButton extends StatelessWidget {
           foregroundColor: Colors.white,
           textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontSize: screenWidth * 0.04,
               ),
           padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.08,
-            vertical: MediaQuery.of(context).size.width * 0.02,
+            horizontal: screenWidth * 0.08,
+            vertical: screenWidth * 0.02,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
           minimumSize: Size(
-            max(50, MediaQuery.of(context).size.width * 0.2),
-            max(50, MediaQuery.of(context).size.height * 0.1),
+            max(50, screenWidth * 0.2),
+            max(50, screenHeight * 0.1),
           ),
         ),
         child: Row(
@@ -78,14 +80,14 @@ class LanguageButton extends StatelessWidget {
             Text(
               language.flag,
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontSize: screenWidth * 0.04,
               ),
             ),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+            SizedBox(width: screenWidth * 0.02),
             Text(
               language.name,
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontSize: screenWidth * 0.04,
               ),
             ),
           ],

@@ -9,6 +9,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
@@ -21,13 +23,12 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Padding(
-                padding:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+                padding: EdgeInsets.all(screenWidth * 0.05),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: screenHeight * 0.1,
                     ),
                     Semantics(
                       label: localization(context).sloganLabel,
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
                         localization(context).slogan,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.055,
+                          fontSize: screenWidth * 0.055,
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.none,
                         ),
@@ -48,10 +49,10 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                MediaQuery.of(context).size.width * 0.05,
+                screenWidth * 0.05,
                 0,
-                MediaQuery.of(context).size.width * 0.05,
-                MediaQuery.of(context).size.height * 0.02,
+                screenWidth * 0.05,
+                screenHeight * 0.02,
               ),
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -70,14 +71,13 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.1,
-                        vertical: MediaQuery.of(context).size.height * 0.02,
+                        horizontal: screenWidth * 0.1,
+                        vertical: screenHeight * 0.02,
                       ),
                     ),
                     child: Text(
                       localization(context).getStarted,
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.05),
+                      style: TextStyle(fontSize: screenWidth * 0.05),
                     ),
                   ),
                 ),

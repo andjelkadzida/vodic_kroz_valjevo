@@ -113,6 +113,8 @@ class BugReportPageState extends State<BugReportPage> {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: customAppBar(context, localization(context).bugReport),
       bottomNavigationBar: const CustomBottomNavigationBar(),
@@ -126,7 +128,7 @@ class BugReportPageState extends State<BugReportPage> {
               ),
             )
           : Padding(
-              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+              padding: EdgeInsets.all(screenWidth * 0.04),
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return SingleChildScrollView(
@@ -190,23 +192,19 @@ class BugReportPageState extends State<BugReportPage> {
                                   maxLines: 5,
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.02),
+                              SizedBox(height: screenHeight * 0.02),
                               Semantics(
                                 label: localization(context).osLabel,
                                 child: DropdownButtonFormField<String>(
                                   icon: Icon(
                                     Icons.keyboard_arrow_down_rounded,
-                                    size: MediaQuery.of(context).size.width *
-                                        0.08,
+                                    size: screenWidth * 0.08,
                                     semanticLabel:
                                         localization(context).selectOSLabel,
                                   ),
                                   iconDisabledColor: Colors.grey,
                                   iconEnabledColor: Colors.teal,
-                                  iconSize:
-                                      MediaQuery.of(context).size.width * 0.08,
+                                  iconSize: screenWidth * 0.08,
                                   decoration: InputDecoration(
                                     filled: true,
                                     labelText: localization(context).selectOS,
@@ -264,9 +262,7 @@ class BugReportPageState extends State<BugReportPage> {
                                   },
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.02),
+                              SizedBox(height: screenHeight * 0.02),
                               Semantics(
                                 label: localization(context).uploadFile,
                                 child: GestureDetector(
@@ -289,8 +285,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         child: SizedBox(
                                           width: max(
                                             50,
-                                            MediaQuery.of(context).size.width *
-                                                0.05,
+                                            screenWidth * 0.05,
                                           ),
                                           height: max(
                                               50,
@@ -302,10 +297,7 @@ class BugReportPageState extends State<BugReportPage> {
                                             Icons.attach_file,
                                             semanticLabel: localization(context)
                                                 .uploadFile,
-                                            size: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.07,
+                                            size: screenWidth * 0.07,
                                           ),
                                         ),
                                       ),
@@ -323,7 +315,7 @@ class BugReportPageState extends State<BugReportPage> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.04,
+                                width: screenWidth * 0.04,
                               ),
                               Text(fileName ??
                                   localization(context).noFileSelected),
@@ -337,9 +329,7 @@ class BugReportPageState extends State<BugReportPage> {
                                       borderRadius: BorderRadius.circular(18),
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                      vertical:
-                                          MediaQuery.of(context).size.height *
-                                              0.01,
+                                      vertical: screenHeight * 0.01,
                                     ),
                                   ),
                                   child: Text(

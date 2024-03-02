@@ -287,12 +287,7 @@ class BugReportPageState extends State<BugReportPage> {
                                             50,
                                             screenWidth * 0.05,
                                           ),
-                                          height: max(
-                                              50,
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.05),
+                                          height: max(50, screenHeight * 0.05),
                                           child: Icon(
                                             Icons.attach_file,
                                             semanticLabel: localization(context)
@@ -301,11 +296,7 @@ class BugReportPageState extends State<BugReportPage> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.02),
+                                      SizedBox(width: screenWidth * 0.02),
                                       Text(localization(context).uploadFile,
                                           style: Theme.of(context)
                                               .textTheme
@@ -339,10 +330,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         .bodyLarge
                                         ?.copyWith(
                                           color: Colors.white,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.05,
+                                          fontSize: screenWidth * 0.05,
                                         ),
                                   ),
                                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/services.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../helper/images_loader_helper.dart';
@@ -44,23 +45,37 @@ class HotelDetailsPage extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(height: constraints.maxWidth * 0.04),
-                          CarouselSlider.builder(
-                            itemCount: images.length,
-                            itemBuilder: (BuildContext context, int itemIndex,
-                                int pageViewIndex) {
-                              return Semantics(
-                                  label:
-                                      '${localization(context).hotelImage}"${hotelData['title']}',
-                                  child: Image.asset(images[itemIndex],
-                                      fit: BoxFit.cover));
-                            },
-                            options: CarouselOptions(
-                              autoPlay: true,
-                              enlargeCenterPage: true,
-                              viewportFraction: 0.9,
-                              aspectRatio: 2.0,
-                              autoPlayAnimationDuration:
-                                  const Duration(seconds: 2),
+                          SizedBox(
+                            height: constraints.maxHeight * 0.3,
+                            child: PhotoViewGallery.builder(
+                              itemCount: images.length,
+                              builder: (context, index) {
+                                return PhotoViewGalleryPageOptions(
+                                  imageProvider: AssetImage(images[index]),
+                                  maxScale:
+                                      PhotoViewComputedScale.contained * 5,
+                                  minScale: PhotoViewComputedScale.contained,
+                                  initialScale:
+                                      PhotoViewComputedScale.contained,
+                                  basePosition: Alignment.center,
+                                  filterQuality: FilterQuality.high,
+                                  heroAttributes: PhotoViewHeroAttributes(
+                                      tag: images[index]),
+                                );
+                              },
+                              scrollPhysics: const BouncingScrollPhysics(),
+                              backgroundDecoration: BoxDecoration(
+                                color: Theme.of(context).canvasColor,
+                              ),
+                              loadingBuilder: (context, event) => Center(
+                                child: Tooltip(
+                                  message: localization(context).loading,
+                                  child: CircularProgressIndicator(
+                                    semanticsLabel:
+                                        localization(context).loading,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           Padding(

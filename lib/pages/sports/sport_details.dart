@@ -133,11 +133,12 @@ class SportDetailsPage extends StatelessWidget {
                               child: IconButton(
                                 onPressed: () => TextToSpeechConfig.instance
                                     .speak(sportData['description']),
-                                tooltip: localization(context).tapToHearDetails,
+                                tooltip:
+                                    localization(context).tapToHearSportDetails,
                                 icon: Icon(
                                   Icons.volume_up,
-                                  semanticLabel:
-                                      localization(context).tapToHearDetails,
+                                  semanticLabel: localization(context)
+                                      .tapToHearSportDetails,
                                   size: constraints.maxWidth * 0.065,
                                   applyTextScaling: true,
                                 ),

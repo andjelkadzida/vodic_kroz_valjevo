@@ -139,11 +139,12 @@ class ParkDetailsPage extends StatelessWidget {
                               child: IconButton(
                                 onPressed: () => TextToSpeechConfig.instance
                                     .speak(parkData['description']),
-                                tooltip: localization(context).tapToHearDetails,
+                                tooltip:
+                                    localization(context).tapToHearParkDetails,
                                 icon: Icon(
                                   Icons.volume_up,
-                                  semanticLabel:
-                                      localization(context).tapToHearDetails,
+                                  semanticLabel: localization(context)
+                                      .tapToHearParkDetails,
                                   size: constraints.maxWidth * 0.065,
                                   applyTextScaling: true,
                                 ),

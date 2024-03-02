@@ -102,11 +102,12 @@ class SightDetailsPage extends StatelessWidget {
                           child: IconButton(
                             onPressed: () => TextToSpeechConfig.instance
                                 .speak(sightData['description']),
-                            tooltip: localization(context).tapToHearDetails,
+                            tooltip:
+                                localization(context).tapToHearSightDetails,
                             icon: Icon(
                               Icons.volume_up,
                               semanticLabel:
-                                  localization(context).tapToHearDetails,
+                                  localization(context).tapToHearSightDetails,
                               size: constraints.maxWidth * 0.065,
                               applyTextScaling: true,
                             ),

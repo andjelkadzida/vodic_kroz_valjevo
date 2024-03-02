@@ -44,6 +44,7 @@
     "tapToHearSportDetails": "Tap to hear details about the sport field. Tap twice to stop.",
     "tapToHearLegend": "Tap to hear the legend of the city name. Tap twice to stop.",
     "tapToHearHistory": "Tap to hear the city's history. Tap twice to stop.",
+    "tapToSeeSightDetails": "To view further information regarding the sight named {name}, simply tap on it.",
     "legendOfTheCity": "Legends about the name of the city",
     "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
     "description": "Description",

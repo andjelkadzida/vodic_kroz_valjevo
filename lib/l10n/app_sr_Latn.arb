@@ -44,6 +44,7 @@
     "tapToHearSportDetails": "Dodirnite da čujete detalje o sportskom terenu. Dodirnite dva puta za zaustavljanje.",
     "tapToHearLegend": "Dodirnite da biste čuli legendu o imenu grada. Dodirnite dva puta, da biste zaustavili.",
     "tapToHearHistory": "Dodirnite da čujete istoriju grada. Dodirnite dva puta, da biste zaustavili.",
+    "tapToSeeSightDetails": "Da biste videli više informacija o znamenitosti pod imenom {name}, jednostavno dodirnite.",
     "legendOfTheCity": "Legende o imenu grada",
     "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "description": "Opis",

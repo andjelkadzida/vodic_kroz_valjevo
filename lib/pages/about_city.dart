@@ -244,6 +244,7 @@ class AboutCity extends StatelessWidget {
                   width: max(50, MediaQuery.of(context).size.width * 0.1),
                   height: max(50, MediaQuery.of(context).size.width * 0.1),
                   child: IconButton(
+                    tooltip: localization(context).tapToHearLegend,
                     onPressed: () {
                       TextToSpeechConfig.instance
                           .speak(aboutCityData['description']);

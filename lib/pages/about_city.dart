@@ -33,45 +33,56 @@ class AboutCity extends StatelessWidget {
   Widget _buildAboutCityContent(
       BuildContext context, List<Map<String, dynamic>> data) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      return OrientationBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return OrientationBuilder(
           builder: (BuildContext context, Orientation orientation) {
-        return CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.01,
-                horizontal: MediaQuery.of(context).size.width * 0.05,
-              ),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Semantics(
-                      label: localization(context).aboutCity,
-                      child: Image.asset(
-                        'images/vaPogled.jpg',
-                        fit: BoxFit.cover,
-                      ),
+            return CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height * 0.01,
+                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        Semantics(
+                          label: localization(context).aboutCity,
+                          child: Image.asset(
+                            'images/vaPogled.jpg',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        _buildResponsiveDataTable(context),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        _buildHistoryCard(context, data.first),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        ExpansionTile(
+                          title: Text(localization(context).legendOfTheCity,
+                              style: Theme.of(context).textTheme.titleLarge),
+                          children: data
+                              .map((legend) =>
+                                  _buildExpansionTile(context, legend))
+                              .toList(),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    _buildResponsiveDataTable(context),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    _buildHistoryCard(context, data.first),
-                    ...data
-                        .map((legend) => _buildExpansionTile(context, legend)),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         );
-      });
-    });
+      },
+    );
   }
 
   Widget _buildResponsiveDataTable(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: [
           DataColumn(
@@ -181,9 +192,9 @@ class AboutCity extends StatelessWidget {
                       fontSize: MediaQuery.of(context).size.width * 0.04),
                 ))),
             DataCell(Semantics(
-                label: '20.3.',
+                label: localization(context).cityDayDate,
                 child: Text(
-                  '20.3.',
+                  localization(context).cityDayDate,
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.04),
                 ))),

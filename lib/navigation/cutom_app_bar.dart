@@ -9,21 +9,27 @@ import '../policies/terms_of_use.dart';
 
 AppBar customAppBar(BuildContext context, String title) {
   return AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Semantics(
-          header: true,
-          label: title,
-          child: AutoSizeText(
-            title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width * 0.05,
-                ),
+    title: Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            flex: 1,
+            child: Semantics(
+              header: true,
+              label: title,
+              child: AutoSizeText(
+                title,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
     actions: <Widget>[
       Semantics(

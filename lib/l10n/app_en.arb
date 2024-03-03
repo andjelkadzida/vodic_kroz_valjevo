@@ -56,8 +56,6 @@
     "restaurantName": "Restaurant name: ",
     "restaurantImage": "Restaurant image",
     "tapToView": "Tap to open page: ",
-    "distanceFromRestaurant": "Distance from the restaurant: ",
-    "distanceNotAvailable": "Unable to calculate the distance to the restaurant.",
     "sportFields": "Sport fields",
     "parks": "Parks",
     "valjevoCityImage": "Image of the city of Valjevo",

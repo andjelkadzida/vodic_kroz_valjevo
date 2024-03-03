@@ -126,7 +126,10 @@ class SightListItem extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(blockSizeHorizontal * 2),
                     child: Semantics(
-                      label: 'Image of ${sightData['title']}',
+                      label:
+                          '${localization(context).image} ${sightData['title']}',
+                      button: true,
+                      onTapHint: localization(context).tapToViewSight,
                       child: Image.asset(sightData['sight_image_path'],
                           fit: BoxFit.cover),
                     ),
@@ -150,7 +153,7 @@ class SightListItem extends StatelessWidget {
                           child: Semantics(
                             button: true,
                             enabled: true,
-                            onTapHint: 'Start navigation',
+                            onTapHint: localization(context).startNavigation,
                             child: Text(localization(context).startNavigation,
                                 style: TextStyle(
                                     color: Colors.white,

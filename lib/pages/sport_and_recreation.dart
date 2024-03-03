@@ -120,12 +120,17 @@ class SportsAndRecreation extends StatelessWidget {
             child: ClipRRect(
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(20)),
-              child: Image.asset(
-                data.containsKey('park_image_path')
-                    ? data['park_image_path']
-                    : data['sport_image_path'],
-                fit: BoxFit.cover,
-                semanticLabel: localization(context).image + data['title'],
+              child: Semantics(
+                onTapHint: data.containsKey('park_image_path')
+                    ? localization(context).tapToViewPark
+                    : localization(context).tapToViewSport,
+                child: Image.asset(
+                  data.containsKey('park_image_path')
+                      ? data['park_image_path']
+                      : data['sport_image_path'],
+                  fit: BoxFit.cover,
+                  semanticLabel: localization(context).image + data['title'],
+                ),
               ),
             ),
           )),

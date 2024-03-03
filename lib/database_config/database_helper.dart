@@ -24,7 +24,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 2,
+        version: 3,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,

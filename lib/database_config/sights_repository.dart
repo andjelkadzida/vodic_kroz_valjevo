@@ -333,7 +333,7 @@ class SightsRepository {
               'Vuk Stefanović Karadžić rođen je 1787. godine u selu Tršiću, nedaleko od Loznice. Smatra se najvećim reformatorom srpskog jezika i pravopisa, kao i najvećim sakupljačem narodnih umotvorina. Autor je prvog rečnika srpskog jezika. Umro je februara 1864. godine u Beču.\n\nPovodom dvestote godišnjice rođenja utemeljivača srpskog jezika, u Valjevu je 5. novembra 1987. svečano otkriven spomenik Vuku Stefanoviću Karadžiću na tada novoformiranom trgu kod stare železničke stanice. Pored ulice sa njegovim imenom, Vuk je u Valjevu dobio monumentalni spomenik koji bi trebalo da odgovara važnosti njegovog dela.\n\nAutor spomenika je Nikola Kolja Milunović, akademski vajar iz Beograda. Spomenik je visok 7 metara i izrađen je od belovodskog peščara.',
         },
       },
-      // Desanka Maksimovic
+      // Desanka Maksimović
       {
         'sight_image_path': 'images/sightsImages/desanka/desanka1.jpg',
         'sight_image_path2': 'images/sightsImages/desanka/desanka2.jpg',

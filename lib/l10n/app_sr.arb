@@ -3,7 +3,7 @@
     "homePage": "Početna",
     "aboutCity": "O gradu",
     "sights": "Znamenitosti",
-    "sight": "Znamenitost: {name}",
+    "sightName": "Naziv znamenitost: {name}",
     "sportRecreation": "Sport i rekreacija",
     "restaurantsAndHotels": "Restorani i prenoćište",
     "hotels": "Hoteli",

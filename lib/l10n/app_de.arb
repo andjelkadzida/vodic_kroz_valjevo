@@ -3,7 +3,7 @@
     "homePage": "Startseite",
     "aboutCity": "Über Stadt",
     "sights": "Sehenswürdigkeiten",
-    "sight": "Sehenswürdigkeit: {name}",
+    "sightName": "Name der Sehenswürdigkeit: {name}",
     "sportRecreation": "Sport & Erholung",
     "restaurantsAndHotels": "Hotels & Gaststätten",
     "hotels": "Hotels",

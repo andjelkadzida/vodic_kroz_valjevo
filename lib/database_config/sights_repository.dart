@@ -93,7 +93,7 @@ class SightsRepository {
       // Muselimov konak
       {
         'sight_image_path':
-            'images/sightsImages/muselimovKonak/muselimovKonak1.jpeg',
+            'images/sightsImages/muselimovKonak/muselimovKonak1.jpg',
         'sight_image_path2':
             'images/sightsImages/muselimovKonak/muselimovKonak2.jpeg',
         'sight_image_path3':
@@ -306,7 +306,7 @@ class SightsRepository {
           'sr_Latn': 'Živojin Mišić opis',
         },
       },
-      // Vuk Karadzic
+      // Vuk Karadžić
       {
         'sight_image_path': 'images/sightsImages/vuk/vuk1.jpg',
         'sight_image_path2': 'images/sightsImages/vuk/vuk2.jpg',
@@ -321,11 +321,16 @@ class SightsRepository {
           'sr_Latn': 'Spomenik Vuku Karadžiću',
         },
         'descriptions': {
-          'en': 'Vuk Karadzic description',
-          'de': 'Vuk Karadzic Beschreibung',
-          'sr': 'Vuk Karadzic opis',
-          'sr_Cyrl': 'Вук Караџић опис',
-          'sr_Latn': 'Vuk Karadzic opis',
+          'en':
+              'Vuk Stefanović Karadžić was born in the village of Tršić, near Loznica, in 1787. He is considered the greatest reformer of the Serbian language and spelling and the biggest collector of folk tales, poems and riddles in Serbian folklore. On top of that, he was the author of the first Serbian dictionary. He died in Vienna in February 1864.\n\nOn November 5, 1987, to mark the two hundredth birth anniversary of the founder of the modern Serbian language, a monument to Vuk Stefanović Karadžić was ceremonially unveiled at a newly formed square by the old railway station in Valjevo.In addition to a street with his name, Vuk received this massive monument in his honour that should correspond to the importance of his work.\n\nThe designer of the monument is Nikola Kolja Milunović, an academic sculptor from Belgrade. The monument to Vuk Stefanovic Karadžić is 7 metres high and made of Belovode sandstone.',
+          'de':
+              'Vuk Stefanović Karadžić wurde 1787 im Dorf Tršić in der Nähe von Loznica geboren. Er gilt als der größte Reformer der serbischen Sprache und Orthographie und als der größte Sammler von Volkserzählungen, Gedichten und Rätseln in der serbischen Folklore. Darüber hinaus war er der Autor des ersten serbischen Wörterbuchs. Er starb im Februar 1864 in Wien.\n\nAm 5. November 1987 wurde anlässlich des zweihundertsten Geburtstags des Begründers der modernen serbischen Sprache feierlich ein Denkmal für Vuk Stefanović Karadžić auf einem neu angelegten Platz bei der alten Bahnhofsstation in Valjevo enthüllt. Neben einer Straße mit seinem Namen erhielt Vuk dieses massive Denkmal zu seinen Ehren, das der Bedeutung seines Werks entsprechen sollte.\n\nDer Gestalter des Denkmals ist Nikola Kolja Milunović, ein akademischer Bildhauer aus Belgrad. Das Denkmal für Vuk Stefanović Karadžić ist 7 Meter hoch und aus Belovoder Sandstein gefertigt.',
+          'sr':
+              'Vuk Stefanović Karadžić rođen je 1787. godine u selu Tršiću, nedaleko od Loznice. Smatra se najvećim reformatorom srpskog jezika i pravopisa, kao i najvećim sakupljačem narodnih umotvorina. Autor je prvog rečnika srpskog jezika. Umro je februara 1864. godine u Beču.\n\nPovodom dvestote godišnjice rođenja utemeljivača srpskog jezika, u Valjevu je 5. novembra 1987. svečano otkriven spomenik Vuku Stefanoviću Karadžiću na tada novoformiranom trgu kod stare železničke stanice. Pored ulice sa njegovim imenom, Vuk je u Valjevu dobio monumentalni spomenik koji bi trebalo da odgovara važnosti njegovog dela.\n\nAutor spomenika je Nikola Kolja Milunović, akademski vajar iz Beograda. Spomenik je visok 7 metara i izrađen je od belovodskog peščara.',
+          'sr_Cyrl':
+              'Вук Стефановић Караџић рођен је 1787. године у селу Тршићу, недалеко од Лознице. Сматра се највећим реформатором српског језиика и правописа, као и највећим сакупљачем народних умотворина. Аутор је првог речника српског језика. Умро је фебруара 1864. године у Бечу.\n\nПоводом двестоте годишњице рођења утемељивача српског језика, у Ваљеву је 5. новембра 1987. свечано откривен споменик Вуку Стефановићу Караџићу на тада ноформираном тргу код старе железничке станице. Поред улице са његовим именом, Вук је у Ваљеву добио монументалан споменик који би требало да одговара важности његовог дела.\n\nАутор споменика је Никола Коља Милуновић, академски вајар из Београда. Споменик је висок 7 метара и израђен је од беловодског пешчара.',
+          'sr_Latn':
+              'Vuk Stefanović Karadžić rođen je 1787. godine u selu Tršiću, nedaleko od Loznice. Smatra se najvećim reformatorom srpskog jezika i pravopisa, kao i najvećim sakupljačem narodnih umotvorina. Autor je prvog rečnika srpskog jezika. Umro je februara 1864. godine u Beču.\n\nPovodom dvestote godišnjice rođenja utemeljivača srpskog jezika, u Valjevu je 5. novembra 1987. svečano otkriven spomenik Vuku Stefanoviću Karadžiću na tada novoformiranom trgu kod stare železničke stanice. Pored ulice sa njegovim imenom, Vuk je u Valjevu dobio monumentalni spomenik koji bi trebalo da odgovara važnosti njegovog dela.\n\nAutor spomenika je Nikola Kolja Milunović, akademski vajar iz Beograda. Spomenik je visok 7 metara i izrađen je od belovodskog peščara.',
         },
       },
       // Desanka Maksimovic

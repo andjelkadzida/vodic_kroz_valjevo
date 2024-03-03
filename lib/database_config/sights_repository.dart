@@ -65,7 +65,7 @@ class SightsRepository {
     List<Map<String, dynamic>> dataList = [
       // Valjevski muzej
       {
-        'sight_image_path': 'images/sightsImages/muzej/muzej1.jpg',
+        'sight_image_path': 'images/sightsImages/muzej/muzej1.jpeg',
         'sight_image_path2': 'images/sightsImages/muzej/muzej2.jpg',
         'sight_image_path3': 'images/sightsImages/muzej/muzej3.jpeg',
         'latitude': 44.26925398584459,
@@ -97,7 +97,7 @@ class SightsRepository {
         'sight_image_path2':
             'images/sightsImages/muselimovKonak/muselimovKonak2.jpeg',
         'sight_image_path3':
-            'images/sightsImages/muselimovKonak/muselimovKonak3.jpeg',
+            'images/sightsImages/muselimovKonak/muselimovKonak3.jpg',
         'latitude': 44.26973928761971,
         'longitude': 19.88489479391643,
         'titles': {

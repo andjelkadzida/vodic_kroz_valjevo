@@ -43,6 +43,7 @@
     "legendOfTheCity": "Legenden über den Namen der Stadt",
     "starCount": "{numberOfStars, plural, =1{1 Stern} other{{numberOfStars} Sterne}}",
     "closeDialog": "Dialog schließen",
+    "details": "Details",
     "hotelImage": "Hotelbild",
     "hotelName": "Hotelname: ",
     "starRating": "Sternebewertung",

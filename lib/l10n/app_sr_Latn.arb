@@ -43,6 +43,7 @@
     "legendOfTheCity": "Legende o imenu grada",
     "starCount": "{numberOfStars, plural, =1{1 zvezdica} other{{numberOfStars} zvezdice}}",
     "closeDialog": "Zatvori dijalog",
+    "details": "Detalji",
     "hotelImage": "Slika hotela",
     "hotelName": "Naziv hotela: ",
     "starRating": "Broj zvezdica",

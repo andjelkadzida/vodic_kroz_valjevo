@@ -113,7 +113,7 @@ class SportDetailsPage extends StatelessWidget {
                       title: Row(
                         children: [
                           Text(
-                            localization(context).description,
+                            localization(context).details,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium

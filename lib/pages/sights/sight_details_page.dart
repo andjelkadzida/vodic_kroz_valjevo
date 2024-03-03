@@ -82,7 +82,7 @@ class SightDetailsPage extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          localization(context).description,
+                          localization(context).details,
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium

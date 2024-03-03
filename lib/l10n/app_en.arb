@@ -43,6 +43,7 @@
     "legendOfTheCity": "Legends about the name of the city",
     "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
     "closeDialog": "Close dialog",
+    "details": "Details",
     "hotelImage": "Hotel image",
     "hotelName": "Hotel name: ",
     "starRating": "Star rating",

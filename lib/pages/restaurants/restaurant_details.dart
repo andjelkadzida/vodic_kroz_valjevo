@@ -83,7 +83,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                             padding:
                                 EdgeInsets.all(constraints.maxWidth * 0.04),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Semantics(
                                   header: true,

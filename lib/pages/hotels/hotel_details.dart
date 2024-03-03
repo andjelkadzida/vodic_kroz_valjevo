@@ -82,7 +82,7 @@ class HotelDetailsPage extends StatelessWidget {
                             padding:
                                 EdgeInsets.all(constraints.maxWidth * 0.04),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   hotelData['title'],

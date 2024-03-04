@@ -360,6 +360,7 @@ class SightsRepository {
               'Desanka Maksimović, pesnikinja, profesorka književnosti i akademik, rođena je 1898. u selu Rabrovici, kod Valjeva, ali se brzo po njenom rođenju porodica preselila u Brankovinu.\n\nSmatra se jednom od najvećih srpskih pesnikinja. Preminula je 1993. godine u Beogradu, a sahranjena je u Brankovini. Odmah nakon njene smrti osnovana je Zadužbina Desanka Maksimović i ustanovljena pesnička nagrada s imenom poznate pesnikinje, čiji kontinuitet dodeljivanja i dalje traje.\n\nSlavnoj pesnikinji Valjevci su želeli da se oduže još za njenog života. Tako je 27. oktobra 1990. svečano otkriven spomenik Desanki Maksimović. Zbog malog negodovanja pesnikinje što joj se odaje velika čast, odlučeno je da spomenik, kao i trg na kojem se nalazi budu posvećeni pesništvu, a ne direktno njenom liku i delu. Ipak, danas je ovaj prostor među Valjevcima poznatiji kao Desankin trg sa Desankinim spomenikom u njegovom centralnom delu. Glavnu besedu u čast otvaranja spomenika održao je književnik i akademik Matija Bećković, koji nikad nije krio ljubav prema gradu na Kolubari.\n\nSpomenik je delo akademskog vajara i profesora Aleksandra Zarina, a isklesao ga je akademski vajar Milija Glišić. Plato oko spomenika projektovao je arhitekta Predrag Kojić, a radove je izvodilo Građevinsko preduzeće "Jablanica".',
         },
       },
+      // Gradac
     ];
 
     await bulkInsertSightsData(dataList);

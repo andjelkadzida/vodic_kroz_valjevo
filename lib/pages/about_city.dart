@@ -49,7 +49,8 @@ class AboutCity extends StatelessWidget {
                     delegate: SliverChildListDelegate(
                       [
                         Semantics(
-                          label: localization(context).aboutCity,
+                          label: localization(context)
+                              .image(localization(context).valjevoCityImage),
                           child: Image.asset(
                             'images/vaPogled.jpg',
                             fit: BoxFit.contain,
@@ -231,9 +232,11 @@ class AboutCity extends StatelessWidget {
       title: Row(
         children: [
           Expanded(
-            child: Text(
-              localization(context).historyOfTheCity,
-              style: Theme.of(context).textTheme.titleLarge,
+            child: Semantics(
+              child: Text(
+                localization(context).historyOfTheCity,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
           ),
         ],
@@ -243,12 +246,13 @@ class AboutCity extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(screenWidth * 0.05),
-                child: Text(
-                  aboutCityData['history'],
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
+                  padding: EdgeInsets.all(screenWidth * 0.05),
+                  child: Semantics(
+                    child: Text(
+                      aboutCityData['history'],
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  )),
             ),
             GestureDetector(
               onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),

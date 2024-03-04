@@ -94,77 +94,72 @@ class SightListItem extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Semantics(
-            label: localization(context).sightName(sightData['title']),
-            child: InkWell(
-              onTap: () => showDetailsPage(
-                  context, SightDetailsPage(sightData: sightData)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    title: Text(
+          child: InkWell(
+            onTap: () => showDetailsPage(
+                context, SightDetailsPage(sightData: sightData)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  title: Semantics(
+                    child: Text(
                       sightData['title'],
                       style: Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.center,
                     ),
-                    trailing: SizedBox(
-                      width: max(50, blockSizeHorizontal * 10),
-                      height: max(50, blockSizeVertical * 10),
-                      child: IconButton(
-                        onPressed: () => TextToSpeechConfig.instance
-                            .speak(sightData['title']),
-                        icon: Icon(
-                          Icons.volume_up,
-                          semanticLabel:
-                              localization(context).tapToHearSightName,
-                        ),
-                        tooltip: localization(context).tapToHearSightName,
+                  ),
+                  trailing: SizedBox(
+                    width: max(50, blockSizeHorizontal * 10),
+                    height: max(50, blockSizeVertical * 10),
+                    child: IconButton(
+                      onPressed: () =>
+                          TextToSpeechConfig.instance.speak(sightData['title']),
+                      icon: Icon(
+                        Icons.volume_up,
+                        semanticLabel: localization(context).tapToHearSightName,
                       ),
+                      tooltip: localization(context).tapToHearSightName,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(blockSizeHorizontal * 2),
-                    child: Semantics(
-                      label:
-                          '${localization(context).image} ${sightData['title']}',
-                      button: true,
-                      onTapHint: localization(context).tapToViewSight,
-                      child: Image.asset(sightData['sight_image_path'],
-                          fit: BoxFit.cover),
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(blockSizeHorizontal * 2),
+                  child: Semantics(
+                    onTapHint: localization(context).tapToViewSight,
+                    child: Image.asset(sightData['sight_image_path'],
+                        fit: BoxFit.cover),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(blockSizeHorizontal * 2),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(blockSizeHorizontal * 2),
+                  child: SizedBox(
+                    width: max(50, screenWidth),
+                    height: max(50, blockSizeVertical * 5),
                     child: SizedBox(
                       width: max(50, screenWidth),
                       height: max(50, blockSizeVertical * 5),
-                      child: SizedBox(
-                        width: max(50, screenWidth),
-                        height: max(50, blockSizeVertical * 5),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            HapticFeedback.selectionClick();
-                            mapScreen.navigateToDestination(
-                                sightData['latitude'], sightData['longitude']);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal),
-                          child: Semantics(
-                            button: true,
-                            enabled: true,
-                            onTapHint: localization(context).startNavigation,
-                            child: Text(localization(context).startNavigation,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: blockSizeHorizontal * 4)),
-                          ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          mapScreen.navigateToDestination(
+                              sightData['latitude'], sightData['longitude']);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal),
+                        child: Semantics(
+                          button: true,
+                          enabled: true,
+                          onTapHint: localization(context).startNavigation,
+                          child: Text(localization(context).startNavigation,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: blockSizeHorizontal * 4)),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         );

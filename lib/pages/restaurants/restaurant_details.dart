@@ -36,109 +36,98 @@ class RestaurantDetailsPage extends StatelessWidget {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Card(
-                      margin: EdgeInsets.all(constraints.maxWidth * 0.04),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: constraints.maxWidth * 0.04),
-                          SizedBox(
-                            height: constraints.maxHeight * 0.3,
-                            child: PhotoViewGallery.builder(
-                              itemCount: images.length,
-                              builder: (context, index) {
-                                return PhotoViewGalleryPageOptions(
-                                  imageProvider: AssetImage(images[index]),
-                                  maxScale:
-                                      PhotoViewComputedScale.contained * 5,
-                                  minScale: PhotoViewComputedScale.contained,
-                                  initialScale:
-                                      PhotoViewComputedScale.contained,
-                                  basePosition: Alignment.center,
-                                  filterQuality: FilterQuality.high,
-                                  heroAttributes: PhotoViewHeroAttributes(
-                                      tag: images[index]),
-                                );
-                              },
-                              scrollPhysics: const BouncingScrollPhysics(),
-                              backgroundDecoration: BoxDecoration(
-                                color: Theme.of(context).canvasColor,
-                              ),
-                              loadingBuilder: (context, event) => Center(
-                                child: Tooltip(
-                                  message: localization(context).loading,
-                                  child: CircularProgressIndicator(
-                                    semanticsLabel:
-                                        localization(context).loading,
-                                  ),
+                child: Padding(
+                  padding: EdgeInsets.all(constraints.maxWidth * 0.04),
+                  child: Column(
+                    children: [
+                      SizedBox(height: constraints.maxWidth * 0.04),
+                      SizedBox(
+                        height: constraints.maxHeight * 0.3,
+                        child: Semantics(
+                          label: localization(context).restaurantImage,
+                          child: PhotoViewGallery.builder(
+                            itemCount: images.length,
+                            builder: (context, index) {
+                              return PhotoViewGalleryPageOptions(
+                                imageProvider: AssetImage(images[index]),
+                                maxScale: PhotoViewComputedScale.contained * 5,
+                                minScale: PhotoViewComputedScale.contained,
+                                initialScale: PhotoViewComputedScale.contained,
+                                basePosition: Alignment.center,
+                                filterQuality: FilterQuality.high,
+                                heroAttributes:
+                                    PhotoViewHeroAttributes(tag: images[index]),
+                              );
+                            },
+                            scrollPhysics: const BouncingScrollPhysics(),
+                            backgroundDecoration: BoxDecoration(
+                              color: Theme.of(context).canvasColor,
+                            ),
+                            loadingBuilder: (context, event) => Center(
+                              child: Semantics(
+                                tooltip: localization(context).loading,
+                                child: CircularProgressIndicator(
+                                  semanticsLabel: localization(context).loading,
                                 ),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsets.all(constraints.maxWidth * 0.04),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Semantics(
-                                  header: true,
-                                  child: Text(
-                                    restaurantData['title'],
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                ),
-                                SizedBox(height: constraints.maxHeight * 0.02),
-                                Semantics(
-                                  button: true,
-                                  enabled: true,
-                                  onTapHint: localization(context)
-                                      .navigateToRestaurant,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.teal,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical:
-                                                constraints.maxHeight * 0.015),
-                                      ),
-                                      child: Text(
-                                        localization(context).startNavigation,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize:
-                                                constraints.maxWidth * 0.05),
-                                      ),
-                                      onPressed: () {
-                                        mapScreen.navigateToDestination(
-                                            restaurantData['latitude'],
-                                            restaurantData['longitude']);
-                                      },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(constraints.maxWidth * 0.04),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Semantics(
+                              child: Text(
+                                restaurantData['title'],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ),
-                                ),
-                                SizedBox(height: constraints.maxWidth * 0.04),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                            SizedBox(height: constraints.maxHeight * 0.02),
+                            Semantics(
+                              button: true,
+                              enabled: true,
+                              onTapHint:
+                                  localization(context).navigateToRestaurant,
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.teal,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical:
+                                            constraints.maxHeight * 0.015),
+                                  ),
+                                  child: Text(
+                                    localization(context).startNavigation,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: constraints.maxWidth * 0.05),
+                                  ),
+                                  onPressed: () {
+                                    mapScreen.navigateToDestination(
+                                        restaurantData['latitude'],
+                                        restaurantData['longitude']);
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: constraints.maxWidth * 0.04),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

@@ -39,7 +39,6 @@ class SightDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Semantics(
-                  image: true,
                   label: localization(context).imageOfSight(sightData['title']),
                   child: Container(
                     color: Colors.transparent,

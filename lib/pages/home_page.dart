@@ -31,19 +31,16 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: screenHeight * 0.1,
                     ),
-                    Semantics(
-                      label: localization(context).sloganLabel,
-                      child: Text(
-                        localization(context).slogan,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: screenWidth * 0.055,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.none,
-                        ),
-                        textAlign: TextAlign.center,
+                    Text(
+                      localization(context).slogan,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenWidth * 0.055,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.none,
                       ),
-                    )
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),

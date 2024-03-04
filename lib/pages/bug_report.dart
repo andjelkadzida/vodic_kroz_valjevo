@@ -120,8 +120,8 @@ class BugReportPageState extends State<BugReportPage> {
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: _isLoading
           ? Center(
-              child: Tooltip(
-                message: localization(context).loading,
+              child: Semantics(
+                tooltip: localization(context).loading,
                 child: CircularProgressIndicator(
                   semanticsLabel: localization(context).loading,
                 ),

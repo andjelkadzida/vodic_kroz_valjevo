@@ -193,26 +193,22 @@ class DatabaseHelper {
       return Semantics(
         label: localization(context).loading,
         child: Center(
-          child: Tooltip(
-            message: localization(context).loading,
+          child: Semantics(
+            tooltip: localization(context).loading,
             child: CircularProgressIndicator(
                 semanticsLabel: localization(context).loading),
           ),
         ),
       );
     } else if (snapshot.hasError) {
-      return Semantics(
-        label: localization(context).errorLoadingData,
-        child: Center(
-          child: Text(
-              '${localization(context).errorLoadingData}: ${snapshot.error}'),
-        ),
+      return Center(
+        child: Text(
+            '${localization(context).errorLoadingData}: ${snapshot.error}'),
       );
     } else if (!snapshot.hasData ||
         (snapshot.data is List && (snapshot.data as List).isEmpty)) {
-      return Semantics(
-        label: localization(context).noDataAvailable,
-        child: Center(child: Text(localization(context).noDataAvailable)),
+      return Center(
+        child: Text(localization(context).noDataAvailable),
       );
     }
     // Handle the case when data is available

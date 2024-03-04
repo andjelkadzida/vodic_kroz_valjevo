@@ -39,22 +39,6 @@ class BugReportPageState extends State<BugReportPage> {
     initData();
     // Set operating system to the current platform
     operatingSystem = getOperatingSystem();
-    internetConnectionSubscription =
-        hasInternetConnection().listen((hasInternet) {
-      if (!hasInternet) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(localization(context).noInternetConnection),
-            action: SnackBarAction(
-              onPressed: () {
-                AppSettings.openAppSettings(type: AppSettingsType.wireless);
-              },
-              label: localization(context).settings,
-            ),
-          ),
-        );
-      }
-    });
   }
 
   @override
@@ -77,17 +61,30 @@ class BugReportPageState extends State<BugReportPage> {
       _formKey.currentState!.save();
       checkInitialInternetConnection().then((bool? hasInternet) {
         if (!hasInternet!) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(localization(context).noInternetConnection),
-              action: SnackBarAction(
-                onPressed: () {
-                  AppSettings.openAppSettings(type: AppSettingsType.wireless);
-                },
-                label: localization(context).settings,
+          var screenWidth = MediaQuery.of(context).size.width;
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                duration: const Duration(seconds: 5),
+                behavior: SnackBarBehavior.floating,
+                width: max(50, screenWidth),
+                content: Text(
+                  localization(context).noInternetConnection,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: screenWidth * 0.04,
+                        color: Colors.white,
+                      ),
+                ),
+                action: SnackBarAction(
+                  onPressed: () {
+                    AppSettings.openAppSettings(type: AppSettingsType.wireless);
+                  },
+                  label: localization(context).settings,
+                  textColor: Colors.teal,
+                ),
               ),
-            ),
-          );
+            );
         } else {
           setState(() {
             _isLoading = true;
@@ -272,7 +269,6 @@ class BugReportPageState extends State<BugReportPage> {
                               ),
                               SizedBox(height: screenHeight * 0.02),
                               Semantics(
-                                label: localization(context).uploadFile,
                                 child: GestureDetector(
                                   onTap: () async {
                                     FilePickerResult? result =
@@ -298,8 +294,6 @@ class BugReportPageState extends State<BugReportPage> {
                                           height: max(50, screenHeight * 0.05),
                                           child: Icon(
                                             Icons.attach_file,
-                                            semanticLabel: localization(context)
-                                                .uploadFile,
                                             size: screenWidth * 0.07,
                                           ),
                                         ),
@@ -358,6 +352,7 @@ class BugReportPageState extends State<BugReportPage> {
 
 void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
     PlatformFile? file, BuildContext context) {
+  var screenWidth = MediaQuery.of(context).size.width;
   var bugReport = ParseObject('BugReport')
     ..set('title', bugTitle)
     ..set('description', bugDescription)
@@ -372,20 +367,49 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
 
   bugReport.save().then((response) {
     if (response.success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(localization(context).bugReportSent),
+      ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 5),
+            behavior: SnackBarBehavior.floating,
+            width: max(50, screenWidth),
+            content: Text(
+              localization(context).bugReportSent,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontSize: screenWidth * 0.04,
+                    color: Colors.white,
+                  ),
+            ),
             action: SnackBarAction(
               label: localization(context).ok,
+              textColor: Colors.teal,
               onPressed: () {},
-            )),
-      );
+            ),
+          ),
+        );
     }
   }).catchError((error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(localization(context).submissionFailed),
-      ),
-    );
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 5),
+          behavior: SnackBarBehavior.floating,
+          width: max(50, screenWidth),
+          content: Text(
+            localization(context).submissionFailed,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontSize: screenWidth * 0.04,
+                  color: Colors.white,
+                ),
+          ),
+          action: SnackBarAction(
+            label: localization(context).ok,
+            textColor: Colors.teal,
+            onPressed: () {},
+          ),
+        ),
+      );
   });
 }

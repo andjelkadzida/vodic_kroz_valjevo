@@ -77,10 +77,12 @@ class LanguageButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(
-              language.flag,
-              style: TextStyle(
-                fontSize: screenWidth * 0.04,
+            ExcludeSemantics(
+              child: Text(
+                language.flag,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04,
+                ),
               ),
             ),
             SizedBox(width: screenWidth * 0.02),

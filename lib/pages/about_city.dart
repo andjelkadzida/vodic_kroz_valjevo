@@ -104,102 +104,74 @@ class AboutCity extends StatelessWidget {
         ],
         rows: [
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).surface,
-                child: Text(
-                  localization(context).surface,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: '2256 ha',
-                child: Text(
-                  '2256 ha',
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).surface,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              '2256 ha',
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).elevation,
-                child: Text(
-                  localization(context).elevation,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: '185 m',
-                child: Text(
-                  '185 m',
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).elevation,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              '185 m',
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).populationDensity,
-                child: Text(
-                  localization(context).populationDensity,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: '90,79 st/km\u00B2 (2022.)',
-                child: Text(
-                  '90,79 st/km\u00B2 (2022.)',
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).populationDensity,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              '90,79 st/km\u00B2 (2022.)',
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).population,
-                child: Text(
-                  localization(context).population,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: '82.541 (2022.)',
-                child: Text(
-                  '82.541 (2022.)',
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).population,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              '82.541 (2022.)',
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).district,
-                child: Text(
-                  localization(context).district,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: localization(context).kolubaraDistrict,
-                child: Text(
-                  localization(context).kolubaraDistrict,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).district,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              localization(context).kolubaraDistrict,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).cityDay,
-                child: Text(
-                  localization(context).cityDay,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: localization(context).cityDayDate,
-                child: Text(
-                  localization(context).cityDayDate,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).cityDay,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              localization(context).cityDayDate,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
           DataRow(cells: [
-            DataCell(Semantics(
-                label: localization(context).saint,
-                child: Text(
-                  localization(context).saint,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
-            DataCell(Semantics(
-                label: localization(context).saintName,
-                child: Text(
-                  localization(context).saintName,
-                  style: TextStyle(fontSize: screenWidth * 0.04),
-                ))),
+            DataCell(Text(
+              localization(context).saint,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
+            DataCell(Text(
+              localization(context).saintName,
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            )),
           ]),
         ],
       ),

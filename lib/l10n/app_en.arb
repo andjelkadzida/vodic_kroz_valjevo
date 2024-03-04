@@ -24,7 +24,7 @@
     "cancel": "Cancel",
     "settings": "Settings",
     "openSettings": "Open Settings",
-    "image": "Image of ",
+    "image": "Image of {name}",
     "loading": "Loading data, please wait...",
     "errorLoadingData": "Error occured during loading data.",
     "errorLoadingImages": "Error occured during loading images.",

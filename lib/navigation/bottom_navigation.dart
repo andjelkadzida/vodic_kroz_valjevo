@@ -87,44 +87,34 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           (context) => localization(context).bugReport),
     ];
 
-    return Semantics(
-      namesRoute: true,
-      label: localization(context).bottomNavigation,
-      child: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        items: navItems.map((NavItem navItem) {
-          return BottomNavigationBarItem(
-            icon: Tooltip(
-              message: navItem.tooltip(context),
-              child: Semantics(
-                label: navItem.title(context),
-                child: SizedBox(
-                  width: max(screenWidth * 0.1, 50),
-                  height: max(screenHeight * 0.03, 50),
-                  child: Icon(
-                    _selectedIndex == -1 ||
-                            _selectedIndex != navItems.indexOf(navItem)
-                        ? navItem.icon
-                        : navItem.selectedIcon,
-                    size: screenWidth * 0.07,
-                  ),
-                ),
-              ),
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      items: navItems.map((NavItem navItem) {
+        return BottomNavigationBarItem(
+          icon: SizedBox(
+            width: max(screenWidth * 0.1, 50),
+            height: max(screenHeight * 0.03, 50),
+            child: Icon(
+              _selectedIndex == -1 ||
+                      _selectedIndex != navItems.indexOf(navItem)
+                  ? navItem.icon
+                  : navItem.selectedIcon,
+              size: screenWidth * 0.07,
             ),
-            label: navItem.title(context),
-            tooltip: navItem.tooltip(context),
-          );
-        }).toList(),
-        currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
-        selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        onTap: _onNavItemTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: MediaQuery.of(context).size.width * 0.03,
-        unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
-      ),
+          ),
+          label: navItem.title(context),
+          tooltip: navItem.tooltip(context),
+        );
+      }).toList(),
+      currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
+      selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
+      unselectedItemColor: Colors.grey,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+      onTap: _onNavItemTapped,
+      type: BottomNavigationBarType.fixed,
+      selectedFontSize: MediaQuery.of(context).size.width * 0.03,
+      unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
     );
   }
 }

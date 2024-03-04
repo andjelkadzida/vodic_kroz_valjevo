@@ -25,7 +25,6 @@ class SportsAndRecreation extends StatelessWidget {
               body: Column(
                 children: [
                   Semantics(
-                    header: true,
                     child: Text(
                       localization(context).parks,
                       style: TextStyle(
@@ -49,7 +48,6 @@ class SportsAndRecreation extends StatelessWidget {
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   Semantics(
-                    header: true,
                     child: Text(
                       localization(context).sportFields,
                       style: TextStyle(
@@ -129,7 +127,7 @@ class SportsAndRecreation extends StatelessWidget {
                       ? data['park_image_path']
                       : data['sport_image_path'],
                   fit: BoxFit.cover,
-                  semanticLabel: localization(context).image + data['title'],
+                  semanticLabel: localization(context).image(data['title']),
                 ),
               ),
             ),

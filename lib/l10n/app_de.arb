@@ -24,7 +24,7 @@
     "cancel": "Abbrechen",
     "settings": "Einstellungen",
     "openSettings": "Einstellungen öffnen",
-    "image": "Build von ",
+    "image": "Build von {name}",
     "loading": "Daten werden geladen, bitte warten...",
     "errorLoadingData": "Fehler beim Laden der Daten aufgetreten.",
     "errorLoadingImages": "Fehler beim Laden der Bilder aufgetreten.",

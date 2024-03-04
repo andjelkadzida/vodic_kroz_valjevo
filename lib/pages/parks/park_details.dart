@@ -43,9 +43,7 @@ class ParkDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Semantics(
-                      image: true,
-                      label:
-                          localization(context).imageOfSight(parkData['title']),
+                      label: localization(context).image(parkData['title']),
                       child: Container(
                         color: Colors.transparent,
                         height: constraints.maxWidth * 0.6,

@@ -24,7 +24,7 @@
     "cancel": "Otkaži",
     "settings": "Podešavanja",
     "openSettings": "Otvorite podešavanja",
-    "image": "Slika ",
+    "image": "Slika {name}",
     "loading": "Učitavanje podataka, molimo sačekajte...",
     "errorLoadingData": "Došlo je do greške prilikom učitavanja podataka.",
     "errorLoadingImages": "Došlo je do greške prilikom učitavanja slika.",

@@ -140,17 +140,14 @@ Widget buildWithMarkers(
       height: max(MediaQuery.of(context).size.height * 0.1, 50),
       child: GestureDetector(
         onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
-        child: Semantics(
-          label: '${itemData['title']}',
-          child: Tooltip(
-            message: '${itemData['title']}',
-            child: Icon(
-              Icons.location_pin,
-              size: MediaQuery.of(context).size.width * 0.07,
-              semanticLabel: '${itemData['title']}',
-              color: Colors.blue,
-              applyTextScaling: true,
-            ),
+        child: Tooltip(
+          message: '${itemData['title']}',
+          child: Icon(
+            Icons.location_pin,
+            size: MediaQuery.of(context).size.width * 0.07,
+            semanticLabel: '${itemData['title']}',
+            color: Colors.blue,
+            applyTextScaling: true,
           ),
         ),
       ),

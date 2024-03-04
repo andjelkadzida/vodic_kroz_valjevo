@@ -17,9 +17,7 @@ AppBar customAppBar(BuildContext context, String title) {
         children: [
           Flexible(
             flex: 1,
-            child: Semantics(
-              header: true,
-              label: title,
+           
               child: AutoSizeText(
                 title,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -28,7 +26,6 @@ AppBar customAppBar(BuildContext context, String title) {
                     ),
                 textAlign: TextAlign.center,
               ),
-            ),
           ),
         ],
       ),

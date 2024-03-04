@@ -20,12 +20,12 @@ class Language {
   Language(this.id, this.flag, this.name, this.languageCode, this.scriptCode,
       this.countyCode);
 
-  static List<Language> languageList() {
+  static List<Language> languageList(BuildContext context) {
     return <Language>[
-      Language(1, '🇷🇸', 'Srpski', 'sr', 'Latn', 'sr-RS'),
-      Language(2, '🇷🇸', 'Српски', 'sr', 'Cyrl', 'sr-RS'),
-      Language(3, '🇺🇸', 'English', 'en', 'en', 'en-US'),
-      Language(4, '🇩🇪', 'Deutsch', 'de', 'de', 'de-DE')
+      Language(1, '🇷🇸', localization(context).serbian, 'sr', 'Latn', 'sr-RS'),
+      Language(2, '🇷🇸', localization(context).serbianCyrl, 'sr', 'Cyrl', 'sr-RS'),
+      Language(3, '🇺🇸', localization(context).english, 'en', 'en', 'en-US'),
+      Language(4, '🇩🇪', localization(context).german, 'de', 'de', 'de-DE')
     ];
   }
 }
@@ -69,8 +69,8 @@ class LanguageButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           ),
           minimumSize: Size(
-            max(50, screenWidth * 0.2),
-            max(50, screenHeight * 0.1),
+            max(50, screenWidth * 0.4),
+            max(50, screenHeight * 0.08),
           ),
         ),
         child: Row(
@@ -145,7 +145,7 @@ void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
                 ),
               ),
             ),
-            ...Language.languageList().map(
+            ...Language.languageList(context).map(
               (language) => Padding(
                 padding: EdgeInsets.only(bottom: size.width * 0.02),
                 child: Semantics(

@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
       children: <Widget>[
         Image.asset(
           'images/pogled.jpg',
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
           semanticLabel: localization(context).valjevoCityImage,
         ),
         Column(

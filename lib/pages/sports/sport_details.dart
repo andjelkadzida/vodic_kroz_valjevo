@@ -66,8 +66,8 @@ class SportDetailsPage extends StatelessWidget {
                             color: Theme.of(context).canvasColor,
                           ),
                           loadingBuilder: (context, event) => Center(
-                            child: Tooltip(
-                              message: localization(context).loading,
+                            child: Semantics(
+                              tooltip: localization(context).loading,
                               child: CircularProgressIndicator(
                                 semanticsLabel: localization(context).loading,
                               ),

@@ -38,11 +38,7 @@ class BugReportPageState extends State<BugReportPage> {
     super.initState();
     initData();
     // Set operating system to the current platform
-    if (Platform.isAndroid) {
-      operatingSystem = 'Android';
-    } else if (Platform.isIOS) {
-      operatingSystem = 'iOS';
-    }
+    operatingSystem = getOperatingSystem();
     internetConnectionSubscription =
         hasInternetConnection().listen((hasInternet) {
       if (!hasInternet) {
@@ -104,11 +100,23 @@ class BugReportPageState extends State<BugReportPage> {
             _isLoading = false;
             file = null;
             fileName = null;
-            operatingSystem = null;
+            operatingSystem = getOperatingSystem();
           });
         }
       });
     }
+  }
+
+  // Return current user's operating system
+  String getOperatingSystem() {
+    if (Platform.isAndroid) {
+      operatingSystem = 'Android';
+    } else if (Platform.isIOS) {
+      operatingSystem = 'iOS';
+    } else {
+      operatingSystem = null;
+    }
+    return operatingSystem!;
   }
 
   @override

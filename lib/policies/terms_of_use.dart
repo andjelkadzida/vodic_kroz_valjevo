@@ -12,7 +12,7 @@ void showTermsOfUse(BuildContext context) {
         title: Semantics(
           header: true,
           child: Text(
-            localization(context).privacyPolicy,
+            localization(context).termsOfUse,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                 ),
@@ -112,7 +112,6 @@ Widget _buildSection(BuildContext context, String title, String content) {
   var screenWidth = MediaQuery.of(context).size.width;
   var screenHeight = MediaQuery.of(context).size.height;
   return Semantics(
-    header: true,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -72,7 +72,6 @@ Widget _buildSection(BuildContext context, String title, String content) {
   var screenWidth = MediaQuery.of(context).size.width;
   var screenHeight = MediaQuery.of(context).size.height;
   return Semantics(
-    header: true,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

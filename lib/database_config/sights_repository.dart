@@ -212,18 +212,23 @@ class SightsRepository {
         'latitude': 44.27981454262845,
         'longitude': 19.877936945116286,
         'titles': {
-          'en': 'Markova Stolica',
-          'de': 'Markova Stolica',
+          'en': '"Marko\'s Chair',
+          'de': 'Markos Stuhl',
           'sr': 'Markova Stolica',
           'sr_Cyrl': 'Маркова Столица',
           'sr_Latn': 'Markova Stolica',
         },
         'descriptions': {
-          'en': 'Markova Stolica description',
-          'de': 'Markova Stolica Beschreibung',
-          'sr': 'Markova Stolica opis',
-          'sr_Cyrl': 'Маркова Столица опис',
-          'sr_Latn': 'Markova Stolica opis',
+          'en':
+              'The lookout point on Vidrak hill above the city, where the most beautiful view of Valjevo and its surroundings can be seen, is known as "Marko\'s Chair". \n\nThe place was named after the Serbian hero from the Middle Ages, Marko Kraljević. According to legend, Marko sat down to rest at the top of Vidrak hill, and his feet were in the Kolubara River. Hence, this small plateau, arranged for relaxation and walking, is called "Marko\'s Chair". The appearance of this place viewed from the air resembles a chair with a backrest.',
+          'de':
+              'Der Aussichtspunkt auf dem Vidrak-Hügel über der Stadt, von dem aus man den schönsten Blick auf Valjevo und seine Umgebung hat, ist als "Markos Stuhl" bekannt.\n\nDer Ort wurde nach dem serbischen Helden des Mittelalters, Marko Kraljević, benannt. Der Legende nach setzte sich Marko zum Ausruhen auf den Gipfel des Vidrak-Hügels, und seine Füße waren im Fluss Kolubara. Daher wird dieses kleine Plateau, das zum Entspannen und Spazieren eingerichtet ist, "Markos Stuhl" genannt. Das Aussehen dieses Ortes aus der Luft betrachtet ähnelt einem Stuhl mit einer Rückenlehne.',
+          'sr':
+              'Vidikovac na brdu Vidrak iznad grada, sa koga se pruža najlepši pogled na grad Valjevo i okolinu poznat je kao "Markova stolica".\n\nMesto je dobilo ime po srpskom junaku iz srednjeg veka, Marku Kraljeviću. Po legendi, Marko je seo da se odmori na vrhu brda Vidrak a stopala su mu bila u reci Kolubari. Otuda se ova mala zaravan, uređena za odmor i šetnju, naziva "Markova stolica". Izgled ovog mesta posmatran iz vazduha zaista podseća na stolicu sa naslonom.',
+          'sr_Cyrl':
+              'Видиковац на брду Видрак изнад града, са кога се пружа најлепши поглед на град Ваљево и околину познат је као "Маркова столица".\n\nМесто је добило име по српском јунаку из средњег века, Марку Краљевићу. По легенди, Марко је сео да се одмори на врху брда Видрак а стопала су му била у реци Колубари. Отуда се ова мала зараван, уређена за одмор и шетњу, назива "Маркова столица". Изглед овог места посматран из ваздуха заиста подсећа на столицу са наслоном.',
+          'sr_Latn':
+              'Vidikovac na brdu Vidrak iznad grada, sa koga se pruža najlepši pogled na grad Valjevo i okolinu poznat je kao "Markova stolica".\n\nMesto je dobilo ime po srpskom junaku iz srednjeg veka, Marku Kraljeviću. Po legendi, Marko je seo da se odmori na vrhu brda Vidrak a stopala su mu bila u reci Kolubari. Otuda se ova mala zaravan, uređena za odmor i šetnju, naziva "Markova stolica". Izgled ovog mesta posmatran iz vazduha zaista podseća na stolicu sa naslonom.',
         },
       },
       // Stevan Filipović

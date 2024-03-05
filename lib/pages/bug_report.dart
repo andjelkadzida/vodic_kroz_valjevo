@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -37,27 +38,7 @@ class BugReportPageState extends State<BugReportPage> {
     super.initState();
     initData();
     // Set operating system to the current platform
-    if (Platform.isAndroid) {
-      operatingSystem = 'Android';
-    } else if (Platform.isIOS) {
-      operatingSystem = 'iOS';
-    }
-    internetConnectionSubscription =
-        hasInternetConnection().listen((hasInternet) {
-      if (!hasInternet) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(localization(context).noInternetConnection),
-            action: SnackBarAction(
-              onPressed: () {
-                AppSettings.openAppSettings(type: AppSettingsType.wireless);
-              },
-              label: localization(context).settings,
-            ),
-          ),
-        );
-      }
-    });
+    operatingSystem = getOperatingSystem();
   }
 
   @override
@@ -80,17 +61,30 @@ class BugReportPageState extends State<BugReportPage> {
       _formKey.currentState!.save();
       checkInitialInternetConnection().then((bool? hasInternet) {
         if (!hasInternet!) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(localization(context).noInternetConnection),
-              action: SnackBarAction(
-                onPressed: () {
-                  AppSettings.openAppSettings(type: AppSettingsType.wireless);
-                },
-                label: localization(context).settings,
+          var screenWidth = MediaQuery.of(context).size.width;
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                duration: const Duration(seconds: 5),
+                behavior: SnackBarBehavior.floating,
+                width: max(50, screenWidth),
+                content: Text(
+                  localization(context).noInternetConnection,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: screenWidth * 0.04,
+                        color: Colors.white,
+                      ),
+                ),
+                action: SnackBarAction(
+                  onPressed: () {
+                    AppSettings.openAppSettings(type: AppSettingsType.wireless);
+                  },
+                  label: localization(context).settings,
+                  textColor: Colors.teal,
+                ),
               ),
-            ),
-          );
+            );
         } else {
           setState(() {
             _isLoading = true;
@@ -103,22 +97,43 @@ class BugReportPageState extends State<BugReportPage> {
             _isLoading = false;
             file = null;
             fileName = null;
-            operatingSystem = null;
+            operatingSystem = getOperatingSystem();
           });
         }
       });
     }
   }
 
+  // Return current user's operating system
+  String getOperatingSystem() {
+    if (Platform.isAndroid) {
+      operatingSystem = 'Android';
+    } else if (Platform.isIOS) {
+      operatingSystem = 'iOS';
+    } else {
+      operatingSystem = null;
+    }
+    return operatingSystem!;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: customAppBar(context, localization(context).bugReport),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: Semantics(
+                tooltip: localization(context).loading,
+                child: CircularProgressIndicator(
+                  semanticsLabel: localization(context).loading,
+                ),
+              ),
+            )
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(screenWidth * 0.04),
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return SingleChildScrollView(
@@ -140,7 +155,8 @@ class BugReportPageState extends State<BugReportPage> {
                                     labelText: localization(context).bugTitle,
                                   ),
                                   style: TextStyle(
-                                      fontSize: constraints.maxWidth * 0.04),
+                                    fontSize: constraints.maxWidth * 0.04,
+                                  ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return localization(context).enterTitle;
@@ -166,7 +182,8 @@ class BugReportPageState extends State<BugReportPage> {
                                     ),
                                   ),
                                   style: TextStyle(
-                                      fontSize: constraints.maxWidth * 0.04),
+                                    fontSize: constraints.maxWidth * 0.04,
+                                  ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return localization(context)
@@ -180,16 +197,19 @@ class BugReportPageState extends State<BugReportPage> {
                                   maxLines: 5,
                                 ),
                               ),
-                              const SizedBox(height: 16.0),
+                              SizedBox(height: screenHeight * 0.02),
                               Semantics(
                                 label: localization(context).osLabel,
                                 child: DropdownButtonFormField<String>(
-                                  icon: const Icon(
-                                      Icons.keyboard_arrow_down_rounded),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    size: screenWidth * 0.08,
+                                    semanticLabel:
+                                        localization(context).selectOSLabel,
+                                  ),
                                   iconDisabledColor: Colors.grey,
                                   iconEnabledColor: Colors.teal,
-                                  iconSize:
-                                      MediaQuery.of(context).size.width * 0.08,
+                                  iconSize: screenWidth * 0.08,
                                   decoration: InputDecoration(
                                     filled: true,
                                     labelText: localization(context).selectOS,
@@ -219,6 +239,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         width: constraints.maxWidth * 0.6,
                                         child: Text(
                                           value,
+                                          semanticsLabel: value,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!
@@ -246,9 +267,8 @@ class BugReportPageState extends State<BugReportPage> {
                                   },
                                 ),
                               ),
-                              const SizedBox(height: 16.0),
+                              SizedBox(height: screenHeight * 0.02),
                               Semantics(
-                                label: localization(context).uploadFile,
                                 child: GestureDetector(
                                   onTap: () async {
                                     FilePickerResult? result =
@@ -266,19 +286,19 @@ class BugReportPageState extends State<BugReportPage> {
                                       Tooltip(
                                         message: localization(context)
                                             .fileUploadLabel,
-                                        child: Icon(
-                                          Icons.attach_file,
-                                          semanticLabel:
-                                              localization(context).uploadFile,
-                                          size: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.07,
+                                        child: SizedBox(
+                                          width: max(
+                                            50,
+                                            screenWidth * 0.05,
+                                          ),
+                                          height: max(50, screenHeight * 0.05),
+                                          child: Icon(
+                                            Icons.attach_file,
+                                            size: screenWidth * 0.07,
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 10.0,
-                                      ),
+                                      SizedBox(width: screenWidth * 0.02),
                                       Text(localization(context).uploadFile,
                                           style: Theme.of(context)
                                               .textTheme
@@ -287,8 +307,8 @@ class BugReportPageState extends State<BugReportPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 10.0,
+                              SizedBox(
+                                width: screenWidth * 0.04,
                               ),
                               Text(fileName ??
                                   localization(context).noFileSelected),
@@ -302,7 +322,8 @@ class BugReportPageState extends State<BugReportPage> {
                                       borderRadius: BorderRadius.circular(18),
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                        vertical: constraints.maxWidth * 0.015),
+                                      vertical: screenHeight * 0.01,
+                                    ),
                                   ),
                                   child: Text(
                                     localization(context).submit,
@@ -311,7 +332,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         .bodyLarge
                                         ?.copyWith(
                                           color: Colors.white,
-                                          fontSize: constraints.maxWidth * 0.05,
+                                          fontSize: screenWidth * 0.05,
                                         ),
                                   ),
                                 ),
@@ -331,6 +352,7 @@ class BugReportPageState extends State<BugReportPage> {
 
 void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
     PlatformFile? file, BuildContext context) {
+  var screenWidth = MediaQuery.of(context).size.width;
   var bugReport = ParseObject('BugReport')
     ..set('title', bugTitle)
     ..set('description', bugDescription)
@@ -345,20 +367,49 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
 
   bugReport.save().then((response) {
     if (response.success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(localization(context).bugReportSent),
+      ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 5),
+            behavior: SnackBarBehavior.floating,
+            width: max(50, screenWidth),
+            content: Text(
+              localization(context).bugReportSent,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontSize: screenWidth * 0.04,
+                    color: Colors.white,
+                  ),
+            ),
             action: SnackBarAction(
               label: localization(context).ok,
+              textColor: Colors.teal,
               onPressed: () {},
-            )),
-      );
+            ),
+          ),
+        );
     }
   }).catchError((error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(localization(context).submissionFailed),
-      ),
-    );
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 5),
+          behavior: SnackBarBehavior.floating,
+          width: max(50, screenWidth),
+          content: Text(
+            localization(context).submissionFailed,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontSize: screenWidth * 0.04,
+                  color: Colors.white,
+                ),
+          ),
+          action: SnackBarAction(
+            label: localization(context).ok,
+            textColor: Colors.teal,
+            onPressed: () {},
+          ),
+        ),
+      );
   });
 }

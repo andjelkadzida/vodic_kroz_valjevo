@@ -12,7 +12,7 @@ void showTermsOfUse(BuildContext context) {
         title: Semantics(
           header: true,
           child: Text(
-            localization(context).privacyPolicy,
+            localization(context).termsOfUse,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                 ),
@@ -44,13 +44,15 @@ void showTermsOfUse(BuildContext context) {
 }
 
 List<Widget> _buildTermsOfUseContent(BuildContext context) {
+  var screenWidth = MediaQuery.of(context).size.width;
+  var screenHeight = MediaQuery.of(context).size.height;
   return [
     Text(localization(context).lastUpdated('24-02-2024'),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: MediaQuery.of(context).size.width * 0.05,
+              fontSize: screenWidth * 0.05,
               fontWeight: FontWeight.bold,
             )),
-    const SizedBox(height: 6.0),
+    SizedBox(height: screenHeight * 0.01),
     _buildSection(context, localization(context).acceptanceTerms,
         localization(context).acceptanceTermsContent),
     _buildSection(context, localization(context).termsChanges,
@@ -70,7 +72,7 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
     Text(
       localization(context).contactUs,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontSize: MediaQuery.of(context).size.width * 0.06,
+            fontSize: screenWidth * 0.06,
           ),
     ),
     GestureDetector(
@@ -107,26 +109,27 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
 }
 
 Widget _buildSection(BuildContext context, String title, String content) {
+  var screenWidth = MediaQuery.of(context).size.width;
+  var screenHeight = MediaQuery.of(context).size.height;
   return Semantics(
-    header: true,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: MediaQuery.of(context).size.width * 0.045,
+                fontSize: screenWidth * 0.045,
                 fontWeight: FontWeight.bold,
               ),
         ),
-        const SizedBox(height: 8.0),
+        SizedBox(height: screenHeight * 0.01),
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
         ),
-        const SizedBox(height: 16.0),
+        SizedBox(height: screenHeight * 0.02),
       ],
     ),
   );

@@ -24,7 +24,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 1,
+        version: 3,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -165,6 +165,7 @@ class DatabaseHelper {
   static Future<void> _onDowngrade(
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion > newVersion) {
+      await db.close();
       await deleteWholeDatabase();
       await _onCreate(db, newVersion);
     }
@@ -175,11 +176,6 @@ class DatabaseHelper {
     String dbName = 'valjevo_tour_guide.db';
     String databasesPath = await getDatabasesPath();
     String fullPath = join(databasesPath, dbName);
-
-    if (_database != null) {
-      await _database!.close();
-      _database = null;
-    }
 
     var file = File(fullPath);
     if (await file.exists()) {
@@ -196,21 +192,23 @@ class DatabaseHelper {
     if (snapshot.connectionState == ConnectionState.waiting) {
       return Semantics(
         label: localization(context).loading,
-        child: const Center(child: CircularProgressIndicator()),
+        child: Center(
+          child: Semantics(
+            tooltip: localization(context).loading,
+            child: CircularProgressIndicator(
+                semanticsLabel: localization(context).loading),
+          ),
+        ),
       );
     } else if (snapshot.hasError) {
-      return Semantics(
-        label: localization(context).errorLoadingData,
-        child: Center(
-          child: Text(
-              '${localization(context).errorLoadingData}: ${snapshot.error}'),
-        ),
+      return Center(
+        child: Text(
+            '${localization(context).errorLoadingData}: ${snapshot.error}'),
       );
     } else if (!snapshot.hasData ||
         (snapshot.data is List && (snapshot.data as List).isEmpty)) {
-      return Semantics(
-        label: localization(context).noDataAvailable,
-        child: Center(child: Text(localization(context).noDataAvailable)),
+      return Center(
+        child: Text(localization(context).noDataAvailable),
       );
     }
     // Handle the case when data is available

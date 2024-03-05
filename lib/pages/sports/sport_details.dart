@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
+import '../../helper/images_loader_helper.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_screen.dart';
 import '../../navigation/bottom_navigation.dart';
@@ -18,6 +18,7 @@ class SportDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     MapScreen mapScreen = MapScreen();
 
     List<String> images = [
@@ -36,19 +37,16 @@ class SportDetailsPage extends StatelessWidget {
         builder: (context, orientation) {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              double width = constraints.maxWidth;
               return SingleChildScrollView(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(constraints.maxWidth * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Semantics(
-                      image: true,
-                      label: localization(context)
-                          .imageOfSight(sportData['title']),
+                      label: localization(context).image(sportData['title']),
                       child: Container(
                         color: Colors.transparent,
-                        height: width * 0.6,
+                        height: constraints.maxWidth * 0.6,
                         child: PhotoViewGallery.builder(
                           itemCount: images.length,
                           builder: (context, index) {
@@ -67,13 +65,18 @@ class SportDetailsPage extends StatelessWidget {
                           backgroundDecoration: BoxDecoration(
                             color: Theme.of(context).canvasColor,
                           ),
-                          loadingBuilder: (context, event) => const Center(
-                            child: CircularProgressIndicator(),
+                          loadingBuilder: (context, event) => Center(
+                            child: Semantics(
+                              tooltip: localization(context).loading,
+                              child: CircularProgressIndicator(
+                                semanticsLabel: localization(context).loading,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(width: screenWidth * 0.20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -83,7 +86,8 @@ class SportDetailsPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18),
                           ),
                           padding: EdgeInsets.symmetric(
-                              vertical: constraints.maxWidth * 0.015),
+                            vertical: constraints.maxWidth * 0.015,
+                          ),
                         ),
                         child: Text(
                           localization(context).startNavigation,
@@ -99,7 +103,7 @@ class SportDetailsPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: screenWidth * 0.03),
                     ExpansionTile(
                       expandedAlignment: Alignment.bottomCenter,
                       enableFeedback: true,
@@ -107,32 +111,33 @@ class SportDetailsPage extends StatelessWidget {
                       title: Row(
                         children: [
                           Text(
-                            localization(context).description,
+                            localization(context).details,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
                                 ?.copyWith(
                                   color: Colors.black,
-                                  fontSize: width * 0.06,
+                                  fontSize: constraints.maxWidth * 0.06,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(height: screenWidth * 0.03),
                           SizedBox(
-                            width: max(width * 0.06, 48),
-                            height: max(width * 0.06, 48),
+                            width: max(constraints.maxWidth * 0.06, 50),
+                            height: max(constraints.maxWidth * 0.06, 50),
                             child: GestureDetector(
                               onDoubleTap: () =>
                                   TextToSpeechConfig.instance.stopSpeaking(),
                               child: IconButton(
                                 onPressed: () => TextToSpeechConfig.instance
                                     .speak(sportData['description']),
-                                tooltip: localization(context).tapToHearDetails,
+                                tooltip:
+                                    localization(context).tapToHearSportDetails,
                                 icon: Icon(
                                   Icons.volume_up,
-                                  semanticLabel:
-                                      localization(context).tapToHearDetails,
-                                  size: width * 0.065,
+                                  semanticLabel: localization(context)
+                                      .tapToHearSportDetails,
+                                  size: constraints.maxWidth * 0.065,
                                   applyTextScaling: true,
                                 ),
                               ),
@@ -143,13 +148,13 @@ class SportDetailsPage extends StatelessWidget {
                       children: [
                         Text(
                           sportData['description'],
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.left,
                           style: Theme.of(context)
                               .primaryTextTheme
-                              .displayMedium
+                              .bodySmall
                               ?.copyWith(
                                   color: Colors.black,
-                                  fontSize: width * 0.065,
+                                  fontSize: constraints.maxWidth * 0.05,
                                   fontWeight: FontWeight.w400),
                         ),
                       ],

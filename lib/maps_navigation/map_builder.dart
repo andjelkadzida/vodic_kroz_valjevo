@@ -1,12 +1,15 @@
+import 'dart:math';
+
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:vodic_kroz_valjevo/navigation/cutom_app_bar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../helper/internet_connectivity.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
+import '../navigation/cutom_app_bar.dart';
 import '../navigation/navigation_helper.dart';
 
 class MapPage extends StatelessWidget {
@@ -35,8 +38,11 @@ Widget buildMapWithMarkers(List<Marker> markers) {
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(
-          semanticsLabel: localization(context).loading,
+        return Tooltip(
+          message: localization(context).loading,
+          child: CircularProgressIndicator(
+            semanticsLabel: localization(context).loading,
+          ),
         );
       } else {
         return StreamBuilder<bool>(
@@ -60,22 +66,49 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                 children: [
                   Stack(
                     children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      Semantics(
+                        label: localization(context).map,
+                        child: TileLayer(
+                          urlTemplate:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        ),
                       ),
                       MarkerLayer(markers: markers),
                       Positioned(
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
+                          width:
+                              max(50, MediaQuery.of(context).size.width * 0.6),
+                          height: max(
+                              50, MediaQuery.of(context).size.height * 0.01),
                           color: Colors.white,
-                          child: Text(
-                            '© OpenStreetMap contributors',
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context)
-                                    .textScaler
-                                    .scale(16.0)),
+                          child: GestureDetector(
+                            onTap: () {
+                              launchUrlString(
+                                'https://www.openstreetmap.org/',
+                              );
+                            },
+                            child: Semantics(
+                              link: true,
+                              label: localization(context).mapCredits,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '© OpenStreetMap contributors',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue,
+                                      ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -103,21 +136,18 @@ Widget buildWithMarkers(
 
     return Marker(
       point: position,
-      width: MediaQuery.of(context).size.width * 0.1,
-      height: MediaQuery.of(context).size.height * 0.1,
+      width: max(MediaQuery.of(context).size.width * 0.1, 50),
+      height: max(MediaQuery.of(context).size.height * 0.1, 50),
       child: GestureDetector(
         onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
-        child: Semantics(
-          label: '${itemData['title']}',
-          child: Tooltip(
-            message: '${itemData['title']}',
-            child: Icon(
-              Icons.location_pin,
-              size: MediaQuery.of(context).size.width * 0.07,
-              semanticLabel: '${itemData['title']}',
-              color: Colors.blue,
-              applyTextScaling: true,
-            ),
+        child: Tooltip(
+          message: '${itemData['title']}',
+          child: Icon(
+            Icons.location_pin,
+            size: MediaQuery.of(context).size.width * 0.07,
+            semanticLabel: '${itemData['title']}',
+            color: Colors.blue,
+            applyTextScaling: true,
           ),
         ),
       ),
@@ -132,8 +162,11 @@ Widget buildMap() {
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(
-          semanticsLabel: localization(context).loading,
+        return Tooltip(
+          message: localization(context).loading,
+          child: CircularProgressIndicator(
+            semanticsLabel: localization(context).loading,
+          ),
         );
       } else {
         return StreamBuilder<bool>(
@@ -155,21 +188,48 @@ Widget buildMap() {
                 children: [
                   Stack(
                     children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      Semantics(
+                        label: localization(context).map,
+                        child: TileLayer(
+                          urlTemplate:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        ),
                       ),
                       Positioned(
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
+                          width:
+                              max(50, MediaQuery.of(context).size.width * 0.6),
+                          height: max(
+                              50, MediaQuery.of(context).size.height * 0.01),
                           color: Colors.white,
-                          child: Text(
-                            '© OpenStreetMap contributors',
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context)
-                                    .textScaler
-                                    .scale(16.0)),
+                          child: GestureDetector(
+                            onTap: () {
+                              launchUrlString(
+                                'https://www.openstreetmap.org/',
+                              );
+                            },
+                            child: Semantics(
+                              link: true,
+                              label: localization(context).mapCredits,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '© OpenStreetMap contributors',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue,
+                                      ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -194,7 +254,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
         children: [
           SizedBox(height: constraints.maxHeight * 0.1),
           Semantics(
-            label: localization(context).noInternetConnection,
+            liveRegion: true,
             child: Align(
               alignment: Alignment.topCenter,
               child: Text(
@@ -207,12 +267,16 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
             ),
           ),
           Semantics(
-            child: Icon(
-              Icons.wifi_off_outlined,
-              semanticLabel: localization(context).noInternetConnection,
-              size: constraints.maxWidth * 0.3,
-            ),
-          ),
+              liveRegion: true,
+              child: Tooltip(
+                message: localization(context).noInternetConnection,
+                child: Icon(
+                  Icons.wifi_off_outlined,
+                  semanticLabel: localization(context).noInternetConnection,
+                  size: constraints.maxWidth * 0.3,
+                  applyTextScaling: true,
+                ),
+              )),
           Semantics(
             button: true,
             enabled: true,

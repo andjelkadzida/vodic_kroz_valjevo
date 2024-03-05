@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,12 +20,13 @@ class Language {
   Language(this.id, this.flag, this.name, this.languageCode, this.scriptCode,
       this.countyCode);
 
-  static List<Language> languageList() {
+  static List<Language> languageList(BuildContext context) {
     return <Language>[
-      Language(1, '🇷🇸', 'Srpski', 'sr', 'Latn', 'sr-RS'),
-      Language(2, '🇷🇸', 'Српски', 'sr', 'Cyrl', 'sr-RS'),
-      Language(3, '🇺🇸', 'English', 'en', 'en', 'en-US'),
-      Language(4, '🇩🇪', 'Deutsch', 'de', 'de', 'de-DE')
+      Language(1, '🇷🇸', localization(context).serbian, 'sr', 'Latn', 'sr-RS'),
+      Language(
+          2, '🇷🇸', localization(context).serbianCyrl, 'sr', 'Cyrl', 'sr-RS'),
+      Language(3, '🇺🇸', localization(context).english, 'en', 'en', 'en-US'),
+      Language(4, '🇩🇪', localization(context).german, 'de', 'de', 'de-DE')
     ];
   }
 }
@@ -38,62 +41,75 @@ class LanguageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        double screenWidth = constraints.maxWidth;
-        double paddingHorizontal = screenWidth * 0.08;
-        double paddingVertical = screenWidth * 0.02;
-        double fontSize = screenWidth * 0.04;
-
-        // If called from bottom navigation bar, navigate back, otherwise navigate to menu page
-        return Semantics(
-          label: localization(context).changeLanguageLabel(language.name),
-          child: ElevatedButton(
-            onPressed: () {
-              setSelectedLanguage(language);
-              if (calledFromNavBar) {
-                Navigator.pop(context);
-                HapticFeedback.selectionClick();
-              } else {
-                navigateTo(context, const MenuPage());
-              }
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    return SizedBox(
+      width: screenWidth,
+      child: IntrinsicWidth(
+        child: SizedBox(
+          height: max(50, screenHeight * 0.08),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Semantics(
+                label: localization(context).changeLanguageLabel(language.name),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setSelectedLanguage(language);
+                    if (calledFromNavBar) {
+                      Navigator.pop(context);
+                      HapticFeedback.selectionClick();
+                    } else {
+                      navigateTo(context, const MenuPage());
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    foregroundColor: Colors.white,
+                    textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: screenWidth * 0.6,
+                        ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.08,
+                      vertical: screenWidth * 0.02,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    minimumSize: Size(
+                      max(50, screenWidth * 0.55),
+                      max(50, screenHeight * 0.2),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ExcludeSemantics(
+                        child: Text(
+                          language.flag,
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    fontSize: screenWidth * 0.045,
+                                  ),
+                        ),
+                      ),
+                      SizedBox(width: screenWidth * 0.02),
+                      Text(
+                        language.name,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              fontSize: screenWidth * 0.045,
+                              color: Colors.white,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
-              textStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: fontSize,
-              ),
-              padding: EdgeInsets.symmetric(
-                  horizontal: paddingHorizontal, vertical: paddingVertical),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              minimumSize: const Size(48, 48),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  language.flag,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                  ),
-                ),
-                SizedBox(width: screenWidth * 0.02),
-                Text(
-                  language.name,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                  ),
-                ),
-              ],
-            ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
@@ -121,49 +137,45 @@ void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
-      return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          double screenWidth = constraints.maxWidth;
-          double paddingHorizontal = screenWidth * 0.08;
-          double paddingVertical = screenWidth * 0.02;
-          double fontSize = screenWidth * 0.04;
-
-          return Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: paddingHorizontal, vertical: paddingVertical),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: paddingVertical),
-                  child: Semantics(
-                    header: true,
-                    child: Text(
-                      localization(context).chooseLanguage,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+      var size = MediaQuery.of(context).size;
+      return Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.08,
+          vertical: size.width * 0.02,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: size.width * 0.02),
+              child: Semantics(
+                header: true,
+                child: Text(
+                  localization(context).chooseLanguage,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
-                        fontSize: fontSize,
                       ),
-                    ),
+                ),
+              ),
+            ),
+            ...Language.languageList(context).map(
+              (language) => Padding(
+                padding: EdgeInsets.only(bottom: size.width * 0.02),
+                child: Semantics(
+                  button: true,
+                  enabled: true,
+                  onTapHint:
+                      localization(context).selectLanguageLabel(language),
+                  child: LanguageButton(
+                    language: language,
+                    calledFromNavBar: calledFromNavBar,
                   ),
                 ),
-                ...Language.languageList().map((language) => Padding(
-                      padding: EdgeInsets.only(bottom: paddingVertical),
-                      child: Semantics(
-                        button: true,
-                        enabled: true,
-                        onTapHint:
-                            localization(context).selectLanguageLabel(language),
-                        child: LanguageButton(
-                            language: language,
-                            calledFromNavBar: calledFromNavBar),
-                      ),
-                    )),
-              ],
+              ),
             ),
-          );
-        },
+          ],
+        ),
       );
     },
   );

@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
 
+import '../../helper/images_loader_helper.dart';
 import '../../localization/supported_languages.dart';
 import '../../navigation/bottom_navigation.dart';
 import '../../navigation/cutom_app_bar.dart';
@@ -32,12 +34,11 @@ class SightDetailsPage extends StatelessWidget {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(constraints.maxWidth * 0.02),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Semantics(
-                  image: true,
                   label: localization(context).imageOfSight(sightData['title']),
                   child: Container(
                     color: Colors.transparent,
@@ -60,12 +61,18 @@ class SightDetailsPage extends StatelessWidget {
                       backgroundDecoration: BoxDecoration(
                         color: Theme.of(context).canvasColor,
                       ),
-                      loadingBuilder: (context, event) => const Center(
-                        child: CircularProgressIndicator(),
+                      loadingBuilder: (context, event) => Center(
+                        child: Semantics(
+                          tooltip: localization(context).loading,
+                          child: CircularProgressIndicator(
+                            semanticsLabel: localization(context).loading,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
+                SizedBox(height: constraints.maxHeight * 0.03),
                 ExpansionTile(
                   expandedAlignment: Alignment.bottomCenter,
                   enableFeedback: true,
@@ -74,7 +81,7 @@ class SightDetailsPage extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          localization(context).description,
+                          localization(context).details,
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
@@ -86,18 +93,23 @@ class SightDetailsPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: constraints.maxWidth * 0.1,
-                        height: constraints.maxHeight * 0.1,
-                        child: IconButton(
-                          onPressed: () => TextToSpeechConfig.instance
-                              .speak(sightData['description']),
-                          tooltip: localization(context).tapToHearDetails,
-                          icon: Icon(
-                            Icons.volume_up,
-                            semanticLabel:
-                                localization(context).tapToHearDetails,
-                            size: constraints.maxWidth * 0.065,
-                            applyTextScaling: true,
+                        width: max(50, constraints.maxWidth * 0.1),
+                        height: max(50, constraints.maxHeight * 0.1),
+                        child: GestureDetector(
+                          onDoubleTap: () =>
+                              TextToSpeechConfig.instance.stopSpeaking(),
+                          child: IconButton(
+                            onPressed: () => TextToSpeechConfig.instance
+                                .speak(sightData['description']),
+                            tooltip:
+                                localization(context).tapToHearSightDetails,
+                            icon: Icon(
+                              Icons.volume_up,
+                              semanticLabel:
+                                  localization(context).tapToHearSightDetails,
+                              size: constraints.maxWidth * 0.065,
+                              applyTextScaling: true,
+                            ),
                           ),
                         ),
                       )
@@ -106,13 +118,13 @@ class SightDetailsPage extends StatelessWidget {
                   children: [
                     Text(
                       sightData['description'],
-                      textAlign: TextAlign.justify,
+                      textAlign: TextAlign.left,
                       style: Theme.of(context)
                           .primaryTextTheme
-                          .displayMedium
+                          .bodySmall
                           ?.copyWith(
                               color: Colors.black,
-                              fontSize: constraints.maxWidth * 0.065,
+                              fontSize: constraints.maxWidth * 0.05,
                               fontWeight: FontWeight.w400),
                     ),
                   ],

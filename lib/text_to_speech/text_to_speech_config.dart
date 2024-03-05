@@ -39,7 +39,7 @@ class TextToSpeechConfig {
       ],
       IosTextToSpeechAudioMode.voicePrompt,
     );
-    await flutterTts.awaitSpeakCompletion(true);
+    await flutterTts.awaitSpeakCompletion(false);
     await flutterTts.speak(text);
   }
 

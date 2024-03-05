@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:vodic_kroz_valjevo/localization/supported_languages.dart';
+
+import '../../localization/supported_languages.dart';
 
 class MenuItem extends StatelessWidget {
   final String label;
   final IconData icon;
   final String lottieAsset;
   final VoidCallback onTap;
-  final double size;
 
   const MenuItem({
     Key? key,
@@ -15,11 +15,11 @@ class MenuItem extends StatelessWidget {
     required this.icon,
     required this.lottieAsset,
     required this.onTap,
-    required this.size,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return Semantics(
       label: localization(context).menuItem(label),
       button: true,
@@ -27,7 +27,7 @@ class MenuItem extends StatelessWidget {
       onTapHint: localization(context).tapToOpen(label),
       child: Card(
         elevation: 4,
-        margin: const EdgeInsets.all(4),
+        margin: EdgeInsets.all(screenWidth * 0.01),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: InkWell(
           onTap: onTap,
@@ -37,15 +37,17 @@ class MenuItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Lottie.asset(lottieAsset, width: size, height: size),
+                child: Lottie.asset(lottieAsset,
+                    width: screenWidth * 0.2, height: screenWidth * 0.2),
               ),
               Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(screenWidth * 0.02),
                   child: Center(
                     child: Text(
                       label,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: Colors.teal,
+                            fontSize: screenWidth * 0.05,
                             letterSpacing: 1,
                           ),
                       textAlign: TextAlign.center,
@@ -54,7 +56,7 @@ class MenuItem extends StatelessWidget {
               Center(
                 child: Icon(
                   icon,
-                  size: size * 0.2,
+                  size: screenWidth * 0.12,
                   color: Colors.teal,
                   applyTextScaling: true,
                 ),

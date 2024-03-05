@@ -40,7 +40,6 @@ dependencies:
   app_settings: ^5.1.1
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
-  carousel_slider: ^4.2.1
   lottie: ^3.0.0
   url_launcher: ^6.2.4
   photo_view: ^0.14.0
@@ -87,7 +86,7 @@ flutter:
     - images/sightsImages/kulaNenadovica/kulaNenadovica1.jpg
     - images/sightsImages/kulaNenadovica/kulaNenadovica2.jpg
     - images/sightsImages/kulaNenadovica/kulaNenadovica3.jpg
-    - images/sightsImages/muzej/muzej1.jpg
+    - images/sightsImages/muzej/muzej1.jpeg
     - images/sightsImages/muzej/muzej2.jpg
     - images/sightsImages/muzej/muzej3.jpeg
     - images/sightsImages/gimnazija/gimnazija1.jpg
@@ -114,9 +113,9 @@ flutter:
     - images/sightsImages/desanka/desanka1.jpg
     - images/sightsImages/desanka/desanka2.jpg
     - images/sightsImages/desanka/desanka3.jpg
-    - images/sightsImages/muselimovKonak/muselimovKonak1.jpeg
+    - images/sightsImages/muselimovKonak/muselimovKonak1.jpg
     - images/sightsImages/muselimovKonak/muselimovKonak2.jpeg
-    - images/sightsImages/muselimovKonak/muselimovKonak3.jpeg
+    - images/sightsImages/muselimovKonak/muselimovKonak3.jpg
     - images/parksImages/jadar/jadar1.jpg
     - images/parksImages/jadar/jadar2.jpg
     - images/parksImages/jadar/jadar3.jpg
@@ -126,7 +125,6 @@ flutter:
     - images/parksImages/petiPuk/petiPuk1.jpg
     - images/parksImages/petiPuk/petiPuk2.jpg
     - images/parksImages/petiPuk/petiPuk3.jpg
-    - images/parksImages/petiPuk/petiPuk4.jpg
     - images/sportsImages/petiPuk/radnicki1.jpg
     - images/sportsImages/petiPuk/radnicki2.jpg
     - images/sportsImages/petiPuk/radnicki3.jpg

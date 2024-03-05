@@ -25,9 +25,6 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        double width = constraints.maxWidth;
-        double height = constraints.maxHeight;
-
         return Scaffold(
           appBar: customAppBar(
             context,
@@ -35,7 +32,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           ),
           bottomNavigationBar: const CustomBottomNavigationBar(),
           body: Padding(
-            padding: EdgeInsets.all(width * 0.05),
+            padding: EdgeInsets.all(constraints.maxWidth * 0.05),
             child: ListView(
               children: [
                 _buildItem(
@@ -44,8 +41,8 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                   icon: Icons.hotel,
                   lottieAsset: 'animations/hotels.json',
                   onTap: () => navigateTo(context, const Hotels()),
-                  width: width,
-                  height: height,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight,
                 ),
                 _buildItem(
                   context,
@@ -53,8 +50,8 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                   icon: Icons.restaurant,
                   lottieAsset: 'animations/restaurants.json',
                   onTap: () => navigateTo(context, const Restaurants()),
-                  width: width,
-                  height: height,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight,
                 ),
               ],
             ),
@@ -73,39 +70,45 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required double width,
     required double height,
   }) {
-    return Card(
-      elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: height * 0.01),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: EdgeInsets.all(width * 0.04),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Lottie.asset(
-                lottieAsset,
-                width: width * 0.1,
-                height: width * 0.1,
-                fit: BoxFit.contain,
-              ),
-              SizedBox(width: width * 0.05),
-              Expanded(
-                child: Text(
-                  label,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.teal,
-                        letterSpacing: 1,
-                      ),
+    return Semantics(
+      label: localization(context).buttonFor(label),
+      button: true,
+      enabled: true,
+      onTap: onTap,
+      child: Card(
+        elevation: 5,
+        margin: EdgeInsets.symmetric(vertical: height * 0.01),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Padding(
+            padding: EdgeInsets.all(width * 0.04),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Lottie.asset(
+                  lottieAsset,
+                  width: width * 0.1,
+                  height: width * 0.1,
+                  fit: BoxFit.contain,
                 ),
-              ),
-              Icon(icon,
-                  size: width * 0.08,
-                  applyTextScaling: true,
-                  color: Colors.teal),
-            ],
+                SizedBox(width: width * 0.05),
+                Expanded(
+                  child: Text(
+                    label,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Colors.teal,
+                          letterSpacing: 1,
+                        ),
+                  ),
+                ),
+                Icon(icon,
+                    size: width * 0.08,
+                    applyTextScaling: true,
+                    color: Colors.teal),
+              ],
+            ),
           ),
         ),
       ),

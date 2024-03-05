@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:vodic_kroz_valjevo/pages/bug_report.dart';
 
 import '../localization/language.dart';
 import '../localization/supported_languages.dart';
 import '../maps_navigation/map_builder.dart';
+import '../pages/bug_report.dart';
 import '../pages/home_page.dart';
 import '../pages/menu/menu_page.dart';
 import 'navigation_helper.dart';
@@ -55,6 +57,8 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     final List<NavItem> navItems = [
       NavItem(
           Icons.home,
@@ -83,40 +87,34 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           (context) => localization(context).bugReport),
     ];
 
-    return Semantics(
-      namesRoute: true,
-      label: localization(context).bottomNavigation,
-      child: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        items: navItems.map((NavItem navItem) {
-          return BottomNavigationBarItem(
-            icon: Tooltip(
-              message: navItem.tooltip(context),
-              child: Semantics(
-                label: navItem.title(context),
-                child: Icon(
-                  _selectedIndex == -1 ||
-                          _selectedIndex != navItems.indexOf(navItem)
-                      ? navItem.icon
-                      : navItem.selectedIcon,
-                  size: MediaQuery.of(context).size.width * 0.07,
-                ),
-              ),
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      items: navItems.map((NavItem navItem) {
+        return BottomNavigationBarItem(
+          icon: SizedBox(
+            width: max(50, screenWidth * 0.1),
+            height: max(50, screenHeight * 0.03),
+            child: Icon(
+              _selectedIndex == -1 ||
+                      _selectedIndex != navItems.indexOf(navItem)
+                  ? navItem.icon
+                  : navItem.selectedIcon,
+              size: screenWidth * 0.07,
             ),
-            label: navItem.title(context),
-            tooltip: navItem.tooltip(context),
-          );
-        }).toList(),
-        currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
-        selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        onTap: _onNavItemTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: MediaQuery.of(context).size.width * 0.03,
-        unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
-      ),
+          ),
+          label: navItem.title(context),
+          tooltip: navItem.tooltip(context),
+        );
+      }).toList(),
+      currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
+      selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
+      unselectedItemColor: Colors.grey,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+      onTap: _onNavItemTapped,
+      type: BottomNavigationBarType.fixed,
+      selectedFontSize: MediaQuery.of(context).size.width * 0.03,
+      unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
     );
   }
 }

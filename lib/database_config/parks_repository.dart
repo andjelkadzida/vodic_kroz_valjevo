@@ -69,20 +69,25 @@ class ParksRepository {
         'park_image_path2': 'images/parksImages/jadar/jadar2.jpg',
         'park_image_path3': 'images/parksImages/jadar/jadar3.jpg',
         'titles': {
-          'en': "Park Vide Jocić",
-          'de': "Titel auf Deutsch",
-          'sr': "Park Vide Jocić",
-          'sr_Cyrl': "Парк Виде Јоцић",
-          'sr_Latn': "Park Vide Jocić",
+          'en': 'Vida Jocić Park (Park on the Jadar)',
+          'de': 'Vida Jocić Park (Park am Jadar)',
+          'sr': 'Park Vide Jocić (Park na Jadru)',
+          'sr_Cyrl': 'Парк Виде Јоцић (Парк на Јадру)',
+          'sr_Latn': 'Park Vide Jocić (Park na Jadru)',
         },
         'latitude': 44.26955379468345,
         'longitude': 19.879072700675714,
         'description': {
-          'en': 'Description in English',
-          'de': 'Beschreibung auf Deutsch',
-          'sr': 'Опис на српском',
-          'sr_Cyrl': 'Опис на српском ћирилицом',
-          'sr_Latn': 'Opis na srpskom latinicom',
+          'en':
+              'It is dedicated to the sculptor Vida Jocić, whose sculptures are within its 1.2 hectares. The park was landscaped in 1892, and the 17th Infantry Regiment of the Royal Serbian Army carried out the work. Since 1925, the city has taken over its care. Since 1969, the park has been adorned with sculptures by Vida Jocić. In 1990, a monument to the national hero Dragojlo Dudić was relocated to the central part of the park. It was reconstructed in 2015, and after the floods of 2014, it represents an oasis of art and nature close to the city centre. The park features sculptures of the national hero Miloš Dunić, the national hero Žikica Jovanović Španac, activist Živan Đurđević, teacher and national hero Dara Pavlović, and student and secretary of the League of Communist Youth of Yugoslavia (SKOJ) for Valjevo, Milivoje Radosavljević.',
+          'de':
+              'Er ist der Bildhauerin Vida Jocić gewidmet, deren Skulpturen sich auf seinen 1,2 Hektar befinden. Der Park wurde 1892 angelegt, und die Arbeiten wurden vom 17. Infanterieregiment der Königlich Serbischen Armee durchgeführt. Seit 1925 hat die Stadt die Pflege übernommen. Seit 1969 wird der Park mit Skulpturen von Vida Jocić geschmückt. Im Jahr 1990 wurde ein Denkmal für den Nationalhelden Dragojlo Dudić in den zentralen Teil des Parks verlegt. Es wurde 2015 rekonstruiert und stellt nach den Überschwemmungen von 2014 eine Oase der Kunst und Natur nahe dem Stadtzentrum dar. Der Park beherbergt Skulpturen des Nationalhelden Miloš Dunić, des Nationalhelden Žikica Jovanović Španac, des Aktivisten Živan Đurđević, der Lehrerin und Nationalheldin Dara Pavlović und des Studenten und Sekretärs der Liga der Kommunistischen Jugend Jugoslawiens (SKOJ) für Valjevo, Milivoje Radosavljević.',
+          'sr':
+              'Posvećen vajarki Vidi Jocić čije se skulpture nalaze u njegovih 1,2 hektara površine. Park je uređen 1892. godine, a radove je izveo 17. pešadijski Puk vojske Kraljevine Srbije. Od 1925. godine grad je preuzeo brigu o njemu . Od 1969. godine park krase skulpture Vide Jocić. U centralni deo parka 1990. godine je premešten spomenik narodnom heroju Dragojlu Dudiću. Rekonstruisan je 2015. godine, a nakon poplava 2014. i predstavlja oazu umetnosti i prirode nadomak centra grada. U parku se nalaze skulpture  narodnog heroja Miloša Dunića , narodnog heroja Žikice Jovanovića Španca, aktiviste Živana Đurđevića, učiteljice i narodnog heroja Dare Pavlović i studenta i sekretara SKOJ-a za Valjevo Milivoja Radosavljevića.',
+          'sr_Cyrl':
+              'Посвећен вајарки Види Јоцић чије се скулптуре налазе у његових 1,2 хектара површине. Парк је уређен 1892. године, а радове је извео 17. пешадијски Пук војске Краљевине Србије. Од 1925. године град је преузео бригу о њему. Од 1969. године парк красе скулптуре Виде Јоцић. У централни део парка 1990. године је премештен споменик народном хероју Драгољу Дудићу. Реконструисан је 2015. године, а након поплава 2014. и представља оазу уметности и природе надомак центра града. У парку се налазе скулптуре народног хероја Милоша Дунића, народног хероја Жикице Јовановића Шпанца, активисте Живана Ђурђевића, учитељице и народног хероја Даре Павловић и студента и секретара СКОЈ-а за Ваљево Миливоја Радосављевића.',
+          'sr_Latn':
+              'Posvećen vajarki Vidi Jocić čije se skulpture nalaze u njegovih 1,2 hektara površine. Park je uređen 1892. godine, a radove je izveo 17. pešadijski Puk vojske Kraljevine Srbije. Od 1925. godine grad je preuzeo brigu o njemu . Od 1969. godine park krase skulpture Vide Jocić. U centralni deo parka 1990. godine je premešten spomenik narodnom heroju Dragojlu Dudiću. Rekonstruisan je 2015. godine, a nakon poplava 2014. i predstavlja oazu umetnosti i prirode nadomak centra grada. U parku se nalaze skulpture  narodnog heroja Miloša Dunića , narodnog heroja Žikice Jovanovića Španca, aktiviste Živana Đurđevića, učiteljice i narodnog heroja Dare Pavlović i studenta i sekretara SKOJ-a za Valjevo Milivoja Radosavljevića.',
         },
       },
       // Pećina

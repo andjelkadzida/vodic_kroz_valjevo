@@ -100,11 +100,16 @@ class ParksRepository {
         'latitude': 44.262610342861635,
         'longitude': 19.873701632737493,
         'description': {
-          'en': 'Description in English',
-          'de': 'Beschreibung auf Deutsch',
-          'sr': 'Опис на српском',
-          'sr_Cyrl': 'Опис на српском ћирилицом',
-          'sr_Latn': 'Opis na srpskom latinicom',
+          'en':
+              'Pećina Park, located on the left bank of the Kolubara River, is one of the symbols of the city of Valjevo. It was named after a karst cave on the right bank of the river, discovered in 1974. The park is close to the city centre and consists of three parts: the first includes areas for sports activities - a tennis court, football stadium, and mini-golf course. The second segment comprises a fitness trail that is 682 meters long and one and a half meters wide and surrounds a children\'s park with numerous amenities for the youngest population. The third area encompasses grassy and forested parts with many different types of trees, especially lindens and conifers. This place is a favourite for rest and recreation among the people of Valjevo.',
+          'de':
+              'Der Pećina Park, gelegen am linken Ufer des Flusses Kolubara, ist eines der Symbole der Stadt Valjevo. Er wurde nach einer Karsthöhle auf dem rechten Flussufer benannt, die 1974 entdeckt wurde. Der Park liegt in unmittelbarer Nähe zum Stadtzentrum und besteht aus drei Teilen: Der erste umfasst Bereiche für sportliche Aktivitäten – einen Tennisplatz, ein Fußballstadion und eine Minigolfanlage. Der zweite Abschnitt besteht aus einem Fitnesspfad, der 682 Meter lang und eineinhalb Meter breit ist und einen Kinderspielplatz mit zahlreichen Einrichtungen für die jüngste Bevölkerung umgibt. Der dritte Bereich umfasst grasbewachsene und bewaldete Teile mit vielen verschiedenen Baumarten, insbesondere Linden und Nadelbäumen. Dieser Ort ist bei den Bewohnern Valjevos beliebt zum Ausruhen und für Freizeitaktivitäten.',
+          'sr':
+              'Park pećina je jedan od simbola grada Valjeva, smešten na levoj obali Kolubare. Dobio je ime po kraškoj pećini koja se nalazi na desnoj obali reke i otkrivena je 1974. godine. Park se nalazi u neposrednoj blizini centra grada i sastoji se od tri dela: prvi obuhvata terene za sportske aktivnosti - teniski teren, fudbalski stadion i teren za mini golf. Drugi segment čini trim staza dužine 682 metra i širine jedan i po metar, koja okružuje dečiji park sa brojnim sadržajima za najmlađu populaciju. Treća oblast obuhvata travnate i šumovite delove sa mnogo različitih vrsta drveća, naročito lipa i četinara. Ovo mesto je omiljeno za odmor i rekreaciju među Valjevcima.',
+          'sr_Cyrl':
+              'Парк пећина је један од симбола града Ваљева, смештен на левој обали Колубаре. Добио је име по крашкој пећини која се налази на десној обали реке и откривена је 1974. године. Парк се налази у непосредној близини центра града и састоји се од три дела: први обухвата терене за спортске активности - тениски терен, фудбалски стадион и терен за мини голф. Други сегмент чини трим стаза дужине 682 метра и ширине један и по метар, која окружује дечији парк са бројним садржајима за најмлађу популацију. Трећа област обухвата травнате и шумовите делове са много различитих врста дрвећа, нарочито липа и четинара. Ово место је омиљено за одмор и рекреацију међу Ваљевцима.',
+          'sr_Latn':
+              'Park pećina je jedan od simbola grada Valjeva, smešten na levoj obali Kolubare. Dobio je ime po kraškoj pećini koja se nalazi na desnoj obali reke i otkrivena je 1974. godine. Park se nalazi u neposrednoj blizini centra grada i sastoji se od tri dela: prvi obuhvata terene za sportske aktivnosti - teniski teren, fudbalski stadion i teren za mini golf. Drugi segment čini trim staza dužine 682 metra i širine jedan i po metar, koja okružuje dečiji park sa brojnim sadržajima za najmlađu populaciju. Treća oblast obuhvata travnate i šumovite delove sa mnogo različitih vrsta drveća, naročito lipa i četinara. Ovo mesto je omiljeno za odmor i rekreaciju među Valjevcima.',
         },
       },
       // Peti Puk (Spomen park na Krušiku)

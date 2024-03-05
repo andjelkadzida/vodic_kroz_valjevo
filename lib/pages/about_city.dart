@@ -13,7 +13,6 @@ class AboutCity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    precacheImage(const AssetImage('images/vaPogled.jpg'), context);
     return Scaffold(
       appBar: customAppBar(context, localization(context).aboutCity),
       bottomNavigationBar: const CustomBottomNavigationBar(),
@@ -34,6 +33,7 @@ class AboutCity extends StatelessWidget {
       BuildContext context, List<Map<String, dynamic>> data) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
+    var imagePath = data.first['about_city_image_path'];
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return OrientationBuilder(
@@ -52,7 +52,7 @@ class AboutCity extends StatelessWidget {
                           label: localization(context)
                               .image(localization(context).valjevoCityImage),
                           child: Image.asset(
-                            'images/vaPogled.jpg',
+                            imagePath,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -286,7 +286,8 @@ class AboutCity extends StatelessWidget {
       SELECT 
         legend_title_$languageCode AS title,
         legend_description_$languageCode AS description,
-        history_$languageCode AS history       
+        history_$languageCode AS history,
+        about_city_image_path       
       FROM AboutCity
     ''');
   }

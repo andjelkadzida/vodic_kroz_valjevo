@@ -37,9 +37,10 @@ class AboutCityRepository {
           history_de,
           history_sr,
           history_sr_Cyrl,
-          history_sr_Latn
+          history_sr_Latn,
+          about_city_image_path
         )
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ''', [
           data['legend_title']['en'],
           data['legend_title']['de'],
@@ -56,6 +57,7 @@ class AboutCityRepository {
           history['sr'],
           history['sr_Cyrl'],
           history['sr_Latn'],
+          'images/vaPogled.jpg',
         ]);
       }
       // Commit the batch

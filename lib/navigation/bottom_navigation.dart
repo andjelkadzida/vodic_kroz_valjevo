@@ -113,8 +113,8 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       showSelectedLabels: false,
       onTap: _onNavItemTapped,
       type: BottomNavigationBarType.fixed,
-      selectedFontSize: MediaQuery.of(context).size.width * 0.03,
-      unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
+      selectedFontSize: screenWidth * 0.03,
+      unselectedFontSize: screenWidth * 0.03,
     );
   }
 }

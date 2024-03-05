@@ -84,90 +84,83 @@ class SightListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        double screenWidth = constraints.maxWidth;
-        double blockSizeHorizontal = screenWidth / 100;
-        double blockSizeVertical = MediaQuery.of(context).size.height / 100;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-        return Card(
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: InkWell(
-            onTap: () => showDetailsPage(
-                context, SightDetailsPage(sightData: sightData)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  title: Semantics(
-                    child: AutoSizeText(
-                      sightData['title'],
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontSize: blockSizeHorizontal * 6,
-                          ),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                    ),
-                  ),
-                  trailing: SizedBox(
-                    width: max(50, blockSizeHorizontal * 10),
-                    height: max(50, blockSizeVertical * 10),
-                    child: IconButton(
-                      onPressed: () =>
-                          TextToSpeechConfig.instance.speak(sightData['title']),
-                      icon: Icon(
-                        Icons.volume_up,
-                        semanticLabel: localization(context).tapToHearSightName,
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        onTap: () =>
+            showDetailsPage(context, SightDetailsPage(sightData: sightData)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              title: Semantics(
+                child: AutoSizeText(
+                  sightData['title'],
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontSize: screenWidth * 0.06,
                       ),
-                      tooltip: localization(context).tapToHearSightName,
-                    ),
-                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(blockSizeHorizontal * 2),
-                  child: Semantics(
-                    onTapHint: localization(context).tapToViewSight,
-                    child: Image.asset(sightData['sight_image_path'],
-                        fit: BoxFit.cover),
+              ),
+              trailing: SizedBox(
+                width: max(50, screenWidth * 0.1),
+                height: max(50, screenHeight * 0.1),
+                child: IconButton(
+                  onPressed: () =>
+                      TextToSpeechConfig.instance.speak(sightData['title']),
+                  icon: Icon(
+                    Icons.volume_up,
+                    semanticLabel: localization(context).tapToHearSightName,
                   ),
+                  tooltip: localization(context).tapToHearSightName,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(blockSizeHorizontal * 2),
-                  child: SizedBox(
-                    width: max(50, screenWidth),
-                    height: max(50, blockSizeVertical * 5),
-                    child: SizedBox(
-                      width: max(50, screenWidth),
-                      height: max(50, blockSizeVertical * 5),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          HapticFeedback.selectionClick();
-                          mapScreen.navigateToDestination(
-                              sightData['latitude'], sightData['longitude']);
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal),
-                        child: Semantics(
-                          button: true,
-                          enabled: true,
-                          onTapHint: localization(context).startNavigation,
-                          child: Text(localization(context).startNavigation,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: blockSizeHorizontal * 4)),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.02),
+              child: Semantics(
+                onTapHint: localization(context).tapToViewSight,
+                child: Image.asset(sightData['sight_image_path'],
+                    fit: BoxFit.cover),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.02),
+              child: ElevatedButton(
+                onPressed: () {
+                  HapticFeedback.selectionClick();
+                  mapScreen.navigateToDestination(
+                      sightData['latitude'], sightData['longitude']);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  minimumSize: Size(
+                    max(50, screenWidth),
+                    max(50, screenHeight * 0.05),
+                  ),
+                ),
+                child: Semantics(
+                  button: true,
+                  enabled: true,
+                  onTapHint: localization(context).startNavigation,
+                  child: Text(
+                    localization(context).startNavigation,
+                    style: TextStyle(
+                        color: Colors.white, fontSize: screenWidth * 0.04),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -17,15 +17,15 @@ AppBar customAppBar(BuildContext context, String title) {
         children: [
           Flexible(
             flex: 1,
-           
-              child: AutoSizeText(
-                title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Colors.white,
-                      fontSize: screenWidth * 0.05,
-                    ),
-                textAlign: TextAlign.center,
-              ),
+            child: AutoSizeText(
+              title,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                    fontSize: screenWidth * 0.05,
+                  ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+            ),
           ),
         ],
       ),

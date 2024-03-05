@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -102,10 +103,13 @@ class SightListItem extends StatelessWidget {
               children: [
                 ListTile(
                   title: Semantics(
-                    child: Text(
+                    child: AutoSizeText(
                       sightData['title'],
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontSize: blockSizeHorizontal * 6,
+                          ),
                       textAlign: TextAlign.center,
+                      maxLines: 2,
                     ),
                   ),
                   trailing: SizedBox(

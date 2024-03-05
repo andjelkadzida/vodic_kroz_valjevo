@@ -92,8 +92,8 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       items: navItems.map((NavItem navItem) {
         return BottomNavigationBarItem(
           icon: SizedBox(
-            width: max(screenWidth * 0.1, 50),
-            height: max(screenHeight * 0.03, 50),
+            width: max(50, screenWidth * 0.1),
+            height: max(50, screenHeight * 0.03),
             child: Icon(
               _selectedIndex == -1 ||
                       _selectedIndex != navItems.indexOf(navItem)

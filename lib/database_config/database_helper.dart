@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -24,7 +22,7 @@ class DatabaseHelper {
       _database = null;
     }
     _database = await openDatabase(path,
-        version: 3,
+        version: 1,
         readOnly: false,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
@@ -145,7 +143,8 @@ class DatabaseHelper {
         history_de TEXT,
         history_sr TEXT,
         history_sr_Cyrl TEXT,
-        history_sr_Latn TEXT
+        history_sr_Latn TEXT,
+        about_city_image_path TEXT
       )''');
   }
 
@@ -165,21 +164,13 @@ class DatabaseHelper {
   static Future<void> _onDowngrade(
       Database db, int oldVersion, int newVersion) async {
     if (oldVersion > newVersion) {
-      await db.close();
-      await deleteWholeDatabase();
+      await db.execute('DROP TABLE IF EXISTS Sights');
+      await db.execute('DROP TABLE IF EXISTS Sports');
+      await db.execute('DROP TABLE IF EXISTS Parks');
+      await db.execute('DROP TABLE IF EXISTS Hotels');
+      await db.execute('DROP TABLE IF EXISTS Restaurants');
+      await db.execute('DROP TABLE IF EXISTS AboutCity');
       await _onCreate(db, newVersion);
-    }
-  }
-
-  // Deleting the database
-  static Future<void> deleteWholeDatabase() async {
-    String dbName = 'valjevo_tour_guide.db';
-    String databasesPath = await getDatabasesPath();
-    String fullPath = join(databasesPath, dbName);
-
-    var file = File(fullPath);
-    if (await file.exists()) {
-      await file.delete();
     }
   }
 

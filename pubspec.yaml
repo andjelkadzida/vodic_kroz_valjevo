@@ -144,15 +144,15 @@ flutter:
     - images/hotelsImages/omniSpolja.jpg
     - images/hotelsImages/omniSoba.jpg
     - images/restaurantsImages/paviljonNapolju.jpeg
-    - images/restaurantsImages/paviljonPrizemlje.jpeg
+    - images/restaurantsImages/paviljonUnutra.jpg
     - images/restaurantsImages/lovciNapolju.jpeg
     - images/restaurantsImages/lovciUnutra.jpeg
     - images/restaurantsImages/kucaSpolja.jpeg
-    - images/restaurantsImages/kucaUnutra.jpeg
-    - images/restaurantsImages/tavernaSpolja.jpeg
-    - images/restaurantsImages/tavernaUnutra.jpeg
-    - images/restaurantsImages/laPiazzaSpolja.jpeg
-    - images/restaurantsImages/laPiazzaUnutra.jpeg
+    - images/restaurantsImages/kucaUnutra.jpg
+    - images/restaurantsImages/tavernaSpolja.jpg
+    - images/restaurantsImages/tavernaUnutra.jpg
+    - images/restaurantsImages/laPiazzaSpolja.jpg
+    - images/restaurantsImages/laPiazzaUnutra.jpg
     - animations/hotels.json
     - animations/restaurants.json
     - animations/menu_item.json

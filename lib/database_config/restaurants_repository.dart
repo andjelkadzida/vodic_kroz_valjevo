@@ -56,8 +56,7 @@ class RestaurantsRepository {
       {
         'restaurant_image_path':
             'images/restaurantsImages/paviljonNapolju.jpeg',
-        'restaurant_image_path2':
-            'images/restaurantsImages/paviljonPrizemlje.jpeg',
+        'restaurant_image_path2': 'images/restaurantsImages/paviljonUnutra.jpg',
         'latitude': 44.26121378368397,
         'longitude': 19.878408885329353,
         'titles': {
@@ -82,8 +81,8 @@ class RestaurantsRepository {
         },
       },
       {
-        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpeg',
-        'restaurant_image_path2': 'images/restaurantsImages/kucaUnutra.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpg',
+        'restaurant_image_path2': 'images/restaurantsImages/kucaUnutra.jpg',
         'latitude': 44.270799571481014,
         'longitude': 19.891283525386942,
         'titles': {
@@ -95,8 +94,8 @@ class RestaurantsRepository {
         },
       },
       {
-        'restaurant_image_path': 'images/restaurantsImages/tavernaSpolja.jpeg',
-        'restaurant_image_path2': 'images/restaurantsImages/tavernaUnutra.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/tavernaSpolja.jpg',
+        'restaurant_image_path2': 'images/restaurantsImages/tavernaUnutra.jpg',
         'latitude': 44.27082751943143,
         'longitude': 19.8831951515897,
         'titles': {
@@ -108,9 +107,8 @@ class RestaurantsRepository {
         },
       },
       {
-        'restaurant_image_path': 'images/restaurantsImages/laPiazzaSpolja.jpeg',
-        'restaurant_image_path2':
-            'images/restaurantsImages/laPiazzaUnutra.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/laPiazzaSpolja.jpg',
+        'restaurant_image_path2': 'images/restaurantsImages/laPiazzaUnutra.jpg',
         'latitude': 44.27005106183441,
         'longitude': 19.884875712310876,
         'titles': {

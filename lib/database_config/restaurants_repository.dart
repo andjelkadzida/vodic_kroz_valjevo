@@ -54,8 +54,7 @@ class RestaurantsRepository {
   Future<void> restaurantsDataInsertion() async {
     List<Map<String, dynamic>> restaurantsList = [
       {
-        'restaurant_image_path':
-            'images/restaurantsImages/paviljonNapolju.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/paviljonNapolju.jpg',
         'restaurant_image_path2': 'images/restaurantsImages/paviljonUnutra.jpg',
         'latitude': 44.26121378368397,
         'longitude': 19.878408885329353,
@@ -81,7 +80,7 @@ class RestaurantsRepository {
         },
       },
       {
-        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpg',
+        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpeg',
         'restaurant_image_path2': 'images/restaurantsImages/kucaUnutra.jpg',
         'latitude': 44.270799571481014,
         'longitude': 19.891283525386942,

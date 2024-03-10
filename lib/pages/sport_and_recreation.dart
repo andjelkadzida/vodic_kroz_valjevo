@@ -112,8 +112,13 @@ class SportsAndRecreation extends StatelessWidget {
               child: GestureDetector(
             onTap: () {
               data.containsKey('park_image_path')
-                  ? showDetailsPage(context, ParkDetailsPage(parkData: data))
-                  : showDetailsPage(context, SportDetailsPage(sportData: data));
+                  ? showDetailsPage(
+                      context,
+                      ParkDetailsPage(
+                        parkId: data['id'],
+                      ))
+                  : showDetailsPage(
+                      context, SportDetailsPage(sportId: data['id']));
             },
             child: ClipRRect(
               borderRadius:
@@ -170,6 +175,7 @@ class SportsAndRecreation extends StatelessWidget {
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT
+        id,
         sport_image_path,
         sport_image_path2,
         sport_image_path3,
@@ -189,6 +195,7 @@ class SportsAndRecreation extends StatelessWidget {
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT
+        id,
         park_image_path,
         park_image_path2,
         park_image_path3,

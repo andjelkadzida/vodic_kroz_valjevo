@@ -61,7 +61,8 @@ class Sights extends StatelessWidget {
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
     return await db.rawQuery('''
-      SELECT 
+      SELECT
+        id,
         sight_image_path, 
         sight_image_path2,
         sight_image_path3,
@@ -93,8 +94,12 @@ class SightListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () =>
-            showDetailsPage(context, SightDetailsPage(sightData: sightData)),
+        onTap: () => showDetailsPage(
+          context,
+          SightDetailsPage(
+            sightId: sightData['id'],
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

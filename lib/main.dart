@@ -17,8 +17,8 @@ import 'text_to_speech/text_to_speech_config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
+  final prefs = await SharedPreferences.getInstance();
+  final isFirstRun = prefs.getBool('isFirstRun') ?? true;
 
   if (isFirstRun) {
     await prefs.setBool('isFirstRun', true);
@@ -33,8 +33,11 @@ void main() async {
   // Initialize the database
   final db = await DatabaseHelper.instance.getNamedDatabase();
   final databaseInitializer = DatabaseInitializer(db);
-  await databaseInitializer.initializeData();
-  await dotenv.load();
+
+  await Future.wait([
+    databaseInitializer.initializeData(),
+    dotenv.load(),
+  ]);
 
   runApp(VodicKrozValjevo(database: db, isFirstRun: isFirstRun));
 }
@@ -92,7 +95,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   Widget build(BuildContext context) {
     return MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -49,8 +49,7 @@ class AboutCity extends StatelessWidget {
                     delegate: SliverChildListDelegate(
                       [
                         Semantics(
-                          label: localization(context)
-                              .image(localization(context).valjevoCityImage),
+                          label: localization(context).valjevoCityImage,
                           child: Image.asset(
                             imagePath,
                             fit: BoxFit.contain,

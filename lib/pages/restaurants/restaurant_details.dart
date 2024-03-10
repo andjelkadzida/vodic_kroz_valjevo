@@ -99,7 +99,6 @@ class RestaurantDetailsPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Semantics(
-                                      label: localization(context).photoSource,
                                       child: SizedBox(
                                         width:
                                             max(50, constraints.maxWidth * 0.5),
@@ -115,9 +114,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Semantics(
-                                                label: localization(context)
-                                                    .copyrightOfImages,
+                                              ExcludeSemantics(
                                                 child: Icon(
                                                   Icons.copyright,
                                                   size: constraints.maxWidth *

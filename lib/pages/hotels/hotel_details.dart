@@ -93,7 +93,6 @@ class HotelDetailsPage extends StatelessWidget {
                                 ),
                               ),
                               Semantics(
-                                label: localization(context).photoSource,
                                 child: SizedBox(
                                   width: max(50, constraints.maxWidth * 0.5),
                                   height: max(50, constraints.maxHeight * 0.05),
@@ -106,9 +105,7 @@ class HotelDetailsPage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Semantics(
-                                          label: localization(context)
-                                              .copyrightOfImages,
+                                        ExcludeSemantics(
                                           child: Icon(
                                             Icons.copyright,
                                             size: constraints.maxWidth * 0.045,

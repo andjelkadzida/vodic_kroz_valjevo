@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../database_config/database_helper.dart';
 import '../../helper/images_loader_helper.dart';
@@ -95,6 +99,56 @@ class RestaurantDetailsPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Semantics(
+                                      label: localization(context).photoSource,
+                                      child: SizedBox(
+                                        width:
+                                            max(50, constraints.maxWidth * 0.5),
+                                        height: max(
+                                            50, constraints.maxHeight * 0.05),
+                                        child: InkWell(
+                                          onTap: () {
+                                            launchUrlString(restaurantData[
+                                                'restaurant_images_resource']);
+                                            HapticFeedback.selectionClick();
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Semantics(
+                                                label: localization(context)
+                                                    .copyrightOfImages,
+                                                child: Icon(
+                                                  Icons.copyright,
+                                                  size: constraints.maxWidth *
+                                                      0.05,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: constraints.maxWidth *
+                                                      0.02),
+                                              Flexible(
+                                                child: Text(
+                                                  localization(context)
+                                                      .photoSource,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyLarge
+                                                      ?.copyWith(
+                                                        color: Theme.of(context)
+                                                            .primaryColorDark,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Semantics(
                                       child: Text(
                                         restaurantData['title'],
                                         style: Theme.of(context)
@@ -169,6 +223,7 @@ class RestaurantDetailsPage extends StatelessWidget {
     SELECT 
       restaurant_image_path, 
       restaurant_image_path2,
+      restaurant_images_resource,
       title_$languageCode AS title, 
       latitude,
       longitude

@@ -86,6 +86,8 @@
     "selectLanguageLabel": "Wähle {lang}",
     "bugReportSent": "Fehlerbericht erfolgreich gesendet.",
     "ok": "OK",
+    "photoSource": "Quelle der Fotos",
+    "copyrightOfImages": "Urheberrecht der Fotos",
     "noInternetConnection": "Keine Internetverbindung!",
     "aboutApp": "Über die App",
     "appAuthor": "© 2024 Andjelka Dzida",

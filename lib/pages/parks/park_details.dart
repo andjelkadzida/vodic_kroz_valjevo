@@ -14,22 +14,22 @@ import '../../text_to_speech/text_to_speech_config.dart';
 
 class ParkDetailsPage extends StatelessWidget {
   final int parkId;
+  static MapScreen mapScreen = MapScreen();
 
   const ParkDetailsPage({Key? key, required this.parkId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    MapScreen mapScreen = MapScreen();
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return FutureBuilder<Map<String, dynamic>>(
-      future: _getParkFromDatabase(parkId, localization(context).localeName),
+      future: _getParkById(parkId, localization(context).localeName),
       builder: (context, snapshot) {
         return DatabaseHelper.buildFutureState<Map<String, dynamic>>(
           context: context,
           snapshot: snapshot,
           onData: (parkData) {
-            List<String> images = [
+            final images = [
               parkData['park_image_path'],
               parkData['park_image_path2'],
               parkData['park_image_path3'],
@@ -201,7 +201,7 @@ class ParkDetailsPage extends StatelessWidget {
   }
 }
 
-Future<Map<String, dynamic>> _getParkFromDatabase(
+Future<Map<String, dynamic>> _getParkById(
     int parkId, String languageCode) async {
   final db = await DatabaseHelper.instance.getNamedDatabase();
   return await db.rawQuery('''

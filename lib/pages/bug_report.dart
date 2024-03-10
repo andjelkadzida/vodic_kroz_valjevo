@@ -123,6 +123,7 @@ class BugReportPageState extends State<BugReportPage> {
     return Scaffold(
       appBar: customAppBar(context, localization(context).bugReport),
       bottomNavigationBar: const CustomBottomNavigationBar(),
+      resizeToAvoidBottomInset: true,
       body: _isLoading
           ? Center(
               child: Semantics(

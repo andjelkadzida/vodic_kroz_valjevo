@@ -25,24 +25,27 @@ class Restaurants extends StatelessWidget {
               onData: (data) => buildWithMarkers(
                   context,
                   data,
-                  (restaurantData) =>
-                      RestaurantDetailsPage(restaurantData: restaurantData)));
+                  (restaurantData) => RestaurantDetailsPage(
+                      restaurantId: restaurantData['id'])));
         },
       ),
     );
   }
 
+  // Getting restaurant data from the database
   Future<List<Map<String, dynamic>>> _getRestaurantsFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
-    return await db.rawQuery('''
+
+    final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
-        restaurant_image_path, 
-        restaurant_image_path2,
-        title_$languageCode AS title, 
-        latitude, 
+        id,
+        title_$languageCode AS title,
+        latitude,
         longitude
-      FROM Restaurants
+      FROM 
+        Restaurants
     ''');
+    return data;
   }
 }

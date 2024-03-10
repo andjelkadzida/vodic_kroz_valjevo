@@ -19,13 +19,13 @@ class SightDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: _getSightFromDatabase(sightId, localization(context).localeName),
+      future: _getSightById(sightId, localization(context).localeName),
       builder: (context, snapshot) {
         return DatabaseHelper.buildFutureState<Map<String, dynamic>>(
           context: context,
           snapshot: snapshot,
           onData: (sightData) {
-            List<String> images = [
+            final images = [
               sightData['sight_image_path'],
               sightData['sight_image_path2'],
               sightData['sight_image_path3'],
@@ -153,10 +153,10 @@ class SightDetailsPage extends StatelessWidget {
     );
   }
 
-  Future<Map<String, dynamic>> _getSightFromDatabase(
+  Future<Map<String, dynamic>> _getSightById(
       int sightId, String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
-    return await db.rawQuery('''
+    final List<Map<String, dynamic>> queryResult = await db.rawQuery('''
     SELECT 
       sight_image_path, 
       sight_image_path2,
@@ -164,7 +164,9 @@ class SightDetailsPage extends StatelessWidget {
       title_$languageCode AS title, 
       description_$languageCode AS description
     FROM Sights
-    WHERE id = $sightId
-  ''').then((result) => result.first);
+    WHERE id = ?
+  ''', [sightId]);
+
+    return queryResult.first;
   }
 }

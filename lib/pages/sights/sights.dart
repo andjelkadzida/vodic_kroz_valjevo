@@ -39,7 +39,6 @@ class Sights extends StatelessWidget {
               );
             },
           ),
-          resizeToAvoidBottomInset: true,
         );
       },
     );

@@ -23,26 +23,23 @@ class Hotels extends StatelessWidget {
               context: context,
               snapshot: snapshot,
               onData: (data) => buildWithMarkers(context, data,
-                  (hotelData) => HotelDetailsPage(hotelData: hotelData)));
+                  (hotelData) => HotelDetailsPage(hotelId: hotelData['id'])));
         },
       ),
     );
   }
 
-// Getting hotel data from the database
+  // Getting hotel data from the database
   Future<List<Map<String, dynamic>>> _getHotelsDataFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
-        hotel_image_path, 
-        hotel_image_path2,
+        id,
         title_$languageCode AS title,
         latitude,
-        longitude,
-        website,
-        noStars
+        longitude
       FROM 
         Hotels
     ''');

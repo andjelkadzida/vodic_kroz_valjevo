@@ -121,7 +121,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                                                 child: Icon(
                                                   Icons.copyright,
                                                   size: constraints.maxWidth *
-                                                      0.05,
+                                                      0.045,
                                                 ),
                                               ),
                                               SizedBox(
@@ -133,7 +133,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                                                       .photoSource,
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       ?.copyWith(
                                                         color: Theme.of(context)
                                                             .primaryColorDark,

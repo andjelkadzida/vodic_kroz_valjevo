@@ -92,6 +92,49 @@ class HotelDetailsPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              Semantics(
+                                label: localization(context).photoSource,
+                                child: SizedBox(
+                                  width: max(50, constraints.maxWidth * 0.5),
+                                  height: max(50, constraints.maxHeight * 0.05),
+                                  child: InkWell(
+                                    onTap: () {
+                                      launchUrlString(hotelData['website']);
+                                      HapticFeedback.selectionClick();
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Semantics(
+                                          label: localization(context)
+                                              .copyrightOfImages,
+                                          child: Icon(
+                                            Icons.copyright,
+                                            size: constraints.maxWidth * 0.045,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width: constraints.maxWidth * 0.02),
+                                        Flexible(
+                                          child: Text(
+                                            localization(context).photoSource,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .primaryColorDark,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding:
                                     EdgeInsets.all(constraints.maxWidth * 0.04),

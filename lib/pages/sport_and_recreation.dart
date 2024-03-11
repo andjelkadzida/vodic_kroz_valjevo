@@ -93,93 +93,80 @@ class SportsAndRecreation extends StatelessWidget {
         controller: PageController(viewportFraction: viewportFraction),
         itemBuilder: (context, index) {
           var item = data[index];
-          return _buildSportsItem(context, item, constraints, orientation);
+          return _buildSportsItem(context, item);
         },
       ),
     );
   }
 
-  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data,
-      BoxConstraints constraints, Orientation orientation) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Card(
-        margin: EdgeInsets.all(constraints.maxWidth * 0.04),
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Colors.black, width: 3),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: constraints.maxWidth * 0.02),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      data.containsKey('park_image_path')
-                          ? showDetailsPage(
-                              context,
-                              ParkDetailsPage(
-                                parkId: data['id'],
-                              ),
-                            )
-                          : showDetailsPage(
-                              context,
-                              SportDetailsPage(
-                                sportId: data['id'],
-                              ),
-                            );
-                    },
-                    child: Center(
-                      child: Semantics(
-                        onTapHint: data.containsKey('park_image_path')
-                            ? localization(context).tapToViewPark
-                            : localization(context).tapToViewSport,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            data.containsKey('park_image_path')
-                                ? data['park_image_path']
-                                : data['sport_image_path'],
-                            fit: BoxFit.cover,
-                            semanticLabel:
-                                localization(context).image(data['title']),
-                          ),
-                        ),
+  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Semantics(
+          label: 'Card for ${data['title']}',
+          onTapHint: 'Opens details for ${data['title']}',
+          child: GestureDetector(
+            onTap: () {
+              data.containsKey('park_image_path')
+                  ? showDetailsPage(
+                      context, ParkDetailsPage(parkId: data['id']))
+                  : showDetailsPage(
+                      context, SportDetailsPage(sportId: data['id']));
+            },
+            child: Card(
+              margin: EdgeInsets.all(constraints.maxWidth * 0.02),
+              elevation: 5,
+              color: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.black, width: 1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Semantics(
+                      onTapHint: data.containsKey('park_image_path')
+                          ? localization(context).tapToViewPark
+                          : localization(context).tapToViewSport,
+                      child: Image.asset(
+                        data.containsKey('park_image_path')
+                            ? data['park_image_path']
+                            : data['sport_image_path'],
+                        fit: BoxFit.cover,
+                        height: double.infinity,
+                        width: double.infinity,
+                        semanticLabel:
+                            localization(context).image(data['title']),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.transparent,
-              padding: EdgeInsets.all(constraints.maxWidth * 0.02),
-              child: Align(
-                alignment: Alignment.center,
-                child: Semantics(
-                  child: Text(
-                    data['title'],
-                    style: TextStyle(
-                      fontSize: constraints.maxWidth * 0.05,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black,
+                  Positioned(
+                    bottom: 10,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(constraints.maxWidth * 0.02),
+                      color: Colors.black.withOpacity(0.5),
+                      child: Text(
+                        data['title'],
+                        style: TextStyle(
+                          fontSize: constraints.maxWidth * 0.055,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
                   ),
-                ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

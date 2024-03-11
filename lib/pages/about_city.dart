@@ -87,97 +87,118 @@ class AboutCity extends StatelessWidget {
   Widget _buildResponsiveDataTable(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: DataTable(
-        columns: [
-          DataColumn(
-              label: Icon(
-                Icons.people,
-                semanticLabel: localization(context).indicator,
-                size: Theme.of(context).iconTheme.size,
-                applyTextScaling: true,
-              ),
-              tooltip: localization(context).indicator),
-          DataColumn(
-              label: Icon(
-                Icons.attribution,
-                semanticLabel: localization(context).value,
-                size: Theme.of(context).iconTheme.size,
-                applyTextScaling: true,
-              ),
-              tooltip: localization(context).value),
-        ],
-        rows: [
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).surface,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '2256 ha',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).elevation,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '185 m',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).populationDensity,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '90,79 st/km\u00B2 (2022.)',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).population,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '82.541 (2022.)',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).district,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              localization(context).kolubaraDistrict,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).cityDay,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              localization(context).cityDayDate,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).saint,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              localization(context).saintName,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-        ],
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          dividerColor: const Color.fromRGBO(219, 33, 41, 1),
+          dataTableTheme: DataTableThemeData(
+            dataTextStyle: TextStyle(
+              fontSize: screenWidth * 0.042,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ),
+        child: DataTable(
+          columns: [
+            DataColumn(
+                label: Icon(
+                  Icons.info_outline,
+                  semanticLabel: localization(context).indicator,
+                  size: Theme.of(context).iconTheme.size,
+                  applyTextScaling: true,
+                  color: const Color.fromRGBO(219, 33, 41, 1),
+                ),
+                tooltip: localization(context).indicator),
+            const DataColumn(
+              label: Text(''),
+            ),
+          ],
+          rows: [
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).surface,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '2256 ha',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).elevation,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '185 m',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).populationDensity,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '90,79 st/km\u00B2 (2022.)',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).population,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '82.541 (2022.)',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).district,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              DataCell(Text(
+                localization(context).kolubaraDistrict,
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).cityDay,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              DataCell(Text(
+                localization(context).cityDayDate,
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).saint,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              DataCell(Text(
+                localization(context).saintName,
+              )),
+            ]),
+          ],
+        ),
       ),
     );
   }

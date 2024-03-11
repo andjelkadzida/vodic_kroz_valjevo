@@ -142,7 +142,7 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
     ],
     excludeHeaderSemantics: false,
     centerTitle: true,
-    backgroundColor: Colors.teal,
+    backgroundColor: color,
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),

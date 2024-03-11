@@ -63,10 +63,9 @@ class LanguageButton extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal,
-                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white,
                     textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           fontSize: screenWidth * 0.6,
                         ),
                     padding: EdgeInsets.symmetric(
@@ -90,7 +89,8 @@ class LanguageButton extends StatelessWidget {
                           language.flag,
                           style:
                               Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontSize: screenWidth * 0.045,
+                                    fontSize: screenWidth * 0.05,
+                                    fontWeight: FontWeight.w300,
                                   ),
                         ),
                       ),
@@ -99,7 +99,8 @@ class LanguageButton extends StatelessWidget {
                         language.name,
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                               fontSize: screenWidth * 0.045,
-                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.black,
                             ),
                       ),
                     ],
@@ -139,6 +140,7 @@ void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
     builder: (BuildContext context) {
       var size = MediaQuery.of(context).size;
       return Container(
+        color: Colors.white,
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.08,
           vertical: size.width * 0.02,
@@ -149,12 +151,12 @@ void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
             Padding(
               padding: EdgeInsets.symmetric(vertical: size.width * 0.02),
               child: Semantics(
-                header: true,
                 child: Text(
                   localization(context).chooseLanguage,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.06,
+                        fontWeight: FontWeight.w500,
                       ),
                 ),
               ),

@@ -39,6 +39,7 @@ class RestaurantDetailsPage extends StatelessWidget {
               appBar: customAppBar(
                 context,
                 restaurantData['title'],
+                const Color.fromRGBO(11, 20, 32, 1),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(),
               body: OrientationBuilder(

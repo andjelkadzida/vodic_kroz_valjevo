@@ -7,7 +7,7 @@ import '../localization/supported_languages.dart';
 import '../policies/privacy_policy.dart';
 import '../policies/terms_of_use.dart';
 
-AppBar customAppBar(BuildContext context, String title) {
+AppBar customAppBar(BuildContext context, String title, Color color) {
   var screenWidth = MediaQuery.of(context).size.width;
   var screenHeight = MediaQuery.of(context).size.height;
   return AppBar(

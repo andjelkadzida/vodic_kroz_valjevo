@@ -121,7 +121,11 @@ class BugReportPageState extends State<BugReportPage> {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: customAppBar(context, localization(context).bugReport),
+      appBar: customAppBar(
+        context,
+        localization(context).bugReport,
+        const Color.fromRGBO(11, 20, 32, 1),
+      ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       resizeToAvoidBottomInset: true,
       body: _isLoading
@@ -318,7 +322,8 @@ class BugReportPageState extends State<BugReportPage> {
                                 child: ElevatedButton(
                                   onPressed: attemptToSendReport,
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.teal,
+                                    backgroundColor:
+                                        const Color.fromRGBO(11, 20, 32, 1),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18),
                                     ),

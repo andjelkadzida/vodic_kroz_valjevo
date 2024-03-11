@@ -29,6 +29,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           appBar: customAppBar(
             context,
             localization(context).restaurantsAndHotels,
+            const Color.fromRGBO(11, 20, 32, 1),
           ),
           bottomNavigationBar: const CustomBottomNavigationBar(),
           body: Padding(

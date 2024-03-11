@@ -14,7 +14,11 @@ class AboutCity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context, localization(context).aboutCity),
+      appBar: customAppBar(
+        context,
+        localization(context).aboutCity,
+        const Color.fromRGBO(219, 33, 41, 1),
+      ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getAboutCityFromDatabase(localization(context).localeName),

@@ -15,6 +15,7 @@ class Restaurants extends StatelessWidget {
       appBar: customAppBar(
         context,
         localization(context).restaurants,
+        const Color.fromRGBO(11, 20, 32, 1),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getRestaurantsFromDatabase(localization(context).localeName),

@@ -37,6 +37,7 @@ class SightDetailsPage extends StatelessWidget {
               appBar: customAppBar(
                 context,
                 sightData['title'],
+                const Color.fromRGBO(87, 19, 20, 1),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(),
               body: LayoutBuilder(

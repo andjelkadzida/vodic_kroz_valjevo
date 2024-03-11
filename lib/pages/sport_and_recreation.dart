@@ -21,6 +21,7 @@ class SportsAndRecreation extends StatelessWidget {
               appBar: customAppBar(
                 context,
                 localization(context).sportRecreation,
+                const Color.fromRGBO(65, 89, 45, 1),
               ),
               body: Column(
                 children: [

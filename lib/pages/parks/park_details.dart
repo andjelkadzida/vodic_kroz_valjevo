@@ -40,6 +40,7 @@ class ParkDetailsPage extends StatelessWidget {
               appBar: customAppBar(
                 context,
                 parkData['title'],
+                const Color.fromRGBO(65, 89, 45, 1),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(),
               body: OrientationBuilder(

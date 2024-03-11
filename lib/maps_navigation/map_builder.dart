@@ -22,7 +22,11 @@ class MapPage extends StatelessWidget {
         return LayoutBuilder(
           builder: (context, constraints) {
             return Scaffold(
-              appBar: customAppBar(context, localization(context).mapPage),
+              appBar: customAppBar(
+                context,
+                localization(context).mapPage,
+                const Color.fromRGBO(11, 20, 32, 1),
+              ),
               bottomNavigationBar: const CustomBottomNavigationBar(),
               body: buildMap(),
             );

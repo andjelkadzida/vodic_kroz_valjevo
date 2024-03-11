@@ -15,6 +15,7 @@ class Hotels extends StatelessWidget {
       appBar: customAppBar(
         context,
         localization(context).hotels,
+        const Color.fromRGBO(11, 20, 32, 1),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getHotelsDataFromDatabase(localization(context).localeName),

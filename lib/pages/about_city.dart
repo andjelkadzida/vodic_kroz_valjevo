@@ -66,7 +66,13 @@ class AboutCity extends StatelessWidget {
                         SizedBox(height: screenHeight * 0.02),
                         ExpansionTile(
                           title: Text(localization(context).legendOfTheCity,
-                              style: Theme.of(context).textTheme.titleLarge),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    fontSize: screenWidth * 0.07,
+                                    fontWeight: FontWeight.w500,
+                                  )),
                           children: data
                               .map((legend) =>
                                   _buildExpansionTile(context, legend))
@@ -211,14 +217,19 @@ class AboutCity extends StatelessWidget {
         title: Text(
           aboutCityData['title'],
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.normal,
+                fontSize: screenWidth * 0.05,
+                fontWeight: FontWeight.w500,
               ),
         ),
         children: [
           ListTile(
             title: Text(
               aboutCityData['description'],
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: screenWidth * 0.05,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black,
+                  ),
             ),
             trailing: Semantics(
               label: localization(context).tapToHearLegend,
@@ -228,6 +239,7 @@ class AboutCity extends StatelessWidget {
                   width: max(50, screenWidth * 0.1),
                   height: max(50, screenWidth * 0.1),
                   child: IconButton(
+                    iconSize: max(50, screenWidth * 0.1),
                     tooltip: localization(context).tapToHearLegend,
                     onPressed: () {
                       TextToSpeechConfig.instance
@@ -259,13 +271,26 @@ class AboutCity extends StatelessWidget {
             child: Semantics(
               child: Text(
                 localization(context).historyOfTheCity,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: screenWidth * 0.07,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ),
           ),
         ],
       ),
       children: [
+        Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black,
+                width: 3.0,
+              ),
+            ),
+          ),
+        ),
         Row(
           children: [
             Expanded(
@@ -274,7 +299,11 @@ class AboutCity extends StatelessWidget {
                   child: Semantics(
                     child: Text(
                       aboutCityData['history'],
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: screenWidth * 0.05,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
+                          ),
                     ),
                   )),
             ),

@@ -30,7 +30,7 @@ class SportsAndRecreation extends StatelessWidget {
                       localization(context).parks,
                       style: TextStyle(
                         fontSize: constraints.maxWidth * 0.07,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -53,7 +53,7 @@ class SportsAndRecreation extends StatelessWidget {
                       localization(context).sportFields,
                       style: TextStyle(
                         fontSize: constraints.maxWidth * 0.07,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -101,70 +101,84 @@ class SportsAndRecreation extends StatelessWidget {
 
   Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data,
       BoxConstraints constraints, Orientation orientation) {
-    return Card(
-      margin: EdgeInsets.all(constraints.maxWidth * 0.02),
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-              child: GestureDetector(
-            onTap: () {
-              data.containsKey('park_image_path')
-                  ? showDetailsPage(
-                      context,
-                      ParkDetailsPage(
-                        parkId: data['id'],
-                      ))
-                  : showDetailsPage(
-                      context, SportDetailsPage(sportId: data['id']));
-            },
-            child: ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(20)),
-              child: Semantics(
-                onTapHint: data.containsKey('park_image_path')
-                    ? localization(context).tapToViewPark
-                    : localization(context).tapToViewSport,
-                child: Image.asset(
-                  data.containsKey('park_image_path')
-                      ? data['park_image_path']
-                      : data['sport_image_path'],
-                  fit: BoxFit.cover,
-                  semanticLabel: localization(context).image(data['title']),
-                ),
-              ),
-            ),
-          )),
-          Container(
-            padding: EdgeInsets.all(constraints.maxWidth * 0.02),
-            decoration: BoxDecoration(
-              color: Colors.teal[300],
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-            child: Align(
-              alignment: Alignment.center,
-              child: Semantics(
-                child: Text(
-                  data['title'],
-                  style: TextStyle(
-                    fontSize: constraints.maxWidth * 0.05,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Card(
+        margin: EdgeInsets.all(constraints.maxWidth * 0.04),
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Colors.black, width: 3),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: constraints.maxWidth * 0.02),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: GestureDetector(
+                    onTap: () {
+                      data.containsKey('park_image_path')
+                          ? showDetailsPage(
+                              context,
+                              ParkDetailsPage(
+                                parkId: data['id'],
+                              ),
+                            )
+                          : showDetailsPage(
+                              context,
+                              SportDetailsPage(
+                                sportId: data['id'],
+                              ),
+                            );
+                    },
+                    child: Center(
+                      child: Semantics(
+                        onTapHint: data.containsKey('park_image_path')
+                            ? localization(context).tapToViewPark
+                            : localization(context).tapToViewSport,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            data.containsKey('park_image_path')
+                                ? data['park_image_path']
+                                : data['sport_image_path'],
+                            fit: BoxFit.cover,
+                            semanticLabel:
+                                localization(context).image(data['title']),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: orientation == Orientation.portrait ? 2 : 1,
                 ),
               ),
             ),
-          ),
-        ],
+            Container(
+              color: Colors.transparent,
+              padding: EdgeInsets.all(constraints.maxWidth * 0.02),
+              child: Align(
+                alignment: Alignment.center,
+                child: Semantics(
+                  child: Text(
+                    data['title'],
+                    style: TextStyle(
+                      fontSize: constraints.maxWidth * 0.05,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

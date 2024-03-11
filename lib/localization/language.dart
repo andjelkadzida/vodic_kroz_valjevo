@@ -52,58 +52,47 @@ class LanguageButton extends StatelessWidget {
             builder: (BuildContext context, BoxConstraints constraints) {
               return Semantics(
                 label: localization(context).changeLanguageLabel(language.name),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setSelectedLanguage(language);
-                    if (calledFromNavBar) {
-                      Navigator.pop(context);
-                      HapticFeedback.selectionClick();
-                    } else {
-                      navigateTo(context, const MenuPage());
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: screenWidth * 0.6,
+                child: SizedBox(
+                  width: max(50, screenWidth * 0.55),
+                  height: max(50, screenHeight * 0.2),
+                  child: InkWell(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ExcludeSemantics(
+                          child: Text(
+                            language.flag,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontSize: screenWidth * 0.05,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                          ),
                         ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.08,
-                      vertical: screenWidth * 0.02,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    minimumSize: Size(
-                      max(50, screenWidth * 0.55),
-                      max(50, screenHeight * 0.2),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ExcludeSemantics(
-                        child: Text(
-                          language.flag,
+                        SizedBox(width: screenWidth * 0.02),
+                        Text(
+                          language.name,
                           style:
                               Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontSize: screenWidth * 0.05,
+                                    fontSize: screenWidth * 0.045,
                                     fontWeight: FontWeight.w300,
+                                    color: Colors.black,
                                   ),
                         ),
-                      ),
-                      SizedBox(width: screenWidth * 0.02),
-                      Text(
-                        language.name,
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              fontSize: screenWidth * 0.045,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.black,
-                            ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    onTap: () {
+                      setSelectedLanguage(language);
+                      if (calledFromNavBar) {
+                        Navigator.pop(context);
+                        HapticFeedback.selectionClick();
+                      } else {
+                        navigateTo(context, const MenuPage());
+                      }
+                    },
                   ),
                 ),
               );

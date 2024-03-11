@@ -1,8 +1,4 @@
-import 'dart:math';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_screen.dart';
@@ -47,9 +43,13 @@ class Sights extends StatelessWidget {
 
   Widget buildSightsList(
       List<Map<String, dynamic>> sightsData, BuildContext context) {
-    return ListView.builder(
+    return GridView.builder(
       padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
       itemCount: sightsData.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.7,
+      ),
       itemBuilder: (context, index) {
         return SightListItem(
             sightData: sightsData[index], mapScreen: mapScreen);
@@ -86,80 +86,78 @@ class SightListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: () => navigateTo(
+        context,
+        SightDetailsPage(
+          sightId: sightData['id'],
+        ),
       ),
-      child: InkWell(
-        onTap: () => showDetailsPage(
-          context,
-          SightDetailsPage(
-            sightId: sightData['id'],
-          ),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            ListTile(
-              title: Semantics(
-                child: AutoSizeText(
-                  sightData['title'],
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: screenWidth * 0.06,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
+            Expanded(
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(15)),
+                child: Image.asset(
+                  sightData['sight_image_path'],
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ),
-              trailing: SizedBox(
-                width: max(50, screenWidth * 0.1),
-                height: max(50, screenHeight * 0.1),
-                child: IconButton(
-                  onPressed: () =>
-                      TextToSpeechConfig.instance.speak(sightData['title']),
-                  icon: Icon(
-                    Icons.volume_up,
-                    semanticLabel: localization(context).tapToHearSightName,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      sightData['title'],
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontSize: screenWidth * 0.04,
+                          fontWeight: FontWeight.w500),
+                      maxLines: 3,
+                    ),
                   ),
-                  tooltip: localization(context).tapToHearSightName,
-                ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.volume_up,
+                      semanticLabel: localization(context).tapToHearSightName,
+                    ),
+                    onPressed: () {
+                      TextToSpeechConfig.instance.speak(
+                        sightData['title'],
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(screenWidth * 0.02),
-              child: Semantics(
-                onTapHint: localization(context).tapToViewSight,
-                child: Image.asset(sightData['sight_image_path'],
-                    fit: BoxFit.cover),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(screenWidth * 0.02),
-              child: ElevatedButton(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
                 onPressed: () {
-                  HapticFeedback.selectionClick();
                   mapScreen.navigateToDestination(
-                      sightData['latitude'], sightData['longitude']);
+                    sightData['latitude'],
+                    sightData['longitude'],
+                  );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  minimumSize: Size(
-                    max(50, screenWidth),
-                    max(50, screenHeight * 0.05),
+                child: Text(
+                  localization(context).startNavigation,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: screenWidth * 0.035,
+                    color: Colors.black,
                   ),
-                ),
-                child: Semantics(
-                  button: true,
-                  enabled: true,
-                  onTapHint: localization(context).startNavigation,
-                  child: Text(
-                    localization(context).startNavigation,
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.04),
-                  ),
+                  textAlign: TextAlign.left,
                 ),
               ),
             ),

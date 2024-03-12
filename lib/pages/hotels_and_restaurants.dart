@@ -90,9 +90,9 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
               children: [
                 Lottie.asset(
                   lottieAsset,
-                  width: width * 0.1,
-                  height: width * 0.1,
-                  fit: BoxFit.contain,
+                  width: width * 0.35,
+                  height: width * 0.35,
+                  fit: BoxFit.cover,
                 ),
                 SizedBox(width: width * 0.05),
                 Expanded(

@@ -152,8 +152,7 @@ flutter:
     - images/restaurantsImages/tavernaUnutra.jpg
     - images/restaurantsImages/laPiazzaSpolja.jpg
     - images/restaurantsImages/laPiazzaUnutra.jpg
-    - animations/hotels.json
-    - animations/restaurants.json
+    - animations/hotels_restaurants.json
     - animations/menu_item.json
     - .env
 

@@ -155,7 +155,7 @@ class SightListItem extends StatelessWidget {
                       localization(context).startNavigation,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: Colors.black,
-                            fontSize: screenWidth * 0.035,
+                            fontSize: screenWidth * 0.037,
                             fontWeight: FontWeight.w300,
                           ),
                     ),

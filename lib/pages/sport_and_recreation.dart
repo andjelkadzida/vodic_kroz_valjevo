@@ -116,48 +116,44 @@ class SportsAndRecreation extends StatelessWidget {
             child: Card(
               margin: EdgeInsets.all(constraints.maxWidth * 0.02),
               elevation: 5,
-              color: Colors.transparent,
+              color: const Color.fromRGBO(65, 89, 45, 1),
               shape: RoundedRectangleBorder(
                 side: const BorderSide(color: Colors.black, width: 1),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Stack(
+              child: Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Semantics(
-                      onTapHint: data.containsKey('park_image_path')
-                          ? localization(context).tapToViewPark
-                          : localization(context).tapToViewSport,
-                      child: Image.asset(
-                        data.containsKey('park_image_path')
-                            ? data['park_image_path']
-                            : data['sport_image_path'],
-                        fit: BoxFit.cover,
-                        height: double.infinity,
-                        width: double.infinity,
-                        semanticLabel:
-                            localization(context).image(data['title']),
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Semantics(
+                        onTapHint: data.containsKey('park_image_path')
+                            ? localization(context).tapToViewPark
+                            : localization(context).tapToViewSport,
+                        child: Image.asset(
+                          data.containsKey('park_image_path')
+                              ? data['park_image_path']
+                              : data['sport_image_path'],
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          semanticLabel:
+                              localization(context).image(data['title']),
+                        ),
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 10,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      padding: EdgeInsets.all(constraints.maxWidth * 0.02),
-                      child: Text(
-                        data['title'],
-                        style: TextStyle(
-                          fontSize: constraints.maxWidth * 0.055,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+                  Container(
+                    padding: EdgeInsets.all(constraints.maxWidth * 0.02),
+                    child: Text(
+                      data['title'],
+                      style: TextStyle(
+                        fontSize: constraints.maxWidth * 0.055,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
                   ),
                 ],

@@ -149,9 +149,9 @@ Widget buildWithMarkers(
           message: '${itemData['title']}',
           child: Icon(
             Icons.location_pin,
-            size: MediaQuery.of(context).size.width * 0.07,
+            size: MediaQuery.of(context).size.width * 0.08,
             semanticLabel: '${itemData['title']}',
-            color: Colors.blue,
+            color: const Color.fromRGBO(11, 20, 32, 1),
             applyTextScaling: true,
           ),
         ),

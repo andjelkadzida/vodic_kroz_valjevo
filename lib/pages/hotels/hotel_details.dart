@@ -87,6 +87,7 @@ class HotelDetailsPage extends StatelessWidget {
                                                       .primaryColorDark,
                                                   decoration:
                                                       TextDecoration.underline,
+                                                  fontWeight: FontWeight.w300,
                                                 ),
                                           ),
                                         ),
@@ -107,7 +108,7 @@ class HotelDetailsPage extends StatelessWidget {
                                           .textTheme
                                           .titleLarge
                                           ?.copyWith(
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                     ),
                                     SizedBox(
@@ -176,6 +177,8 @@ class HotelDetailsPage extends StatelessWidget {
                                                         decoration:
                                                             TextDecoration
                                                                 .underline,
+                                                        fontWeight:
+                                                            FontWeight.w300,
                                                       ),
                                                 ),
                                               ),

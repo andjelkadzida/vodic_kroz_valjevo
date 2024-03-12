@@ -50,11 +50,14 @@ class HomePage extends StatelessWidget {
                             ),
                             textAlign: TextAlign.center,
                           ),
+                          SizedBox(
+                            height: screenHeight * 0.06,
+                          ),
                           Text(
                             localization(context).songAuthor,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: screenWidth * 0.035,
+                              fontSize: screenWidth * 0.03,
                               decoration: TextDecoration.none,
                             ),
                             textAlign: TextAlign.center,

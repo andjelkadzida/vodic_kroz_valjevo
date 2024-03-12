@@ -88,13 +88,15 @@ class SportsAndRecreation extends StatelessWidget {
     double viewportFraction = constraints.maxWidth < 600 ? 0.8 : 0.5;
 
     return Expanded(
-      child: PageView.builder(
-        itemCount: data.length,
-        controller: PageController(viewportFraction: viewportFraction),
-        itemBuilder: (context, index) {
-          var item = data[index];
-          return _buildSportsItem(context, item);
-        },
+      child: ExcludeSemantics(
+        child: PageView.builder(
+          itemCount: data.length,
+          controller: PageController(viewportFraction: viewportFraction),
+          itemBuilder: (context, index) {
+            var item = data[index];
+            return _buildSportsItem(context, item);
+          },
+        ),
       ),
     );
   }
@@ -103,8 +105,6 @@ class SportsAndRecreation extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Semantics(
-          label: 'Card for ${data['title']}',
-          onTapHint: 'Opens details for ${data['title']}',
           child: GestureDetector(
             onTap: () {
               data.containsKey('park_image_path')

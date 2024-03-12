@@ -109,6 +109,7 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                                                 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
+                                        fontWeight: FontWeight.w300,
                                       ),
                                 ),
                               ),
@@ -230,6 +231,7 @@ Widget buildMap() {
                                                 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
+                                        fontWeight: FontWeight.w300,
                                       ),
                                 ),
                               ),
@@ -266,6 +268,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontSize: constraints.maxWidth * 0.05,
+                      fontWeight: FontWeight.w300,
                     ),
               ),
             ),
@@ -290,7 +293,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
                 AppSettings.openAppSettings(type: AppSettingsType.wireless);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
+                backgroundColor: const Color.fromRGBO(11, 20, 32, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),

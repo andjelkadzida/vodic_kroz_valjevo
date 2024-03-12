@@ -126,7 +126,7 @@ class SightListItem extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontSize: screenWidth * 0.04,
                             fontWeight: FontWeight.w500),
-                        maxLines: 3,
+                        maxLines: 5,
                       ),
                     ),
                     IconButton(

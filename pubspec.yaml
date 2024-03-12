@@ -43,7 +43,6 @@ dependencies:
   lottie: ^3.0.0
   url_launcher: ^6.2.4
   photo_view: ^0.14.0
-  auto_size_text: ^3.0.0
   file_picker: ^6.1.1
   parse_server_sdk_flutter: ^7.0.1
   flutter_dotenv: ^5.1.0

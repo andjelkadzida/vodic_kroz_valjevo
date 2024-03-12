@@ -32,11 +32,10 @@ class SightDetailsPage extends StatelessWidget {
             ];
 
             precacheImages(context, images);
-
             return Scaffold(
               appBar: customAppBar(
                 context,
-                sightData['title'],
+                sightData['title'].split(RegExp(r'-|"|\(')).first,
                 const Color.fromRGBO(87, 19, 20, 1),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(),

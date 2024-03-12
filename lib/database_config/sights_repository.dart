@@ -212,7 +212,7 @@ class SightsRepository {
         'latitude': 44.27981454262845,
         'longitude': 19.877936945116286,
         'titles': {
-          'en': '"Marko\'s Chair',
+          'en': 'Marko\'s Chair',
           'de': 'Markos Stuhl',
           'sr': 'Markova Stolica',
           'sr_Cyrl': 'Маркова Столица',
@@ -240,14 +240,14 @@ class SightsRepository {
         'longitude': 19.891073,
         'titles': {
           'en':
-              'Monument to the Fighters of the Revolution (monument to Stevan Filipović)',
+              'Monument to the Fighters of the Revolution (Monument of Stevan Filipović)',
           'de':
-              'Denkmal für die Kämpfer der Revolution (Denkmal für Stevan Filipović)',
-          'sr': 'Spomenik borcima Revolucije (spomenik Stevanu Filipoviću)',
+              'Denkmal für die Kämpfer der Revolution (Denkmal von Stevan Filipović)',
+          'sr': 'Spomenik borcima Revolucije (Spomenik Stevanu Filipoviću)',
           'sr_Cyrl':
-              'Споменик борцима Револуције (споменик Стевану Филиповићу)',
+              'Споменик борцима Револуције (Споменик Стевану Филиповићу)',
           'sr_Latn':
-              'Spomenik borcima Revolucije (spomenik Stevanu Filipoviću)',
+              'Spomenik borcima Revolucije (Spomenik Stevanu Filipoviću)',
         },
         'descriptions': {
           'en':

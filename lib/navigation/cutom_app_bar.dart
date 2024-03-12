@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../localization/supported_languages.dart';
@@ -17,14 +16,14 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
         children: [
           Flexible(
             flex: 1,
-            child: AutoSizeText(
+            child: Text(
               title,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Colors.white,
                     fontSize: screenWidth * 0.05,
                   ),
               textAlign: TextAlign.center,
-              maxLines: 1,
+              maxLines: 2,
             ),
           ),
         ],

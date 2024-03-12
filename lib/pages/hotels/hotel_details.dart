@@ -52,47 +52,9 @@ class HotelDetailsPage extends StatelessWidget {
                           padding: EdgeInsets.all(constraints.maxWidth * 0.04),
                           child: Column(
                             children: [
-                              SizedBox(height: constraints.maxWidth * 0.04),
-                              Semantics(
-                                label: localization(context).hotelImage,
-                                child: SizedBox(
-                                  height: constraints.maxHeight * 0.3,
-                                  child: PhotoViewGallery.builder(
-                                    itemCount: images.length,
-                                    builder: (context, index) {
-                                      return PhotoViewGalleryPageOptions(
-                                        imageProvider:
-                                            AssetImage(images[index]),
-                                        maxScale:
-                                            PhotoViewComputedScale.contained *
-                                                5,
-                                        minScale:
-                                            PhotoViewComputedScale.contained,
-                                        initialScale:
-                                            PhotoViewComputedScale.contained,
-                                        basePosition: Alignment.center,
-                                        filterQuality: FilterQuality.high,
-                                        heroAttributes: PhotoViewHeroAttributes(
-                                            tag: images[index]),
-                                      );
-                                    },
-                                    scrollPhysics:
-                                        const BouncingScrollPhysics(),
-                                    backgroundDecoration: BoxDecoration(
-                                      color: Theme.of(context).canvasColor,
-                                    ),
-                                    loadingBuilder: (context, event) => Center(
-                                      child: Semantics(
-                                        tooltip: localization(context).loading,
-                                        child: CircularProgressIndicator(
-                                          semanticsLabel:
-                                              localization(context).loading,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              SizedBox(height: constraints.maxHeight * 0.05),
+                              _buildHotelImageGallery(
+                                  context, images, constraints),
                               Semantics(
                                 child: SizedBox(
                                   width: max(50, constraints.maxWidth * 0.5),
@@ -137,7 +99,7 @@ class HotelDetailsPage extends StatelessWidget {
                                 padding:
                                     EdgeInsets.all(constraints.maxWidth * 0.04),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       hotelData['title'],
@@ -149,27 +111,61 @@ class HotelDetailsPage extends StatelessWidget {
                                           ),
                                     ),
                                     SizedBox(
+                                        height: constraints.maxHeight * 0.01),
+                                    Container(
+                                      width: constraints.maxWidth * 0.5,
+                                      decoration: const BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color:
+                                                Color.fromRGBO(11, 20, 32, 1),
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
                                         height: constraints.maxHeight * 0.02),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        Semantics(
+                                          label: localization(context)
+                                              .starCount(noStars),
+                                          tooltip: localization(context)
+                                              .starCount(noStars),
+                                          child: Row(
+                                            children: List.generate(
+                                              noStars,
+                                              (index) => Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                                size:
+                                                    constraints.maxWidth * 0.05,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                         SizedBox(
                                           width: max(
-                                              50, constraints.maxWidth * 0.3),
+                                              50, constraints.maxWidth * 0.5),
                                           height: max(
-                                              50, constraints.maxHeight * 0.05),
-                                          child: InkWell(
-                                            onTap: () {
-                                              launchUrlString(
-                                                  hotelData['website']);
-                                              HapticFeedback.selectionClick();
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
+                                              50, constraints.maxHeight * 0.1),
+                                          child: Semantics(
+                                            button: true,
+                                            onTapHint: localization(context)
+                                                .tapToNavigateToHotel,
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  launchUrlString(
+                                                      hotelData['website']);
+                                                  HapticFeedback
+                                                      .selectionClick();
+                                                },
+                                                child: Text(
                                                   localization(context).website,
                                                   style: Theme.of(context)
                                                       .textTheme
@@ -182,80 +178,14 @@ class HotelDetailsPage extends StatelessWidget {
                                                                 .underline,
                                                       ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Semantics(
-                                          label: localization(context)
-                                              .starCount(noStars),
-                                          tooltip: localization(context)
-                                              .starCount(noStars),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                                size:
-                                                    constraints.maxWidth * 0.05,
                                               ),
-                                              ExcludeSemantics(
-                                                child: Text(
-                                                  '$noStars',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge,
-                                                ),
-                                              )
-                                            ],
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                        height: constraints.maxHeight * 0.03),
-                                    Semantics(
-                                      button: true,
-                                      enabled: true,
-                                      onTapHint:
-                                          localization(context).navigateToHotel,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.teal,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(18),
-                                            ),
-                                            padding: EdgeInsets.symmetric(
-                                                vertical:
-                                                    constraints.maxHeight *
-                                                        0.015),
-                                          ),
-                                          child: Text(
-                                            localization(context)
-                                                .startNavigation,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge
-                                                ?.copyWith(
-                                                  color: Colors.white,
-                                                  fontSize:
-                                                      constraints.maxWidth *
-                                                          0.05,
-                                                ),
-                                          ),
-                                          onPressed: () {
-                                            mapScreen.navigateToDestination(
-                                                hotelData['latitude'],
-                                                hotelData['longitude']);
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                        height: constraints.maxWidth * 0.04),
+                                    _buildNavigationButton(context, hotelData,
+                                        constraints.maxWidth),
                                   ],
                                 ),
                               ),
@@ -271,6 +201,76 @@ class HotelDetailsPage extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  Widget _buildNavigationButton(BuildContext context,
+      Map<String, dynamic> hotelData, double screenWidth) {
+    return SizedBox(
+      width: max(50, screenWidth * 0.5),
+      height: max(50, screenWidth * 0.1),
+      child: Semantics(
+        button: true,
+        onTapHint: localization(context).tapToNavigateToHotel,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: InkWell(
+            onTap: () => MapScreen().navigateToDestination(
+                hotelData['latitude'], hotelData['longitude']),
+            child: Text(
+              localization(context).startNavigation,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Colors.black,
+                    fontSize: screenWidth * 0.045,
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHotelImageGallery(
+      BuildContext context, List<dynamic> images, BoxConstraints constraints) {
+    return Semantics(
+      label: localization(context).hotelImage,
+      child: SizedBox(
+        height: constraints.maxHeight * 0.3,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: PhotoViewGallery.builder(
+            itemCount: images.length,
+            builder: (context, index) {
+              return PhotoViewGalleryPageOptions.customChild(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    images[index],
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                initialScale: PhotoViewComputedScale.contained,
+                minScale: PhotoViewComputedScale.contained * 0.5,
+                maxScale: PhotoViewComputedScale.covered * 2,
+                heroAttributes: PhotoViewHeroAttributes(tag: images[index]),
+              );
+            },
+            scrollPhysics: const BouncingScrollPhysics(),
+            backgroundDecoration: BoxDecoration(
+              color: Theme.of(context).canvasColor,
+            ),
+            loadingBuilder: (context, event) => Center(
+              child: Semantics(
+                tooltip: localization(context).loading,
+                child: CircularProgressIndicator(
+                  semanticsLabel: localization(context).loading,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 

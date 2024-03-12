@@ -147,7 +147,6 @@ class SportsAndRecreation extends StatelessWidget {
                     right: 0,
                     child: Container(
                       padding: EdgeInsets.all(constraints.maxWidth * 0.02),
-                      color: Colors.black.withOpacity(0.5),
                       child: Text(
                         data['title'],
                         style: TextStyle(

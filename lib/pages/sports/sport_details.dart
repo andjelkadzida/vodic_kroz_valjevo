@@ -112,27 +112,25 @@ class SportDetailsPage extends StatelessWidget {
       Map<String, dynamic> sportData, double screenWidth) {
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.teal,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
-          padding: EdgeInsets.symmetric(
-            vertical: screenWidth * 0.015,
+      height: max(50, screenWidth * 0.1),
+      child: Semantics(
+        button: true,
+        onTapHint: localization(context).tapToNavigateToSportField,
+        child: InkWell(
+          onTap: () => MapScreen().navigateToDestination(
+              sportData['latitude'], sportData['longitude']),
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              localization(context).startNavigation,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Colors.black,
+                    fontSize: screenWidth * 0.06,
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
           ),
         ),
-        child: Text(
-          localization(context).startNavigation,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.white,
-                fontSize: screenWidth * 0.05,
-              ),
-        ),
-        onPressed: () {
-          mapScreen.navigateToDestination(
-              sportData['latitude'], sportData['longitude']);
-        },
       ),
     );
   }
@@ -175,13 +173,23 @@ class SportDetailsPage extends StatelessWidget {
         ],
       ),
       children: [
+        Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Color.fromRGBO(65, 89, 45, 1),
+                width: 3.0,
+              ),
+            ),
+          ),
+        ),
         Text(
           sportData['description'],
           textAlign: TextAlign.left,
           style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(
               color: Colors.black,
               fontSize: screenWidth * 0.05,
-              fontWeight: FontWeight.w400),
+              fontWeight: FontWeight.w300),
         ),
       ],
     );

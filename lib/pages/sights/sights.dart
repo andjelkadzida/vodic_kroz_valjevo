@@ -145,21 +145,20 @@ class SightListItem extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: TextButton(
-                  onPressed: () {
-                    mapScreen.navigateToDestination(
-                      sightData['latitude'],
-                      sightData['longitude'],
-                    );
-                  },
-                  child: Text(
-                    localization(context).startNavigation,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: screenWidth * 0.035,
-                      color: Colors.black,
+                child: Semantics(
+                  button: true,
+                  onTapHint: localization(context).tapToNavigateToSight,
+                  child: InkWell(
+                    onTap: () => mapScreen.navigateToDestination(
+                        sightData['latitude'], sightData['longitude']),
+                    child: Text(
+                      localization(context).startNavigation,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.black,
+                            fontSize: screenWidth * 0.035,
+                            fontWeight: FontWeight.w300,
+                          ),
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
               ),

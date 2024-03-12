@@ -47,101 +47,10 @@ class SightDetailsPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Semantics(
-                          label: localization(context)
-                              .imageOfSight(sightData['title']),
-                          child: Container(
-                            color: Colors.transparent,
-                            height: constraints.maxHeight * 0.3,
-                            child: PhotoViewGallery.builder(
-                              itemCount: images.length,
-                              builder: (context, index) {
-                                return PhotoViewGalleryPageOptions(
-                                  imageProvider: AssetImage(images[index]),
-                                  maxScale:
-                                      PhotoViewComputedScale.contained * 5,
-                                  minScale: PhotoViewComputedScale.contained,
-                                  initialScale:
-                                      PhotoViewComputedScale.contained,
-                                  basePosition: Alignment.center,
-                                  filterQuality: FilterQuality.high,
-                                  heroAttributes: PhotoViewHeroAttributes(
-                                      tag: images[index]),
-                                );
-                              },
-                              scrollPhysics: const BouncingScrollPhysics(),
-                              backgroundDecoration: BoxDecoration(
-                                color: Theme.of(context).canvasColor,
-                              ),
-                              loadingBuilder: (context, event) => Center(
-                                child: Semantics(
-                                  tooltip: localization(context).loading,
-                                  child: CircularProgressIndicator(
-                                    semanticsLabel:
-                                        localization(context).loading,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: constraints.maxHeight * 0.03),
-                        ExpansionTile(
-                          expandedAlignment: Alignment.bottomCenter,
-                          enableFeedback: true,
-                          initiallyExpanded: false,
-                          title: Row(
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  localization(context).details,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium
-                                      ?.copyWith(
-                                        color: Colors.black,
-                                        fontSize: constraints.maxWidth * 0.06,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: max(50, constraints.maxWidth * 0.1),
-                                height: max(50, constraints.maxHeight * 0.1),
-                                child: GestureDetector(
-                                  onDoubleTap: () => TextToSpeechConfig.instance
-                                      .stopSpeaking(),
-                                  child: IconButton(
-                                    onPressed: () => TextToSpeechConfig.instance
-                                        .speak(sightData['description']),
-                                    tooltip: localization(context)
-                                        .tapToHearSightDetails,
-                                    icon: Icon(
-                                      Icons.volume_up,
-                                      semanticLabel: localization(context)
-                                          .tapToHearSightDetails,
-                                      size: constraints.maxWidth * 0.065,
-                                      applyTextScaling: true,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          children: [
-                            Text(
-                              sightData['description'],
-                              textAlign: TextAlign.left,
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Colors.black,
-                                      fontSize: constraints.maxWidth * 0.05,
-                                      fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        )
+                        _buildImageGallery(
+                            context, images, sightData, constraints),
+                        _buildDetailsExpansionButton(
+                            context, sightData, constraints),
                       ],
                     ),
                   );
@@ -151,6 +60,105 @@ class SightDetailsPage extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  Widget _buildImageGallery(BuildContext context, List<dynamic> images,
+      Map<String, dynamic> sightData, BoxConstraints constraints) {
+    return Semantics(
+      label: localization(context).imageOfSight(sightData['title']),
+      child: Container(
+        color: Colors.transparent,
+        height: constraints.maxHeight * 0.3,
+        child: PhotoViewGallery.builder(
+          itemCount: images.length,
+          builder: (context, index) {
+            return PhotoViewGalleryPageOptions(
+              imageProvider: AssetImage(images[index]),
+              maxScale: PhotoViewComputedScale.contained * 5,
+              minScale: PhotoViewComputedScale.contained,
+              initialScale: PhotoViewComputedScale.contained,
+              basePosition: Alignment.center,
+              filterQuality: FilterQuality.high,
+              heroAttributes: PhotoViewHeroAttributes(tag: images[index]),
+            );
+          },
+          scrollPhysics: const BouncingScrollPhysics(),
+          backgroundDecoration: BoxDecoration(
+            color: Theme.of(context).canvasColor,
+          ),
+          loadingBuilder: (context, event) => Center(
+            child: Semantics(
+              tooltip: localization(context).loading,
+              child: CircularProgressIndicator(
+                semanticsLabel: localization(context).loading,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailsExpansionButton(BuildContext context,
+      Map<String, dynamic> sightData, BoxConstraints constraints) {
+    return ExpansionTile(
+      expandedAlignment: Alignment.bottomCenter,
+      enableFeedback: true,
+      initiallyExpanded: false,
+      title: Row(
+        children: [
+          Flexible(
+            child: Text(
+              localization(context).details,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Colors.black,
+                    fontSize: constraints.maxWidth * 0.06,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+          SizedBox(
+            width: max(50, constraints.maxWidth * 0.1),
+            height: max(50, constraints.maxHeight * 0.1),
+            child: GestureDetector(
+              onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
+              child: IconButton(
+                onPressed: () =>
+                    TextToSpeechConfig.instance.speak(sightData['description']),
+                tooltip: localization(context).tapToHearSightDetails,
+                icon: Icon(
+                  Icons.volume_up,
+                  semanticLabel: localization(context).tapToHearSightDetails,
+                  size: constraints.maxWidth * 0.065,
+                  applyTextScaling: true,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Color.fromRGBO(87, 19, 20, 1),
+                width: 3.0,
+              ),
+            ),
+          ),
+        ),
+        Text(
+          sightData['description'],
+          textAlign: TextAlign.left,
+          style: Theme.of(context).primaryTextTheme.bodySmall?.copyWith(
+                color: Colors.black,
+                fontSize: constraints.maxWidth * 0.05,
+                fontWeight: FontWeight.w300,
+              ),
+        ),
+      ],
     );
   }
 

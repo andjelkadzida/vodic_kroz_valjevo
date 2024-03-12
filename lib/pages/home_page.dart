@@ -41,11 +41,20 @@ class HomePage extends StatelessWidget {
                             height: screenHeight * 0.1,
                           ),
                           Text(
-                            localization(context).slogan,
+                            localization(context).song,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: screenWidth * 0.055,
                               fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            localization(context).songAuthor,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: screenWidth * 0.035,
                               decoration: TextDecoration.none,
                             ),
                             textAlign: TextAlign.center,
@@ -72,7 +81,7 @@ class HomePage extends StatelessWidget {
                             showLanguageMenuIfNeeded(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
+                            backgroundColor: Colors.black54,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),

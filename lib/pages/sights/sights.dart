@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_screen.dart';
@@ -26,8 +24,11 @@ class Sights extends StatelessWidget {
           appBar: customAppBar(
             context,
             localization(context).sights,
+            const Color.fromRGBO(87, 19, 20, 1),
           ),
-          bottomNavigationBar: const CustomBottomNavigationBar(),
+          bottomNavigationBar: const CustomBottomNavigationBar(
+            unselectedColor: Color.fromRGBO(87, 19, 20, 1),
+          ),
           body: FutureBuilder<List<Map<String, dynamic>>>(
             future: _getSightsFromDatabase(localization(context).localeName),
             builder: (context, snapshot) {
@@ -39,7 +40,6 @@ class Sights extends StatelessWidget {
               );
             },
           ),
-          resizeToAvoidBottomInset: true,
         );
       },
     );
@@ -47,9 +47,15 @@ class Sights extends StatelessWidget {
 
   Widget buildSightsList(
       List<Map<String, dynamic>> sightsData, BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+    final screenSize = MediaQuery.of(context).size;
+
+    return GridView.builder(
+      padding: EdgeInsets.all(screenSize.width * 0.02),
       itemCount: sightsData.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.7,
+      ),
       itemBuilder: (context, index) {
         return SightListItem(
             sightData: sightsData[index], mapScreen: mapScreen);
@@ -61,7 +67,8 @@ class Sights extends StatelessWidget {
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
     return await db.rawQuery('''
-      SELECT 
+      SELECT
+        id,
         sight_image_path, 
         sight_image_path2,
         sight_image_path3,
@@ -84,81 +91,93 @@ class SightListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return Semantics(
+      label: localization(context).tapToSeeSightDetails(sightData['title']),
       child: InkWell(
-        onTap: () =>
-            showDetailsPage(context, SightDetailsPage(sightData: sightData)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              title: Semantics(
-                child: AutoSizeText(
-                  sightData['title'],
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: screenWidth * 0.06,
+        onTap: () => navigateTo(
+          context,
+          SightDetailsPage(
+            sightId: sightData['id'],
+          ),
+        ),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(15)),
+                  child: Image.asset(
+                    sightData['sight_image_path'],
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        sightData['title'],
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontSize: screenSize.width * 0.04,
+                            fontWeight: FontWeight.w500),
+                        maxLines: 5,
                       ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.volume_up,
+                        size: min(50, screenSize.width * 0.065),
+                        semanticLabel: localization(context).tapToHearSightName,
+                      ),
+                      onPressed: () {
+                        TextToSpeechConfig.instance.speak(
+                          sightData['title'],
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-              trailing: SizedBox(
-                width: max(50, screenWidth * 0.1),
-                height: max(50, screenHeight * 0.1),
-                child: IconButton(
-                  onPressed: () =>
-                      TextToSpeechConfig.instance.speak(sightData['title']),
-                  icon: Icon(
-                    Icons.volume_up,
-                    semanticLabel: localization(context).tapToHearSightName,
-                  ),
-                  tooltip: localization(context).tapToHearSightName,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(screenWidth * 0.02),
-              child: Semantics(
-                onTapHint: localization(context).tapToViewSight,
-                child: Image.asset(sightData['sight_image_path'],
-                    fit: BoxFit.cover),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(screenWidth * 0.02),
-              child: ElevatedButton(
-                onPressed: () {
-                  HapticFeedback.selectionClick();
-                  mapScreen.navigateToDestination(
-                      sightData['latitude'], sightData['longitude']);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  minimumSize: Size(
-                    max(50, screenWidth),
-                    max(50, screenHeight * 0.05),
-                  ),
-                ),
-                child: Semantics(
-                  button: true,
-                  enabled: true,
-                  onTapHint: localization(context).startNavigation,
-                  child: Text(
-                    localization(context).startNavigation,
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.04),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
+                  child: Semantics(
+                    button: true,
+                    onTapHint: localization(context).tapToNavigateToSight,
+                    child: InkWell(
+                      onTap: () => mapScreen.navigateToDestination(
+                          sightData['latitude'], sightData['longitude']),
+                      child: SizedBox(
+                        width: max(50, screenSize.width * 0.7),
+                        child: Text(
+                          localization(context).startNavigation,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.black,
+                                    fontSize: screenSize.width * 0.038,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

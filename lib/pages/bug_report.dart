@@ -81,7 +81,6 @@ class BugReportPageState extends State<BugReportPage> {
                     AppSettings.openAppSettings(type: AppSettingsType.wireless);
                   },
                   label: localization(context).settings,
-                  textColor: Colors.teal,
                 ),
               ),
             );
@@ -118,11 +117,17 @@ class BugReportPageState extends State<BugReportPage> {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: customAppBar(context, localization(context).bugReport),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      appBar: customAppBar(
+        context,
+        localization(context).bugReport,
+        const Color.fromRGBO(11, 20, 32, 1),
+      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+      ),
+      resizeToAvoidBottomInset: true,
       body: _isLoading
           ? Center(
               child: Semantics(
@@ -133,7 +138,7 @@ class BugReportPageState extends State<BugReportPage> {
               ),
             )
           : Padding(
-              padding: EdgeInsets.all(screenWidth * 0.04),
+              padding: EdgeInsets.all(screenSize.width * 0.04),
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return SingleChildScrollView(
@@ -178,7 +183,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         localization(context).bugDescription,
                                     focusedBorder: const UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.teal),
+                                          BorderSide(color: Colors.black),
                                     ),
                                   ),
                                   style: TextStyle(
@@ -197,19 +202,19 @@ class BugReportPageState extends State<BugReportPage> {
                                   maxLines: 5,
                                 ),
                               ),
-                              SizedBox(height: screenHeight * 0.02),
+                              SizedBox(height: screenSize.height * 0.02),
                               Semantics(
                                 label: localization(context).osLabel,
                                 child: DropdownButtonFormField<String>(
                                   icon: Icon(
                                     Icons.keyboard_arrow_down_rounded,
-                                    size: screenWidth * 0.08,
+                                    size: screenSize.width * 0.08,
                                     semanticLabel:
                                         localization(context).selectOSLabel,
                                   ),
                                   iconDisabledColor: Colors.grey,
-                                  iconEnabledColor: Colors.teal,
-                                  iconSize: screenWidth * 0.08,
+                                  iconEnabledColor: Colors.black,
+                                  iconSize: screenSize.width * 0.08,
                                   decoration: InputDecoration(
                                     filled: true,
                                     labelText: localization(context).selectOS,
@@ -225,7 +230,7 @@ class BugReportPageState extends State<BugReportPage> {
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: const BorderSide(
-                                        color: Colors.teal,
+                                        color: Colors.black,
                                         width: 3,
                                       ),
                                     ),
@@ -267,7 +272,7 @@ class BugReportPageState extends State<BugReportPage> {
                                   },
                                 ),
                               ),
-                              SizedBox(height: screenHeight * 0.02),
+                              SizedBox(height: screenSize.height * 0.02),
                               Semantics(
                                 child: GestureDetector(
                                   onTap: () async {
@@ -289,16 +294,17 @@ class BugReportPageState extends State<BugReportPage> {
                                         child: SizedBox(
                                           width: max(
                                             50,
-                                            screenWidth * 0.05,
+                                            screenSize.width * 0.05,
                                           ),
-                                          height: max(50, screenHeight * 0.05),
+                                          height:
+                                              max(50, screenSize.height * 0.05),
                                           child: Icon(
                                             Icons.attach_file,
-                                            size: screenWidth * 0.07,
+                                            size: screenSize.width * 0.07,
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: screenWidth * 0.02),
+                                      SizedBox(width: screenSize.width * 0.02),
                                       Text(localization(context).uploadFile,
                                           style: Theme.of(context)
                                               .textTheme
@@ -308,7 +314,7 @@ class BugReportPageState extends State<BugReportPage> {
                                 ),
                               ),
                               SizedBox(
-                                width: screenWidth * 0.04,
+                                width: screenSize.width * 0.04,
                               ),
                               Text(fileName ??
                                   localization(context).noFileSelected),
@@ -317,12 +323,13 @@ class BugReportPageState extends State<BugReportPage> {
                                 child: ElevatedButton(
                                   onPressed: attemptToSendReport,
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.teal,
+                                    backgroundColor:
+                                        const Color.fromRGBO(11, 20, 32, 1),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18),
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                      vertical: screenHeight * 0.01,
+                                      vertical: screenSize.height * 0.01,
                                     ),
                                   ),
                                   child: Text(
@@ -332,7 +339,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         .bodyLarge
                                         ?.copyWith(
                                           color: Colors.white,
-                                          fontSize: screenWidth * 0.05,
+                                          fontSize: screenSize.width * 0.05,
                                         ),
                                   ),
                                 ),
@@ -383,7 +390,6 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
             ),
             action: SnackBarAction(
               label: localization(context).ok,
-              textColor: Colors.teal,
               onPressed: () {},
             ),
           ),
@@ -406,7 +412,6 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
           ),
           action: SnackBarAction(
             label: localization(context).ok,
-            textColor: Colors.teal,
             onPressed: () {},
           ),
         ),

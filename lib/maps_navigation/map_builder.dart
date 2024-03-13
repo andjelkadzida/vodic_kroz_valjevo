@@ -17,14 +17,21 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return OrientationBuilder(
       builder: (context, orientation) {
         return LayoutBuilder(
           builder: (context, constraints) {
             return Scaffold(
-              appBar: customAppBar(context, localization(context).mapPage),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
-              body: buildMap(),
+              appBar: customAppBar(
+                context,
+                localization(context).mapPage,
+                const Color.fromRGBO(11, 20, 32, 1),
+              ),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+              ),
+              body: buildMap(screenSize.width, screenSize.height),
             );
           },
         );
@@ -37,6 +44,7 @@ Widget buildMapWithMarkers(List<Marker> markers) {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+      final size = MediaQuery.of(context).size;
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Tooltip(
           message: localization(context).loading,
@@ -78,10 +86,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
-                          width:
-                              max(50, MediaQuery.of(context).size.width * 0.6),
-                          height: max(
-                              50, MediaQuery.of(context).size.height * 0.01),
+                          width: max(50, size.width * 0.6),
+                          height: max(50, size.height * 0.01),
                           color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
@@ -100,11 +106,10 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
+                                        fontSize: size.width * 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
+                                        fontWeight: FontWeight.w300,
                                       ),
                                 ),
                               ),
@@ -133,20 +138,22 @@ Widget buildWithMarkers(
   List<Marker> markers = data.map((itemData) {
     LatLng position =
         LatLng(itemData['latitude'] as double, itemData['longitude'] as double);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Marker(
       point: position,
-      width: max(MediaQuery.of(context).size.width * 0.1, 50),
-      height: max(MediaQuery.of(context).size.height * 0.1, 50),
+      width: max(screenWidth * 0.1, 50),
+      height: max(screenHeight * 0.1, 50),
       child: GestureDetector(
         onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
         child: Tooltip(
           message: '${itemData['title']}',
           child: Icon(
             Icons.location_pin,
-            size: MediaQuery.of(context).size.width * 0.07,
+            size: min(50, screenWidth * 0.09),
             semanticLabel: '${itemData['title']}',
-            color: Colors.blue,
+            color: const Color.fromRGBO(11, 20, 32, 1),
             applyTextScaling: true,
           ),
         ),
@@ -157,7 +164,7 @@ Widget buildWithMarkers(
   return buildMapWithMarkers(markers);
 }
 
-Widget buildMap() {
+Widget buildMap(double screenWidth, double screenHeight) {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -199,10 +206,8 @@ Widget buildMap() {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
-                          width:
-                              max(50, MediaQuery.of(context).size.width * 0.6),
-                          height: max(
-                              50, MediaQuery.of(context).size.height * 0.01),
+                          width: max(50, screenWidth * 0.6),
+                          height: max(50, screenHeight * 0.01),
                           color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
@@ -221,11 +226,10 @@ Widget buildMap() {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
+                                        fontSize: screenWidth * 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
+                                        fontWeight: FontWeight.w300,
                                       ),
                                 ),
                               ),
@@ -262,6 +266,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontSize: constraints.maxWidth * 0.05,
+                      fontWeight: FontWeight.w300,
                     ),
               ),
             ),
@@ -273,7 +278,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
                 child: Icon(
                   Icons.wifi_off_outlined,
                   semanticLabel: localization(context).noInternetConnection,
-                  size: constraints.maxWidth * 0.3,
+                  size: max(50, constraints.maxWidth * 0.3),
                   applyTextScaling: true,
                 ),
               )),
@@ -286,7 +291,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
                 AppSettings.openAppSettings(type: AppSettingsType.wireless);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
+                backgroundColor: const Color.fromRGBO(11, 20, 32, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),

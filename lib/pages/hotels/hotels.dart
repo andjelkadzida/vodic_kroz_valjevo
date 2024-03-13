@@ -15,6 +15,7 @@ class Hotels extends StatelessWidget {
       appBar: customAppBar(
         context,
         localization(context).hotels,
+        const Color.fromRGBO(11, 20, 32, 1),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getHotelsDataFromDatabase(localization(context).localeName),
@@ -23,26 +24,23 @@ class Hotels extends StatelessWidget {
               context: context,
               snapshot: snapshot,
               onData: (data) => buildWithMarkers(context, data,
-                  (hotelData) => HotelDetailsPage(hotelData: hotelData)));
+                  (hotelData) => HotelDetailsPage(hotelId: hotelData['id'])));
         },
       ),
     );
   }
 
-// Getting hotel data from the database
+  // Getting hotel data from the database
   Future<List<Map<String, dynamic>>> _getHotelsDataFromDatabase(
       String languageCode) async {
     final db = await DatabaseHelper.instance.getNamedDatabase();
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT 
-        hotel_image_path, 
-        hotel_image_path2,
+        id,
         title_$languageCode AS title,
         latitude,
-        longitude,
-        website,
-        noStars
+        longitude
       FROM 
         Hotels
     ''');

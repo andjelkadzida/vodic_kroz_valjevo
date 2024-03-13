@@ -25,6 +25,7 @@ class RestaurantsRepository {
           INSERT INTO Restaurants(
             restaurant_image_path, 
             restaurant_image_path2, 
+            restaurant_images_resource,
             latitude,
             longitude,
             title_en, 
@@ -33,10 +34,11 @@ class RestaurantsRepository {
             title_sr_Cyrl, 
             title_sr_Latn
           )
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', [
           data['restaurant_image_path'],
           data['restaurant_image_path2'],
+          data['restaurant_images_resource'],
           data['latitude'],
           data['longitude'],
           data['titles']['en'],
@@ -56,6 +58,7 @@ class RestaurantsRepository {
       {
         'restaurant_image_path': 'images/restaurantsImages/paviljonNapolju.jpg',
         'restaurant_image_path2': 'images/restaurantsImages/paviljonUnutra.jpg',
+        'restaurant_images_resource': 'http://paviljon.rs',
         'latitude': 44.26121378368397,
         'longitude': 19.878408885329353,
         'titles': {
@@ -69,6 +72,7 @@ class RestaurantsRepository {
       {
         'restaurant_image_path': 'images/restaurantsImages/lovciNapolju.jpeg',
         'restaurant_image_path2': 'images/restaurantsImages/lovciUnutra.jpeg',
+        'restaurant_images_resource': 'https://restoranlovackidom.co.rs',
         'latitude': 44.26254034889633,
         'longitude': 19.870473925801104,
         'titles': {
@@ -82,6 +86,8 @@ class RestaurantsRepository {
       {
         'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpeg',
         'restaurant_image_path2': 'images/restaurantsImages/kucaUnutra.jpg',
+        'restaurant_images_resource':
+            'https://www.instagram.com/restorankucavaljevo/',
         'latitude': 44.270799571481014,
         'longitude': 19.891283525386942,
         'titles': {
@@ -95,6 +101,8 @@ class RestaurantsRepository {
       {
         'restaurant_image_path': 'images/restaurantsImages/tavernaSpolja.jpg',
         'restaurant_image_path2': 'images/restaurantsImages/tavernaUnutra.jpg',
+        'restaurant_images_resource':
+            'https://www.facebook.com/valjevotaverna/',
         'latitude': 44.27082751943143,
         'longitude': 19.8831951515897,
         'titles': {
@@ -108,6 +116,8 @@ class RestaurantsRepository {
       {
         'restaurant_image_path': 'images/restaurantsImages/laPiazzaSpolja.jpg',
         'restaurant_image_path2': 'images/restaurantsImages/laPiazzaUnutra.jpg',
+        'restaurant_images_resource':
+            'https://www.instagram.com/la.piazza_restaurant_bar/',
         'latitude': 44.27005106183441,
         'longitude': 19.884875712310876,
         'titles': {

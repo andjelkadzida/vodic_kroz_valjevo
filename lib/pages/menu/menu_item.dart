@@ -19,7 +19,7 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Semantics(
       label: localization(context).menuItem(label),
       button: true,

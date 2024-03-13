@@ -43,7 +43,6 @@ dependencies:
   lottie: ^3.0.0
   url_launcher: ^6.2.4
   photo_view: ^0.14.0
-  auto_size_text: ^3.0.0
   file_picker: ^6.1.1
   parse_server_sdk_flutter: ^7.0.1
   flutter_dotenv: ^5.1.0
@@ -94,7 +93,7 @@ flutter:
     - images/sightsImages/gimnazija/gimnazija3.jpg
     - images/sightsImages/hram/hram1.jpg
     - images/sightsImages/hram/hram2.jpg
-    - images/sightsImages/hram/hram3.jpg
+    - images/sightsImages/hram/hram3.jpeg
     - images/sightsImages/paviljon/paviljon1.jpg
     - images/sightsImages/paviljon/paviljon2.jpg
     - images/sightsImages/paviljon/paviljon3.jpg
@@ -153,8 +152,7 @@ flutter:
     - images/restaurantsImages/tavernaUnutra.jpg
     - images/restaurantsImages/laPiazzaSpolja.jpg
     - images/restaurantsImages/laPiazzaUnutra.jpg
-    - animations/hotels.json
-    - animations/restaurants.json
+    - animations/hotels_restaurants.json
     - animations/menu_item.json
     - .env
 

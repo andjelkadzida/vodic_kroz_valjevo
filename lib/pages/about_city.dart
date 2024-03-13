@@ -14,8 +14,14 @@ class AboutCity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context, localization(context).aboutCity),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      appBar: customAppBar(
+        context,
+        localization(context).aboutCity,
+        const Color.fromRGBO(219, 33, 41, 1),
+      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(219, 33, 41, 1),
+      ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getAboutCityFromDatabase(localization(context).localeName),
         builder: (context, snapshot) {
@@ -31,8 +37,7 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildAboutCityContent(
       BuildContext context, List<Map<String, dynamic>> data) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     var imagePath = data.first['about_city_image_path'];
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -42,28 +47,33 @@ class AboutCity extends StatelessWidget {
               slivers: [
                 SliverPadding(
                   padding: EdgeInsets.symmetric(
-                    vertical: screenHeight * 0.01,
-                    horizontal: screenWidth * 0.05,
+                    vertical: screenSize.height * 0.01,
+                    horizontal: screenSize.width * 0.05,
                   ),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate(
                       [
                         Semantics(
-                          label: localization(context)
-                              .image(localization(context).valjevoCityImage),
+                          label: localization(context).valjevoCityImage,
                           child: Image.asset(
                             imagePath,
                             fit: BoxFit.contain,
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.02),
+                        SizedBox(height: screenSize.height * 0.02),
                         _buildResponsiveDataTable(context),
-                        SizedBox(height: screenHeight * 0.02),
+                        SizedBox(height: screenSize.height * 0.02),
                         _buildHistoryCard(context, data.first),
-                        SizedBox(height: screenHeight * 0.02),
+                        SizedBox(height: screenSize.height * 0.02),
                         ExpansionTile(
                           title: Text(localization(context).legendOfTheCity,
-                              style: Theme.of(context).textTheme.titleLarge),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    fontSize: screenSize.width * 0.07,
+                                    fontWeight: FontWeight.w500,
+                                  )),
                           children: data
                               .map((legend) =>
                                   _buildExpansionTile(context, legend))
@@ -82,128 +92,155 @@ class AboutCity extends StatelessWidget {
   }
 
   Widget _buildResponsiveDataTable(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
+    final screenSize = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: DataTable(
-        columns: [
-          DataColumn(
-              label: Icon(
-                Icons.people,
-                semanticLabel: localization(context).indicator,
-                size: Theme.of(context).iconTheme.size,
-                applyTextScaling: true,
-              ),
-              tooltip: localization(context).indicator),
-          DataColumn(
-              label: Icon(
-                Icons.attribution,
-                semanticLabel: localization(context).value,
-                size: Theme.of(context).iconTheme.size,
-                applyTextScaling: true,
-              ),
-              tooltip: localization(context).value),
-        ],
-        rows: [
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).surface,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '2256 ha',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).elevation,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '185 m',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).populationDensity,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '90,79 st/km\u00B2 (2022.)',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).population,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              '82.541 (2022.)',
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).district,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              localization(context).kolubaraDistrict,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).cityDay,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              localization(context).cityDayDate,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-          DataRow(cells: [
-            DataCell(Text(
-              localization(context).saint,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-            DataCell(Text(
-              localization(context).saintName,
-              style: TextStyle(fontSize: screenWidth * 0.04),
-            )),
-          ]),
-        ],
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          dividerColor: const Color.fromRGBO(219, 33, 41, 1),
+          dataTableTheme: DataTableThemeData(
+            dataTextStyle: TextStyle(
+              fontSize: screenSize.width * 0.042,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ),
+        child: DataTable(
+          columns: [
+            DataColumn(
+                label: Icon(
+                  Icons.info_outline,
+                  semanticLabel: localization(context).indicator,
+                  size: Theme.of(context).iconTheme.size,
+                  applyTextScaling: true,
+                  color: const Color.fromRGBO(219, 33, 41, 1),
+                ),
+                tooltip: localization(context).indicator),
+            const DataColumn(
+              label: Text(''),
+            ),
+          ],
+          rows: [
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).surface,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '2256 ha',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).elevation,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '185 m',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).populationDensity,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '90,79 st/km\u00B2 (2022.)',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).population,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              const DataCell(Text(
+                '82.541 (2022.)',
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).district,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              DataCell(Text(
+                localization(context).kolubaraDistrict,
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).cityDay,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              DataCell(Text(
+                localization(context).cityDayDate,
+              )),
+            ]),
+            DataRow(cells: [
+              DataCell(Text(
+                localization(context).saint,
+                style: TextStyle(
+                  fontSize: screenSize.width * 0.042,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+              DataCell(Text(
+                localization(context).saintName,
+              )),
+            ]),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildExpansionTile(
       BuildContext context, Map<String, dynamic> aboutCityData) {
-    var screenWidth = MediaQuery.of(context).size.width;
+    final screenSize = MediaQuery.of(context).size;
     return Card(
       child: ExpansionTile(
         title: Text(
           aboutCityData['title'],
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.normal,
+                fontSize: screenSize.width * 0.05,
+                fontWeight: FontWeight.w500,
               ),
         ),
         children: [
           ListTile(
             title: Text(
               aboutCityData['description'],
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: screenSize.width * 0.05,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black,
+                  ),
             ),
             trailing: Semantics(
               label: localization(context).tapToHearLegend,
               child: GestureDetector(
                 onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
                 child: SizedBox(
-                  width: max(50, screenWidth * 0.1),
-                  height: max(50, screenWidth * 0.1),
+                  width: max(50, screenSize.width * 0.1),
+                  height: max(50, screenSize.width * 0.1),
                   child: IconButton(
+                    iconSize: max(50, screenSize.width * 0.1),
                     tooltip: localization(context).tapToHearLegend,
                     onPressed: () {
                       TextToSpeechConfig.instance
@@ -212,7 +249,7 @@ class AboutCity extends StatelessWidget {
                     icon: Icon(
                       Icons.volume_up,
                       semanticLabel: localization(context).tapToHearLegend,
-                      size: screenWidth * 0.07,
+                      size: screenSize.width * 0.07,
                       applyTextScaling: true,
                     ),
                   ),
@@ -227,7 +264,7 @@ class AboutCity extends StatelessWidget {
 
   Widget _buildHistoryCard(
       BuildContext context, Map<String, dynamic> aboutCityData) {
-    var screenWidth = MediaQuery.of(context).size.width;
+    final screenSize = MediaQuery.of(context).size;
     return ExpansionTile(
       title: Row(
         children: [
@@ -235,35 +272,52 @@ class AboutCity extends StatelessWidget {
             child: Semantics(
               child: Text(
                 localization(context).historyOfTheCity,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: screenSize.width * 0.07,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ),
           ),
         ],
       ),
       children: [
+        Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black,
+                width: 3.0,
+              ),
+            ),
+          ),
+        ),
         Row(
           children: [
             Expanded(
               child: Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.05),
+                  padding: EdgeInsets.all(screenSize.width * 0.05),
                   child: Semantics(
                     child: Text(
                       aboutCityData['history'],
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: screenSize.width * 0.05,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
+                          ),
                     ),
                   )),
             ),
             GestureDetector(
               onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
               child: SizedBox(
-                width: max(50, screenWidth * 0.1),
-                height: max(50, screenWidth * 0.1),
+                width: max(50, screenSize.width * 0.1),
+                height: max(50, screenSize.width * 0.1),
                 child: IconButton(
                   icon: Icon(
                     Icons.volume_up,
                     semanticLabel: localization(context).tapToHearHistory,
-                    size: screenWidth * 0.07,
+                    size: screenSize.width * 0.07,
                     applyTextScaling: true,
                   ),
                   onPressed: () {

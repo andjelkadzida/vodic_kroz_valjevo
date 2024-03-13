@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../localization/supported_languages.dart';
 
 void showPrivacyPolicy(BuildContext context) {
-  var screenWidth = MediaQuery.of(context).size.width;
+  final screenSize = MediaQuery.of(context).size;
   showDialog(
     barrierDismissible: false,
     context: context,
@@ -14,14 +14,14 @@ void showPrivacyPolicy(BuildContext context) {
           child: Text(
             localization(context).privacyPolicy,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: screenWidth * 0.06,
+                  fontSize: screenSize.width * 0.06,
                 ),
           ),
         ),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              ..._buildPrivacyPolicyContent(context),
+              ..._buildPrivacyPolicyContent(context, screenSize),
             ],
           ),
         ),
@@ -45,32 +45,33 @@ void showPrivacyPolicy(BuildContext context) {
   );
 }
 
-List<Widget> _buildPrivacyPolicyContent(BuildContext context) {
+List<Widget> _buildPrivacyPolicyContent(BuildContext context, Size screenSize) {
   return [
-    _buildSection(context, localization(context).infoByYou,
+    _buildSection(context, screenSize, localization(context).infoByYou,
         localization(context).infoByYouContent),
-    _buildSection(context, localization(context).autoCollectedData,
+    _buildSection(context, screenSize, localization(context).autoCollectedData,
         localization(context).autoCollectedDataContent),
-    _buildSection(context, localization(context).localStorage,
+    _buildSection(context, screenSize, localization(context).localStorage,
         localization(context).localStorageContent),
-    _buildSection(context, localization(context).useOfInfo,
+    _buildSection(context, screenSize, localization(context).useOfInfo,
         localization(context).useOfInfoContent),
-    _buildSection(context, localization(context).thirdParty,
+    _buildSection(context, screenSize, localization(context).thirdParty,
         localization(context).thirdPartyContent),
-    _buildSection(context, localization(context).tearmsOfAnd,
+    _buildSection(context, screenSize, localization(context).tearmsOfAnd,
         localization(context).tearmsOfAndContent),
-    _buildSection(context, localization(context).ongoingAmend,
+    _buildSection(context, screenSize, localization(context).ongoingAmend,
         localization(context).ongoingAmendContent),
-    _buildSection(context, localization(context).contact,
+    _buildSection(context, screenSize, localization(context).contact,
         localization(context).contactContent),
-    _buildSection(context, localization(context).mapCredits,
+    _buildSection(context, screenSize, localization(context).mapCredits,
         localization(context).mapCreditsContent),
   ];
 }
 
-Widget _buildSection(BuildContext context, String title, String content) {
-  var screenWidth = MediaQuery.of(context).size.width;
-  var screenHeight = MediaQuery.of(context).size.height;
+Widget _buildSection(
+    BuildContext context, Size screenSize, String title, String content) {
+  var screenWidth = screenSize.width;
+  var screenHeight = screenSize.height;
   return Semantics(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

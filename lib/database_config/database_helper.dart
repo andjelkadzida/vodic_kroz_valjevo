@@ -117,6 +117,7 @@ class DatabaseHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             restaurant_image_path TEXT,
             restaurant_image_path2 TEXT,
+            restaurant_images_resource TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             title_en TEXT,

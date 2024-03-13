@@ -29,8 +29,11 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           appBar: customAppBar(
             context,
             localization(context).restaurantsAndHotels,
+            const Color.fromRGBO(11, 20, 32, 1),
           ),
-          bottomNavigationBar: const CustomBottomNavigationBar(),
+          bottomNavigationBar: const CustomBottomNavigationBar(
+            unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+          ),
           body: Padding(
             padding: EdgeInsets.all(constraints.maxWidth * 0.05),
             child: ListView(
@@ -39,7 +42,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                   context,
                   label: localization(context).hotels,
                   icon: Icons.hotel,
-                  lottieAsset: 'animations/hotels.json',
+                  lottieAsset: 'animations/hotels_restaurants.json',
                   onTap: () => navigateTo(context, const Hotels()),
                   width: constraints.maxWidth,
                   height: constraints.maxHeight,
@@ -48,7 +51,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                   context,
                   label: localization(context).restaurants,
                   icon: Icons.restaurant,
-                  lottieAsset: 'animations/restaurants.json',
+                  lottieAsset: 'animations/hotels_restaurants.json',
                   onTap: () => navigateTo(context, const Restaurants()),
                   width: constraints.maxWidth,
                   height: constraints.maxHeight,
@@ -89,9 +92,9 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
               children: [
                 Lottie.asset(
                   lottieAsset,
-                  width: width * 0.1,
-                  height: width * 0.1,
-                  fit: BoxFit.contain,
+                  width: width * 0.35,
+                  height: width * 0.35,
+                  fit: BoxFit.cover,
                 ),
                 SizedBox(width: width * 0.05),
                 Expanded(

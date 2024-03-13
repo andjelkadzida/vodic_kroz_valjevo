@@ -20,8 +20,14 @@ class MenuPage extends StatelessWidget {
     var lottieAsset = 'animations/menu_item.json';
 
     return Scaffold(
-      appBar: customAppBar(context, localization(context).menu),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      appBar: customAppBar(
+        context,
+        localization(context).menu,
+        const Color.fromRGBO(11, 20, 32, 1),
+      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+      ),
       body: GridView.count(
         padding: const EdgeInsets.all(8),
         crossAxisCount: crossAxisCount,

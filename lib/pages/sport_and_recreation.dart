@@ -21,6 +21,7 @@ class SportsAndRecreation extends StatelessWidget {
               appBar: customAppBar(
                 context,
                 localization(context).sportRecreation,
+                const Color.fromRGBO(65, 89, 45, 1),
               ),
               body: Column(
                 children: [
@@ -29,7 +30,7 @@ class SportsAndRecreation extends StatelessWidget {
                       localization(context).parks,
                       style: TextStyle(
                         fontSize: constraints.maxWidth * 0.07,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -52,7 +53,7 @@ class SportsAndRecreation extends StatelessWidget {
                       localization(context).sportFields,
                       style: TextStyle(
                         fontSize: constraints.maxWidth * 0.07,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -71,7 +72,9 @@ class SportsAndRecreation extends StatelessWidget {
                   ),
                 ],
               ),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(65, 89, 45, 1),
+              ),
             );
           },
         );
@@ -87,79 +90,79 @@ class SportsAndRecreation extends StatelessWidget {
     double viewportFraction = constraints.maxWidth < 600 ? 0.8 : 0.5;
 
     return Expanded(
-      child: PageView.builder(
-        itemCount: data.length,
-        controller: PageController(viewportFraction: viewportFraction),
-        itemBuilder: (context, index) {
-          var item = data[index];
-          return _buildSportsItem(context, item, constraints, orientation);
-        },
+      child: ExcludeSemantics(
+        child: PageView.builder(
+          itemCount: data.length,
+          controller: PageController(viewportFraction: viewportFraction),
+          itemBuilder: (context, index) {
+            var item = data[index];
+            return _buildSportsItem(context, item);
+          },
+        ),
       ),
     );
   }
 
-  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data,
-      BoxConstraints constraints, Orientation orientation) {
-    return Card(
-      margin: EdgeInsets.all(constraints.maxWidth * 0.02),
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-              child: GestureDetector(
+  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Semantics(
+          child: GestureDetector(
             onTap: () {
               data.containsKey('park_image_path')
-                  ? showDetailsPage(context, ParkDetailsPage(parkData: data))
-                  : showDetailsPage(context, SportDetailsPage(sportData: data));
+                  ? showDetailsPage(
+                      context, ParkDetailsPage(parkId: data['id']))
+                  : showDetailsPage(
+                      context, SportDetailsPage(sportId: data['id']));
             },
-            child: ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(20)),
-              child: Semantics(
-                onTapHint: data.containsKey('park_image_path')
-                    ? localization(context).tapToViewPark
-                    : localization(context).tapToViewSport,
-                child: Image.asset(
-                  data.containsKey('park_image_path')
-                      ? data['park_image_path']
-                      : data['sport_image_path'],
-                  fit: BoxFit.cover,
-                  semanticLabel: localization(context).image(data['title']),
-                ),
+            child: Card(
+              margin: EdgeInsets.all(constraints.maxWidth * 0.02),
+              elevation: 5,
+              color: const Color.fromRGBO(255, 255, 255, 1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-          )),
-          Container(
-            padding: EdgeInsets.all(constraints.maxWidth * 0.02),
-            decoration: BoxDecoration(
-              color: Colors.teal[300],
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-            child: Align(
-              alignment: Alignment.center,
-              child: Semantics(
-                child: Text(
-                  data['title'],
-                  style: TextStyle(
-                    fontSize: constraints.maxWidth * 0.05,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Semantics(
+                        onTapHint: data.containsKey('park_image_path')
+                            ? localization(context).tapToViewPark
+                            : localization(context).tapToViewSport,
+                        child: Image.asset(
+                          data.containsKey('park_image_path')
+                              ? data['park_image_path']
+                              : data['sport_image_path'],
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          semanticLabel:
+                              localization(context).image(data['title']),
+                        ),
+                      ),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: orientation == Orientation.portrait ? 2 : 1,
-                ),
+                  Container(
+                    padding: EdgeInsets.all(constraints.maxWidth * 0.02),
+                    child: Text(
+                      data['title'],
+                      style: TextStyle(
+                        fontSize: constraints.maxWidth * 0.055,
+                        fontWeight: FontWeight.w300,
+                        color: const Color.fromRGBO(0, 0, 0, 1),
+                      ),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -170,6 +173,7 @@ class SportsAndRecreation extends StatelessWidget {
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT
+        id,
         sport_image_path,
         sport_image_path2,
         sport_image_path3,
@@ -189,6 +193,7 @@ class SportsAndRecreation extends StatelessWidget {
 
     final List<Map<String, dynamic>> data = await db.rawQuery('''
       SELECT
+        id,
         park_image_path,
         park_image_path2,
         park_image_path3,

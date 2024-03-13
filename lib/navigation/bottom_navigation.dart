@@ -20,7 +20,9 @@ class NavItem {
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({Key? key}) : super(key: key);
+  final Color unselectedColor;
+  const CustomBottomNavigationBar({Key? key, required this.unselectedColor})
+      : super(key: key);
 
   @override
   CustomBottomNavigationBarState createState() =>
@@ -28,7 +30,14 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  late final Color unselectedColor;
   int _selectedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    unselectedColor = widget.unselectedColor;
+  }
 
   void _onNavItemTapped(int index) {
     setState(() {
@@ -57,8 +66,7 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     final List<NavItem> navItems = [
       NavItem(
           Icons.home,
@@ -92,14 +100,14 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       items: navItems.map((NavItem navItem) {
         return BottomNavigationBarItem(
           icon: SizedBox(
-            width: max(50, screenWidth * 0.1),
-            height: max(50, screenHeight * 0.03),
+            width: max(50, screenSize.width * 0.1),
+            height: max(50, screenSize.height * 0.03),
             child: Icon(
               _selectedIndex == -1 ||
                       _selectedIndex != navItems.indexOf(navItem)
                   ? navItem.icon
                   : navItem.selectedIcon,
-              size: screenWidth * 0.07,
+              size: screenSize.width * 0.07,
             ),
           ),
           label: navItem.title(context),
@@ -107,14 +115,15 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         );
       }).toList(),
       currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
-      selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor:
+          _selectedIndex == -1 ? unselectedColor : unselectedColor,
+      unselectedItemColor: unselectedColor,
       showUnselectedLabels: false,
       showSelectedLabels: false,
       onTap: _onNavItemTapped,
       type: BottomNavigationBarType.fixed,
-      selectedFontSize: screenWidth * 0.03,
-      unselectedFontSize: screenWidth * 0.03,
+      selectedFontSize: screenSize.width * 0.03,
+      unselectedFontSize: screenSize.width * 0.03,
     );
   }
 }

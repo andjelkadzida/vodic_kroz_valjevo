@@ -84,7 +84,7 @@ class RestaurantsRepository {
         },
       },
       {
-        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpeg',
+        'restaurant_image_path': 'images/restaurantsImages/kucaSpolja.jpg',
         'restaurant_image_path2': 'images/restaurantsImages/kucaUnutra.jpg',
         'restaurant_images_resource':
             'https://www.instagram.com/restorankucavaljevo/',

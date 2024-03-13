@@ -130,11 +130,8 @@ class BugReportPageState extends State<BugReportPage> {
       resizeToAvoidBottomInset: true,
       body: _isLoading
           ? Center(
-              child: Semantics(
-                tooltip: localization(context).loading,
-                child: CircularProgressIndicator(
-                  semanticsLabel: localization(context).loading,
-                ),
+              child: CircularProgressIndicator(
+                semanticsLabel: localization(context).loading,
               ),
             )
           : Padding(

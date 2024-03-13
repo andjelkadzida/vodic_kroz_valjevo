@@ -182,13 +182,11 @@ class DatabaseHelper {
     required Widget Function(T data) onData,
   }) {
     if (snapshot.connectionState == ConnectionState.waiting) {
-      return Semantics(
-        label: localization(context).loading,
-        child: Center(
-          child: Semantics(
-            tooltip: localization(context).loading,
-            child: CircularProgressIndicator(
-                semanticsLabel: localization(context).loading),
+      return Center(
+        child: Semantics(
+          tooltip: localization(context).loading,
+          child: CircularProgressIndicator(
+            semanticsLabel: localization(context).loading,
           ),
         ),
       );

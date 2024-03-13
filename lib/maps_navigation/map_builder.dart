@@ -17,6 +17,8 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return OrientationBuilder(
       builder: (context, orientation) {
         return LayoutBuilder(
@@ -30,7 +32,7 @@ class MapPage extends StatelessWidget {
               bottomNavigationBar: const CustomBottomNavigationBar(
                 unselectedColor: Color.fromRGBO(11, 20, 32, 1),
               ),
-              body: buildMap(),
+              body: buildMap(screenWidth, screenHeight),
             );
           },
         );
@@ -43,8 +45,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-      double screenWidth = MediaQuery.of(context).size.width;
-      double screenHeight = MediaQuery.of(context).size.height;
+      final screenWidth = MediaQuery.of(context).size.width;
+      final screenHeight = MediaQuery.of(context).size.height;
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Tooltip(
           message: localization(context).loading,
@@ -164,12 +166,10 @@ Widget buildWithMarkers(
   return buildMapWithMarkers(markers);
 }
 
-Widget buildMap() {
+Widget buildMap(double screenWidth, double screenHeight) {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-      double screenWidth = MediaQuery.of(context).size.width;
-      double screenHeight = MediaQuery.of(context).size.height;
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Tooltip(
           message: localization(context).loading,

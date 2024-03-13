@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../localization/supported_languages.dart';
 
 void showTermsOfUse(BuildContext context) {
+  var screenWidth = MediaQuery.of(context).size.width;
   showDialog(
     barrierDismissible: false,
     context: context,
@@ -14,7 +15,7 @@ void showTermsOfUse(BuildContext context) {
           child: Text(
             localization(context).termsOfUse,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: MediaQuery.of(context).size.width * 0.06,
+                  fontSize: screenWidth * 0.06,
                 ),
           ),
         ),
@@ -90,7 +91,7 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
           text: TextSpan(
             text: localization(context).contactUsContent,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: MediaQuery.of(context).size.width * 0.035,
+                  fontSize: screenWidth * 0.035,
                 ),
             children: const <TextSpan>[
               TextSpan(
@@ -126,7 +127,7 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: MediaQuery.of(context).size.width * 0.035,
+                fontSize: screenWidth * 0.035,
               ),
         ),
         SizedBox(height: screenHeight * 0.02),

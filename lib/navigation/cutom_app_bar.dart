@@ -54,8 +54,7 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
               applicationLegalese: localization(context).appAuthor,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(top: screenHeight * 0.02),
                   child: Text(
                     localization(context).aboutAppDescription,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -64,8 +63,7 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(top: screenHeight * 0.02),
                   child: Text(
                     localization(context).aboutAppLocalization,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -74,8 +72,7 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(top: screenHeight * 0.02),
                   child: Text(
                     localization(context).aboutAppAccessibility,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -84,7 +81,7 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: screenHeight * 0.02,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

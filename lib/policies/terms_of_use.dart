@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../localization/supported_languages.dart';
 
 void showTermsOfUse(BuildContext context) {
-  var screenWidth = MediaQuery.of(context).size.width;
+  final size = MediaQuery.of(context).size;
   showDialog(
     barrierDismissible: false,
     context: context,
@@ -15,13 +15,13 @@ void showTermsOfUse(BuildContext context) {
           child: Text(
             localization(context).termsOfUse,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: screenWidth * 0.06,
+                  fontSize: size.width * 0.06,
                 ),
           ),
         ),
         content: SingleChildScrollView(
           child: Column(
-            children: _buildTermsOfUseContent(context),
+            children: _buildTermsOfUseContent(context, size),
           ),
         ),
         actions: <Widget>[
@@ -44,36 +44,34 @@ void showTermsOfUse(BuildContext context) {
   );
 }
 
-List<Widget> _buildTermsOfUseContent(BuildContext context) {
-  var screenWidth = MediaQuery.of(context).size.width;
-  var screenHeight = MediaQuery.of(context).size.height;
+List<Widget> _buildTermsOfUseContent(BuildContext context, Size size) {
   return [
     Text(localization(context).lastUpdated('24-02-2024'),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: screenWidth * 0.05,
+              fontSize: size.width * 0.05,
               fontWeight: FontWeight.bold,
             )),
-    SizedBox(height: screenHeight * 0.01),
+    SizedBox(height: size.height * 0.01),
     _buildSection(context, localization(context).acceptanceTerms,
-        localization(context).acceptanceTermsContent),
+        localization(context).acceptanceTermsContent, size),
     _buildSection(context, localization(context).termsChanges,
-        localization(context).termsChangesContent),
+        localization(context).termsChangesContent, size),
     _buildSection(context, localization(context).privacyPolicy,
-        localization(context).privacyContent),
+        localization(context).privacyContent, size),
     _buildSection(context, localization(context).userConduct,
-        localization(context).userConductContent),
+        localization(context).userConductContent, size),
     _buildSection(context, localization(context).intellectualProperty,
-        localization(context).intellectualPropertyContent),
+        localization(context).intellectualPropertyContent, size),
     _buildSection(context, localization(context).userGen,
-        localization(context).userGenContent),
+        localization(context).userGenContent, size),
     _buildSection(context, localization(context).thirdPartServices,
-        localization(context).thirdPartServicesContent),
+        localization(context).thirdPartServicesContent, size),
     _buildSection(context, localization(context).appChanges,
-        localization(context).appChangesContent),
+        localization(context).appChangesContent, size),
     Text(
       localization(context).contactUs,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontSize: screenWidth * 0.06,
+            fontSize: size.width * 0.06,
           ),
     ),
     GestureDetector(
@@ -91,7 +89,7 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
           text: TextSpan(
             text: localization(context).contactUsContent,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: screenWidth * 0.035,
+                  fontSize: size.width * 0.035,
                 ),
             children: const <TextSpan>[
               TextSpan(
@@ -109,9 +107,8 @@ List<Widget> _buildTermsOfUseContent(BuildContext context) {
   ];
 }
 
-Widget _buildSection(BuildContext context, String title, String content) {
-  var screenWidth = MediaQuery.of(context).size.width;
-  var screenHeight = MediaQuery.of(context).size.height;
+Widget _buildSection(
+    BuildContext context, String title, String content, Size size) {
   return Semantics(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,18 +116,18 @@ Widget _buildSection(BuildContext context, String title, String content) {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: screenWidth * 0.045,
+                fontSize: size.width * 0.045,
                 fontWeight: FontWeight.bold,
               ),
         ),
-        SizedBox(height: screenHeight * 0.01),
+        SizedBox(height: size.height * 0.01),
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: screenWidth * 0.035,
+                fontSize: size.width * 0.035,
               ),
         ),
-        SizedBox(height: screenHeight * 0.02),
+        SizedBox(height: size.height * 0.02),
       ],
     ),
   );

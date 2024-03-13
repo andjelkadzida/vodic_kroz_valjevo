@@ -9,8 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     return FutureBuilder(
       future: precacheImage(const AssetImage('images/pogled.jpg'), context),
       builder: (context, snapshot) {
@@ -33,31 +32,31 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(screenWidth * 0.05),
+                      padding: EdgeInsets.all(screenSize.width * 0.05),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: screenHeight * 0.1,
+                            height: screenSize.height * 0.1,
                           ),
                           Text(
                             localization(context).song,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: screenWidth * 0.055,
+                              fontSize: screenSize.width * 0.055,
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.none,
                             ),
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(
-                            height: screenHeight * 0.06,
+                            height: screenSize.height * 0.06,
                           ),
                           Text(
                             localization(context).songAuthor,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: screenWidth * 0.03,
+                              fontSize: screenSize.width * 0.03,
                               decoration: TextDecoration.none,
                             ),
                             textAlign: TextAlign.center,
@@ -68,10 +67,10 @@ class HomePage extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
-                      screenWidth * 0.05,
+                      screenSize.width * 0.05,
                       0,
-                      screenWidth * 0.05,
-                      screenHeight * 0.02,
+                      screenSize.width * 0.05,
+                      screenSize.height * 0.02,
                     ),
                     child: Align(
                       alignment: Alignment.bottomCenter,
@@ -90,13 +89,13 @@ class HomePage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(30),
                             ),
                             padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.1,
-                              vertical: screenHeight * 0.02,
+                              horizontal: screenSize.width * 0.1,
+                              vertical: screenSize.height * 0.02,
                             ),
                           ),
                           child: Text(
                             localization(context).getStarted,
-                            style: TextStyle(fontSize: screenWidth * 0.05),
+                            style: TextStyle(fontSize: screenSize.width * 0.05),
                           ),
                         ),
                       ),

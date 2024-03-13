@@ -17,8 +17,7 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     return OrientationBuilder(
       builder: (context, orientation) {
         return LayoutBuilder(
@@ -32,7 +31,7 @@ class MapPage extends StatelessWidget {
               bottomNavigationBar: const CustomBottomNavigationBar(
                 unselectedColor: Color.fromRGBO(11, 20, 32, 1),
               ),
-              body: buildMap(screenWidth, screenHeight),
+              body: buildMap(screenSize.width, screenSize.height),
             );
           },
         );
@@ -45,8 +44,7 @@ Widget buildMapWithMarkers(List<Marker> markers) {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-      final screenWidth = MediaQuery.of(context).size.width;
-      final screenHeight = MediaQuery.of(context).size.height;
+      final size = MediaQuery.of(context).size;
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Tooltip(
           message: localization(context).loading,
@@ -88,8 +86,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
-                          width: max(50, screenWidth * 0.6),
-                          height: max(50, screenHeight * 0.01),
+                          width: max(50, size.width * 0.6),
+                          height: max(50, size.height * 0.01),
                           color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
@@ -108,7 +106,7 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                        fontSize: screenWidth * 0.04,
+                                        fontSize: size.width * 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
                                         fontWeight: FontWeight.w300,

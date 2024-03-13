@@ -47,8 +47,10 @@ class Sights extends StatelessWidget {
 
   Widget buildSightsList(
       List<Map<String, dynamic>> sightsData, BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return GridView.builder(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+      padding: EdgeInsets.all(screenSize.width * 0.02),
       itemCount: sightsData.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -89,7 +91,7 @@ class SightListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    final screenSize = MediaQuery.of(context).size;
 
     return Semantics(
       label: localization(context).tapToSeeSightDetails(sightData['title']),
@@ -128,7 +130,7 @@ class SightListItem extends StatelessWidget {
                         sightData['title'],
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontSize: screenWidth * 0.04,
+                            fontSize: screenSize.width * 0.04,
                             fontWeight: FontWeight.w500),
                         maxLines: 5,
                       ),
@@ -136,7 +138,7 @@ class SightListItem extends StatelessWidget {
                     IconButton(
                       icon: Icon(
                         Icons.volume_up,
-                        size: min(50, screenWidth * 0.065),
+                        size: min(50, screenSize.width * 0.065),
                         semanticLabel: localization(context).tapToHearSightName,
                       ),
                       onPressed: () {
@@ -151,8 +153,7 @@ class SightListItem extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
                   child: Semantics(
                     button: true,
                     onTapHint: localization(context).tapToNavigateToSight,
@@ -160,13 +161,13 @@ class SightListItem extends StatelessWidget {
                       onTap: () => mapScreen.navigateToDestination(
                           sightData['latitude'], sightData['longitude']),
                       child: SizedBox(
-                        width: max(50, screenWidth * 0.7),
+                        width: max(50, screenSize.width * 0.7),
                         child: Text(
                           localization(context).startNavigation,
                           style:
                               Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: Colors.black,
-                                    fontSize: screenWidth * 0.038,
+                                    fontSize: screenSize.width * 0.038,
                                     fontWeight: FontWeight.w300,
                                   ),
                         ),

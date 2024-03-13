@@ -66,8 +66,7 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     final List<NavItem> navItems = [
       NavItem(
           Icons.home,
@@ -101,14 +100,14 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       items: navItems.map((NavItem navItem) {
         return BottomNavigationBarItem(
           icon: SizedBox(
-            width: max(50, screenWidth * 0.1),
-            height: max(50, screenHeight * 0.03),
+            width: max(50, screenSize.width * 0.1),
+            height: max(50, screenSize.height * 0.03),
             child: Icon(
               _selectedIndex == -1 ||
                       _selectedIndex != navItems.indexOf(navItem)
                   ? navItem.icon
                   : navItem.selectedIcon,
-              size: screenWidth * 0.07,
+              size: screenSize.width * 0.07,
             ),
           ),
           label: navItem.title(context),
@@ -123,8 +122,8 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       showSelectedLabels: false,
       onTap: _onNavItemTapped,
       type: BottomNavigationBarType.fixed,
-      selectedFontSize: screenWidth * 0.03,
-      unselectedFontSize: screenWidth * 0.03,
+      selectedFontSize: screenSize.width * 0.03,
+      unselectedFontSize: screenSize.width * 0.03,
     );
   }
 }

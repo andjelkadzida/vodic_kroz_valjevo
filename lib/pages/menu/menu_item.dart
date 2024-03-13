@@ -26,6 +26,7 @@ class MenuItem extends StatelessWidget {
       enabled: true,
       onTapHint: localization(context).tapToOpen(label),
       child: Card(
+        elevation: 4,
         margin: EdgeInsets.all(screenWidth * 0.01),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: InkWell(

@@ -30,7 +30,7 @@ void showTermsOfUse(BuildContext context) {
             label: localization(context).closeDialog,
             child: TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.teal,
+                foregroundColor: const Color.fromRGBO(11, 20, 32, 1),
               ),
               child: Text(localization(context).close),
               onPressed: () {

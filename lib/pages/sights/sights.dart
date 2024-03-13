@@ -49,17 +49,19 @@ class Sights extends StatelessWidget {
       List<Map<String, dynamic>> sightsData, BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return GridView.builder(
-      padding: EdgeInsets.all(screenSize.width * 0.02),
-      itemCount: sightsData.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.7,
+    return ExcludeSemantics(
+      child: GridView.builder(
+        padding: EdgeInsets.all(screenSize.width * 0.02),
+        itemCount: sightsData.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+        ),
+        itemBuilder: (context, index) {
+          return SightListItem(
+              sightData: sightsData[index], mapScreen: mapScreen);
+        },
       ),
-      itemBuilder: (context, index) {
-        return SightListItem(
-            sightData: sightsData[index], mapScreen: mapScreen);
-      },
     );
   }
 

@@ -57,7 +57,7 @@ class AboutCityRepository {
           history['sr'],
           history['sr_Cyrl'],
           history['sr_Latn'],
-          'images/vaPogled.jpg',
+          'images/backgroundAndCoverImages/oGraduCover.jpg',
         ]);
       }
       // Commit the batch

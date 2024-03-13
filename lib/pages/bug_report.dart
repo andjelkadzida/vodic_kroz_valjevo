@@ -81,7 +81,6 @@ class BugReportPageState extends State<BugReportPage> {
                     AppSettings.openAppSettings(type: AppSettingsType.wireless);
                   },
                   label: localization(context).settings,
-                  textColor: Colors.teal,
                 ),
               ),
             );
@@ -126,7 +125,9 @@ class BugReportPageState extends State<BugReportPage> {
         localization(context).bugReport,
         const Color.fromRGBO(11, 20, 32, 1),
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+      ),
       resizeToAvoidBottomInset: true,
       body: _isLoading
           ? Center(
@@ -183,7 +184,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         localization(context).bugDescription,
                                     focusedBorder: const UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.teal),
+                                          BorderSide(color: Colors.black),
                                     ),
                                   ),
                                   style: TextStyle(
@@ -213,7 +214,7 @@ class BugReportPageState extends State<BugReportPage> {
                                         localization(context).selectOSLabel,
                                   ),
                                   iconDisabledColor: Colors.grey,
-                                  iconEnabledColor: Colors.teal,
+                                  iconEnabledColor: Colors.black,
                                   iconSize: screenWidth * 0.08,
                                   decoration: InputDecoration(
                                     filled: true,
@@ -230,7 +231,7 @@ class BugReportPageState extends State<BugReportPage> {
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: const BorderSide(
-                                        color: Colors.teal,
+                                        color: Colors.black,
                                         width: 3,
                                       ),
                                     ),
@@ -389,7 +390,6 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
             ),
             action: SnackBarAction(
               label: localization(context).ok,
-              textColor: Colors.teal,
               onPressed: () {},
             ),
           ),
@@ -412,7 +412,6 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
           ),
           action: SnackBarAction(
             label: localization(context).ok,
-            textColor: Colors.teal,
             onPressed: () {},
           ),
         ),

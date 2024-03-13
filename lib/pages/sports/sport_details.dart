@@ -39,7 +39,9 @@ class SportDetailsPage extends StatelessWidget {
                 sportData['title'],
                 const Color.fromRGBO(65, 89, 45, 1),
               ),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(65, 89, 45, 1),
+              ),
               body: OrientationBuilder(
                 builder: (context, orientation) {
                   return LayoutBuilder(

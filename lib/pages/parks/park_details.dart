@@ -42,7 +42,9 @@ class ParkDetailsPage extends StatelessWidget {
                 (parkData['title'] as String).split('\n').first,
                 const Color.fromRGBO(65, 89, 45, 1),
               ),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(65, 89, 45, 1),
+              ),
               body: OrientationBuilder(
                 builder: (context, orientation) {
                   return LayoutBuilder(

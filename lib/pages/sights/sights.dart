@@ -24,7 +24,9 @@ class Sights extends StatelessWidget {
             localization(context).sights,
             const Color.fromRGBO(87, 19, 20, 1),
           ),
-          bottomNavigationBar: const CustomBottomNavigationBar(),
+          bottomNavigationBar: const CustomBottomNavigationBar(
+            unselectedColor: Color.fromRGBO(87, 19, 20, 1),
+          ),
           body: FutureBuilder<List<Map<String, dynamic>>>(
             future: _getSightsFromDatabase(localization(context).localeName),
             builder: (context, snapshot) {

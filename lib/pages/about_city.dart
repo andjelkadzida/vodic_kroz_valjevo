@@ -19,7 +19,9 @@ class AboutCity extends StatelessWidget {
         localization(context).aboutCity,
         const Color.fromRGBO(219, 33, 41, 1),
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(219, 33, 41, 1),
+      ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getAboutCityFromDatabase(localization(context).localeName),
         builder: (context, snapshot) {

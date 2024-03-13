@@ -72,7 +72,9 @@ class SportsAndRecreation extends StatelessWidget {
                   ),
                 ],
               ),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(65, 89, 45, 1),
+              ),
             );
           },
         );

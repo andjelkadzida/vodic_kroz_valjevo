@@ -20,7 +20,9 @@ class NavItem {
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({Key? key}) : super(key: key);
+  final Color unselectedColor;
+  const CustomBottomNavigationBar({Key? key, required this.unselectedColor})
+      : super(key: key);
 
   @override
   CustomBottomNavigationBarState createState() =>
@@ -28,7 +30,14 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  late final Color unselectedColor;
   int _selectedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    unselectedColor = widget.unselectedColor;
+  }
 
   void _onNavItemTapped(int index) {
     setState(() {
@@ -107,8 +116,7 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         );
       }).toList(),
       currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
-      selectedItemColor: _selectedIndex == -1 ? Colors.grey : Colors.teal,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: unselectedColor,
       showUnselectedLabels: false,
       showSelectedLabels: false,
       onTap: _onNavItemTapped,

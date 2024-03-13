@@ -27,7 +27,9 @@ class MapPage extends StatelessWidget {
                 localization(context).mapPage,
                 const Color.fromRGBO(11, 20, 32, 1),
               ),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+              ),
               body: buildMap(),
             );
           },

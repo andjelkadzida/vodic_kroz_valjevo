@@ -38,7 +38,9 @@ class SightDetailsPage extends StatelessWidget {
                 sightData['title'].split(RegExp(r'-|"|\(')).first,
                 const Color.fromRGBO(87, 19, 20, 1),
               ),
-              bottomNavigationBar: const CustomBottomNavigationBar(),
+              bottomNavigationBar: const CustomBottomNavigationBar(
+                unselectedColor: Color.fromRGBO(87, 19, 20, 1),
+              ),
               body: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return SingleChildScrollView(

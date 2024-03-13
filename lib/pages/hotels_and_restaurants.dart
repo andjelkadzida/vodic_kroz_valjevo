@@ -31,7 +31,9 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
             localization(context).restaurantsAndHotels,
             const Color.fromRGBO(11, 20, 32, 1),
           ),
-          bottomNavigationBar: const CustomBottomNavigationBar(),
+          bottomNavigationBar: const CustomBottomNavigationBar(
+            unselectedColor: Color.fromRGBO(11, 20, 32, 1),
+          ),
           body: Padding(
             padding: EdgeInsets.all(constraints.maxWidth * 0.05),
             child: ListView(

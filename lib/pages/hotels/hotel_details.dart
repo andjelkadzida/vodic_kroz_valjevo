@@ -143,7 +143,8 @@ class HotelDetailsPage extends StatelessWidget {
                                               noStars,
                                               (index) => Icon(
                                                 Icons.star,
-                                                color: Colors.amber,
+                                                color: const Color.fromRGBO(
+                                                    11, 20, 32, 1),
                                                 size:
                                                     constraints.maxWidth * 0.05,
                                               ),

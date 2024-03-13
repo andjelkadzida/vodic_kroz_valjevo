@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../localization/supported_languages.dart';
@@ -134,6 +136,7 @@ class SightListItem extends StatelessWidget {
                     IconButton(
                       icon: Icon(
                         Icons.volume_up,
+                        size: min(50, screenWidth * 0.065),
                         semanticLabel: localization(context).tapToHearSightName,
                       ),
                       onPressed: () {
@@ -146,20 +149,28 @@ class SightListItem extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment.centerLeft,
-                child: Semantics(
-                  button: true,
-                  onTapHint: localization(context).tapToNavigateToSight,
-                  child: InkWell(
-                    onTap: () => mapScreen.navigateToDestination(
-                        sightData['latitude'], sightData['longitude']),
-                    child: Text(
-                      localization(context).startNavigation,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.black,
-                            fontSize: screenWidth * 0.037,
-                            fontWeight: FontWeight.w300,
-                          ),
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.02),
+                  child: Semantics(
+                    button: true,
+                    onTapHint: localization(context).tapToNavigateToSight,
+                    child: InkWell(
+                      onTap: () => mapScreen.navigateToDestination(
+                          sightData['latitude'], sightData['longitude']),
+                      child: SizedBox(
+                        width: max(50, screenWidth * 0.7),
+                        child: Text(
+                          localization(context).startNavigation,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.black,
+                                    fontSize: screenWidth * 0.038,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

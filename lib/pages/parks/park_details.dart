@@ -39,7 +39,7 @@ class ParkDetailsPage extends StatelessWidget {
             return Scaffold(
               appBar: customAppBar(
                 context,
-                (parkData['title'] as String).split('\n').first,
+                (parkData['title'] as String).split(' (').first,
                 const Color.fromRGBO(65, 89, 45, 1),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(

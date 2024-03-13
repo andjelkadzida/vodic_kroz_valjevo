@@ -43,6 +43,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+      double screenWidth = MediaQuery.of(context).size.width;
+      double screenHeight = MediaQuery.of(context).size.height;
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Tooltip(
           message: localization(context).loading,
@@ -84,10 +86,8 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
-                          width:
-                              max(50, MediaQuery.of(context).size.width * 0.6),
-                          height: max(
-                              50, MediaQuery.of(context).size.height * 0.01),
+                          width: max(50, screenWidth * 0.6),
+                          height: max(50, screenHeight * 0.01),
                           color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
@@ -106,9 +106,7 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
+                                        fontSize: screenWidth * 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
                                         fontWeight: FontWeight.w300,
@@ -140,18 +138,20 @@ Widget buildWithMarkers(
   List<Marker> markers = data.map((itemData) {
     LatLng position =
         LatLng(itemData['latitude'] as double, itemData['longitude'] as double);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Marker(
       point: position,
-      width: max(MediaQuery.of(context).size.width * 0.1, 50),
-      height: max(MediaQuery.of(context).size.height * 0.1, 50),
+      width: max(screenWidth * 0.1, 50),
+      height: max(screenHeight * 0.1, 50),
       child: GestureDetector(
         onTap: () => showDetailsPage(context, buildDetailsPage(itemData)),
         child: Tooltip(
           message: '${itemData['title']}',
           child: Icon(
             Icons.location_pin,
-            size: MediaQuery.of(context).size.width * 0.08,
+            size: min(50, screenWidth * 0.09),
             semanticLabel: '${itemData['title']}',
             color: const Color.fromRGBO(11, 20, 32, 1),
             applyTextScaling: true,
@@ -168,6 +168,8 @@ Widget buildMap() {
   return FutureBuilder<bool>(
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+      double screenWidth = MediaQuery.of(context).size.width;
+      double screenHeight = MediaQuery.of(context).size.height;
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Tooltip(
           message: localization(context).loading,
@@ -206,10 +208,8 @@ Widget buildMap() {
                         bottom: 5.0,
                         right: 5.0,
                         child: Container(
-                          width:
-                              max(50, MediaQuery.of(context).size.width * 0.6),
-                          height: max(
-                              50, MediaQuery.of(context).size.height * 0.01),
+                          width: max(50, screenWidth * 0.6),
+                          height: max(50, screenHeight * 0.01),
                           color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
@@ -228,9 +228,7 @@ Widget buildMap() {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
+                                        fontSize: screenWidth * 0.04,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
                                         fontWeight: FontWeight.w300,
@@ -282,7 +280,7 @@ Widget buildLayout(BuildContext context, BoxConstraints constraints) {
                 child: Icon(
                   Icons.wifi_off_outlined,
                   semanticLabel: localization(context).noInternetConnection,
-                  size: constraints.maxWidth * 0.3,
+                  size: max(50, constraints.maxWidth * 0.3),
                   applyTextScaling: true,
                 ),
               )),

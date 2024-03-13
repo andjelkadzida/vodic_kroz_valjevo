@@ -118,9 +118,8 @@ class SportsAndRecreation extends StatelessWidget {
             child: Card(
               margin: EdgeInsets.all(constraints.maxWidth * 0.02),
               elevation: 5,
-              color: const Color.fromRGBO(65, 89, 45, 1),
+              color: const Color.fromRGBO(255, 255, 255, 1),
               shape: RoundedRectangleBorder(
-                side: const BorderSide(color: Colors.black, width: 1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -151,7 +150,7 @@ class SportsAndRecreation extends StatelessWidget {
                       style: TextStyle(
                         fontSize: constraints.maxWidth * 0.055,
                         fontWeight: FontWeight.w300,
-                        color: Colors.white,
+                        color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,

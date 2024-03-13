@@ -116,6 +116,8 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         );
       }).toList(),
       currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
+      selectedItemColor:
+          _selectedIndex == -1 ? unselectedColor : unselectedColor,
       unselectedItemColor: unselectedColor,
       showUnselectedLabels: false,
       showSelectedLabels: false,

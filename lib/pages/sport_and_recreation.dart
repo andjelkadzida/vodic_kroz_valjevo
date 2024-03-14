@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';
@@ -42,6 +43,7 @@ class SportsAndRecreation extends StatelessWidget {
                         style: TextStyle(
                           fontSize: constraints.maxWidth * 0.07,
                           fontWeight: FontWeight.w500,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                     ),
@@ -65,6 +67,7 @@ class SportsAndRecreation extends StatelessWidget {
                         style: TextStyle(
                           fontSize: constraints.maxWidth * 0.07,
                           fontWeight: FontWeight.w500,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                     ),

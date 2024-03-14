@@ -11,7 +11,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return FutureBuilder(
-      future: precacheImage(const AssetImage('images/pogled.jpg'), context),
+      future: precacheImage(
+          const AssetImage('images/backgroundAndCoverImages/homeImage.jpg'),
+          context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -24,7 +26,7 @@ class HomePage extends StatelessWidget {
             fit: StackFit.expand,
             children: <Widget>[
               Image.asset(
-                'images/pogled.jpg',
+                'images/backgroundAndCoverImages/homeImage.jpg',
                 fit: BoxFit.cover,
                 semanticLabel: localization(context).valjevoCityImage,
               ),
@@ -37,13 +39,13 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: screenSize.height * 0.1,
+                            height: screenSize.height * 0.3,
                           ),
                           Text(
                             localization(context).song,
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: screenSize.width * 0.055,
+                              color: const Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: screenSize.width * 0.05,
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.none,
                             ),
@@ -55,7 +57,7 @@ class HomePage extends StatelessWidget {
                           Text(
                             localization(context).songAuthor,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: const Color.fromRGBO(255, 255, 255, 1),
                               fontSize: screenSize.width * 0.03,
                               decoration: TextDecoration.none,
                             ),

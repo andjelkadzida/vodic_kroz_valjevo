@@ -34,29 +34,38 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           bottomNavigationBar: const CustomBottomNavigationBar(
             unselectedColor: Color.fromRGBO(11, 20, 32, 1),
           ),
-          body: Padding(
-            padding: EdgeInsets.all(constraints.maxWidth * 0.05),
-            child: ListView(
-              children: [
-                _buildItem(
-                  context,
-                  label: localization(context).hotels,
-                  icon: Icons.hotel,
-                  lottieAsset: 'animations/hotels_restaurants.json',
-                  onTap: () => navigateTo(context, const Hotels()),
-                  width: constraints.maxWidth,
-                  height: constraints.maxHeight,
-                ),
-                _buildItem(
-                  context,
-                  label: localization(context).restaurants,
-                  icon: Icons.restaurant,
-                  lottieAsset: 'animations/hotels_restaurants.json',
-                  onTap: () => navigateTo(context, const Restaurants()),
-                  width: constraints.maxWidth,
-                  height: constraints.maxHeight,
-                ),
-              ],
+          body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'images/backgroundAndCoverImages/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(constraints.maxWidth * 0.05),
+              child: ListView(
+                children: [
+                  _buildItem(
+                    context,
+                    label: localization(context).hotels,
+                    icon: Icons.hotel,
+                    lottieAsset: 'animations/hotels_restaurants.json',
+                    onTap: () => navigateTo(context, const Hotels()),
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight,
+                  ),
+                  _buildItem(
+                    context,
+                    label: localization(context).restaurants,
+                    icon: Icons.restaurant,
+                    lottieAsset: 'animations/hotels_restaurants.json',
+                    onTap: () => navigateTo(context, const Restaurants()),
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight,
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -87,8 +96,8 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
           borderRadius: BorderRadius.circular(20),
           child: Padding(
             padding: EdgeInsets.all(width * 0.04),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
                 Lottie.asset(
                   lottieAsset,
@@ -96,20 +105,25 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                   height: width * 0.35,
                   fit: BoxFit.cover,
                 ),
-                SizedBox(width: width * 0.05),
-                Expanded(
-                  child: Text(
-                    label,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Colors.teal,
-                          letterSpacing: 1,
-                        ),
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      icon,
+                      size: width * 0.08,
+                      applyTextScaling: true,
+                      color: const Color.fromRGBO(11, 20, 32, 1),
+                    ),
+                    SizedBox(width: width * 0.03),
+                    Text(
+                      label,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: const Color.fromRGBO(11, 20, 32, 1),
+                            letterSpacing: 1.5,
+                          ),
+                    ),
+                  ],
                 ),
-                Icon(icon,
-                    size: width * 0.08,
-                    applyTextScaling: true,
-                    color: Colors.teal),
               ],
             ),
           ),

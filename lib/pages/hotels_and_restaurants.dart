@@ -120,6 +120,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: const Color.fromRGBO(11, 20, 32, 1),
                             letterSpacing: 1.5,
+                            fontWeight: FontWeight.w400,
                           ),
                     ),
                   ],

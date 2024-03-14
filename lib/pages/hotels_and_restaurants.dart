@@ -85,7 +85,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required double width,
     required double height,
   }) {
-    return Container(
+    return SizedBox(
       width: width,
       child: Semantics(
         label: localization(context).buttonFor(label),

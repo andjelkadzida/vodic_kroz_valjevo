@@ -192,8 +192,8 @@ class DatabaseHelper {
       );
     } else if (snapshot.hasError) {
       return Center(
-        child: Text(
-            '${localization(context).errorLoadingData}: ${snapshot.error}'),
+        child: Text(localization(context).errorLoadingData),
+        //snapshot.error
       );
     } else if (!snapshot.hasData ||
         (snapshot.data is List && (snapshot.data as List).isEmpty)) {

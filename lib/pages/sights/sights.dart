@@ -29,16 +29,25 @@ class Sights extends StatelessWidget {
           bottomNavigationBar: const CustomBottomNavigationBar(
             unselectedColor: Color.fromRGBO(87, 19, 20, 1),
           ),
-          body: FutureBuilder<List<Map<String, dynamic>>>(
-            future: _getSightsFromDatabase(localization(context).localeName),
-            builder: (context, snapshot) {
-              return DatabaseHelper.buildFutureState<
-                  List<Map<String, dynamic>>>(
-                context: context,
-                snapshot: snapshot,
-                onData: (data) => buildSightsList(data, context),
-              );
-            },
+          body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'images/backgroundAndCoverImages/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+              future: _getSightsFromDatabase(localization(context).localeName),
+              builder: (context, snapshot) {
+                return DatabaseHelper.buildFutureState<
+                    List<Map<String, dynamic>>>(
+                  context: context,
+                  snapshot: snapshot,
+                  onData: (data) => buildSightsList(data, context),
+                );
+              },
+            ),
           ),
         );
       },

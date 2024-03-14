@@ -38,7 +38,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'images/backgroundAndCoverImages/background.jpg'),
+                    'images/backgroundAndCoverImages/hotelsBackground.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -52,19 +52,19 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                       context,
                       label: localization(context).hotels,
                       icon: Icons.hotel,
-                      lottieAsset: 'animations/hotels_restaurants.json',
+                      lottieAsset: 'animations/menu_item.json',
                       onTap: () => navigateTo(context, const Hotels()),
-                      width: constraints.maxWidth,
-                      height: constraints.maxHeight,
+                      width: constraints.maxWidth * 0.75,
+                      height: constraints.maxHeight * 0.75,
                     ),
                     _buildItem(
                       context,
                       label: localization(context).restaurants,
                       icon: Icons.restaurant,
-                      lottieAsset: 'animations/hotels_restaurants.json',
+                      lottieAsset: 'animations/menu_item.json',
                       onTap: () => navigateTo(context, const Restaurants()),
-                      width: constraints.maxWidth,
-                      height: constraints.maxHeight,
+                      width: constraints.maxWidth * 0.75,
+                      height: constraints.maxHeight * 0.75,
                     ),
                   ],
                 ),
@@ -86,7 +86,8 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
     required double height,
   }) {
     return SizedBox(
-      width: width,
+      width: width / 1.5,
+      height: width / 1.5,
       child: Semantics(
         label: localization(context).buttonFor(label),
         button: true,

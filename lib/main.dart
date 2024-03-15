@@ -1,4 +1,3 @@
-import 'package:accessibility_tools/accessibility_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -108,13 +107,6 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         canvasColor: Colors.transparent,
-      ),
-      builder: (context, child) => AccessibilityTools(
-        minimumTapAreas: MinimumTapAreas.material,
-        checkSemanticLabels: true,
-        checkMissingInputLabels: true,
-        checkFontOverflows: true,
-        child: child,
       ),
       home: const HomePage(),
     );

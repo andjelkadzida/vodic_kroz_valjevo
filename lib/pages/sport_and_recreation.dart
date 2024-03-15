@@ -101,15 +101,13 @@ class SportsAndRecreation extends StatelessWidget {
     double viewportFraction = constraints.maxWidth < 600 ? 0.8 : 0.5;
 
     return Expanded(
-      child: ExcludeSemantics(
-        child: PageView.builder(
-          itemCount: data.length,
-          controller: PageController(viewportFraction: viewportFraction),
-          itemBuilder: (context, index) {
-            var item = data[index];
-            return _buildSportsItem(context, item);
-          },
-        ),
+      child: PageView.builder(
+        itemCount: data.length,
+        controller: PageController(viewportFraction: viewportFraction),
+        itemBuilder: (context, index) {
+          var item = data[index];
+          return _buildSportsItem(context, item);
+        },
       ),
     );
   }

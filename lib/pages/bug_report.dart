@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
@@ -371,6 +372,7 @@ void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
 
   bugReport.save().then((response) {
     if (response.success) {
+      HapticFeedback.mediumImpact();
       ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(

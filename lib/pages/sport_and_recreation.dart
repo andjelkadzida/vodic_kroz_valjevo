@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../database_config/database_helper.dart';
 import '../localization/supported_languages.dart';

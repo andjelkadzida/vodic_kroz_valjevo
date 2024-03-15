@@ -1,4 +1,4 @@
-package com.example.vodic_kroz_valjevo
+package com.andjelkadzida.vodic_kroz_valjevo
 
 import io.flutter.embedding.android.FlutterActivity
 

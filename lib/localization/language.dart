@@ -88,7 +88,7 @@ class LanguageButton extends StatelessWidget {
                       setSelectedLanguage(language);
                       if (calledFromNavBar) {
                         Navigator.pop(context);
-                        HapticFeedback.selectionClick();
+                        HapticFeedback.mediumImpact();
                       } else {
                         navigateTo(context, const MenuPage());
                       }
@@ -107,6 +107,8 @@ class LanguageButton extends StatelessWidget {
 void setSelectedLanguage(Language language) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool('isFirstRun', false);
+
+  HapticFeedback.selectionClick();
 
   Locale locale = await setLocale(language.scriptCode);
   VodicKrozValjevo.setLanguage(locale);

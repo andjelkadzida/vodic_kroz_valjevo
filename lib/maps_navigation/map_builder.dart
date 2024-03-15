@@ -169,11 +169,8 @@ Widget buildMap(double screenWidth, double screenHeight) {
     future: checkInitialInternetConnection(),
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return Tooltip(
-          message: localization(context).loading,
-          child: CircularProgressIndicator(
-            semanticsLabel: localization(context).loading,
-          ),
+        return CircularProgressIndicator(
+          semanticsLabel: localization(context).loading,
         );
       } else {
         return StreamBuilder<bool>(

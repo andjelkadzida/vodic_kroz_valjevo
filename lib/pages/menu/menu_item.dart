@@ -33,32 +33,34 @@ class MenuItem extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Lottie.asset(lottieAsset,
-                    width: screenWidth * 0.2, height: screenWidth * 0.2),
+                child: Stack(
+                  children: [
+                    Lottie.asset(lottieAsset,
+                        width: screenWidth * 0.2, height: screenWidth * 0.2),
+                    Center(
+                      child: Icon(
+                        icon,
+                        size: screenWidth * 0.17,
+                        color: const Color.fromRGBO(11, 20, 32, 1),
+                        applyTextScaling: true,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.02),
-                  child: Center(
-                    child: Text(
-                      label,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: Colors.teal,
-                            fontSize: screenWidth * 0.05,
-                            letterSpacing: 1,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
-              Center(
-                child: Icon(
-                  icon,
-                  size: screenWidth * 0.12,
-                  color: Colors.teal,
-                  applyTextScaling: true,
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Text(
+                  label,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: const Color.fromRGBO(11, 20, 32, 1),
+                        fontSize: screenWidth * 0.05,
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w400,
+                      ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ],

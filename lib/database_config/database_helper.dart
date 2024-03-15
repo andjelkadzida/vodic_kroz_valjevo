@@ -182,20 +182,18 @@ class DatabaseHelper {
     required Widget Function(T data) onData,
   }) {
     if (snapshot.connectionState == ConnectionState.waiting) {
-      return Semantics(
-        label: localization(context).loading,
-        child: Center(
-          child: Semantics(
-            tooltip: localization(context).loading,
-            child: CircularProgressIndicator(
-                semanticsLabel: localization(context).loading),
+      return Center(
+        child: Semantics(
+          tooltip: localization(context).loading,
+          child: CircularProgressIndicator(
+            semanticsLabel: localization(context).loading,
           ),
         ),
       );
     } else if (snapshot.hasError) {
       return Center(
-        child: Text(
-            '${localization(context).errorLoadingData}: ${snapshot.error}'),
+        child: Text(localization(context).errorLoadingData),
+        //snapshot.error
       );
     } else if (!snapshot.hasData ||
         (snapshot.data is List && (snapshot.data as List).isEmpty)) {

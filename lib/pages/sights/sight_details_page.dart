@@ -106,7 +106,7 @@ class SightDetailsPage extends StatelessWidget {
     return ExpansionTile(
       expandedAlignment: Alignment.bottomCenter,
       enableFeedback: true,
-      initiallyExpanded: false,
+      initiallyExpanded: true,
       title: Row(
         children: [
           Flexible(

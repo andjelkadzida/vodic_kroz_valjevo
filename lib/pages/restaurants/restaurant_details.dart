@@ -155,7 +155,7 @@ class RestaurantDetailsPage extends StatelessWidget {
   Widget _buildRestaurantImageGallery(
       BuildContext context, List<dynamic> images, BoxConstraints constraints) {
     return Semantics(
-      label: localization(context).hotelImage,
+      label: localization(context).restaurantImage,
       child: SizedBox(
         height: constraints.maxHeight * 0.3,
         child: ClipRRect(

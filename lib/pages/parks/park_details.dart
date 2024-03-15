@@ -147,7 +147,7 @@ Widget _buildDetailsExpansionTile(
   return ExpansionTile(
     expandedAlignment: Alignment.bottomCenter,
     enableFeedback: true,
-    initiallyExpanded: false,
+    initiallyExpanded: true,
     title: Row(
       children: [
         Text(

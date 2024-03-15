@@ -23,57 +23,68 @@ class SportsAndRecreation extends StatelessWidget {
                 localization(context).sportRecreation,
                 const Color.fromRGBO(65, 89, 45, 1),
               ),
-              body: Column(
-                children: [
-                  Semantics(
-                    child: Text(
-                      localization(context).parks,
-                      style: TextStyle(
-                        fontSize: constraints.maxWidth * 0.07,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  FutureBuilder<List<Map<String, dynamic>>>(
-                    future: _getParksDataFromDatabase(
-                        localization(context).localeName),
-                    builder: (context, snapshot) {
-                      return DatabaseHelper.buildFutureState<
-                          List<Map<String, dynamic>>>(
-                        context: context,
-                        snapshot: snapshot,
-                        onData: (data) => _buildSportsSlider(
-                            context, data, constraints, orientation),
-                      );
-                    },
-                  ),
-                  SizedBox(height: constraints.maxHeight * 0.02),
-                  Semantics(
-                    child: Text(
-                      localization(context).sportFields,
-                      style: TextStyle(
-                        fontSize: constraints.maxWidth * 0.07,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  FutureBuilder<List<Map<String, dynamic>>>(
-                    future: _getSportsDataFromDatabase(
-                        localization(context).localeName),
-                    builder: (context, snapshot) {
-                      return DatabaseHelper.buildFutureState<
-                          List<Map<String, dynamic>>>(
-                        context: context,
-                        snapshot: snapshot,
-                        onData: (data) => _buildSportsSlider(
-                            context, data, constraints, orientation),
-                      );
-                    },
-                  ),
-                ],
-              ),
               bottomNavigationBar: const CustomBottomNavigationBar(
                 unselectedColor: Color.fromRGBO(65, 89, 45, 1),
+              ),
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'images/backgroundAndCoverImages/background.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Semantics(
+                      child: Text(
+                        localization(context).parks,
+                        style: TextStyle(
+                          fontSize: constraints.maxWidth * 0.07,
+                          fontWeight: FontWeight.w500,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                    ),
+                    FutureBuilder<List<Map<String, dynamic>>>(
+                      future: _getParksDataFromDatabase(
+                          localization(context).localeName),
+                      builder: (context, snapshot) {
+                        return DatabaseHelper.buildFutureState<
+                            List<Map<String, dynamic>>>(
+                          context: context,
+                          snapshot: snapshot,
+                          onData: (data) => _buildSportsSlider(
+                              context, data, constraints, orientation),
+                        );
+                      },
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    Semantics(
+                      child: Text(
+                        localization(context).sportFields,
+                        style: TextStyle(
+                          fontSize: constraints.maxWidth * 0.07,
+                          fontWeight: FontWeight.w500,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                    ),
+                    FutureBuilder<List<Map<String, dynamic>>>(
+                      future: _getSportsDataFromDatabase(
+                          localization(context).localeName),
+                      builder: (context, snapshot) {
+                        return DatabaseHelper.buildFutureState<
+                            List<Map<String, dynamic>>>(
+                          context: context,
+                          snapshot: snapshot,
+                          onData: (data) => _buildSportsSlider(
+                              context, data, constraints, orientation),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           },

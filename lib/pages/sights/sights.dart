@@ -29,16 +29,25 @@ class Sights extends StatelessWidget {
           bottomNavigationBar: const CustomBottomNavigationBar(
             unselectedColor: Color.fromRGBO(87, 19, 20, 1),
           ),
-          body: FutureBuilder<List<Map<String, dynamic>>>(
-            future: _getSightsFromDatabase(localization(context).localeName),
-            builder: (context, snapshot) {
-              return DatabaseHelper.buildFutureState<
-                  List<Map<String, dynamic>>>(
-                context: context,
-                snapshot: snapshot,
-                onData: (data) => buildSightsList(data, context),
-              );
-            },
+          body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'images/backgroundAndCoverImages/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+              future: _getSightsFromDatabase(localization(context).localeName),
+              builder: (context, snapshot) {
+                return DatabaseHelper.buildFutureState<
+                    List<Map<String, dynamic>>>(
+                  context: context,
+                  snapshot: snapshot,
+                  onData: (data) => buildSightsList(data, context),
+                );
+              },
+            ),
           ),
         );
       },
@@ -49,17 +58,19 @@ class Sights extends StatelessWidget {
       List<Map<String, dynamic>> sightsData, BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return GridView.builder(
-      padding: EdgeInsets.all(screenSize.width * 0.02),
-      itemCount: sightsData.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.7,
+    return ExcludeSemantics(
+      child: GridView.builder(
+        padding: EdgeInsets.all(screenSize.width * 0.02),
+        itemCount: sightsData.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+        ),
+        itemBuilder: (context, index) {
+          return SightListItem(
+              sightData: sightsData[index], mapScreen: mapScreen);
+        },
       ),
-      itemBuilder: (context, index) {
-        return SightListItem(
-            sightData: sightsData[index], mapScreen: mapScreen);
-      },
     );
   }
 
@@ -93,23 +104,24 @@ class SightListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return Semantics(
-      label: localization(context).tapToSeeSightDetails(sightData['title']),
-      child: InkWell(
-        onTap: () => navigateTo(
-          context,
-          SightDetailsPage(
-            sightId: sightData['id'],
-          ),
+    return InkWell(
+      onTap: () => navigateTo(
+        context,
+        SightDetailsPage(
+          sightId: sightData['id'],
         ),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
+      ),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: Semantics(
+                label: localization(context)
+                    .tapToSeeSightDetails(sightData['title']),
                 child: ClipRRect(
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(15)),
@@ -120,12 +132,15 @@ class SightListItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Semantics(
+                      label: localization(context).tapToHearSightName,
                       child: Text(
                         sightData['title'],
                         textAlign: TextAlign.left,
@@ -135,49 +150,47 @@ class SightListItem extends StatelessWidget {
                         maxLines: 5,
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.volume_up,
-                        size: min(50, screenSize.width * 0.065),
-                        semanticLabel: localization(context).tapToHearSightName,
-                      ),
-                      onPressed: () {
-                        TextToSpeechConfig.instance.speak(
-                          sightData['title'],
-                        );
-                      },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.volume_up,
+                      size: min(50, screenSize.width * 0.065),
                     ),
-                  ],
-                ),
+                    onPressed: () {
+                      TextToSpeechConfig.instance.speak(
+                        sightData['title'],
+                      );
+                    },
+                  ),
+                ],
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
-                  child: Semantics(
-                    button: true,
-                    onTapHint: localization(context).tapToNavigateToSight,
-                    child: InkWell(
-                      onTap: () => mapScreen.navigateToDestination(
-                          sightData['latitude'], sightData['longitude']),
-                      child: SizedBox(
-                        width: max(50, screenSize.width * 0.7),
-                        child: Text(
-                          localization(context).startNavigation,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: Colors.black,
-                                    fontSize: screenSize.width * 0.038,
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                        ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
+                child: Semantics(
+                  button: true,
+                  onTapHint: localization(context).tapToNavigateToSight,
+                  child: InkWell(
+                    onTap: () => mapScreen.navigateToDestination(
+                        sightData['latitude'], sightData['longitude']),
+                    child: SizedBox(
+                      width: max(50, screenSize.width * 0.7),
+                      child: Text(
+                        localization(context).startNavigation,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.black,
+                              fontSize: screenSize.width * 0.038,
+                              fontWeight: FontWeight.w300,
+                            ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

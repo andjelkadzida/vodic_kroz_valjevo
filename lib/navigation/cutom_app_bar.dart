@@ -44,9 +44,12 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
               barrierDismissible: false,
               context: context,
               applicationIcon: Semantics(
-                image: true,
                 label: localization(context).appLogo,
-                child: FlutterLogo(size: screenSize.width * 0.1),
+                child: Image.asset(
+                  'images/appLogo.png',
+                  width: screenSize.width * 0.1,
+                  fit: BoxFit.cover,
+                ),
               ),
               applicationName: localization(context).appTitle,
               applicationVersion: '1.0.0',

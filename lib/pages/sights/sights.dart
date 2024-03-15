@@ -102,21 +102,21 @@ class SightListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return InkWell(
-      onTap: () => navigateTo(
-        context,
-        SightDetailsPage(
-          sightId: sightData['id'],
-        ),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
       ),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: () => navigateTo(
+                context,
+                SightDetailsPage(
+                  sightId: sightData['id'],
+                ),
+              ),
               child: Semantics(
                 label: localization(context)
                     .tapToSeeSightDetails(sightData['title']),
@@ -131,14 +131,22 @@ class SightListItem extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Semantics(
-                      label: localization(context).tapToHearSightName,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Semantics(
+                    label: localization(context).tapToHearSightName,
+                    child: InkWell(
+                      onTap: () => navigateTo(
+                        context,
+                        SightDetailsPage(
+                          sightId: sightData['id'],
+                        ),
+                      ),
                       child: Text(
                         sightData['title'],
                         textAlign: TextAlign.left,
@@ -149,47 +157,47 @@ class SightListItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.volume_up,
-                      size: min(50, screenSize.width * 0.065),
-                    ),
-                    onPressed: () {
-                      TextToSpeechConfig.instance.speak(
-                        sightData['title'],
-                      );
-                    },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.volume_up,
+                    size: min(50, screenSize.width * 0.065),
                   ),
-                ],
-              ),
+                  onPressed: () {
+                    TextToSpeechConfig.instance.speak(
+                      sightData['title'],
+                    );
+                  },
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
-                child: Semantics(
-                  button: true,
-                  onTapHint: localization(context).tapToNavigateToSight,
-                  child: InkWell(
-                    onTap: () => mapScreen.navigateToDestination(
-                        sightData['latitude'], sightData['longitude']),
-                    child: SizedBox(
-                      width: max(50, screenSize.width * 0.7),
-                      child: Text(
-                        localization(context).startNavigation,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.black,
-                              fontSize: screenSize.width * 0.038,
-                              fontWeight: FontWeight.w300,
-                            ),
-                      ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
+              child: Semantics(
+                button: true,
+                onTapHint: localization(context).tapToNavigateToSight,
+                child: InkWell(
+                  onTap: () => mapScreen.navigateToDestination(
+                      sightData['latitude'], sightData['longitude']),
+                  child: SizedBox(
+                    width: max(50, screenSize.width * 0.7),
+                    child: Text(
+                      localization(context).startNavigation,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.black,
+                            fontSize: screenSize.width * 0.038,
+                            fontWeight: FontWeight.w300,
+                          ),
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

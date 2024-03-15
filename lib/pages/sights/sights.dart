@@ -153,7 +153,7 @@ class SightListItem extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontSize: screenSize.width * 0.04,
                             fontWeight: FontWeight.w500),
-                        maxLines: 5,
+                        maxLines: 6,
                       ),
                     ),
                   ),

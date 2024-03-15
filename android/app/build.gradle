@@ -32,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.andjelkadzida.vodic_kroz_valjevo"
     compileSdk = 34
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "25.1.8937393"
     ext.kotlin_version = '1.6.0'
 
     compileOptions {

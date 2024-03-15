@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -18,6 +20,11 @@ class TextToSpeechConfig {
     flutterTts.setPitch(1.0);
 
     await flutterTts.setLanguage(languageCode);
+
+    // Setting language to Croatian for iOS
+    if (Platform.isIOS && languageCode == 'sr') {
+      await flutterTts.setLanguage('hr');
+    }
   }
 
   Future<void> speak(String text) async {

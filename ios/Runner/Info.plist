@@ -26,8 +26,21 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>itms-beta</string>
-		<string>itms</string>
+		<string>comgooglemaps</string>
+		<string>baidumap</string>
+		<string>iosamap</string>
+		<string>waze</string>
+		<string>yandexmaps</string>
+		<string>yandexnavi</string>
+		<string>citymapper</string>
+		<string>mapswithme</string>
+		<string>osmandmaps</string>
+		<string>dgis</string>
+		<string>qqmap</string>
+		<string>here-location</string>
+		<string>tomtomgo</string>
+		<string>copilot</string>
+		<string>com.sygic.aura</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -37,6 +50,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -46,24 +61,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<!-- Maps launchers-->
-		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>comgooglemaps</string>
-			<string>baidumap</string>
-			<string>iosamap</string>
-			<string>waze</string>
-			<string>yandexmaps</string>
-			<string>yandexnavi</string>
-			<string>citymapper</string>
-			<string>mapswithme</string>
-			<string>osmandmaps</string>
-			<string>dgis</string>
-			<string>qqmap</string>
-			<string>here-location</string>
-			<string>tomtomgo</string>
-			<string>copilot</string>
-			<string>com.sygic.aura</string>
-		</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Our app allows you to submit screenshots of any issues or bugs you encounter directly through the app for faster troubleshooting and improved user support. Access to your photo library is needed to select and attach these screenshots.</string>
 </dict>
 </plist>

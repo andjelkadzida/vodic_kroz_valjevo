@@ -78,7 +78,7 @@ class AboutCityRepository {
         },
         'legend_description': {
           'en':
-              'Immediately after the Battle of Kosovo, a throng of Serbian refugees, fleeing from the Turkish invasion, collapsed into the valley of Valjevo, where they settled, exhausted from the long flight, and named the town Valjevo.',
+              'Immediately after the Battle of Kosovo, a throng of Serbian refugees fleeing from the Turkish invasion collapsed into the valley of Valjevo, where they settled, exhausted from the long flight, and named the city Valjevo.',
           'de':
               'Unmittelbar nach der Schlacht auf dem Amselfeld ergoss sich ein Strom serbischer Flüchtlinge, die vor dem Einfall der Türken flohen, in das Tal von Valjevo, wo sie sich erschöpft von der langen Flucht niederließen und die Stadt Valjevo nannten.',
           'sr':

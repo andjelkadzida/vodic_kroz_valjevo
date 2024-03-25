@@ -139,7 +139,7 @@ class SightsRepository {
         },
         'descriptions': {
           'en':
-              'Nenadović Tower is one of the symbols of the town of Valjevo. It was built in the spring of 1813, before the end of the First Serbian Uprising, to reinforce surveillance over Valjevo and store military supplies. The chief initiators of the construction of the building were Jakov Nenadović and his son Jevrem. The stone from the pulled-down Vitkovic Tower, located at the confluence of the Gradac and Kolubara rivers, was used as a building material. At the end of 1813, the insurgents found a lot of tortured Serbs inside the Tower. Serbian Duke Sima Nenadović, revolted by the actions of the Turks, ordered the Tower to be burnt, but it was renovated in 1836 by Prince Milos Obrenović.\n\nToday, the Nenadović Tower is fully reconstructed and protected, with the appropriate museum exhibition, which has been open for visitors since 2012.',
+              'Nenadović Tower is one of the symbols of the city of Valjevo. It was built in the spring of 1813, before the end of the First Serbian Uprising, to reinforce surveillance over Valjevo and store military supplies. The chief initiators of the construction of the building were Jakov Nenadović and his son Jevrem. The stone from the pulled-down Vitkovic Tower, located at the confluence of the Gradac and Kolubara rivers, was used as a building material. At the end of 1813, the insurgents found a lot of tortured Serbs inside the Tower. Serbian Duke Sima Nenadović, revolted by the actions of the Turks, ordered the Tower to be burnt, but it was renovated in 1836 by Prince Milos Obrenović.\n\nToday, the Nenadović Tower is fully reconstructed and protected, with the appropriate museum exhibition, which has been open for visitors since 2012.',
           'de':
               'Der Nenadović-Turm ist eines der Symbole der Stadt Valjevo. Er wurde im Frühjahr 1813, vor dem Ende des Ersten Serbischen Aufstands, erbaut, um die Überwachung über Valjevo zu verstärken und militärische Vorräte zu lagern. Die Hauptinitiatoren des Baus waren Jakov Nenadović und sein Sohn Jevrem. Als Baumaterial wurde der Stein des abgerissenen Vitkovic-Turms verwendet, der am Zusammenfluss der Flüsse Gradac und Kolubara lag. Ende 1813 fanden die Aufständischen viele gefolterte Serben innerhalb des Turms. Der serbische Herzog Sima Nenadović, empört über die Handlungen der Türken, befahl, den Turm niederzubrennen, aber er wurde 1836 von Fürst Miloš Obrenović renoviert.\n\nHeute ist der Nenadović-Turm vollständig rekonstruiert und geschützt, mit der entsprechenden Museumsausstellung, die seit 2012 für Besucher geöffnet ist.',
           'sr':
@@ -270,7 +270,7 @@ class SightsRepository {
         'latitude': 44.29062866176497,
         'longitude': 19.876563654330376,
         'titles': {
-          'en': 'Tešnjar (Turkish town on the right bank of the Kolubara)',
+          'en': 'Tešnjar (Turkish city on the right bank of the Kolubara)',
           'de': 'Tešnjar (Türkisches Viertel am rechten Ufer der Kolubara)',
           'sr': 'Tešnjar (Turska kasaba na desnoj obali Kolubare)',
           'sr_Cyrl': 'Тешњар (Турска касаба на десној обали Колубаре)',

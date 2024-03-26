@@ -1,7 +1,7 @@
 {
     "appTitle": "Valjevo tour guide",
     "homePage": "Home",
-    "aboutCity": "About city",
+    "aboutCity": "About the city",
     "sights": "Sights",
     "sightName": "Name of the sight: {name}",
     "sportRecreation": "Sport & recreation",
@@ -57,7 +57,7 @@
     "imageOfSight": "Image of sight {name}",
     "tapToHearSightName": "Touch to hear the name of the sight",
     "historyOfTheCity": "City History",
-    "song": "When you come to any town\n\nAnd one comes to any town very late\n\nWhen you come very late to any town\n\nIn case that town happens to be Valjevo...",
+    "song": "When you come to any city\n\nAnd one comes to any ctiy very late\n\nWhen you come very late to any city\n\nIn case that city happens to be Valjevo...",
     "bugReport": "Bug Report Form",
     "bugTitle": "Bug Title",
     "bugDescription": "Bug Description",

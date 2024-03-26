@@ -6,26 +6,26 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Valjevo-Reiseführer"
+            "state" : "needs_review",
+            "value" : "VApp"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valjevo Tour Guide"
+            "value" : "VApp"
           }
         },
         "sr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Водич кроз Ваљево"
           }
         },
         "sr-Latn" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vodič kroz Valjevo"
+            "state" : "needs_review",
+            "value" : "VApp"
           }
         }
       }

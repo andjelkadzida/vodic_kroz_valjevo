@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -34,6 +33,7 @@ void main() async {
   final databaseInitializer = DatabaseInitializer(db);
 
   await Future.wait([
+    TextToSpeechConfig.instance.setEngine(),
     databaseInitializer.initializeData(),
     dotenv.load(),
   ]);
@@ -62,7 +62,6 @@ class VodicKrozValjevo extends StatefulWidget {
 class _VodicKrozValjevo extends State<VodicKrozValjevo> {
   static _VodicKrozValjevo? _instance;
   Locale? _lang;
-  final flutterTts = FlutterTts();
 
   @override
   void initState() {

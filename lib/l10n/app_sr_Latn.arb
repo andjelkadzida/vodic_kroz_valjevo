@@ -64,6 +64,8 @@
     "operatingSystem": "Operativni sistem",
     "selectOS": "Molimo vas da odaberete operativni sistem",
     "selectOSLabel": "Pritisnite da izaberete operativni sistem.",
+    "deviceModel": "Model uređaja",
+    "osVersion": "Verzija operativnog sistema",
     "uploadFile": "Otpremi datoteku",
     "submit": "Pošalji",
     "enterDescription": "Molimo unesite opis problema.",

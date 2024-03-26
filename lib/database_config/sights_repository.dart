@@ -158,7 +158,7 @@ class SightsRepository {
         'latitude': 44.27835736293161,
         'longitude': 19.8847572164086,
         'titles': {
-          'en': 'Valjevo Gymnasium',
+          'en': 'Valjevo high school',
           'de': 'Gymnasium von Valjevo',
           'sr': 'Valjevska gimnazija',
           'sr_Cyrl': 'Ваљевска гимназија',

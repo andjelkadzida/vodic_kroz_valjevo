@@ -14,6 +14,16 @@ class TextToSpeechConfig {
 
   static TextToSpeechConfig get instance => _instance;
 
+
+  Future<void> setEngine() async {
+    if (Platform.isAndroid) {
+      List<Object?> engines = await flutterTts.getEngines;
+      if (engines.toString().contains('com.google.android.tts')) {
+        await flutterTts.setEngine('com.google.android.tts');
+      }
+    }
+  }
+
   Future<void> setLanguage(String languageCode) async {
     flutterTts.setSpeechRate(0.5);
     flutterTts.setVolume(1.0);

@@ -32,6 +32,8 @@ class BugReportPageState extends State<BugReportPage> {
   PlatformFile? file;
   String? fileName;
   String? deviceModel;
+  String? manufacturer;
+  String? brand;
   String? operatingSystemVersion;
   bool _isLoading = false;
   ValueNotifier<bool?> internetConnectionStatus = ValueNotifier<bool?>(null);
@@ -69,12 +71,18 @@ class BugReportPageState extends State<BugReportPage> {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         deviceModel = androidInfo.model;
         operatingSystemVersion = androidInfo.version.release;
+        manufacturer = androidInfo.manufacturer;
+        brand = androidInfo.brand;
+        manufacturer?.toLowerCase() == brand?.toLowerCase()
+            ? manufacturer = manufacturer
+            : manufacturer = '$manufacturer / $brand';
     } else if (Platform.isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         deviceModel = iosInfo.utsname.machine;
         operatingSystemVersion = iosInfo.systemVersion;
+        manufacturer = iosInfo.utsname.machine;
     }
-    deviceModelController!.text = deviceModel!;
+    deviceModelController!.text = '${manufacturer!} ${deviceModel!}';
     operatingSystemVersionController!.text = operatingSystemVersion!;
   }
 

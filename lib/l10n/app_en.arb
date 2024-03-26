@@ -64,6 +64,8 @@
     "operatingSystem": "Operating System",
     "selectOS": "Please select an operating system",
     "selectOSLabel": "Press to select the operating system.",
+    "deviceModel": "Device Model",
+    "osVersion": "Operating System Version",
     "uploadFile": "Upload File",
     "submit": "Submit",
     "enterDescription": "Please enter a description of the issue.",

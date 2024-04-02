@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 import '../helper/internet_connectivity.dart';
 import '../localization/supported_languages.dart';
@@ -30,9 +31,15 @@ class BugReportPageState extends State<BugReportPage> {
   List<String> operatingSystems = ['Android', 'iOS', 'HarmonyOS'];
   PlatformFile? file;
   String? fileName;
+  String? deviceModel;
+  String? manufacturer;
+  String? brand;
+  String? operatingSystemVersion;
   bool _isLoading = false;
   ValueNotifier<bool?> internetConnectionStatus = ValueNotifier<bool?>(null);
   StreamSubscription<bool>? internetConnectionSubscription;
+  TextEditingController? deviceModelController = TextEditingController();
+  TextEditingController? operatingSystemVersionController = TextEditingController();
 
   @override
   void initState() {
@@ -40,6 +47,7 @@ class BugReportPageState extends State<BugReportPage> {
     initData();
     // Set operating system to the current platform
     operatingSystem = getOperatingSystem();
+    getDeviceInfo();
   }
 
   @override
@@ -57,9 +65,32 @@ class BugReportPageState extends State<BugReportPage> {
         clientKey: keyClientKey, debug: true);
   }
 
+  void getDeviceInfo() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        deviceModel = androidInfo.model;
+        operatingSystemVersion = androidInfo.version.release;
+        manufacturer = androidInfo.manufacturer;
+        brand = androidInfo.brand;
+        manufacturer?.toLowerCase() == brand?.toLowerCase()
+            ? manufacturer = manufacturer
+            : manufacturer = '$manufacturer / $brand';
+    } else if (Platform.isIOS) {
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        deviceModel = iosInfo.utsname.machine;
+        operatingSystemVersion = iosInfo.systemVersion;
+        manufacturer = iosInfo.utsname.machine;
+    }
+    deviceModelController!.text = '${manufacturer!} ${deviceModel!}';
+    operatingSystemVersionController!.text = operatingSystemVersion!;
+  }
+
   void attemptToSendReport() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      deviceModel = deviceModelController!.text;
+      operatingSystemVersion = operatingSystemVersionController!.text;
       checkInitialInternetConnection().then((bool? hasInternet) {
         if (!hasInternet!) {
           var screenWidth = MediaQuery.of(context).size.width;
@@ -89,7 +120,7 @@ class BugReportPageState extends State<BugReportPage> {
           setState(() {
             _isLoading = true;
           });
-          sendReport(bugTitle, bugDescription, operatingSystem, file, context);
+          sendReport(bugTitle, bugDescription, operatingSystem, deviceModel, operatingSystemVersion, file, context);
           _formKey.currentState!.reset();
           _titleFocus.unfocus();
           _descriptionFocus.unfocus();
@@ -198,6 +229,28 @@ class BugReportPageState extends State<BugReportPage> {
                                     bugDescription = value!;
                                   },
                                   maxLines: 5,
+                                ),
+                              ),
+                              Semantics(
+                                child: Column(
+                                  children: <Widget>[
+                                    TextFormField(
+                                      controller: deviceModelController,
+                                      decoration: InputDecoration(
+                                        labelText: localization(context).deviceModel,
+                                      ),
+                                      enabled: false,
+                                      style: TextStyle(fontSize: screenSize.width * 0.04),
+                                    ),
+                                    TextFormField(
+                                      controller: operatingSystemVersionController,
+                                      decoration: InputDecoration(
+                                        labelText: localization(context).osVersion,
+                                      ),
+                                      enabled: false,
+                                      style: TextStyle(fontSize: screenSize.width * 0.04),
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(height: screenSize.height * 0.02),
@@ -355,13 +408,15 @@ class BugReportPageState extends State<BugReportPage> {
   }
 }
 
-void sendReport(String bugTitle, String bugDescription, String? operatingSystem,
+void sendReport(String bugTitle, String bugDescription, String? operatingSystem, String? deviceModel, String? operatingSystemVersion,
     PlatformFile? file, BuildContext context) {
   var screenWidth = MediaQuery.of(context).size.width;
   var bugReport = ParseObject('BugReport')
     ..set('title', bugTitle)
     ..set('description', bugDescription)
-    ..set('operatingSystem', operatingSystem);
+    ..set('operatingSystem', operatingSystem)
+    ..set('deviceModel', deviceModel)
+    ..set('operatingSystemVersion', operatingSystemVersion);
 
   if (file != null) {
     var fileToUpload = File(file.path!);

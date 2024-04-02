@@ -64,6 +64,8 @@
     "operatingSystem": "Betriebssystem",
     "selectOS": "Bitte wählen Sie ein Betriebssystem aus.",
     "selectOSLabel": "Drücken Sie, um das Betriebssystem auszuwählen.",
+    "deviceModel": "Gerätemodell",
+    "osVersion": "Betriebssystemversion",
     "uploadFile": "Datei hochladen",
     "submit": "Einreichen",
     "enterDescription": "Bitte geben Sie eine Beschreibung des Problems ein.",

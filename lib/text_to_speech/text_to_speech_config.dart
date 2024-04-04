@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../helper/internet_connectivity.dart';
 
@@ -28,12 +30,22 @@ class TextToSpeechConfig {
     flutterTts.setVolume(1.0);
     flutterTts.setPitch(1.0);
 
-    await flutterTts.setLanguage(languageCode);
-
     // Setting language to Croatian for iOS
-    if (Platform.isIOS && languageCode == 'sr') {
-      await flutterTts.setLanguage('hr');
+    if (Platform.isIOS || Platform.isMacOS) {
+    if(await flutterTts.isLanguageAvailable(languageCode))  {
+      await flutterTts.setLanguage(languageCode);
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
+
+      if (!isFirstRun) {
+        const url = 'App-Prefs:root=General&path=Keyboard';
+        await launchUrlString(url);
+      }
+
+      await prefs.setBool('isFirstRun', false);
     }
+  } 
   }
 
   Future<void> speak(String text) async {

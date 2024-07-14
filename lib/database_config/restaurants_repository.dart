@@ -99,21 +99,6 @@ class RestaurantsRepository {
         },
       },
       {
-        'restaurant_image_path': 'images/restaurantsImages/tavernaSpolja.jpg',
-        'restaurant_image_path2': 'images/restaurantsImages/tavernaUnutra.jpg',
-        'restaurant_images_resource':
-            'https://www.facebook.com/valjevotaverna/',
-        'latitude': 44.27082751943143,
-        'longitude': 19.8831951515897,
-        'titles': {
-          'en': 'Taverna 014',
-          'de': 'Taverna 014',
-          'sr': 'Taverna 014',
-          'sr_Cyrl': 'Таверна 014',
-          'sr_Latn': 'Taverna 014'
-        },
-      },
-      {
         'restaurant_image_path': 'images/restaurantsImages/laPiazzaSpolja.jpg',
         'restaurant_image_path2': 'images/restaurantsImages/laPiazzaUnutra.jpg',
         'restaurant_images_resource':

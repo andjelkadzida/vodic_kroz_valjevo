@@ -30,7 +30,13 @@ class TextToSpeechConfig {
     flutterTts.setVolume(1.0);
     flutterTts.setPitch(1.0);
 
-    // Setting language to Croatian for iOS
+
+    // Check if iOS device is muted
+    if(Platform.isIOS || Platform.isMacOS) {
+      
+    }
+
+    // Setting system languages for iOS
     if (Platform.isIOS || Platform.isMacOS) {
     if(await flutterTts.isLanguageAvailable(languageCode))  {
       await flutterTts.setLanguage(languageCode);

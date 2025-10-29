@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sound_mode/sound_mode.dart';
+import 'package:sound_mode/utils/ringer_mode_statuses.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../helper/internet_connectivity.dart';
@@ -30,14 +32,11 @@ class TextToSpeechConfig {
     flutterTts.setVolume(1.0);
     flutterTts.setPitch(1.0);
 
-
-    // Check if iOS device is muted
-    if(Platform.isIOS || Platform.isMacOS) {
-      
-    }
-
     // Setting system languages for iOS
     if (Platform.isIOS || Platform.isMacOS) {
+      if(RingerModeStatus.silent == SoundMode.ringerModeStatus) {
+          AppSettings.openAppSettings(type: AppSettingsType.sound);
+      }
     if(await flutterTts.isLanguageAvailable(languageCode))  {
       await flutterTts.setLanguage(languageCode);
     } else {

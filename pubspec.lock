@@ -722,6 +722,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sound_mode:
+    dependency: "direct main"
+    description:
+      name: sound_mode
+      sha256: ff3b2970ca50741bd1a375b3223fbb842c8596dbd5a6e0fc7ae266cd4864d70b
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   source_gen:
     dependency: transitive
     description:

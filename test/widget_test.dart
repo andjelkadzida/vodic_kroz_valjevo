@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 import 'package:vodic_kroz_valjevo/main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   sqfliteFfiInit(); // Initialize sqflite_ffi

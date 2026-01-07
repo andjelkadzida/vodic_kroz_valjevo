@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 
 import 'database_config/database_helper.dart';
 import 'database_config/database_initializer.dart';
@@ -69,7 +69,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
     _instance = this;
   }
 
-  setLanguage(Locale lang) {
+  void setLanguage(Locale lang) {
     setState(() {
       _lang = lang;
       TextToSpeechConfig.instance.setLanguage(lang.languageCode);

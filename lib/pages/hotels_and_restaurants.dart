@@ -35,6 +35,7 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
             unselectedColor: Color.fromRGBO(11, 20, 32, 1),
           ),
           body: Container(
+            width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
@@ -42,33 +43,42 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.all(constraints.maxWidth * 0.05),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildItem(
-                      context,
-                      label: localization(context).hotels,
-                      icon: Icons.hotel,
-                      lottieAsset: 'animations/menu_item.json',
-                      onTap: () => navigateTo(context, const Hotels()),
-                      width: constraints.maxWidth * 0.75,
-                      height: constraints.maxHeight * 0.75,
+            child: LayoutBuilder(
+              builder: (context, bodyConstraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints(minHeight: bodyConstraints.maxHeight),
+                    child: Padding(
+                      padding: EdgeInsets.all(constraints.maxWidth * 0.05),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildItem(
+                            context,
+                            label: localization(context).hotels,
+                            icon: Icons.hotel,
+                            lottieAsset: 'animations/menu_item.json',
+                            onTap: () => navigateTo(context, const Hotels()),
+                            width: constraints.maxWidth * 0.75,
+                            height: constraints.maxHeight * 0.75,
+                          ),
+                          _buildItem(
+                            context,
+                            label: localization(context).restaurants,
+                            icon: Icons.restaurant,
+                            lottieAsset: 'animations/menu_item.json',
+                            onTap: () =>
+                                navigateTo(context, const Restaurants()),
+                            width: constraints.maxWidth * 0.75,
+                            height: constraints.maxHeight * 0.75,
+                          ),
+                        ],
+                      ),
                     ),
-                    _buildItem(
-                      context,
-                      label: localization(context).restaurants,
-                      icon: Icons.restaurant,
-                      lottieAsset: 'animations/menu_item.json',
-                      onTap: () => navigateTo(context, const Restaurants()),
-                      width: constraints.maxWidth * 0.75,
-                      height: constraints.maxHeight * 0.75,
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ),
         );
@@ -87,52 +97,59 @@ class HotelsAndRestaurantsState extends State<HotelsAndRestaurants> {
   }) {
     return SizedBox(
       width: width / 1.5,
-      height: width / 1.5,
-      child: Semantics(
-        label: localization(context).buttonFor(label),
-        button: true,
-        enabled: true,
-        onTap: onTap,
-        child: Card(
-          elevation: 5,
-          margin: EdgeInsets.symmetric(vertical: height * 0.01),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(20),
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.04),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Lottie.asset(
-                    lottieAsset,
-                    width: width * 0.35,
-                    height: width * 0.35,
-                    fit: BoxFit.cover,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        icon,
-                        size: width * 0.08,
-                        applyTextScaling: true,
-                        color: const Color.fromRGBO(11, 20, 32, 1),
-                      ),
-                      SizedBox(width: width * 0.03),
-                      Text(
-                        label,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              color: const Color.fromRGBO(11, 20, 32, 1),
-                              letterSpacing: 1.5,
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ],
-                  ),
-                ],
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: width / 1.5),
+        child: Semantics(
+          label: localization(context).buttonFor(label),
+          button: true,
+          enabled: true,
+          onTap: onTap,
+          child: Card(
+            elevation: 5,
+            margin: EdgeInsets.symmetric(vertical: height * 0.01),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: InkWell(
+              onTap: onTap,
+              borderRadius: BorderRadius.circular(20),
+              child: Padding(
+                padding: EdgeInsets.all(width * 0.04),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Lottie.asset(
+                      lottieAsset,
+                      width: width * 0.35,
+                      height: width * 0.35,
+                      fit: BoxFit.cover,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          icon,
+                          size: width * 0.08,
+                          applyTextScaling: true,
+                          color: const Color.fromRGBO(11, 20, 32, 1),
+                        ),
+                        SizedBox(width: width * 0.03),
+                        Flexible(
+                          child: Text(
+                            label,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(
+                                  color: const Color.fromRGBO(11, 20, 32, 1),
+                                  letterSpacing: 1.5,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

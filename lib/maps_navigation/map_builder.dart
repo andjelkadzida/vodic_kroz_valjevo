@@ -79,6 +79,9 @@ Widget buildMapWithMarkers(List<Marker> markers) {
                         child: TileLayer(
                           urlTemplate:
                               'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          userAgentPackageName:
+                              'com.andjelkadzida.vodic_kroz_valjevo',
+                          tileProvider: NetworkTileProvider(),
                         ),
                       ),
                       MarkerLayer(markers: markers),
@@ -197,6 +200,9 @@ Widget buildMap(double screenWidth, double screenHeight) {
                         child: TileLayer(
                           urlTemplate:
                               'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          userAgentPackageName:
+                              'com.andjelkadzida.vodic_kroz_valjevo',
+                          tileProvider: NetworkTileProvider(),
                         ),
                       ),
                       Positioned(

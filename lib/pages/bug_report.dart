@@ -234,7 +234,7 @@ class BugReportPageState extends State<BugReportPage> {
                                     ),
                                   ),
                                   dropdownColor: Colors.white,
-                                  value: operatingSystem,
+                                  initialValue: operatingSystem,
                                   items: operatingSystems.map((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,

@@ -30,20 +30,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  map_launcher: ^3.1.0
+  map_launcher: ^7.0.0
   open_store: ^0.5.0
-  flutter_tts: ^3.8.5
-  sqflite: ^2.3.2
+  flutter_tts: ^4.2.5
+  sqflite: ^2.4.5
   path: ^1.9.0
-  connectivity_plus: ^5.0.2
-  app_settings: ^5.1.1
+  connectivity_plus: ^7.3.2
+  app_settings: ^9.0.1
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
   lottie: ^3.0.0
-  url_launcher: ^6.2.4
+  url_launcher: ^6.3.3
   photo_view: ^0.14.0
-  file_picker: ^6.1.1
-  parse_server_sdk_flutter: ^7.0.1
+  file_picker: ^10.2.4
+  parse_server_sdk_flutter: ^10.7.0
   flutter_dotenv: ^5.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -51,14 +51,15 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.1
-  shared_preferences: ^2.0.17
+  intl: ^0.20.3
+  shared_preferences: ^2.5.6
+  flutter_gen: ^5.15.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.4
-  sqflite_common_ffi: ^2.3.2+1
+  sqflite_common_ffi: ^2.4.5
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

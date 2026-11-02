@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/helper/internet_connectivity.dart';
+import '../lib/helper/internet_connectivity.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'l10n/app_localizations.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +8,7 @@ import 'helper/accessibility_theme.dart';
 import 'helper/connection_problem_view.dart';
 import 'helper/internet_connectivity.dart';
 import 'localization/locale_controller.dart';
+import 'l10n/app_localizations.dart';
 import 'pages/home_page.dart';
 import 'text_to_speech/text_to_speech_config.dart';
 

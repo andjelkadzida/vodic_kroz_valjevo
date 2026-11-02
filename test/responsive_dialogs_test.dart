@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
-import 'package:vodic_kroz_valjevo/navigation/cutom_app_bar.dart';
-import 'package:vodic_kroz_valjevo/policies/privacy_policy.dart';
-import 'package:vodic_kroz_valjevo/policies/terms_of_use.dart';
+import '../lib/l10n/app_localizations.dart';
+import '../lib/navigation/custom_app_bar.dart';
+import '../lib/policies/privacy_policy.dart';
+import '../lib/policies/terms_of_use.dart';
 
 void main() {
   const scenarios = [

@@ -9,9 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart'
     show ParseError;
-import 'package:vodic_kroz_valjevo/helper/internet_connectivity.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
-import 'package:vodic_kroz_valjevo/pages/bug_report.dart';
+import '../lib/helper/internet_connectivity.dart';
+import '../lib/l10n/app_localizations.dart';
+import '../lib/pages/bug_report.dart';
 
 void main() {
   const connectivity = MethodChannel('dev.fluttercommunity.plus/connectivity');

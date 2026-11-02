@@ -5,7 +5,7 @@ import '../../helper/remote_data_builder.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_screen.dart';
 import '../../navigation/bottom_navigation.dart';
-import '../../navigation/cutom_app_bar.dart';
+import '../../navigation/custom_app_bar.dart';
 import '../shared/hospitality_details_content.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {

@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/database_config/back4app_config.dart';
-import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
-import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
+import '../lib/database_config/back4app_config.dart';
+import '../lib/database_config/tour_data_service.dart';
+import '../lib/helper/images_loader_helper.dart';
 
 import 'support/tour_fixtures.dart';
 

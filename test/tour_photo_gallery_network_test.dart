@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
-import 'package:vodic_kroz_valjevo/pages/shared/tour_photo_gallery.dart';
+import '../lib/l10n/app_localizations.dart';
+import '../lib/pages/shared/tour_photo_gallery.dart';
 
 import 'support/network_image_test_support.dart';
 

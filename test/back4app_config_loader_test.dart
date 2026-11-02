@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart' show CachingAssetBundle;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/database_config/back4app_config_loader.dart';
+import '../lib/database_config/back4app_config_loader.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

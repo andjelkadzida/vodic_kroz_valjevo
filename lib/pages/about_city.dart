@@ -7,7 +7,7 @@ import '../helper/images_loader_helper.dart';
 import '../helper/remote_data_builder.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
-import '../navigation/cutom_app_bar.dart';
+import '../navigation/custom_app_bar.dart';
 import '../text_to_speech/speech_controls.dart';
 
 class AboutCity extends StatelessWidget {

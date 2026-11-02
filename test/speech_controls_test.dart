@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
+import '../lib/l10n/app_localizations.dart';
+import '../lib/text_to_speech/speech_controls.dart';
+import '../lib/text_to_speech/text_to_speech_config.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

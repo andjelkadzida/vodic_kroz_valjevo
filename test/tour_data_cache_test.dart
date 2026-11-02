@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
+import '../lib/database_config/tour_data_service.dart';
 
 import 'support/tour_fixtures.dart';
 

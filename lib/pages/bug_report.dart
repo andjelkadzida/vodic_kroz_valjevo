@@ -10,7 +10,7 @@ import '../helper/connection_problem_view.dart';
 import '../helper/internet_connectivity.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
-import '../navigation/cutom_app_bar.dart';
+import '../navigation/custom_app_bar.dart';
 
 typedef BugReportSender = Future<void> Function(
   String title,

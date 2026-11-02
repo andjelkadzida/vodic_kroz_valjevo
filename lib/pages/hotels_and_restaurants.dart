@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
-import '../navigation/cutom_app_bar.dart';
+import '../navigation/custom_app_bar.dart';
 import '../navigation/navigation_helper.dart';
 import 'hotels/hotels.dart';
 import 'restaurants/restaurants.dart';

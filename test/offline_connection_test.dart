@@ -7,13 +7,13 @@ import 'package:flutter/foundation.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
-import 'package:vodic_kroz_valjevo/helper/connection_problem_view.dart';
-import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
-import 'package:vodic_kroz_valjevo/helper/internet_connectivity.dart';
-import 'package:vodic_kroz_valjevo/helper/remote_data_builder.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
-import 'package:vodic_kroz_valjevo/main.dart';
+import '../lib/database_config/tour_data_service.dart';
+import '../lib/helper/connection_problem_view.dart';
+import '../lib/helper/images_loader_helper.dart';
+import '../lib/helper/internet_connectivity.dart';
+import '../lib/helper/remote_data_builder.dart';
+import '../lib/l10n/app_localizations.dart';
+import '../lib/main.dart';
 
 void main() {
   const settingsChannel = MethodChannel('com.spencerccf.app_settings/methods');

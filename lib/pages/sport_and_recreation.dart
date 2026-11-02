@@ -9,7 +9,7 @@ import '../helper/remote_data_builder.dart';
 import '../helper/responsive_layout.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
-import '../navigation/cutom_app_bar.dart';
+import '../navigation/custom_app_bar.dart';
 import '../navigation/navigation_helper.dart';
 import 'parks/park_details.dart';
 import 'sports/sport_details.dart';

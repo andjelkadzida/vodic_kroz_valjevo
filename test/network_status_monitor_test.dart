@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
-import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
-import 'package:vodic_kroz_valjevo/helper/internet_connectivity.dart';
-import 'package:vodic_kroz_valjevo/pages/bug_report.dart';
+import '../lib/database_config/tour_data_service.dart';
+import '../lib/helper/internet_connectivity.dart';
+import '../lib/pages/bug_report.dart';
 
 void main() {
   testWidgets('a connectivity event wins over a stale initial check',

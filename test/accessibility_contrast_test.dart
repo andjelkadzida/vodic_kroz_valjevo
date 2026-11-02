@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vodic_kroz_valjevo/helper/accessibility_theme.dart';
+import '../lib/helper/accessibility_theme.dart';
 
 void main() {
   test('text and links meet WCAG AA contrast against their surfaces', () {

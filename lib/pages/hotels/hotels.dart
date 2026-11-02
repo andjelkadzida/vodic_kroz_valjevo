@@ -4,7 +4,7 @@ import '../../database_config/tour_data_service.dart';
 import '../../helper/remote_data_builder.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_builder.dart';
-import '../../navigation/cutom_app_bar.dart';
+import '../../navigation/custom_app_bar.dart';
 import 'hotel_details.dart';
 
 class Hotels extends StatelessWidget {

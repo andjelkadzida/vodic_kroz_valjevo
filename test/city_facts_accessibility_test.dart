@@ -7,12 +7,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
-import 'package:vodic_kroz_valjevo/localization/locale_controller.dart';
-import 'package:vodic_kroz_valjevo/pages/about_city.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
-import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
+import '../lib/database_config/tour_data_service.dart';
+import '../lib/l10n/app_localizations.dart';
+import '../lib/localization/locale_controller.dart';
+import '../lib/pages/about_city.dart';
+import '../lib/text_to_speech/speech_controls.dart';
+import '../lib/text_to_speech/text_to_speech_config.dart';
 
 import 'support/fake_parse_client.dart';
 import 'support/tour_fixtures.dart';

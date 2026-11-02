@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 import 'package:vodic_kroz_valjevo/localization/language.dart';
 import 'package:vodic_kroz_valjevo/navigation/bottom_navigation.dart';
-import 'package:vodic_kroz_valjevo/navigation/cutom_app_bar.dart';
+import 'package:vodic_kroz_valjevo/navigation/custom_app_bar.dart';
 
 void main() {
   const scenarios = [

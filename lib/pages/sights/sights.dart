@@ -9,7 +9,7 @@ import '../../helper/responsive_layout.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_screen.dart';
 import '../../navigation/bottom_navigation.dart';
-import '../../navigation/cutom_app_bar.dart';
+import '../../navigation/custom_app_bar.dart';
 import '../../navigation/navigation_helper.dart';
 import '../../text_to_speech/speech_controls.dart';
 import 'sight_details_page.dart';

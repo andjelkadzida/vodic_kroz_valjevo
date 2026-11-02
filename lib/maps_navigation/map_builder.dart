@@ -14,7 +14,7 @@ import '../helper/internet_connectivity.dart';
 import '../helper/responsive_layout.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
-import '../navigation/cutom_app_bar.dart';
+import '../navigation/custom_app_bar.dart';
 import '../navigation/navigation_helper.dart';
 
 const _mapAttribution = '© OpenStreetMap';

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n/app_localizations.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
 
-import 'database_config/database_helper.dart';
-import 'database_config/database_initializer.dart';
-import 'localization/supported_languages.dart';
+import 'database_config/back4app_config_loader.dart';
+import 'helper/accessibility_theme.dart';
+import 'helper/connection_problem_view.dart';
+import 'helper/internet_connectivity.dart';
+import 'localization/locale_controller.dart';
 import 'pages/home_page.dart';
 import 'text_to_speech/text_to_speech_config.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  runApp(const ApplicationBootstrap());
+}
 
+Future<bool> initializeApplication() async {
   final prefs = await SharedPreferences.getInstance();
   final isFirstRun = prefs.getBool('isFirstRun') ?? true;
 
@@ -22,92 +25,151 @@ void main() async {
     await prefs.setBool('isFirstRun', true);
   }
 
-  // Set the orientation to portrait
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
-  // Initialize the database
-  final db = await DatabaseHelper.instance.getNamedDatabase();
-  final databaseInitializer = DatabaseInitializer(db);
+  final back4App = await loadBack4AppConfig();
 
   await Future.wait([
     TextToSpeechConfig.instance.setEngine(),
-    databaseInitializer.initializeData(),
-    dotenv.load(),
+    Parse().initialize(
+      back4App.applicationId,
+      back4App.serverUrl.toString(),
+      clientKey: back4App.clientKey,
+    ),
   ]);
 
-  runApp(VodicKrozValjevo(database: db, isFirstRun: isFirstRun));
+  return isFirstRun;
 }
 
-class VodicKrozValjevo extends StatefulWidget {
-  final Database database;
-  final bool isFirstRun;
-
-  const VodicKrozValjevo(
-      {Key? key, required this.database, required this.isFirstRun})
+class ApplicationBootstrap extends StatefulWidget {
+  const ApplicationBootstrap(
+      {Key? key, this.initialize = initializeApplication})
       : super(key: key);
 
-  @override
-  State<VodicKrozValjevo> createState() => _VodicKrozValjevo();
+  final Future<bool> Function() initialize;
 
-  // Setting language
-  static void setLanguage(Locale newLanguage) {
-    final appState = _VodicKrozValjevo._instance;
-    appState?.setLanguage(newLanguage);
-  }
+  @override
+  State<ApplicationBootstrap> createState() => _ApplicationBootstrapState();
 }
 
-class _VodicKrozValjevo extends State<VodicKrozValjevo> {
-  static _VodicKrozValjevo? _instance;
-  Locale? _lang;
+class _ApplicationBootstrapState extends State<ApplicationBootstrap> {
+  late Future<bool> _initialization;
 
   @override
   void initState() {
     super.initState();
-    _instance = this;
+    _initialization = widget.initialize();
   }
 
-  setLanguage(Locale lang) {
+  void _retry() {
     setState(() {
-      _lang = lang;
-      TextToSpeechConfig.instance.setLanguage(lang.languageCode);
+      _initialization = widget.initialize();
     });
   }
 
   @override
-  void didChangeDependencies() {
-    getLocale().then((lang) => {setLanguage(lang)});
-    super.didChangeDependencies();
+  Widget build(BuildContext context) {
+    return FutureBuilder<bool>(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
+          return VodicKrozValjevo(isFirstRun: snapshot.data!);
+        }
+
+        return MaterialApp(
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          home: Builder(
+            builder: (context) {
+              final messages = AppLocalizations.of(context)!;
+              return Scaffold(
+                body: Center(
+                  child: snapshot.connectionState == ConnectionState.done &&
+                          snapshot.hasError
+                      ? isPossibleConnectionFailure(snapshot.error!)
+                          ? ConnectionAwareFailure(onRetry: _retry)
+                          : Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(messages.errorLoadingData),
+                                IconButton(
+                                  onPressed: _retry,
+                                  tooltip: MaterialLocalizations.of(context)
+                                      .refreshIndicatorSemanticLabel,
+                                  icon: Icon(
+                                    Icons.refresh,
+                                    semanticLabel:
+                                        MaterialLocalizations.of(context)
+                                            .refreshIndicatorSemanticLabel,
+                                  ),
+                                ),
+                              ],
+                            )
+                      : CircularProgressIndicator(
+                          semanticsLabel: messages.loading,
+                        ),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class VodicKrozValjevo extends StatefulWidget {
+  final bool isFirstRun;
+
+  const VodicKrozValjevo({Key? key, required this.isFirstRun})
+      : super(key: key);
+
+  @override
+  State<VodicKrozValjevo> createState() => _VodicKrozValjevo();
+}
+
+class _VodicKrozValjevo extends State<VodicKrozValjevo> {
+  late final LocaleController _localeController;
+
+  @override
+  void initState() {
+    super.initState();
+    _localeController = LocaleController()..load();
   }
 
   @override
   void dispose() {
-    _instance = null;
-    widget.database.close();
+    _localeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: _lang,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        canvasColor: Colors.transparent,
+    return LocaleScope(
+      controller: _localeController,
+      child: AnimatedBuilder(
+        animation: _localeController,
+        builder: (context, _) => MaterialApp(
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: _localeController.locale,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Roboto',
+            primarySwatch: Colors.blue,
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(foregroundColor: accessibleLinkColor),
+            ),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            canvasColor: Colors.transparent,
+          ),
+          home: const HomePage(),
+        ),
       ),
-      home: const HomePage(),
     );
   }
 }

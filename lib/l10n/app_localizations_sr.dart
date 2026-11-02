@@ -83,6 +83,25 @@ class AppLocalizationsSr extends AppLocalizations {
   String get openSettings => 'Otvorite podešavanja';
 
   @override
+  String get connectionProblem =>
+      'Zahtev nije moguće izvršiti. Proverite internet vezu i pokušajte ponovo.';
+
+  @override
+  String get networkSettingsHint =>
+      'Uključite Wi-Fi ili mobilne podatke u podešavanjima uređaja.';
+
+  @override
+  String get networkSettingsIosHint =>
+      'Uključite Wi-Fi ili mobilne podatke u Podešavanjima ili Kontrolnom centru.';
+
+  @override
+  String get networkSettingsFailed =>
+      'Nije moguće otvoriti podešavanja uređaja.';
+
+  @override
+  String get retryConnection => 'Pokušaj ponovo';
+
+  @override
   String image(Object name) {
     return 'Slika $name';
   }
@@ -98,16 +117,13 @@ class AppLocalizationsSr extends AppLocalizations {
   String get noDataAvailable => 'Podaci nisu dostupni!';
 
   @override
-  String get tapToHearSightDetails =>
-      'Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste zaustavili.';
+  String get tapToHearSightDetails => 'Pročitaj detalje o znamenitosti';
 
   @override
-  String get tapToHearParkDetails =>
-      'Dodirnite da čujete detalje o parku. Dodirnite dva puta za zaustavljanje.';
+  String get tapToHearParkDetails => 'Pročitaj detalje o parku';
 
   @override
-  String get tapToHearSportDetails =>
-      'Dodirnite da čujete detalje o sportskom terenu. Dodirnite dva puta za zaustavljanje.';
+  String get tapToHearSportDetails => 'Pročitaj detalje o sportskom terenu';
 
   @override
   String get tapToViewPark => 'Dodirnite da vidite detalje parka.';
@@ -116,12 +132,15 @@ class AppLocalizationsSr extends AppLocalizations {
   String get tapToViewSport => 'Dodirnite da vidite detalje sportskog terena.';
 
   @override
-  String get tapToHearLegend =>
-      'Dodirnite da biste čuli legendu o imenu grada. Dodirnite dva puta, da biste zaustavili.';
+  String get tapToHearLegend => 'Pročitaj legendu o gradu';
 
   @override
-  String get tapToHearHistory =>
-      'Dodirnite da čujete istoriju grada. Dodirnite dva puta, da biste zaustavili.';
+  String get tapToHearHistory => 'Pročitaj istoriju grada';
+
+  @override
+  String readCityFact(String fact) {
+    return 'Naglas pročitaj: $fact';
+  }
 
   @override
   String tapToSeeSightDetails(Object name) {
@@ -186,6 +205,75 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get map => 'Mapa grada Valjeva';
+
+  @override
+  String get mapView => 'Prikaz mape';
+
+  @override
+  String get listView => 'Prikaz liste';
+
+  @override
+  String get previousItem => 'Prethodna stavka';
+
+  @override
+  String get nextItem => 'Sledeća stavka';
+
+  @override
+  String get previousPhoto => 'Prethodna fotografija';
+
+  @override
+  String get nextPhoto => 'Sledeća fotografija';
+
+  @override
+  String get zoomIn => 'Uvećaj';
+
+  @override
+  String get zoomOut => 'Umanji';
+
+  @override
+  String get resetZoom => 'Vrati uvećanje';
+
+  @override
+  String get movePhotoUp => 'Pomeri fotografiju nagore';
+
+  @override
+  String get movePhotoDown => 'Pomeri fotografiju nadole';
+
+  @override
+  String get movePhotoLeft => 'Pomeri fotografiju nalevo';
+
+  @override
+  String get movePhotoRight => 'Pomeri fotografiju nadesno';
+
+  @override
+  String get moveMapUp => 'Pomeri mapu nagore';
+
+  @override
+  String get moveMapDown => 'Pomeri mapu nadole';
+
+  @override
+  String get moveMapLeft => 'Pomeri mapu nalevo';
+
+  @override
+  String get moveMapRight => 'Pomeri mapu nadesno';
+
+  @override
+  String get resetMap => 'Vrati mapu';
+
+  @override
+  String get stopReading => 'Zaustavi čitanje';
+
+  @override
+  String get speechUnavailable =>
+      'Čitanje nije dostupno. Proverite podešavanja govora na uređaju.';
+
+  @override
+  String get retryImage => 'Pokušaj ponovo da učitaš sliku';
+
+  @override
+  String positionInList(int current, int total) {
+    return '$current od $total';
+  }
 
   @override
   String get website => 'Veb-sajt';
@@ -338,6 +426,78 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get population => 'Broj stanovnika';
+
+  @override
+  String citySurfaceValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ha';
+  }
+
+  @override
+  String citySurfaceSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString hektara';
+  }
+
+  @override
+  String cityElevationValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString m';
+  }
+
+  @override
+  String cityElevationSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString metara';
+  }
+
+  @override
+  String cityDensityValue(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString st./km² ($year.)';
+  }
+
+  @override
+  String cityDensitySpoken(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString stanovnika po kvadratnom kilometru $year. godine';
+  }
+
+  @override
+  String cityPopulationValue(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ($year.)';
+  }
+
+  @override
+  String cityPopulationSpoken(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString stanovnika $year. godine';
+  }
 
   @override
   String get district => 'Okrug';
@@ -580,6 +740,25 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get openSettings => 'Отворите подешавања';
 
   @override
+  String get connectionProblem =>
+      'Захтев није могуће извршити. Проверите интернет везу и покушајте поново.';
+
+  @override
+  String get networkSettingsHint =>
+      'Укључите Wi-Fi или мобилне податке у подешавањима уређаја.';
+
+  @override
+  String get networkSettingsIosHint =>
+      'Укључите Wi-Fi или мобилне податке у Подешавањима или Контролном центру.';
+
+  @override
+  String get networkSettingsFailed =>
+      'Није могуће отворити подешавања уређаја.';
+
+  @override
+  String get retryConnection => 'Покушај поново';
+
+  @override
   String image(Object name) {
     return 'Слика $name';
   }
@@ -595,16 +774,13 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get noDataAvailable => 'Подаци нису доступни!';
 
   @override
-  String get tapToHearSightDetails =>
-      'Додирните да бисте чули детаље о знаменитости. Додирните два пута, да бисте зауставили.';
+  String get tapToHearSightDetails => 'Прочитај детаље о знаменитости';
 
   @override
-  String get tapToHearParkDetails =>
-      'Додирните да чујете детаље о парку. Додирните два пута за заустављање.';
+  String get tapToHearParkDetails => 'Прочитај детаље о парку';
 
   @override
-  String get tapToHearSportDetails =>
-      'Додирните да чујете детаље о спортском терену. Додирните два пута за заустављање.';
+  String get tapToHearSportDetails => 'Прочитај детаље о спортском терену';
 
   @override
   String get tapToViewPark => 'Додирните да видите детаље парка.';
@@ -613,12 +789,15 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get tapToViewSport => 'Додирните да видите детаље спортског терена.';
 
   @override
-  String get tapToHearLegend =>
-      'Додирните да бисте чули легенду о имену града. Додирните два пута, да бисте зауставили.';
+  String get tapToHearLegend => 'Прочитај легенду о граду';
 
   @override
-  String get tapToHearHistory =>
-      'Додирните да чујете историју града. Додирните два пута, да бисте зауставили.';
+  String get tapToHearHistory => 'Прочитај историју града';
+
+  @override
+  String readCityFact(String fact) {
+    return 'Наглас прочитај: $fact';
+  }
 
   @override
   String tapToSeeSightDetails(Object name) {
@@ -683,6 +862,75 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
 
   @override
   String get map => 'Мапа града Ваљева';
+
+  @override
+  String get mapView => 'Приказ мапе';
+
+  @override
+  String get listView => 'Приказ листе';
+
+  @override
+  String get previousItem => 'Претходна ставка';
+
+  @override
+  String get nextItem => 'Следећа ставка';
+
+  @override
+  String get previousPhoto => 'Претходна фотографија';
+
+  @override
+  String get nextPhoto => 'Следећа фотографија';
+
+  @override
+  String get zoomIn => 'Увећај';
+
+  @override
+  String get zoomOut => 'Умањи';
+
+  @override
+  String get resetZoom => 'Врати увећање';
+
+  @override
+  String get movePhotoUp => 'Помери фотографију нагоре';
+
+  @override
+  String get movePhotoDown => 'Помери фотографију надоле';
+
+  @override
+  String get movePhotoLeft => 'Помери фотографију налево';
+
+  @override
+  String get movePhotoRight => 'Помери фотографију надесно';
+
+  @override
+  String get moveMapUp => 'Помери мапу нагоре';
+
+  @override
+  String get moveMapDown => 'Помери мапу надоле';
+
+  @override
+  String get moveMapLeft => 'Помери мапу налево';
+
+  @override
+  String get moveMapRight => 'Помери мапу надесно';
+
+  @override
+  String get resetMap => 'Врати мапу';
+
+  @override
+  String get stopReading => 'Заустави читање';
+
+  @override
+  String get speechUnavailable =>
+      'Читање није доступно. Проверите подешавања говора на уређају.';
+
+  @override
+  String get retryImage => 'Покушај поново да учиташ слику';
+
+  @override
+  String positionInList(int current, int total) {
+    return '$current од $total';
+  }
 
   @override
   String get website => 'Веб-сајт';
@@ -834,6 +1082,78 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
 
   @override
   String get population => 'Број становника';
+
+  @override
+  String citySurfaceValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ха';
+  }
+
+  @override
+  String citySurfaceSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString хектара';
+  }
+
+  @override
+  String cityElevationValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString м';
+  }
+
+  @override
+  String cityElevationSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString метара';
+  }
+
+  @override
+  String cityDensityValue(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ст./км² ($year.)';
+  }
+
+  @override
+  String cityDensitySpoken(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString становника по квадратном километру $year. године';
+  }
+
+  @override
+  String cityPopulationValue(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ($year.)';
+  }
+
+  @override
+  String cityPopulationSpoken(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString становника $year. године';
+  }
 
   @override
   String get district => 'Округ';
@@ -1076,6 +1396,25 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get openSettings => 'Otvorite podešavanja';
 
   @override
+  String get connectionProblem =>
+      'Zahtev nije moguće izvršiti. Proverite internet vezu i pokušajte ponovo.';
+
+  @override
+  String get networkSettingsHint =>
+      'Uključite Wi-Fi ili mobilne podatke u podešavanjima uređaja.';
+
+  @override
+  String get networkSettingsIosHint =>
+      'Uključite Wi-Fi ili mobilne podatke u Podešavanjima ili Kontrolnom centru.';
+
+  @override
+  String get networkSettingsFailed =>
+      'Nije moguće otvoriti podešavanja uređaja.';
+
+  @override
+  String get retryConnection => 'Pokušaj ponovo';
+
+  @override
   String image(Object name) {
     return 'Slika $name';
   }
@@ -1091,16 +1430,13 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get noDataAvailable => 'Podaci nisu dostupni!';
 
   @override
-  String get tapToHearSightDetails =>
-      'Dodirnite da biste čuli detalje o znamenitosti. Dodirnite dva puta, da biste zaustavili.';
+  String get tapToHearSightDetails => 'Pročitaj detalje o znamenitosti';
 
   @override
-  String get tapToHearParkDetails =>
-      'Dodirnite da čujete detalje o parku. Dodirnite dva puta za zaustavljanje.';
+  String get tapToHearParkDetails => 'Pročitaj detalje o parku';
 
   @override
-  String get tapToHearSportDetails =>
-      'Dodirnite da čujete detalje o sportskom terenu. Dodirnite dva puta za zaustavljanje.';
+  String get tapToHearSportDetails => 'Pročitaj detalje o sportskom terenu';
 
   @override
   String get tapToViewPark => 'Dodirnite da vidite detalje parka.';
@@ -1109,12 +1445,15 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get tapToViewSport => 'Dodirnite da vidite detalje sportskog terena.';
 
   @override
-  String get tapToHearLegend =>
-      'Dodirnite da biste čuli legendu o imenu grada. Dodirnite dva puta, da biste zaustavili.';
+  String get tapToHearLegend => 'Pročitaj legendu o gradu';
 
   @override
-  String get tapToHearHistory =>
-      'Dodirnite da čujete istoriju grada. Dodirnite dva puta, da biste zaustavili.';
+  String get tapToHearHistory => 'Pročitaj istoriju grada';
+
+  @override
+  String readCityFact(String fact) {
+    return 'Naglas pročitaj: $fact';
+  }
 
   @override
   String tapToSeeSightDetails(Object name) {
@@ -1179,6 +1518,75 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get map => 'Mapa grada Valjeva';
+
+  @override
+  String get mapView => 'Prikaz mape';
+
+  @override
+  String get listView => 'Prikaz liste';
+
+  @override
+  String get previousItem => 'Prethodna stavka';
+
+  @override
+  String get nextItem => 'Sledeća stavka';
+
+  @override
+  String get previousPhoto => 'Prethodna fotografija';
+
+  @override
+  String get nextPhoto => 'Sledeća fotografija';
+
+  @override
+  String get zoomIn => 'Uvećaj';
+
+  @override
+  String get zoomOut => 'Umanji';
+
+  @override
+  String get resetZoom => 'Vrati uvećanje';
+
+  @override
+  String get movePhotoUp => 'Pomeri fotografiju nagore';
+
+  @override
+  String get movePhotoDown => 'Pomeri fotografiju nadole';
+
+  @override
+  String get movePhotoLeft => 'Pomeri fotografiju nalevo';
+
+  @override
+  String get movePhotoRight => 'Pomeri fotografiju nadesno';
+
+  @override
+  String get moveMapUp => 'Pomeri mapu nagore';
+
+  @override
+  String get moveMapDown => 'Pomeri mapu nadole';
+
+  @override
+  String get moveMapLeft => 'Pomeri mapu nalevo';
+
+  @override
+  String get moveMapRight => 'Pomeri mapu nadesno';
+
+  @override
+  String get resetMap => 'Vrati mapu';
+
+  @override
+  String get stopReading => 'Zaustavi čitanje';
+
+  @override
+  String get speechUnavailable =>
+      'Čitanje nije dostupno. Proverite podešavanja govora na uređaju.';
+
+  @override
+  String get retryImage => 'Pokušaj ponovo da učitaš sliku';
+
+  @override
+  String positionInList(int current, int total) {
+    return '$current od $total';
+  }
 
   @override
   String get website => 'Veb-sajt';
@@ -1330,6 +1738,78 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get population => 'Broj stanovnika';
+
+  @override
+  String citySurfaceValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ha';
+  }
+
+  @override
+  String citySurfaceSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString hektara';
+  }
+
+  @override
+  String cityElevationValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString m';
+  }
+
+  @override
+  String cityElevationSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString metara';
+  }
+
+  @override
+  String cityDensityValue(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString st./km² ($year.)';
+  }
+
+  @override
+  String cityDensitySpoken(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString stanovnika po kvadratnom kilometru $year. godine';
+  }
+
+  @override
+  String cityPopulationValue(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ($year.)';
+  }
+
+  @override
+  String cityPopulationSpoken(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString stanovnika $year. godine';
+  }
 
   @override
   String get district => 'Okrug';

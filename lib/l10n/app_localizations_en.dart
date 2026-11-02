@@ -81,6 +81,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get openSettings => 'Open Settings';
 
   @override
+  String get connectionProblem =>
+      'Unable to complete the request. Check your internet connection and try again.';
+
+  @override
+  String get networkSettingsHint =>
+      'Turn on Wi-Fi or mobile data in your device settings.';
+
+  @override
+  String get networkSettingsIosHint =>
+      'Turn on Wi-Fi or mobile data in Settings or Control Center.';
+
+  @override
+  String get networkSettingsFailed => 'Could not open device settings.';
+
+  @override
+  String get retryConnection => 'Try again';
+
+  @override
   String image(Object name) {
     return 'Image of $name';
   }
@@ -95,16 +113,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDataAvailable => 'No data available!';
 
   @override
-  String get tapToHearSightDetails =>
-      'Tap to hear details about the sight. Tap twice to stop.';
+  String get tapToHearSightDetails => 'Read sight details aloud';
 
   @override
-  String get tapToHearParkDetails =>
-      'Tap to hear details about the park. Tap twice to stop.';
+  String get tapToHearParkDetails => 'Read park details aloud';
 
   @override
-  String get tapToHearSportDetails =>
-      'Tap to hear details about the sport field. Tap twice to stop.';
+  String get tapToHearSportDetails => 'Read sports field details aloud';
 
   @override
   String get tapToViewPark => 'Tap to view park\'s details.';
@@ -113,12 +128,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tapToViewSport => 'Tap to view sport field\'s details.';
 
   @override
-  String get tapToHearLegend =>
-      'Tap to hear the legend of the city name. Tap twice to stop.';
+  String get tapToHearLegend => 'Read the city legend aloud';
 
   @override
-  String get tapToHearHistory =>
-      'Tap to hear the city\'s history. Tap twice to stop.';
+  String get tapToHearHistory => 'Read the city history aloud';
+
+  @override
+  String readCityFact(String fact) {
+    return 'Read $fact aloud';
+  }
 
   @override
   String tapToSeeSightDetails(Object name) {
@@ -183,6 +201,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get map => 'Map of the city of Valjevo';
+
+  @override
+  String get mapView => 'Map view';
+
+  @override
+  String get listView => 'List view';
+
+  @override
+  String get previousItem => 'Previous item';
+
+  @override
+  String get nextItem => 'Next item';
+
+  @override
+  String get previousPhoto => 'Previous photo';
+
+  @override
+  String get nextPhoto => 'Next photo';
+
+  @override
+  String get zoomIn => 'Zoom in';
+
+  @override
+  String get zoomOut => 'Zoom out';
+
+  @override
+  String get resetZoom => 'Reset zoom';
+
+  @override
+  String get movePhotoUp => 'Move photo up';
+
+  @override
+  String get movePhotoDown => 'Move photo down';
+
+  @override
+  String get movePhotoLeft => 'Move photo left';
+
+  @override
+  String get movePhotoRight => 'Move photo right';
+
+  @override
+  String get moveMapUp => 'Move map up';
+
+  @override
+  String get moveMapDown => 'Move map down';
+
+  @override
+  String get moveMapLeft => 'Move map left';
+
+  @override
+  String get moveMapRight => 'Move map right';
+
+  @override
+  String get resetMap => 'Reset map';
+
+  @override
+  String get stopReading => 'Stop reading';
+
+  @override
+  String get speechUnavailable =>
+      'Speech is unavailable. Check your device\'s text-to-speech settings.';
+
+  @override
+  String get retryImage => 'Retry loading image';
+
+  @override
+  String positionInList(int current, int total) {
+    return '$current of $total';
+  }
 
   @override
   String get website => 'Website';
@@ -334,6 +421,78 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get population => 'Population';
+
+  @override
+  String citySurfaceValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ha';
+  }
+
+  @override
+  String citySurfaceSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString hectares';
+  }
+
+  @override
+  String cityElevationValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString m';
+  }
+
+  @override
+  String cityElevationSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString meters';
+  }
+
+  @override
+  String cityDensityValue(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString people/km² ($year)';
+  }
+
+  @override
+  String cityDensitySpoken(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString people per square kilometer in $year';
+  }
+
+  @override
+  String cityPopulationValue(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ($year)';
+  }
+
+  @override
+  String cityPopulationSpoken(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString people in $year';
+  }
 
   @override
   String get district => 'District';

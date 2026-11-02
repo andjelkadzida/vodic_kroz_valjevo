@@ -19,7 +19,6 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     return Semantics(
       label: localization(context).menuItem(label),
       button: true,
@@ -27,43 +26,49 @@ class MenuItem extends StatelessWidget {
       onTapHint: localization(context).tapToOpen(label),
       child: Card(
         elevation: 4,
-        margin: EdgeInsets.all(screenWidth * 0.01),
+        margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(20),
-          child: Column(
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    Lottie.asset(lottieAsset,
-                        width: screenWidth * 0.2, height: screenWidth * 0.2),
-                    Center(
-                      child: Icon(
-                        icon,
-                        size: screenWidth * 0.17,
-                        color: const Color.fromRGBO(11, 20, 32, 1),
-                        applyTextScaling: true,
-                      ),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 160),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 72,
+                    height: 72,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Lottie.asset(
+                          lottieAsset,
+                          animate: !MediaQuery.disableAnimationsOf(context),
+                        ),
+                        Icon(
+                          icon,
+                          size: 44,
+                          color: const Color.fromRGBO(11, 20, 32, 1),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: const Color.fromRGBO(11, 20, 32, 1),
+                          fontWeight: FontWeight.w400,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: Text(
-                  label,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: const Color.fromRGBO(11, 20, 32, 1),
-                        fontSize: screenWidth * 0.05,
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.w400,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

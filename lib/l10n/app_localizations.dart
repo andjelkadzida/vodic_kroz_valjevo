@@ -240,6 +240,36 @@ abstract class AppLocalizations {
   /// **'Open Settings'**
   String get openSettings;
 
+  /// No description provided for @connectionProblem.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to complete the request. Check your internet connection and try again.'**
+  String get connectionProblem;
+
+  /// No description provided for @networkSettingsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Wi-Fi or mobile data in your device settings.'**
+  String get networkSettingsHint;
+
+  /// No description provided for @networkSettingsIosHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Wi-Fi or mobile data in Settings or Control Center.'**
+  String get networkSettingsIosHint;
+
+  /// No description provided for @networkSettingsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open device settings.'**
+  String get networkSettingsFailed;
+
+  /// No description provided for @retryConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get retryConnection;
+
   /// No description provided for @image.
   ///
   /// In en, this message translates to:
@@ -267,19 +297,19 @@ abstract class AppLocalizations {
   /// No description provided for @tapToHearSightDetails.
   ///
   /// In en, this message translates to:
-  /// **'Tap to hear details about the sight. Tap twice to stop.'**
+  /// **'Read sight details aloud'**
   String get tapToHearSightDetails;
 
   /// No description provided for @tapToHearParkDetails.
   ///
   /// In en, this message translates to:
-  /// **'Tap to hear details about the park. Tap twice to stop.'**
+  /// **'Read park details aloud'**
   String get tapToHearParkDetails;
 
   /// No description provided for @tapToHearSportDetails.
   ///
   /// In en, this message translates to:
-  /// **'Tap to hear details about the sport field. Tap twice to stop.'**
+  /// **'Read sports field details aloud'**
   String get tapToHearSportDetails;
 
   /// No description provided for @tapToViewPark.
@@ -297,14 +327,20 @@ abstract class AppLocalizations {
   /// No description provided for @tapToHearLegend.
   ///
   /// In en, this message translates to:
-  /// **'Tap to hear the legend of the city name. Tap twice to stop.'**
+  /// **'Read the city legend aloud'**
   String get tapToHearLegend;
 
   /// No description provided for @tapToHearHistory.
   ///
   /// In en, this message translates to:
-  /// **'Tap to hear the city\'s history. Tap twice to stop.'**
+  /// **'Read the city history aloud'**
   String get tapToHearHistory;
+
+  /// No description provided for @readCityFact.
+  ///
+  /// In en, this message translates to:
+  /// **'Read {fact} aloud'**
+  String readCityFact(String fact);
 
   /// No description provided for @tapToSeeSightDetails.
   ///
@@ -413,6 +449,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Map of the city of Valjevo'**
   String get map;
+
+  /// No description provided for @mapView.
+  ///
+  /// In en, this message translates to:
+  /// **'Map view'**
+  String get mapView;
+
+  /// No description provided for @listView.
+  ///
+  /// In en, this message translates to:
+  /// **'List view'**
+  String get listView;
+
+  /// No description provided for @previousItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous item'**
+  String get previousItem;
+
+  /// No description provided for @nextItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Next item'**
+  String get nextItem;
+
+  /// No description provided for @previousPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous photo'**
+  String get previousPhoto;
+
+  /// No description provided for @nextPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Next photo'**
+  String get nextPhoto;
+
+  /// No description provided for @zoomIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom in'**
+  String get zoomIn;
+
+  /// No description provided for @zoomOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom out'**
+  String get zoomOut;
+
+  /// No description provided for @resetZoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset zoom'**
+  String get resetZoom;
+
+  /// No description provided for @movePhotoUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Move photo up'**
+  String get movePhotoUp;
+
+  /// No description provided for @movePhotoDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Move photo down'**
+  String get movePhotoDown;
+
+  /// No description provided for @movePhotoLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Move photo left'**
+  String get movePhotoLeft;
+
+  /// No description provided for @movePhotoRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Move photo right'**
+  String get movePhotoRight;
+
+  /// No description provided for @moveMapUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Move map up'**
+  String get moveMapUp;
+
+  /// No description provided for @moveMapDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Move map down'**
+  String get moveMapDown;
+
+  /// No description provided for @moveMapLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Move map left'**
+  String get moveMapLeft;
+
+  /// No description provided for @moveMapRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Move map right'**
+  String get moveMapRight;
+
+  /// No description provided for @resetMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset map'**
+  String get resetMap;
+
+  /// No description provided for @stopReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop reading'**
+  String get stopReading;
+
+  /// No description provided for @speechUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Speech is unavailable. Check your device\'s text-to-speech settings.'**
+  String get speechUnavailable;
+
+  /// No description provided for @retryImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry loading image'**
+  String get retryImage;
+
+  /// No description provided for @positionInList.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} of {total}'**
+  String positionInList(int current, int total);
 
   /// No description provided for @website.
   ///
@@ -683,6 +851,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Population'**
   String get population;
+
+  /// No description provided for @citySurfaceValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} ha'**
+  String citySurfaceValue(int value);
+
+  /// No description provided for @citySurfaceSpoken.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} hectares'**
+  String citySurfaceSpoken(int value);
+
+  /// No description provided for @cityElevationValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} m'**
+  String cityElevationValue(int value);
+
+  /// No description provided for @cityElevationSpoken.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} meters'**
+  String cityElevationSpoken(int value);
+
+  /// No description provided for @cityDensityValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} people/km² ({year})'**
+  String cityDensityValue(double value, int year);
+
+  /// No description provided for @cityDensitySpoken.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} people per square kilometer in {year}'**
+  String cityDensitySpoken(double value, int year);
+
+  /// No description provided for @cityPopulationValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} ({year})'**
+  String cityPopulationValue(int value, int year);
+
+  /// No description provided for @cityPopulationSpoken.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} people in {year}'**
+  String cityPopulationSpoken(int value, int year);
 
   /// No description provided for @district.
   ///

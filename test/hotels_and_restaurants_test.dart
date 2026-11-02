@@ -50,8 +50,6 @@ void main() {
       expect(tester.takeException(), isNull);
       final context = tester.element(find.byType(HotelsAndRestaurants));
       final localizations = AppLocalizations.of(context)!;
-      final scrollView = find.byType(SingleChildScrollView);
-      expect(scrollView, findsOneWidget);
       final background = find.byWidgetPredicate((widget) {
         if (widget is! Container) return false;
         final decoration = widget.decoration;
@@ -62,6 +60,11 @@ void main() {
                 'images/backgroundAndCoverImages/hotelsBackground.jpg';
       });
       expect(background, findsOneWidget);
+      final scrollView = find.descendant(
+        of: background,
+        matching: find.byType(SingleChildScrollView),
+      );
+      expect(scrollView, findsOneWidget);
       final backgroundRect = tester.getRect(background);
       final scaffoldRect = tester.getRect(find.byType(Scaffold));
       final appBarRect = tester.getRect(find.byType(AppBar));

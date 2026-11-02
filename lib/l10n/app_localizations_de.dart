@@ -85,6 +85,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String get openSettings => 'Einstellungen öffnen';
 
   @override
+  String get connectionProblem =>
+      'Die Anfrage konnte nicht abgeschlossen werden. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.';
+
+  @override
+  String get networkSettingsHint =>
+      'Aktivieren Sie WLAN oder mobile Daten in den Geräteeinstellungen.';
+
+  @override
+  String get networkSettingsIosHint =>
+      'Aktivieren Sie WLAN oder mobile Daten in den Einstellungen oder im Kontrollzentrum.';
+
+  @override
+  String get networkSettingsFailed =>
+      'Die Geräteeinstellungen konnten nicht geöffnet werden.';
+
+  @override
+  String get retryConnection => 'Erneut versuchen';
+
+  @override
   String image(Object name) {
     return 'Build von $name';
   }
@@ -99,16 +118,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get noDataAvailable => 'Keine Daten verfügbar!';
 
   @override
-  String get tapToHearSightDetails =>
-      'Tippen Sie, um Details über die Sehenswürdigkeit zu hören. Tippen Sie zweimal, um zu stoppen.';
+  String get tapToHearSightDetails => 'Details zur Sehenswürdigkeit vorlesen';
 
   @override
-  String get tapToHearParkDetails =>
-      'Tippen, um Details über den Park zu hören. Zweimal tippen, um anzuhalten.';
+  String get tapToHearParkDetails => 'Details zum Park vorlesen';
 
   @override
-  String get tapToHearSportDetails =>
-      'Tippen, um Details über das Sportfeld zu hören. Zweimal tippen, um anzuhalten.';
+  String get tapToHearSportDetails => 'Details zum Sportplatz vorlesen';
 
   @override
   String get tapToViewPark => 'Tippen, um Details zum Park anzuzeigen.';
@@ -117,12 +133,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tapToViewSport => 'Tippen, um Details zum Sportfeld anzuzeigen.';
 
   @override
-  String get tapToHearLegend =>
-      'Tippen Sie, um die Legende des Stadtnamens zu hören. Tippen Sie zweimal, um zu stoppen.';
+  String get tapToHearLegend => 'Stadtlegende vorlesen';
 
   @override
-  String get tapToHearHistory =>
-      'Tippen Sie, um die Stadtgeschichte zu hören. Tippen Sie zweimal, um zu stoppen.';
+  String get tapToHearHistory => 'Stadtgeschichte vorlesen';
+
+  @override
+  String readCityFact(String fact) {
+    return '$fact vorlesen';
+  }
 
   @override
   String tapToSeeSightDetails(Object name) {
@@ -187,6 +206,75 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get map => 'Stadtplan von Valjevo';
+
+  @override
+  String get mapView => 'Kartenansicht';
+
+  @override
+  String get listView => 'Listenansicht';
+
+  @override
+  String get previousItem => 'Vorheriger Eintrag';
+
+  @override
+  String get nextItem => 'Nächster Eintrag';
+
+  @override
+  String get previousPhoto => 'Vorheriges Foto';
+
+  @override
+  String get nextPhoto => 'Nächstes Foto';
+
+  @override
+  String get zoomIn => 'Vergrößern';
+
+  @override
+  String get zoomOut => 'Verkleinern';
+
+  @override
+  String get resetZoom => 'Zoom zurücksetzen';
+
+  @override
+  String get movePhotoUp => 'Foto nach oben bewegen';
+
+  @override
+  String get movePhotoDown => 'Foto nach unten bewegen';
+
+  @override
+  String get movePhotoLeft => 'Foto nach links bewegen';
+
+  @override
+  String get movePhotoRight => 'Foto nach rechts bewegen';
+
+  @override
+  String get moveMapUp => 'Karte nach oben bewegen';
+
+  @override
+  String get moveMapDown => 'Karte nach unten bewegen';
+
+  @override
+  String get moveMapLeft => 'Karte nach links bewegen';
+
+  @override
+  String get moveMapRight => 'Karte nach rechts bewegen';
+
+  @override
+  String get resetMap => 'Karte zurücksetzen';
+
+  @override
+  String get stopReading => 'Vorlesen stoppen';
+
+  @override
+  String get speechUnavailable =>
+      'Sprachausgabe nicht verfügbar. Überprüfen Sie die Einstellungen der Sprachausgabe auf Ihrem Gerät.';
+
+  @override
+  String get retryImage => 'Bild erneut laden';
+
+  @override
+  String positionInList(int current, int total) {
+    return '$current von $total';
+  }
 
   @override
   String get website => 'Webseite';
@@ -341,6 +429,78 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get population => 'Bevölkerung';
+
+  @override
+  String citySurfaceValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ha';
+  }
+
+  @override
+  String citySurfaceSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString Hektar';
+  }
+
+  @override
+  String cityElevationValue(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString m';
+  }
+
+  @override
+  String cityElevationSpoken(int value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString Meter';
+  }
+
+  @override
+  String cityDensityValue(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString Einw./km² ($year)';
+  }
+
+  @override
+  String cityDensitySpoken(double value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString Einwohner pro Quadratkilometer im Jahr $year';
+  }
+
+  @override
+  String cityPopulationValue(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString ($year)';
+  }
+
+  @override
+  String cityPopulationSpoken(int value, int year) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString Einwohner im Jahr $year';
+  }
 
   @override
   String get district => 'Bezirk';

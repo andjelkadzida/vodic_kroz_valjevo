@@ -1,77 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
-import 'package:vodic_kroz_valjevo/database_config/hotels_repository.dart';
-import 'package:vodic_kroz_valjevo/database_config/restaurants_repository.dart';
-import 'package:vodic_kroz_valjevo/database_config/sights_repository.dart';
-import 'package:vodic_kroz_valjevo/database_config/sports_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vodic_kroz_valjevo/localization/language.dart';
 import 'package:vodic_kroz_valjevo/main.dart';
-import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 
 void main() {
-  sqfliteFfiInit(); // Initialize sqflite_ffi
+  TestWidgetsFlutterBinding.ensureInitialized();
+  const tts = MethodChannel('flutter_tts');
 
   group('VodicKrozValjevo', () {
-    testWidgets('should use default language if not set',
-        (WidgetTester tester) async {
-      databaseFactory = databaseFactoryFfi;
-      final db = await DatabaseHelper.instance.getNamedDatabase();
-      bool isFirstRun = true;
-      late Locale defaultLocale;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: Builder(
-            builder: (BuildContext buildContext) {
-              defaultLocale = Localizations.localeOf(buildContext);
-              return VodicKrozValjevo(database: db, isFirstRun: isFirstRun);
-            },
-          ),
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      expect(
-        Localizations.localeOf(tester.element(find.byType(VodicKrozValjevo))),
-        equals(defaultLocale),
-      );
+    setUp(() {
+      SharedPreferences.setMockInitialValues({});
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(tts, (_) async => 1);
     });
 
-    testWidgets('should initialize data on app start',
+    tearDown(() {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(tts, null);
+    });
+
+    testWidgets('uses Serbian Cyrillic when no language is saved',
         (WidgetTester tester) async {
-      databaseFactory = databaseFactoryFfi;
-      final db = await DatabaseHelper.instance.getNamedDatabase();
-      bool isFirstRun = true;
+      await tester.pumpWidget(const VodicKrozValjevo(isFirstRun: true));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      final locale =
+          tester.widget<MaterialApp>(find.byType(MaterialApp)).locale;
+      expect(locale?.languageCode, 'sr');
+      expect(locale?.scriptCode, 'Cyrl');
+    });
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: VodicKrozValjevo(database: db, isFirstRun: isFirstRun),
-        ),
-      );
-
+    testWidgets('language selection updates the app and preferences',
+        (tester) async {
+      await tester.pumpWidget(const VodicKrozValjevo(isFirstRun: true));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.tap(find.byType(ElevatedButton).first);
       await tester.pumpAndSettle();
-
-      final sightsRepo = SightsRepository(db);
-      final sportsRepo = SportsRepository(db);
-      final hotelsRepo = HotelsRepository(db);
-      final restaurantsRepo = RestaurantsRepository(db);
-
-      final sportsExist = await sportsRepo.checkSportsDataExists();
-      final sightsExist = await sightsRepo.checkSightsDataExist();
-      final hotelsExist = await hotelsRepo.checkHotelsDataExist();
-      final restaurantsExist =
-          await restaurantsRepo.checkRestaurantsDataExist();
-
-      expect(sportsExist, true);
-      expect(sightsExist, true);
-      expect(hotelsExist, true);
-      expect(restaurantsExist, true);
+      final german = find.byWidgetPredicate(
+        (widget) =>
+            widget is LanguageButton && widget.language.scriptCode == 'de',
+      );
+      await tester.ensureVisible(german);
+      await tester.tap(german);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pump();
+      final locale =
+          tester.widget<MaterialApp>(find.byType(MaterialApp)).locale;
+      expect(locale?.languageCode, 'de');
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('scriptCode'), 'de');
+      expect(prefs.getBool('isFirstRun'), isFalse);
     });
   });
 }

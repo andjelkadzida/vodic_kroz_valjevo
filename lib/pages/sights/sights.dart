@@ -2,195 +2,221 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../database_config/tour_data_service.dart';
+import '../../helper/images_loader_helper.dart';
+import '../../helper/remote_data_builder.dart';
+import '../../helper/responsive_layout.dart';
 import '../../localization/supported_languages.dart';
 import '../../maps_navigation/map_screen.dart';
 import '../../navigation/bottom_navigation.dart';
-import '../../database_config/database_helper.dart';
 import '../../navigation/cutom_app_bar.dart';
 import '../../navigation/navigation_helper.dart';
-import '../../text_to_speech/text_to_speech_config.dart';
+import '../../text_to_speech/speech_controls.dart';
 import 'sight_details_page.dart';
 
 class Sights extends StatelessWidget {
-  final MapScreen mapScreen = MapScreen();
-
   Sights({Key? key}) : super(key: key);
+
+  final MapScreen mapScreen = MapScreen();
 
   @override
   Widget build(BuildContext context) {
+    final languageCode = localization(context).localeName;
+    return Scaffold(
+      appBar: customAppBar(
+        context,
+        localization(context).sights,
+        const Color.fromRGBO(87, 19, 20, 1),
+        onRefresh: () =>
+            TourDataService.instance.refresh(TourCollection.sights),
+      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(87, 19, 20, 1),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/backgroundAndCoverImages/background.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          bottom: false,
+          child: RemoteDataBuilder<List<Map<String, dynamic>>>(
+            queryKey: languageCode,
+            load: () => TourDataService.instance
+                .list(TourCollection.sights, languageCode),
+            refreshSignal:
+                TourDataService.instance.refreshSignal(TourCollection.sights),
+            onRetry: () =>
+                TourDataService.instance.refresh(TourCollection.sights),
+            onData: (data) => buildSightsList(data, context),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildSightsList(
+      List<Map<String, dynamic>> sightsData, BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Scaffold(
-          appBar: customAppBar(
-            context,
-            localization(context).sights,
-            const Color.fromRGBO(87, 19, 20, 1),
-          ),
-          bottomNavigationBar: const CustomBottomNavigationBar(
-            unselectedColor: Color.fromRGBO(87, 19, 20, 1),
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    'images/backgroundAndCoverImages/background.jpg'),
-                fit: BoxFit.cover,
+        const padding = 16.0;
+        const spacing = 12.0;
+        final width = min(1100.0, constraints.maxWidth);
+        final textScale = MediaQuery.textScalerOf(context).scale(16) / 16;
+        final columns =
+            width >= 1000 ? 3 : (width >= 600 ? 2 : (textScale >= 1.5 ? 1 : 2));
+        final itemWidth =
+            max(1.0, (width - padding * 2 - spacing * (columns - 1)) / columns);
+        final titleStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ) ??
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+        final navigationStyle = Theme.of(context).textTheme.bodyLarge ??
+            const TextStyle(fontSize: 16);
+        final titleHeight = sightsData
+            .map((item) => measureTextHeight(
+                  context,
+                  item['title'] as String,
+                  titleStyle,
+                  max(1, itemWidth - 16),
+                ))
+            .fold<double>(0, max);
+        final navigationHeight = measureTextHeight(
+          context,
+          localization(context).startNavigation,
+          navigationStyle,
+          max(1, itemWidth - 24),
+        );
+        final imageHeight = (itemWidth * 0.65).clamp(150.0, 240.0);
+        final extent = imageHeight +
+            max(48, titleHeight) +
+            16 +
+            48 +
+            max(48, navigationHeight + 16) +
+            12;
+
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: width),
+            child: GridView.builder(
+              padding: const EdgeInsets.all(padding),
+              itemCount: sightsData.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: columns,
+                crossAxisSpacing: spacing,
+                mainAxisSpacing: spacing,
+                mainAxisExtent: extent,
               ),
-            ),
-            child: FutureBuilder<List<Map<String, dynamic>>>(
-              future: _getSightsFromDatabase(localization(context).localeName),
-              builder: (context, snapshot) {
-                return DatabaseHelper.buildFutureState<
-                    List<Map<String, dynamic>>>(
-                  context: context,
-                  snapshot: snapshot,
-                  onData: (data) => buildSightsList(data, context),
-                );
-              },
+              itemBuilder: (context, index) => SightListItem(
+                sightData: sightsData[index],
+                mapScreen: mapScreen,
+                cacheWidth: max(
+                    1,
+                    (itemWidth * MediaQuery.devicePixelRatioOf(context))
+                        .ceil()),
+              ),
             ),
           ),
         );
       },
     );
   }
-
-  Widget buildSightsList(
-      List<Map<String, dynamic>> sightsData, BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
-    return GridView.builder(
-      padding: EdgeInsets.all(screenSize.width * 0.02),
-      itemCount: sightsData.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.7,
-      ),
-      itemBuilder: (context, index) {
-        return SightListItem(
-            sightData: sightsData[index], mapScreen: mapScreen);
-      },
-    );
-  }
-
-  Future<List<Map<String, dynamic>>> _getSightsFromDatabase(
-      String languageCode) async {
-    final db = await DatabaseHelper.instance.getNamedDatabase();
-    return await db.rawQuery('''
-      SELECT
-        id,
-        sight_image_path, 
-        sight_image_path2,
-        sight_image_path3,
-        title_$languageCode AS title, 
-        description_$languageCode AS description,
-        latitude, 
-        longitude
-      FROM Sights
-    ''');
-  }
 }
 
 class SightListItem extends StatelessWidget {
+  const SightListItem({
+    Key? key,
+    required this.sightData,
+    required this.mapScreen,
+    required this.cacheWidth,
+  }) : super(key: key);
+
   final Map<String, dynamic> sightData;
   final MapScreen mapScreen;
-
-  const SightListItem(
-      {Key? key, required this.sightData, required this.mapScreen})
-      : super(key: key);
+  final int cacheWidth;
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final title = sightData['title'] as String;
+    void showDetails() => navigateTo(
+          context,
+          SightDetailsPage(sightId: sightData['id'] as String),
+        );
 
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
             child: InkWell(
-              onTap: () => navigateTo(
-                context,
-                SightDetailsPage(
-                  sightId: sightData['id'],
-                ),
-              ),
+              onTap: showDetails,
               child: Semantics(
-                label: localization(context)
-                    .tapToSeeSightDetails(sightData['title']),
-                child: ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(15)),
-                  child: Image.asset(
-                    sightData['sight_image_path'],
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                label: localization(context).tapToSeeSightDetails(title),
+                child: TourImage(
+                  image: sightData['sight_image_path'] as String,
+                  cacheWidth: cacheWidth,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: Semantics(
-                    label: localization(context).tapToHearSightName,
-                    child: InkWell(
-                      onTap: () => navigateTo(
-                        context,
-                        SightDetailsPage(
-                          sightId: sightData['id'],
+                Semantics(
+                  button: true,
+                  label: localization(context).tapToSeeSightDetails(title),
+                  child: InkWell(
+                    onTap: showDetails,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 48),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w500),
                         ),
-                      ),
-                      child: Text(
-                        sightData['title'],
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontSize: screenSize.width * 0.04,
-                            fontWeight: FontWeight.w500),
-                        maxLines: 6,
                       ),
                     ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.volume_up,
-                    size: min(50, screenSize.width * 0.065),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SpeechControls(
+                    text: title,
+                    readLabel: localization(context).tapToHearSightName,
                   ),
-                  onPressed: () {
-                    TextToSpeechConfig.instance.speak(
-                      sightData['title'],
-                    );
-                  },
                 ),
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
-              child: Semantics(
-                button: true,
-                onTapHint: localization(context).tapToNavigateToSight,
-                child: InkWell(
-                  onTap: () => mapScreen.navigateToDestination(
-                      sightData['latitude'], sightData['longitude']),
-                  child: SizedBox(
-                    width: max(50, screenSize.width * 0.7),
+          Semantics(
+            button: true,
+            onTapHint: localization(context).tapToNavigateToSight,
+            child: InkWell(
+              onTap: () => mapScreen.navigateToDestination(
+                  sightData['latitude'], sightData['longitude']),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 48),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: Text(
                       localization(context).startNavigation,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.black,
-                            fontSize: screenSize.width * 0.038,
-                            fontWeight: FontWeight.w300,
-                          ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
                 ),

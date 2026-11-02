@@ -2,33 +2,58 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../helper/responsive_layout.dart';
 import '../localization/supported_languages.dart';
 import '../policies/privacy_policy.dart';
 import '../policies/terms_of_use.dart';
 
-AppBar customAppBar(BuildContext context, String title, Color color) {
+AppBar customAppBar(BuildContext context, String title, Color color,
+    {VoidCallback? onRefresh}) {
   final screenSize = MediaQuery.of(context).size;
+  final titleStyle =
+      (Theme.of(context).textTheme.titleLarge ?? const TextStyle()).copyWith(
+    color: Colors.white,
+    fontSize: 20,
+  );
+  final leadingWidth = Navigator.canPop(context) ? 56.0 : 0.0;
+  final actionWidth = onRefresh == null ? 48.0 : 96.0;
+  final titleWidth = max(
+    1.0,
+    screenSize.width -
+        MediaQuery.of(context).padding.horizontal -
+        leadingWidth -
+        actionWidth -
+        32,
+  );
+  final requiredHeight = max(kToolbarHeight,
+      measureTextHeight(context, title, titleStyle, titleWidth) + 16);
+  final maximumHeight =
+      max(kToolbarHeight, min(160.0, screenSize.height * 0.35));
+  final toolbarHeight = min(requiredHeight, maximumHeight);
+  final titleContent = DefaultTextStyle(
+    style: titleStyle,
+    textAlign: TextAlign.center,
+    overflow: TextOverflow.visible,
+    child: Text(title),
+  );
+
   return AppBar(
-    title: Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            flex: 1,
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontSize: screenSize.width * 0.05,
-                  ),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-            ),
-          ),
-        ],
-      ),
-    ),
+    toolbarHeight: toolbarHeight,
+    title: requiredHeight > maximumHeight
+        ? SingleChildScrollView(primary: false, child: titleContent)
+        : titleContent,
     actions: <Widget>[
+      if (onRefresh != null)
+        IconButton(
+          tooltip:
+              MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
+          icon: Icon(
+            Icons.refresh,
+            semanticLabel:
+                MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
+          ),
+          onPressed: onRefresh,
+        ),
       Semantics(
         button: true,
         enabled: true,
@@ -47,7 +72,9 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
                 label: localization(context).appLogo,
                 child: Image.asset(
                   'images/appLogo.png',
-                  width: screenSize.width * 0.1,
+                  width: 48,
+                  cacheWidth:
+                      (48 * MediaQuery.of(context).devicePixelRatio).ceil(),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -56,77 +83,47 @@ AppBar customAppBar(BuildContext context, String title, Color color) {
               applicationLegalese: localization(context).appAuthor,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: screenSize.height * 0.02),
+                  padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     localization(context).aboutAppDescription,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: screenSize.width * 0.03,
-                        ),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: screenSize.height * 0.02),
+                  padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     localization(context).aboutAppLocalization,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: screenSize.width * 0.03,
-                        ),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: screenSize.height * 0.02),
+                  padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     localization(context).aboutAppAccessibility,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: screenSize.width * 0.03,
-                        ),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
-                SizedBox(
-                  height: screenSize.height * 0.02,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                const SizedBox(height: 8),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 8,
+                  runSpacing: 4,
                   children: [
-                    SizedBox(
-                      width: max(50, screenSize.width * 0.3),
-                      height: max(50, screenSize.height * 0.05),
-                      child: InkWell(
-                        onTap: () {
-                          showPrivacyPolicy(context);
-                        },
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            localization(context).privacyPolicy,
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontSize: screenSize.width * 0.03,
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                          ),
+                    TextButton(
+                      onPressed: () => showPrivacyPolicy(context),
+                      child: Text(
+                        localization(context).privacyPolicy,
+                        style: const TextStyle(
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: max(50, screenSize.width * 0.3),
-                      height: max(50, screenSize.height * 0.05),
-                      child: InkWell(
-                        onTap: () {
-                          showTermsOfUse(context);
-                        },
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            localization(context).termsOfUse,
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontSize: screenSize.width * 0.03,
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                          ),
+                    TextButton(
+                      onPressed: () => showTermsOfUse(context),
+                      child: Text(
+                        localization(context).termsOfUse,
+                        style: const TextStyle(
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),

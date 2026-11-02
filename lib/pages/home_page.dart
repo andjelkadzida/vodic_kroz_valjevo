@@ -1,114 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../localization/supported_languages.dart';
+import '../helper/accessibility_theme.dart';
 import '../localization/language.dart';
+import '../localization/supported_languages.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    return FutureBuilder(
-      future: precacheImage(
-          const AssetImage('images/backgroundAndCoverImages/homeImage.jpg'),
-          context),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(
-              semanticsLabel: localization(context).loading,
-            ),
-          );
-        } else {
-          return Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              Image.asset(
-                'images/backgroundAndCoverImages/homeImage.jpg',
-                fit: BoxFit.cover,
-                semanticLabel: localization(context).valjevoCityImage,
-              ),
-              Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(screenSize.width * 0.05),
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'images/backgroundAndCoverImages/homeImage.jpg',
+            fit: BoxFit.cover,
+            semanticLabel: localization(context).valjevoCityImage,
+          ),
+          const ExcludeSemantics(child: ColoredBox(color: photoTextScrim)),
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final horizontal =
+                    (constraints.maxWidth * 0.05).clamp(16.0, 40.0);
+                return SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontal,
+                    vertical: 16,
+                  ),
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: 720,
+                        minHeight: (constraints.maxHeight - 32)
+                            .clamp(0, double.infinity),
+                      ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: screenSize.height * 0.3,
-                          ),
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const SizedBox(height: 8),
                           Text(
                             localization(context).song,
-                            style: TextStyle(
-                              color: const Color.fromRGBO(255, 255, 255, 1),
-                              fontSize: screenSize.width * 0.05,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.none,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(
-                            height: screenSize.height * 0.06,
-                          ),
+                          const SizedBox(height: 16),
                           Text(
                             localization(context).songAuthor,
-                            style: TextStyle(
-                              color: const Color.fromRGBO(255, 255, 255, 1),
-                              fontSize: screenSize.width * 0.03,
-                              decoration: TextDecoration.none,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
+                          const SizedBox(height: 24),
+                          Semantics(
+                            button: true,
+                            label: localization(context).getStarted,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                HapticFeedback.selectionClick();
+                                showLanguageMenuIfNeeded(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black54,
+                                foregroundColor: Colors.white,
+                                minimumSize: const Size(48, 48),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 12),
+                              ),
+                              child: Text(localization(context).getStarted),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
                         ],
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      screenSize.width * 0.05,
-                      0,
-                      screenSize.width * 0.05,
-                      screenSize.height * 0.02,
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Semantics(
-                        button: true,
-                        label: localization(context).getStarted,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            HapticFeedback.selectionClick();
-                            showLanguageMenuIfNeeded(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black54,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: screenSize.width * 0.1,
-                              vertical: screenSize.height * 0.02,
-                            ),
-                          ),
-                          child: Text(
-                            localization(context).getStarted,
-                            style: TextStyle(fontSize: screenSize.width * 0.05),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        }
-      },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

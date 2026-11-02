@@ -1,6 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-import '../database_config/database_helper.dart';
+import '../database_config/tour_data_service.dart';
+import '../helper/accessibility_theme.dart';
+import '../helper/images_loader_helper.dart';
+import '../helper/remote_data_builder.dart';
+import '../helper/responsive_layout.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
 import '../navigation/cutom_app_bar.dart';
@@ -13,205 +19,288 @@ class SportsAndRecreation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return OrientationBuilder(
-          builder: (context, orientation) {
-            return Scaffold(
-              appBar: customAppBar(
-                context,
-                localization(context).sportRecreation,
-                const Color.fromRGBO(65, 89, 45, 1),
-              ),
-              bottomNavigationBar: const CustomBottomNavigationBar(
-                unselectedColor: Color.fromRGBO(65, 89, 45, 1),
-              ),
-              body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'images/backgroundAndCoverImages/background.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Semantics(
-                      child: Text(
-                        localization(context).parks,
-                        style: TextStyle(
-                          fontSize: constraints.maxWidth * 0.07,
-                          fontWeight: FontWeight.w500,
-                          color: const Color.fromRGBO(255, 255, 255, 1),
-                        ),
-                      ),
-                    ),
-                    FutureBuilder<List<Map<String, dynamic>>>(
-                      future: _getParksDataFromDatabase(
-                          localization(context).localeName),
-                      builder: (context, snapshot) {
-                        return DatabaseHelper.buildFutureState<
-                            List<Map<String, dynamic>>>(
-                          context: context,
-                          snapshot: snapshot,
-                          onData: (data) => _buildSportsSlider(
-                              context, data, constraints, orientation),
-                        );
-                      },
-                    ),
-                    SizedBox(height: constraints.maxHeight * 0.02),
-                    Semantics(
-                      child: Text(
-                        localization(context).sportFields,
-                        style: TextStyle(
-                          fontSize: constraints.maxWidth * 0.07,
-                          fontWeight: FontWeight.w500,
-                          color: const Color.fromRGBO(255, 255, 255, 1),
-                        ),
-                      ),
-                    ),
-                    FutureBuilder<List<Map<String, dynamic>>>(
-                      future: _getSportsDataFromDatabase(
-                          localization(context).localeName),
-                      builder: (context, snapshot) {
-                        return DatabaseHelper.buildFutureState<
-                            List<Map<String, dynamic>>>(
-                          context: context,
-                          snapshot: snapshot,
-                          onData: (data) => _buildSportsSlider(
-                              context, data, constraints, orientation),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  Widget _buildSportsSlider(
-      BuildContext context,
-      List<Map<String, dynamic>> data,
-      BoxConstraints constraints,
-      Orientation orientation) {
-    double viewportFraction = constraints.maxWidth < 600 ? 0.8 : 0.5;
-
-    return Expanded(
-      child: PageView.builder(
-        itemCount: data.length,
-        controller: PageController(viewportFraction: viewportFraction),
-        itemBuilder: (context, index) {
-          var item = data[index];
-          return _buildSportsItem(context, item);
+    final languageCode = localization(context).localeName;
+    return Scaffold(
+      appBar: customAppBar(
+        context,
+        localization(context).sportRecreation,
+        const Color.fromRGBO(65, 89, 45, 1),
+        onRefresh: () {
+          TourDataService.instance.refresh(TourCollection.parks);
+          TourDataService.instance.refresh(TourCollection.sports);
         },
       ),
-    );
-  }
-
-  Widget _buildSportsItem(BuildContext context, Map<String, dynamic> data) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return Semantics(
-          child: GestureDetector(
-            onTap: () {
-              data.containsKey('park_image_path')
-                  ? showDetailsPage(
-                      context, ParkDetailsPage(parkId: data['id']))
-                  : showDetailsPage(
-                      context, SportDetailsPage(sportId: data['id']));
-            },
-            child: Card(
-              margin: EdgeInsets.all(constraints.maxWidth * 0.02),
-              elevation: 5,
-              color: const Color.fromRGBO(255, 255, 255, 1),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        unselectedColor: Color.fromRGBO(65, 89, 45, 1),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/backgroundAndCoverImages/background.jpg'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(photoTextScrim, BlendMode.srcOver),
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          bottom: false,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: ListView(
+                padding: const EdgeInsets.all(16),
                 children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Semantics(
-                        onTapHint: data.containsKey('park_image_path')
-                            ? localization(context).tapToViewPark
-                            : localization(context).tapToViewSport,
-                        child: Image.asset(
-                          data.containsKey('park_image_path')
-                              ? data['park_image_path']
-                              : data['sport_image_path'],
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          semanticLabel:
-                              localization(context).image(data['title']),
-                        ),
-                      ),
-                    ),
+                  _RecreationSection(
+                    title: localization(context).parks,
+                    collection: TourCollection.parks,
+                    languageCode: languageCode,
                   ),
-                  Container(
-                    padding: EdgeInsets.all(constraints.maxWidth * 0.02),
-                    child: Text(
-                      data['title'],
-                      style: TextStyle(
-                        fontSize: constraints.maxWidth * 0.055,
-                        fontWeight: FontWeight.w300,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
-                      ),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
+                  const SizedBox(height: 20),
+                  _RecreationSection(
+                    title: localization(context).sportFields,
+                    collection: TourCollection.sports,
+                    languageCode: languageCode,
                   ),
                 ],
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _RecreationSection extends StatelessWidget {
+  const _RecreationSection({
+    required this.title,
+    required this.collection,
+    required this.languageCode,
+  });
+
+  final String title;
+  final TourCollection collection;
+  final String languageCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+        ),
+        const SizedBox(height: 8),
+        RemoteDataBuilder<List<Map<String, dynamic>>>(
+          queryKey: languageCode,
+          load: () => TourDataService.instance.list(collection, languageCode),
+          refreshSignal: TourDataService.instance.refreshSignal(collection),
+          onRetry: () => TourDataService.instance.refresh(collection),
+          onData: (data) => _RecreationCarousel(
+            data: data,
+            isPark: collection == TourCollection.parks,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _RecreationCarousel extends StatelessWidget {
+  const _RecreationCarousel({required this.data, required this.isPark});
+
+  final List<Map<String, dynamic>> data;
+  final bool isPark;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final fraction = constraints.maxWidth < 600 ? 1.0 : 0.5;
+        final pageWidth = constraints.maxWidth * fraction;
+        final titleStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w300,
+                ) ??
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w300);
+        final titleHeight = data
+            .map((item) => measureTextHeight(
+                  context,
+                  item['title'] as String,
+                  titleStyle,
+                  max(1, pageWidth - 40),
+                ))
+            .fold<double>(0, max);
+        final imageHeight = (pageWidth * 0.55).clamp(150.0, 260.0);
+        return SizedBox(
+          height: imageHeight + titleHeight + 96,
+          child: _PagedRecreationCards(
+            key: ValueKey(fraction),
+            data: data,
+            isPark: isPark,
+            fraction: fraction,
+            cacheWidth: max(
+                1, (pageWidth * MediaQuery.devicePixelRatioOf(context)).ceil()),
+          ),
         );
       },
     );
   }
+}
 
-  // Getting sports data from the database
-  Future<List<Map<String, dynamic>>> _getSportsDataFromDatabase(
-      String languageCode) async {
-    final db = await DatabaseHelper.instance.getNamedDatabase();
+class _PagedRecreationCards extends StatefulWidget {
+  const _PagedRecreationCards({
+    Key? key,
+    required this.data,
+    required this.isPark,
+    required this.fraction,
+    required this.cacheWidth,
+  }) : super(key: key);
 
-    final List<Map<String, dynamic>> data = await db.rawQuery('''
-      SELECT
-        id,
-        sport_image_path,
-        sport_image_path2,
-        sport_image_path3,
-        title_$languageCode AS title,
-        latitude,
-        longitude,
-        description_$languageCode AS description
-      FROM Sports
-    ''');
-    return data;
+  final List<Map<String, dynamic>> data;
+  final bool isPark;
+  final double fraction;
+  final int cacheWidth;
+
+  @override
+  State<_PagedRecreationCards> createState() => _PagedRecreationCardsState();
+}
+
+class _PagedRecreationCardsState extends State<_PagedRecreationCards> {
+  late final PageController _controller;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(viewportFraction: widget.fraction);
   }
 
-  // Getting parks data from the database
-  Future<List<Map<String, dynamic>>> _getParksDataFromDatabase(
-      String languageCode) async {
-    final db = await DatabaseHelper.instance.getNamedDatabase();
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
-    final List<Map<String, dynamic>> data = await db.rawQuery('''
-      SELECT
-        id,
-        park_image_path,
-        park_image_path2,
-        park_image_path3,
-        title_$languageCode AS title,
-        latitude,
-        longitude,
-        description_$languageCode AS description
-      FROM Parks
-    ''');
-    return data;
+  @override
+  Widget build(BuildContext context) {
+    final visiblePages = (1 / widget.fraction).floor();
+    final lastPage = max(0, widget.data.length - visiblePages);
+
+    void moveTo(int page) {
+      if (MediaQuery.disableAnimationsOf(context)) {
+        _controller.jumpToPage(page);
+      } else {
+        _controller.animateToPage(
+          page,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
+        );
+      }
+    }
+
+    return Column(
+      children: [
+        Expanded(
+          child: PageView.builder(
+            controller: _controller,
+            padEnds: false,
+            itemCount: widget.data.length,
+            onPageChanged: (page) => setState(() => _currentPage = page),
+            itemBuilder: (context, index) {
+              final item = widget.data[index];
+              final title = item['title'] as String;
+              final image =
+                  item[widget.isPark ? 'park_image_path' : 'sport_image_path']
+                      as String;
+              return Semantics(
+                button: true,
+                label: title,
+                onTapHint: widget.isPark
+                    ? localization(context).tapToViewPark
+                    : localization(context).tapToViewSport,
+                child: Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 6),
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: InkWell(
+                    onTap: () => showDetailsPage(
+                      context,
+                      widget.isPark
+                          ? ParkDetailsPage(parkId: item['id'] as String)
+                          : SportDetailsPage(sportId: item['id'] as String),
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: TourImage(
+                            image: image,
+                            cacheWidth: widget.cacheWidth,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            semanticLabel: localization(context).image(title),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        Center(
+          child: Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                IconButton(
+                  tooltip: localization(context).previousItem,
+                  onPressed:
+                      _currentPage > 0 ? () => moveTo(_currentPage - 1) : null,
+                  icon: Icon(Icons.chevron_left,
+                      semanticLabel: localization(context).previousItem),
+                ),
+                Semantics(
+                  liveRegion: true,
+                  child: Text(localization(context)
+                      .positionInList(_currentPage + 1, widget.data.length)),
+                ),
+                IconButton(
+                  tooltip: localization(context).nextItem,
+                  onPressed: _currentPage < lastPage
+                      ? () => moveTo(_currentPage + 1)
+                      : null,
+                  icon: Icon(Icons.chevron_right,
+                      semanticLabel: localization(context).nextItem),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

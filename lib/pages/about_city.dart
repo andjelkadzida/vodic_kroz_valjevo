@@ -2,347 +2,271 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../database_config/database_helper.dart';
+import '../database_config/tour_data_service.dart';
+import '../helper/images_loader_helper.dart';
+import '../helper/remote_data_builder.dart';
 import '../localization/supported_languages.dart';
 import '../navigation/bottom_navigation.dart';
 import '../navigation/cutom_app_bar.dart';
-import '../text_to_speech/text_to_speech_config.dart';
+import '../text_to_speech/speech_controls.dart';
 
 class AboutCity extends StatelessWidget {
   const AboutCity({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final languageCode = localization(context).localeName;
+    const color = Color.fromRGBO(219, 33, 41, 1);
     return Scaffold(
       appBar: customAppBar(
         context,
         localization(context).aboutCity,
-        const Color.fromRGBO(219, 33, 41, 1),
+        color,
+        onRefresh: () =>
+            TourDataService.instance.refresh(TourCollection.aboutCity),
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(
-        unselectedColor: Color.fromRGBO(219, 33, 41, 1),
-      ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: _getAboutCityFromDatabase(localization(context).localeName),
-        builder: (context, snapshot) {
-          return DatabaseHelper.buildFutureState<List<Map<String, dynamic>>>(
-            context: context,
-            snapshot: snapshot,
-            onData: (data) => _buildAboutCityContent(context, data),
-          );
-        },
+      bottomNavigationBar:
+          const CustomBottomNavigationBar(unselectedColor: color),
+      body: SafeArea(
+        top: false,
+        bottom: false,
+        child: RemoteDataBuilder<List<Map<String, dynamic>>>(
+          queryKey: languageCode,
+          load: () => TourDataService.instance
+              .list(TourCollection.aboutCity, languageCode),
+          refreshSignal:
+              TourDataService.instance.refreshSignal(TourCollection.aboutCity),
+          onRetry: () =>
+              TourDataService.instance.refresh(TourCollection.aboutCity),
+          onData: (data) => _AboutCityContent(data: data),
+        ),
       ),
     );
   }
+}
 
-  Widget _buildAboutCityContent(
-      BuildContext context, List<Map<String, dynamic>> data) {
-    final screenSize = MediaQuery.of(context).size;
-    var imagePath = data.first['about_city_image_path'];
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return OrientationBuilder(
-          builder: (BuildContext context, Orientation orientation) {
-            return CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: screenSize.height * 0.01,
-                    horizontal: screenSize.width * 0.05,
-                  ),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Semantics(
-                          label: localization(context).valjevoCityImage,
-                          child: Image.asset(
-                            imagePath,
+class _AboutCityContent extends StatelessWidget {
+  const _AboutCityContent({required this.data});
+
+  final List<Map<String, dynamic>> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Semantics(
+                      label: localization(context).valjevoCityImage,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 400),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) => TourImage(
+                            image:
+                                data.first['about_city_image_path'] as String,
+                            cacheWidth: max(
+                              1,
+                              (constraints.maxWidth *
+                                      MediaQuery.devicePixelRatioOf(context))
+                                  .ceil(),
+                            ),
                             fit: BoxFit.contain,
                           ),
                         ),
-                        SizedBox(height: screenSize.height * 0.02),
-                        _buildResponsiveDataTable(context),
-                        SizedBox(height: screenSize.height * 0.02),
-                        _buildHistoryCard(context, data.first),
-                        SizedBox(height: screenSize.height * 0.02),
-                        ExpansionTile(
-                          title: Text(localization(context).legendOfTheCity,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                    fontSize: screenSize.width * 0.07,
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                          children: data
-                              .map((legend) =>
-                                  _buildExpansionTile(context, legend))
-                              .toList(),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const _CityFacts(),
+                    const SizedBox(height: 16),
+                    ExpansionTile(
+                      title: Text(localization(context).historyOfTheCity),
+                      children: [
+                        _NarratedText(
+                          text: data.first['history'] as String,
+                          tooltip: localization(context).tapToHearHistory,
                         ),
                       ],
                     ),
-                  ),
+                    ExpansionTile(
+                      title: Text(localization(context).legendOfTheCity),
+                      children: [
+                        for (final legend in data)
+                          Card(
+                            child: ExpansionTile(
+                              title: Text(legend['title'] as String),
+                              children: [
+                                _NarratedText(
+                                  text: legend['description'] as String,
+                                  tooltip:
+                                      localization(context).tapToHearLegend,
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            );
-          },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CityFacts extends StatelessWidget {
+  const _CityFacts();
+
+  @override
+  Widget build(BuildContext context) {
+    final messages = localization(context);
+    const surface = 2256;
+    const elevation = 185;
+    const populationDensity = 90.79;
+    const population = 82541;
+    const populationYear = 2022;
+    final facts = <_CityFact>[
+      _CityFact(
+        messages.surface,
+        messages.citySurfaceValue(surface),
+        spokenValue: messages.citySurfaceSpoken(surface),
+      ),
+      _CityFact(
+        messages.elevation,
+        messages.cityElevationValue(elevation),
+        spokenValue: messages.cityElevationSpoken(elevation),
+      ),
+      _CityFact(
+        messages.populationDensity,
+        messages.cityDensityValue(populationDensity, populationYear),
+        spokenValue:
+            messages.cityDensitySpoken(populationDensity, populationYear),
+      ),
+      _CityFact(
+        messages.population,
+        messages.cityPopulationValue(population, populationYear),
+        spokenValue: messages.cityPopulationSpoken(population, populationYear),
+      ),
+      _CityFact(messages.district, messages.kolubaraDistrict),
+      _CityFact(messages.cityDay, messages.cityDayDate),
+      _CityFact(messages.saint, messages.saintName),
+    ];
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final stacked = constraints.maxWidth < 480 ||
+            MediaQuery.textScalerOf(context).scale(16) >= 24;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Semantics(
+              header: true,
+              child: Text(
+                messages.indicator,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            for (final fact in facts) _buildFact(context, fact, stacked),
+          ],
         );
       },
     );
   }
 
-  Widget _buildResponsiveDataTable(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          dividerColor: const Color.fromRGBO(219, 33, 41, 1),
-          dataTableTheme: DataTableThemeData(
-            dataTextStyle: TextStyle(
-              fontSize: screenSize.width * 0.042,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-        ),
-        child: DataTable(
-          columns: [
-            DataColumn(
-                label: Icon(
-                  Icons.info_outline,
-                  semanticLabel: localization(context).indicator,
-                  size: Theme.of(context).iconTheme.size,
-                  applyTextScaling: true,
-                  color: const Color.fromRGBO(219, 33, 41, 1),
-                ),
-                tooltip: localization(context).indicator),
-            const DataColumn(
-              label: Text(''),
-            ),
-          ],
-          rows: [
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).surface,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              const DataCell(Text(
-                '2256 ha',
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).elevation,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              const DataCell(Text(
-                '185 m',
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).populationDensity,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              const DataCell(Text(
-                '90,79 st/km\u00B2 (2022.)',
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).population,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              const DataCell(Text(
-                '82.541 (2022.)',
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).district,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              DataCell(Text(
-                localization(context).kolubaraDistrict,
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).cityDay,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              DataCell(Text(
-                localization(context).cityDayDate,
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Text(
-                localization(context).saint,
-                style: TextStyle(
-                  fontSize: screenSize.width * 0.042,
-                  fontWeight: FontWeight.w500,
-                ),
-              )),
-              DataCell(Text(
-                localization(context).saintName,
-              )),
-            ]),
-          ],
-        ),
+  Widget _buildFact(BuildContext context, _CityFact fact, bool stacked) {
+    final textStyle = Theme.of(context).textTheme.bodyLarge;
+    final label = Text(
+      fact.label,
+      style: textStyle?.copyWith(fontWeight: FontWeight.w500),
+    );
+    final value = Text(fact.value, style: textStyle);
+    final description = '${fact.label}: ${fact.spokenValue}';
+    final information = Semantics(
+      container: true,
+      label: description,
+      child: ExcludeSemantics(
+        child: stacked
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [label, value],
+              )
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: label),
+                  const SizedBox(width: 16),
+                  Expanded(child: value),
+                ],
+              ),
       ),
     );
-  }
+    final controls = SpeechControls(
+      text: description,
+      readLabel: localization(context).readCityFact(fact.label),
+    );
 
-  Widget _buildExpansionTile(
-      BuildContext context, Map<String, dynamic> aboutCityData) {
-    final screenSize = MediaQuery.of(context).size;
-    return Card(
-      child: ExpansionTile(
-        title: Text(
-          aboutCityData['title'],
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontSize: screenSize.width * 0.05,
-                fontWeight: FontWeight.w500,
-              ),
-        ),
-        children: [
-          ListTile(
-            title: Text(
-              aboutCityData['description'],
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontSize: screenSize.width * 0.05,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black,
-                  ),
-            ),
-            trailing: Semantics(
-              label: localization(context).tapToHearLegend,
-              child: GestureDetector(
-                onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
-                child: SizedBox(
-                  width: max(50, screenSize.width * 0.1),
-                  height: max(50, screenSize.width * 0.1),
-                  child: IconButton(
-                    iconSize: max(50, screenSize.width * 0.1),
-                    tooltip: localization(context).tapToHearLegend,
-                    onPressed: () {
-                      TextToSpeechConfig.instance
-                          .speak(aboutCityData['description']);
-                    },
-                    icon: Icon(
-                      Icons.volume_up,
-                      semanticLabel: localization(context).tapToHearLegend,
-                      size: screenSize.width * 0.07,
-                      applyTextScaling: true,
-                    ),
-                  ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: stacked
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                information,
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: controls,
                 ),
-              ),
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: information),
+                const SizedBox(width: 16),
+                controls,
+              ],
             ),
+    );
+  }
+}
+
+class _CityFact {
+  const _CityFact(this.label, this.value, {String? spokenValue})
+      : spokenValue = spokenValue ?? value;
+
+  final String label;
+  final String value;
+  final String spokenValue;
+}
+
+class _NarratedText extends StatelessWidget {
+  const _NarratedText({required this.text, required this.tooltip});
+
+  final String text;
+  final String tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(text, style: Theme.of(context).textTheme.bodyLarge),
+          Align(
+            alignment: Alignment.centerRight,
+            child: SpeechControls(text: text, readLabel: tooltip),
           ),
         ],
       ),
     );
-  }
-
-  Widget _buildHistoryCard(
-      BuildContext context, Map<String, dynamic> aboutCityData) {
-    final screenSize = MediaQuery.of(context).size;
-    return ExpansionTile(
-      title: Row(
-        children: [
-          Expanded(
-            child: Semantics(
-              child: Text(
-                localization(context).historyOfTheCity,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: screenSize.width * 0.07,
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Colors.black,
-                width: 3.0,
-              ),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Padding(
-                  padding: EdgeInsets.all(screenSize.width * 0.05),
-                  child: Semantics(
-                    child: Text(
-                      aboutCityData['history'],
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontSize: screenSize.width * 0.05,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black,
-                          ),
-                    ),
-                  )),
-            ),
-            GestureDetector(
-              onDoubleTap: () => TextToSpeechConfig.instance.stopSpeaking(),
-              child: SizedBox(
-                width: max(50, screenSize.width * 0.1),
-                height: max(50, screenSize.width * 0.1),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.volume_up,
-                    semanticLabel: localization(context).tapToHearHistory,
-                    size: screenSize.width * 0.07,
-                    applyTextScaling: true,
-                  ),
-                  onPressed: () {
-                    TextToSpeechConfig.instance.speak(aboutCityData['history']);
-                  },
-                  tooltip: localization(context).tapToHearHistory,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Future<List<Map<String, dynamic>>> _getAboutCityFromDatabase(
-      String languageCode) async {
-    final db = await DatabaseHelper.instance.getNamedDatabase();
-    return await db.rawQuery('''
-      SELECT 
-        legend_title_$languageCode AS title,
-        legend_description_$languageCode AS description,
-        history_$languageCode AS history,
-        about_city_image_path       
-      FROM AboutCity
-    ''');
   }
 }

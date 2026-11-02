@@ -33,18 +33,17 @@ dependencies:
   map_launcher: ^7.0.0
   open_store: ^0.5.0
   flutter_tts: ^4.2.5
-  sqflite: ^2.4.5
-  path: ^1.9.0
   connectivity_plus: ^7.3.2
   app_settings: ^9.0.1
   flutter_map: ^6.1.0
+  http: ^0.13.5
   latlong2: ^0.9.0
   lottie: ^3.0.0
   url_launcher: ^6.3.3
   photo_view: ^0.14.0
   file_picker: ^10.2.4
+  flutter_dotenv: ^6.0.0
   parse_server_sdk_flutter: ^10.7.0
-  flutter_dotenv: ^5.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -59,7 +58,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.4
-  sqflite_common_ffi: ^2.4.5
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -82,79 +80,8 @@ flutter:
   assets:
     - images/appLogo.png
     - images/backgroundAndCoverImages/homeImage.jpg
-    - images/backgroundAndCoverImages/oGraduCover.jpg
     - images/backgroundAndCoverImages/background.jpg
     - images/backgroundAndCoverImages/hotelsBackground.jpg
-    - images/sightsImages/kulaNenadovica/kulaNenadovica1.jpg
-    - images/sightsImages/kulaNenadovica/kulaNenadovica2.jpg
-    - images/sightsImages/kulaNenadovica/kulaNenadovica3.jpg
-    - images/sightsImages/muzej/muzej1.jpeg
-    - images/sightsImages/muzej/muzej2.jpg
-    - images/sightsImages/muzej/muzej3.jpeg
-    - images/sightsImages/gimnazija/gimnazija1.jpg
-    - images/sightsImages/gimnazija/gimnazija2.jpg
-    - images/sightsImages/gimnazija/gimnazija3.jpg
-    - images/sightsImages/hram/hram1.jpg
-    - images/sightsImages/hram/hram2.jpg
-    - images/sightsImages/hram/hram3.jpeg
-    - images/sightsImages/paviljon/paviljon1.jpg
-    - images/sightsImages/paviljon/paviljon2.jpg
-    - images/sightsImages/paviljon/paviljon3.jpg
-    - images/sightsImages/stevan/stevan1.jpg
-    - images/sightsImages/stevan/stevan2.jpg
-    - images/sightsImages/stevan/stevan3.jpg
-    - images/sightsImages/tesnjar/tesnjar1.jpg
-    - images/sightsImages/tesnjar/tesnjar2.jpg
-    - images/sightsImages/tesnjar/tesnjar3.jpg
-    - images/sightsImages/zivojin/zivojin1.jpg
-    - images/sightsImages/zivojin/zivojin2.jpg
-    - images/sightsImages/zivojin/zivojin3.jpg
-    - images/sightsImages/vuk/vuk1.jpg
-    - images/sightsImages/vuk/vuk2.jpg
-    - images/sightsImages/vuk/vuk3.jpg
-    - images/sightsImages/desanka/desanka1.jpg
-    - images/sightsImages/desanka/desanka2.jpg
-    - images/sightsImages/desanka/desanka3.jpg
-    - images/sightsImages/muselimovKonak/muselimovKonak1.jpg
-    - images/sightsImages/muselimovKonak/muselimovKonak2.jpeg
-    - images/sightsImages/muselimovKonak/muselimovKonak3.jpg
-    - images/sightsImages/gradac/gradac1.jpg
-    - images/sightsImages/gradac/gradac2.jpg
-    - images/sightsImages/gradac/gradac3.jpg
-    - images/parksImages/jadar/jadar1.jpg
-    - images/parksImages/jadar/jadar2.jpg
-    - images/parksImages/jadar/jadar3.jpg
-    - images/parksImages/pecina/pecina1.jpg
-    - images/parksImages/pecina/pecina2.jpg
-    - images/parksImages/pecina/pecina3.jpg
-    - images/parksImages/petiPuk/petiPuk1.jpg
-    - images/parksImages/petiPuk/petiPuk2.jpg
-    - images/parksImages/petiPuk/petiPuk3.jpg
-    - images/sportsImages/petiPuk/radnicki1.jpg
-    - images/sportsImages/petiPuk/radnicki2.jpg
-    - images/sportsImages/petiPuk/radnicki3.jpg
-    - images/sportsImages/tenis/tenis1.jpg
-    - images/sportsImages/tenis/tenis2.jpg
-    - images/sportsImages/tenis/tenis3.jpg
-    - images/sportsImages/gradskiStadion/gradskiStadion1.jpg
-    - images/sportsImages/gradskiStadion/gradskiStadion2.jpg
-    - images/sportsImages/gradskiStadion/gradskiStadion3.jpg
-    - images/hotelsImages/bubicaSpolja.jpeg
-    - images/hotelsImages/bubicaSoba.jpeg
-    - images/hotelsImages/grandSpolja.jpeg
-    - images/hotelsImages/grandSoba.jpg
-    - images/hotelsImages/omniSpolja.jpg
-    - images/hotelsImages/omniSoba.jpg
-    - images/restaurantsImages/paviljonNapolju.jpg
-    - images/restaurantsImages/paviljonUnutra.jpg
-    - images/restaurantsImages/lovciNapolju.jpeg
-    - images/restaurantsImages/lovciUnutra.jpeg
-    - images/restaurantsImages/kucaSpolja.jpg
-    - images/restaurantsImages/kucaUnutra.jpg
-    - images/restaurantsImages/tavernaSpolja.jpg
-    - images/restaurantsImages/tavernaUnutra.jpg
-    - images/restaurantsImages/laPiazzaSpolja.jpg
-    - images/restaurantsImages/laPiazzaUnutra.jpg
     - animations/menu_item.json
     - .env
 
@@ -172,35 +99,14 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto-Black.ttf
-          weight: 900
-        - asset: fonts/Roboto-BlackItalic.ttf
-          weight: 900
-          style: italic
         - asset: fonts/Roboto-Bold.ttf
           weight: 700
-        - asset: fonts/Roboto-BoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: fonts/Roboto-Italic.ttf
-          style: italic
         - asset: fonts/Roboto-Light.ttf
           weight: 300
-        - asset: fonts/Roboto-LightItalic.ttf
-          weight: 300
-          style: italic
         - asset: fonts/Roboto-Medium.ttf
           weight: 500
-        - asset: fonts/Roboto-MediumItalic.ttf
-          weight: 500
-          style: italic
         - asset: fonts/Roboto-Regular.ttf
           weight: 400
-        - asset: fonts/Roboto-Thin.ttf
-          weight: 100
-        - asset: fonts/Roboto-ThinItalic.ttf
-          weight: 100
-          style: italic
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

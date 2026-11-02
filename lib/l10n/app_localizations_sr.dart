@@ -386,7 +386,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get aboutApp => 'O aplikaciji';
 
   @override
-  String get appAuthor => '© 2024 Anđelka Džida';
+  String get appAuthor => '© 2026 Anđelka Džida';
 
   @override
   String get appLogo => 'Logo aplikacije';
@@ -1043,7 +1043,7 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get aboutApp => 'О апликацији';
 
   @override
-  String get appAuthor => '© 2024 Анђелка Џида';
+  String get appAuthor => '© 2026 Анђелка Џида';
 
   @override
   String get appLogo => 'Лого апликације';
@@ -1699,7 +1699,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get aboutApp => 'O aplikaciji';
 
   @override
-  String get appAuthor => '© 2024 Anđelka Džida';
+  String get appAuthor => '© 2026 Anđelka Džida';
 
   @override
   String get appLogo => 'Logo aplikacije';

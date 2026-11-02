@@ -12,7 +12,7 @@ void showTermsOfUse(BuildContext context) {
     title: messages.termsOfUse,
     sections: [
       Text(
-        messages.lastUpdated('24-02-2024'),
+        messages.lastUpdated('01-11-2026'),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),

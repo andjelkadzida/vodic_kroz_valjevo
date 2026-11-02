@@ -79,7 +79,7 @@ AppBar customAppBar(BuildContext context, String title, Color color,
                 ),
               ),
               applicationName: localization(context).appTitle,
-              applicationVersion: '1.0.0',
+              applicationVersion: '2.0.0',
               applicationLegalese: localization(context).appAuthor,
               children: <Widget>[
                 Padding(

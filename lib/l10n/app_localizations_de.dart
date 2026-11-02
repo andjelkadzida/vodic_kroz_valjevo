@@ -389,7 +389,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutApp => 'Über die App';
 
   @override
-  String get appAuthor => '© 2024 Andjelka Dzida';
+  String get appAuthor => '© 2026 Andjelka Dzida';
 
   @override
   String get appLogo => 'Anwendungslogo';

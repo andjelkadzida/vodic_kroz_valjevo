@@ -783,7 +783,7 @@ abstract class AppLocalizations {
   /// No description provided for @appAuthor.
   ///
   /// In en, this message translates to:
-  /// **'© 2024 Andjelka Dzida'**
+  /// **'© 2026 Andjelka Dzida'**
   String get appAuthor;
 
   /// No description provided for @appLogo.

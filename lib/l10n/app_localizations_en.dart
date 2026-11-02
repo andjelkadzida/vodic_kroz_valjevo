@@ -382,7 +382,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutApp => 'About the application';
 
   @override
-  String get appAuthor => '© 2024 Andjelka Dzida';
+  String get appAuthor => '© 2026 Andjelka Dzida';
 
   @override
   String get appLogo => 'Application Logo';

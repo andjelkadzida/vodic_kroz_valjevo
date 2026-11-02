@@ -307,6 +307,25 @@ class AppLocalizationsSr extends AppLocalizations {
   String get bugReport => 'Formular za prijavu grešaka';
 
   @override
+  String get bugReportIntro =>
+      'Opišite problem kako bismo unapredili aplikaciju.';
+
+  @override
+  String get bugReportDetails => 'Opišite problem';
+
+  @override
+  String get bugReportDeviceDetails => 'Podaci o uređaju';
+
+  @override
+  String get bugReportDeviceNote => 'Ovi podaci se automatski prepoznaju.';
+
+  @override
+  String get bugReportAttachment => 'Prilog (opciono)';
+
+  @override
+  String get removeAttachment => 'Ukloni prilog';
+
+  @override
   String get bugTitle => 'Naslov greške';
 
   @override
@@ -326,6 +345,13 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get osVersion => 'Verzija operativnog sistema';
+
+  @override
+  String get deviceInfoUnavailable =>
+      'Neki podaci o uređaju nisu mogli biti utvrđeni i neće biti uključeni u izveštaj.';
+
+  @override
+  String get deviceInfoNotAvailable => 'Nije dostupno';
 
   @override
   String get uploadFile => 'Otpremi datoteku';
@@ -386,7 +412,9 @@ class AppLocalizationsSr extends AppLocalizations {
   String get aboutApp => 'O aplikaciji';
 
   @override
-  String get appAuthor => '© 2026 Anđelka Džida';
+  String appAuthor(int year) {
+    return '© $year Anđelka Džida';
+  }
 
   @override
   String get appLogo => 'Logo aplikacije';
@@ -516,6 +544,9 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get indicator => 'Indikator';
+
+  @override
+  String get cityFactsTitle => 'Osnovni podaci o Valjevu';
 
   @override
   String get openAboutDialog => 'Otvori dijalog o programu.';
@@ -964,6 +995,25 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get bugReport => 'Формулар за пријаву грешака';
 
   @override
+  String get bugReportIntro =>
+      'Опишите проблем како бисмо унапредили апликацију.';
+
+  @override
+  String get bugReportDetails => 'Опишите проблем';
+
+  @override
+  String get bugReportDeviceDetails => 'Подаци о уређају';
+
+  @override
+  String get bugReportDeviceNote => 'Ови подаци се аутоматски препознају.';
+
+  @override
+  String get bugReportAttachment => 'Прилог (опционо)';
+
+  @override
+  String get removeAttachment => 'Уклони прилог';
+
+  @override
   String get bugTitle => 'Наслов грешке';
 
   @override
@@ -983,6 +1033,13 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
 
   @override
   String get osVersion => 'Верзија оперативног система';
+
+  @override
+  String get deviceInfoUnavailable =>
+      'Неки подаци о уређају нису могли бити утврђени и неће бити укључени у извештај.';
+
+  @override
+  String get deviceInfoNotAvailable => 'Није доступно';
 
   @override
   String get uploadFile => 'Отпреми датотеку';
@@ -1043,7 +1100,9 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get aboutApp => 'О апликацији';
 
   @override
-  String get appAuthor => '© 2026 Анђелка Џида';
+  String appAuthor(int year) {
+    return '© $year Анђелка Џида';
+  }
 
   @override
   String get appLogo => 'Лого апликације';
@@ -1172,6 +1231,9 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
 
   @override
   String get indicator => 'Индикатор';
+
+  @override
+  String get cityFactsTitle => 'Основни подаци о Ваљеву';
 
   @override
   String get openAboutDialog => 'Отвори дијалог о програму.';
@@ -1620,6 +1682,25 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get bugReport => 'Formular za prijavu grešaka';
 
   @override
+  String get bugReportIntro =>
+      'Opišite problem kako bismo unapredili aplikaciju.';
+
+  @override
+  String get bugReportDetails => 'Opišite problem';
+
+  @override
+  String get bugReportDeviceDetails => 'Podaci o uređaju';
+
+  @override
+  String get bugReportDeviceNote => 'Ovi podaci se automatski prepoznaju.';
+
+  @override
+  String get bugReportAttachment => 'Prilog (opciono)';
+
+  @override
+  String get removeAttachment => 'Ukloni prilog';
+
+  @override
   String get bugTitle => 'Naslov greške';
 
   @override
@@ -1639,6 +1720,13 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get osVersion => 'Verzija operativnog sistema';
+
+  @override
+  String get deviceInfoUnavailable =>
+      'Neki podaci o uređaju nisu mogli biti utvrđeni i neće biti uključeni u izveštaj.';
+
+  @override
+  String get deviceInfoNotAvailable => 'Nije dostupno';
 
   @override
   String get uploadFile => 'Otpremi datoteku';
@@ -1699,7 +1787,9 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get aboutApp => 'O aplikaciji';
 
   @override
-  String get appAuthor => '© 2026 Anđelka Džida';
+  String appAuthor(int year) {
+    return '© $year Anđelka Džida';
+  }
 
   @override
   String get appLogo => 'Logo aplikacije';
@@ -1828,6 +1918,9 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get indicator => 'Indikator';
+
+  @override
+  String get cityFactsTitle => 'Osnovni podaci o Valjevu';
 
   @override
   String get openAboutDialog => 'Otvori dijalog o programu.';

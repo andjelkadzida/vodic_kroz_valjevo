@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/l10n/app_localizations.dart';
-import '../lib/text_to_speech/speech_controls.dart';
-import '../lib/text_to_speech/text_to_speech_config.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   const tts = MethodChannel('flutter_tts');
   const connectivity = MethodChannel('dev.fluttercommunity.plus/connectivity');
+  const settings = MethodChannel('com.spencerccf.app_settings/methods');
   final calls = <String>[];
   var speechResult = 1;
   var languageResult = 1;
   var connectivityChecks = 0;
+  var settingsCalls = 0;
 
   setUp(() {
     calls.clear();
     speechResult = 1;
     languageResult = 1;
     connectivityChecks = 0;
+    settingsCalls = 0;
     final messenger =
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(tts, (call) async {
@@ -30,6 +33,10 @@ void main() {
       connectivityChecks++;
       return ['none'];
     });
+    messenger.setMockMethodCallHandler(settings, (_) async {
+      settingsCalls++;
+      return null;
+    });
   });
 
   tearDown(() {
@@ -37,6 +44,7 @@ void main() {
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(tts, null);
     messenger.setMockMethodCallHandler(connectivity, null);
+    messenger.setMockMethodCallHandler(settings, null);
   });
 
   testWidgets('reading and stopping are labeled and work without internet',
@@ -48,6 +56,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 350));
     expect(calls, contains('speak'));
     expect(connectivityChecks, 0);
+    expect(settingsCalls, 0);
     await tester.tap(find.byTooltip(stop));
     await tester.pump();
     expect(calls, contains('stop'));

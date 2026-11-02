@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/l10n/app_localizations.dart';
-import '../lib/navigation/bottom_navigation.dart';
-import '../lib/pages/menu/menu_item.dart';
-import '../lib/pages/menu/menu_page.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/navigation/bottom_navigation.dart';
+import 'package:vodic_kroz_valjevo/pages/menu/menu_item.dart';
+import 'package:vodic_kroz_valjevo/pages/menu/menu_page.dart';
 
 void main() {
   const scenarios = <_Scenario>[

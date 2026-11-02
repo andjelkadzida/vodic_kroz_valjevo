@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/helper/images_loader_helper.dart';
-import '../lib/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/helper/images_loader_helper.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 
 void main() {
   testWidgets('a failed guide photo shows a localized error', (tester) async {

@@ -309,6 +309,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String get bugReport => 'Fehlerberichtsformular';
 
   @override
+  String get bugReportIntro =>
+      'Beschreiben Sie das Problem, damit wir die App verbessern können.';
+
+  @override
+  String get bugReportDetails => 'Problem beschreiben';
+
+  @override
+  String get bugReportDeviceDetails => 'Geräteinformationen';
+
+  @override
+  String get bugReportDeviceNote => 'Diese Angaben werden automatisch erkannt.';
+
+  @override
+  String get bugReportAttachment => 'Anhang (optional)';
+
+  @override
+  String get removeAttachment => 'Anhang entfernen';
+
+  @override
   String get bugTitle => 'Fehlerbezeichnung';
 
   @override
@@ -328,6 +347,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get osVersion => 'Betriebssystemversion';
+
+  @override
+  String get deviceInfoUnavailable =>
+      'Einige Gerätedaten konnten nicht ermittelt werden und werden nicht im Bericht enthalten sein.';
+
+  @override
+  String get deviceInfoNotAvailable => 'Nicht verfügbar';
 
   @override
   String get uploadFile => 'Datei hochladen';
@@ -389,7 +415,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutApp => 'Über die App';
 
   @override
-  String get appAuthor => '© 2026 Andjelka Dzida';
+  String appAuthor(int year) {
+    return '© $year Andjelka Dzida';
+  }
 
   @override
   String get appLogo => 'Anwendungslogo';
@@ -519,6 +547,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get indicator => 'Anzeige';
+
+  @override
+  String get cityFactsTitle => 'Wichtige Fakten über Valjevo';
 
   @override
   String get openAboutDialog => 'Öffnen Sie den Info-Dialog.';

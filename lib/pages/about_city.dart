@@ -162,26 +162,64 @@ class _CityFacts extends StatelessWidget {
     ];
     return LayoutBuilder(
       builder: (context, constraints) {
-        final stacked = constraints.maxWidth < 480 ||
+        final compact = constraints.maxWidth < 560 ||
             MediaQuery.textScalerOf(context).scale(16) >= 24;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Semantics(
-              header: true,
-              child: Text(
-                messages.indicator,
-                style: Theme.of(context).textTheme.titleMedium,
+        final theme = Theme.of(context);
+        final colors = theme.colorScheme;
+        return Card(
+          margin: EdgeInsets.zero,
+          elevation: 0,
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(color: colors.outline),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                color: colors.primaryContainer,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Semantics(
+                  container: true,
+                  header: true,
+                  label: messages.cityFactsTitle,
+                  child: ExcludeSemantics(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_city_outlined,
+                          color: colors.onPrimaryContainer,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            messages.cityFactsTitle,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colors.onPrimaryContainer,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-            for (final fact in facts) _buildFact(context, fact, stacked),
-          ],
+              for (var index = 0; index < facts.length; index++) ...[
+                _buildFact(context, facts[index], compact),
+                if (index < facts.length - 1)
+                  const Divider(height: 1, indent: 12, endIndent: 12),
+              ],
+            ],
+          ),
         );
       },
     );
   }
 
-  Widget _buildFact(BuildContext context, _CityFact fact, bool stacked) {
+  Widget _buildFact(BuildContext context, _CityFact fact, bool compact) {
     final textStyle = Theme.of(context).textTheme.bodyLarge;
     final label = Text(
       fact.label,
@@ -193,7 +231,7 @@ class _CityFacts extends StatelessWidget {
       container: true,
       label: description,
       child: ExcludeSemantics(
-        child: stacked
+        child: compact
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [label, value],
@@ -214,26 +252,15 @@ class _CityFacts extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: stacked
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                information,
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: controls,
-                ),
-              ],
-            )
-          : Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: information),
-                const SizedBox(width: 16),
-                controls,
-              ],
-            ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(child: information),
+          const SizedBox(width: 8),
+          controls,
+        ],
+      ),
     );
   }
 }

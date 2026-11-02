@@ -7,12 +7,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../lib/database_config/tour_data_service.dart';
-import '../lib/l10n/app_localizations.dart';
-import '../lib/localization/locale_controller.dart';
-import '../lib/pages/about_city.dart';
-import '../lib/text_to_speech/speech_controls.dart';
-import '../lib/text_to_speech/text_to_speech_config.dart';
+import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/localization/locale_controller.dart';
+import 'package:vodic_kroz_valjevo/pages/about_city.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 import 'support/fake_parse_client.dart';
 import 'support/tour_fixtures.dart';
@@ -140,6 +140,19 @@ void main() {
         final messages = AppLocalizations.of(context)!;
         final facts = _facts(messages);
 
+        expect(find.text(messages.aboutCity), findsOneWidget);
+        expect(find.byTooltip(messages.aboutApp), findsOneWidget);
+        expect(find.text(messages.cityFactsTitle), findsOneWidget);
+        final headerIcon = find.byIcon(Icons.location_city_outlined);
+        expect(headerIcon, findsOneWidget);
+        await tester.ensureVisible(headerIcon);
+        await tester.pump();
+        final header = find.bySemanticsLabel(messages.cityFactsTitle);
+        expect(header, findsOneWidget);
+        expect(
+          tester.getSemantics(header),
+          matchesSemantics(label: messages.cityFactsTitle, isHeader: true),
+        );
         expect(messages.readCityFact(messages.surface), language.readSurface);
         expect(messages.citySurfaceValue(2256), language.surfaceValue);
         expect('${facts[0].label}: ${facts[0].spoken}', language.surfaceSpeech);
@@ -307,6 +320,16 @@ void main() {
             size: layout.size, textScale: layout.textScale);
         final context = tester.element(find.byType(AboutCity));
         final messages = AppLocalizations.of(context)!;
+        final title = find.text(messages.cityFactsTitle);
+        await tester.ensureVisible(title);
+        await tester.pump();
+        expect(tester.renderObject<RenderParagraph>(title).didExceedMaxLines,
+            isFalse);
+        expect(
+          tester.getRect(title).left,
+          greaterThanOrEqualTo(
+              tester.getRect(find.byIcon(Icons.location_city_outlined)).right),
+        );
         for (final fact in _facts(messages)) {
           final label = find.text(fact.label);
           final value = find.text(fact.value);

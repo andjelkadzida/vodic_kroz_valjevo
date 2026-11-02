@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
-import '../../lib/database_config/tour_data_mapper.dart';
+import 'package:vodic_kroz_valjevo/database_config/tour_data_mapper.dart';
 
 import 'tour_fixtures.dart';
 

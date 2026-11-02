@@ -13,6 +13,24 @@ We have developed a unique tour guide application that caters to the needs of bl
 <li>German</li>
 </ul>
 
+On iOS, requested text-to-speech continues to play when the Silent switch is
+on. Speech follows the device's media volume and audio route, and mixes with
+other audio. Android speech uses the device's existing audio settings.
+
+## Launch splash
+
+The Android and iOS launch screens and the Flutter loading screen use the app
+icon on a white background. Native resources are generated from
+[flutter_native_splash.yaml](./flutter_native_splash.yaml) with:
+
+```powershell
+dart run flutter_native_splash:create
+```
+
+If the icon changes, update the two splash images referenced by that
+configuration before regenerating. The Android 12 image has extra padding to
+keep the icon inside the system's circular mask.
+
 ## Back4App data
 
 The guide reads its content and photos from Back4App. Guide data is cached only
@@ -31,6 +49,14 @@ message. Android can
 open wireless settings; on iOS, use Settings or Control Center to enable Wi-Fi
 or mobile data. An unsent bug report remains in the form and is not submitted
 automatically.
+
+Bug reports show the detected operating system, device model, and OS version as
+read-only values. When detection fails, reports can still be submitted and
+unavailable values are omitted. Available values are saved as strings in the
+Back4App `BugReport` fields `operatingSystem`, `deviceModel`, and
+`operatingSystemVersion`. Configure these as optional String fields.
+Android-compatible HarmonyOS devices are reported as Android when the runtime
+identifies them as Android.
 
 1. Create a Back4App application and add only its public client settings to a
    local `.env` file in the project root:
@@ -119,19 +145,38 @@ The Android build packages native libraries uncompressed. Keep Android Gradle
 Plugin 8.5.1 or later and NDK r28 or later when updating the build; the
 Flutter engine and any native dependencies must also support 16 KB pages.
 
-Before publishing a new release, build the app bundle with the release signing
-configuration and verify that it requests 16 KB alignment:
+The release bundle must be signed with the app's existing upload key. Create
+the ignored `android\key.properties` file with the real values, keeping both
+the passwords and keystore private and out of version control:
+
+```properties
+storePassword=<keystore-password>
+keyPassword=<key-password>
+keyAlias=<upload-key-alias>
+storeFile=C:\\path\\to\\existing-upload-keystore.jks
+```
+
+Replace the placeholders; on Windows, backslashes in `storeFile` must be
+doubled as shown. A missing signing configuration prevents the release bundle
+from being built.
+
+Before publishing, choose a version code higher than every code already
+uploaded to Google Play, build a signed bundle, and verify that it requests
+16 KB alignment. Replace `123` with the chosen code:
 
 ```powershell
-flutter build appbundle --release
+flutter build appbundle --release --build-number 123
 java -jar C:\path\to\bundletool-all.jar dump config --bundle=build\app\outputs\bundle\release\app-release.aab
 ```
 
 The bundle configuration must contain `PAGE_ALIGNMENT_16K`. Also check the
-`LOAD` and `GNU_RELRO` segments of every packaged native library, verify
-generated APK ZIP alignment with `zipalign -c -P 16 4 <path-to-apk>`, and
-test the app on a 16 KB device or emulator (`adb shell getconf PAGE_SIZE` must
-print `16384`). See the
+`LOAD` and `GNU_RELRO` segments of every packaged native library, including
+`arm64-v8a` and `x86_64`. A `GNU_RELRO` segment can end before a 16 KB
+boundary if no writable data shares the protected page; follow the guide below
+when interpreting it. Verify generated APK ZIP alignment with
+`zipalign -c -P 16 4 <path-to-apk>` and test the app on a 16 KB device or
+emulator (`adb shell getconf PAGE_SIZE` must print `16384`). See the
 [Android 16 KB page size guide](https://developer.android.com/guide/practices/page-sizes)
 for the complete verification steps. Previously uploaded bundles are not
-changed; rebuild and upload a new bundle with an incremented version code.
+changed; upload the newly signed bundle to Play and complete the normal release
+process.

@@ -1,11 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/l10n/app_localizations.dart';
-import '../lib/navigation/custom_app_bar.dart';
-import '../lib/policies/privacy_policy.dart';
-import '../lib/policies/terms_of_use.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/navigation/custom_app_bar.dart';
+import 'package:vodic_kroz_valjevo/policies/privacy_policy.dart';
+import 'package:vodic_kroz_valjevo/policies/terms_of_use.dart';
 
 void main() {
+  final authors = <Locale, String>{
+    const Locale('de'): 'Andjelka Dzida',
+    const Locale('en'): 'Andjelka Dzida',
+    const Locale('sr'): 'Anđelka Džida',
+    const Locale.fromSubtags(languageCode: 'sr', scriptCode: 'Latn'):
+        'Anđelka Džida',
+    const Locale.fromSubtags(languageCode: 'sr', scriptCode: 'Cyrl'):
+        'Анђелка Џида',
+  };
+
+  for (final entry in authors.entries) {
+    test('author text uses the supplied year in ${entry.key}', () async {
+      final messages = await AppLocalizations.delegate.load(entry.key);
+      for (final year in [2025, 2026, 2040]) {
+        expect(messages.appAuthor(year), '© $year ${entry.value}');
+      }
+    });
+
+    testWidgets('about dialog shows the current year in ${entry.key}',
+        (tester) async {
+      final scenario = _Scenario('author', const Size(390, 844), entry.key);
+      _setViewport(tester, scenario);
+      await tester.pumpWidget(_app(
+        scenario,
+        Builder(builder: (context) {
+          return Scaffold(
+            appBar: customAppBar(context, 'Menu', Colors.blue),
+          );
+        }),
+      ));
+      final context = tester.element(find.byType(Scaffold));
+      await tester.tap(find.byTooltip(AppLocalizations.of(context)!.aboutApp));
+      await tester.pumpAndSettle();
+
+      final expected = '© ${DateTime.now().year} ${entry.value}';
+      final dialog = tester.widget<AboutDialog>(find.byType(AboutDialog));
+      expect(dialog.applicationLegalese, expected);
+      expect(find.text(expected), findsOneWidget);
+    });
+  }
+
   const scenarios = [
     _Scenario('small portrait', Size(320, 480), Locale('de')),
     _Scenario('small landscape', Size(640, 360),

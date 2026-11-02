@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
-import '../lib/helper/internet_connectivity.dart';
-import '../lib/l10n/app_localizations.dart';
-import '../lib/maps_navigation/map_builder.dart';
+import 'package:vodic_kroz_valjevo/helper/internet_connectivity.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/maps_navigation/map_builder.dart';
 
 import 'support/network_image_test_support.dart';
 

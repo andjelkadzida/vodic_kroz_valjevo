@@ -1,4 +1,4 @@
-import '../../lib/database_config/tour_data_mapper.dart';
+import 'package:vodic_kroz_valjevo/database_config/tour_data_mapper.dart';
 
 typedef TourFixtureData = Map<TourCollection, List<Map<String, dynamic>>>;
 

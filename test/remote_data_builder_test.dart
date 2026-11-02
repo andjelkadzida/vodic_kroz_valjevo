@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/helper/remote_data_builder.dart';
-import '../lib/l10n/app_localizations.dart';
-import '../lib/main.dart';
+import 'package:vodic_kroz_valjevo/helper/remote_data_builder.dart';
+import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/main.dart';
 
 void main() {
   testWidgets('shows a localized error and retries the online request',

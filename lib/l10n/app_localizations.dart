@@ -630,6 +630,42 @@ abstract class AppLocalizations {
   /// **'Bug Report Form'**
   String get bugReport;
 
+  /// No description provided for @bugReportIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what went wrong so we can improve the app.'**
+  String get bugReportIntro;
+
+  /// No description provided for @bugReportDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the issue'**
+  String get bugReportDetails;
+
+  /// No description provided for @bugReportDeviceDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Device details'**
+  String get bugReportDeviceDetails;
+
+  /// No description provided for @bugReportDeviceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'These details are detected automatically.'**
+  String get bugReportDeviceNote;
+
+  /// No description provided for @bugReportAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachment (optional)'**
+  String get bugReportAttachment;
+
+  /// No description provided for @removeAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove attachment'**
+  String get removeAttachment;
+
   /// No description provided for @bugTitle.
   ///
   /// In en, this message translates to:
@@ -671,6 +707,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Operating System Version'**
   String get osVersion;
+
+  /// No description provided for @deviceInfoUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Some device details could not be detected and will not be included in the report.'**
+  String get deviceInfoUnavailable;
+
+  /// No description provided for @deviceInfoNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available'**
+  String get deviceInfoNotAvailable;
 
   /// No description provided for @uploadFile.
   ///
@@ -783,8 +831,8 @@ abstract class AppLocalizations {
   /// No description provided for @appAuthor.
   ///
   /// In en, this message translates to:
-  /// **'© 2026 Andjelka Dzida'**
-  String get appAuthor;
+  /// **'© {year} Andjelka Dzida'**
+  String appAuthor(int year);
 
   /// No description provided for @appLogo.
   ///
@@ -935,6 +983,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Indicator'**
   String get indicator;
+
+  /// No description provided for @cityFactsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Key facts about Valjevo'**
+  String get cityFactsTitle;
 
   /// No description provided for @openAboutDialog.
   ///

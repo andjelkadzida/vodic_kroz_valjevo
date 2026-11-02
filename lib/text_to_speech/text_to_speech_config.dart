@@ -1,15 +1,25 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class TextToSpeechConfig {
   static final TextToSpeechConfig _instance = TextToSpeechConfig._internal();
-  final FlutterTts flutterTts = FlutterTts();
+  final FlutterTts flutterTts;
+  final bool _isIOS;
   bool isPaused = false;
   String? _requestedLanguage;
   String? _configuredLanguage;
 
-  TextToSpeechConfig._internal();
+  TextToSpeechConfig._internal()
+      : flutterTts = FlutterTts(),
+        _isIOS = Platform.isIOS;
+
+  @visibleForTesting
+  TextToSpeechConfig.forTesting({
+    required this.flutterTts,
+    required bool isIOS,
+  }) : _isIOS = isIOS;
 
   static TextToSpeechConfig get instance => _instance;
 
@@ -33,8 +43,7 @@ class TextToSpeechConfig {
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(1.0);
-    final voiceLanguage =
-        Platform.isIOS && languageCode == 'sr' ? 'hr' : languageCode;
+    final voiceLanguage = _isIOS && languageCode == 'sr' ? 'hr' : languageCode;
     final result = await flutterTts.setLanguage(voiceLanguage);
     if (result == 0 || result == false) {
       throw const SpeechUnavailableException();
@@ -48,17 +57,22 @@ class TextToSpeechConfig {
       await _configureLanguage(language);
       if (_requestedLanguage == language) _configuredLanguage = language;
     }
-    if (Platform.isIOS) {
-      await flutterTts.setSharedInstance(true);
-      await flutterTts.setIosAudioCategory(
-        IosTextToSpeechAudioCategory.ambient,
-        [
-          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+
+    if (_isIOS) {
+      final Object? categoryResult = await flutterTts.setIosAudioCategory(
+        IosTextToSpeechAudioCategory.playback,
+        const [
           IosTextToSpeechAudioCategoryOptions.mixWithOthers,
         ],
         IosTextToSpeechAudioMode.voicePrompt,
       );
+      if (categoryResult != 1 && categoryResult != true) {
+        throw const SpeechUnavailableException();
+      }
+      final Object? activationResult = await flutterTts.setSharedInstance(true);
+      if (activationResult != 1 && activationResult != true) {
+        throw const SpeechUnavailableException();
+      }
     }
     await flutterTts.awaitSpeakCompletion(false);
     final result = await flutterTts.speak(text);

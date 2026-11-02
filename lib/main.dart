@@ -78,41 +78,86 @@ class _ApplicationBootstrapState extends State<ApplicationBootstrap> {
         return MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
+          debugShowCheckedModeBanner: false,
           home: Builder(
             builder: (context) {
               final messages = AppLocalizations.of(context)!;
+              final hasError =
+                  snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasError;
               return Scaffold(
-                body: Center(
-                  child: snapshot.connectionState == ConnectionState.done &&
-                          snapshot.hasError
-                      ? isPossibleConnectionFailure(snapshot.error!)
-                          ? ConnectionAwareFailure(onRetry: _retry)
-                          : Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(messages.errorLoadingData),
-                                IconButton(
-                                  onPressed: _retry,
-                                  tooltip: MaterialLocalizations.of(context)
-                                      .refreshIndicatorSemanticLabel,
-                                  icon: Icon(
-                                    Icons.refresh,
-                                    semanticLabel:
-                                        MaterialLocalizations.of(context)
-                                            .refreshIndicatorSemanticLabel,
+                backgroundColor: hasError ? null : Colors.white,
+                body: !hasError
+                    ? const _LaunchSplash()
+                    : Center(
+                        child: isPossibleConnectionFailure(snapshot.error!)
+                            ? ConnectionAwareFailure(onRetry: _retry)
+                            : Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(messages.errorLoadingData),
+                                  IconButton(
+                                    onPressed: _retry,
+                                    tooltip: MaterialLocalizations.of(context)
+                                        .refreshIndicatorSemanticLabel,
+                                    icon: Icon(
+                                      Icons.refresh,
+                                      semanticLabel:
+                                          MaterialLocalizations.of(context)
+                                              .refreshIndicatorSemanticLabel,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                      : CircularProgressIndicator(
-                          semanticsLabel: messages.loading,
-                        ),
-                ),
+                                ],
+                              ),
+                      ),
               );
             },
           ),
         );
       },
+    );
+  }
+}
+
+class _LaunchSplash extends StatelessWidget {
+  const _LaunchSplash();
+
+  @override
+  Widget build(BuildContext context) {
+    final messages = AppLocalizations.of(context)!;
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final logoSize =
+              (constraints.biggest.shortestSide * 0.5).clamp(0.0, 168.0);
+          final cacheWidth = (logoSize * MediaQuery.devicePixelRatioOf(context))
+              .ceil()
+              .clamp(1, 672);
+          return Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    'images/splash_logo.png',
+                    width: logoSize,
+                    height: logoSize,
+                    cacheWidth: cacheWidth,
+                    fit: BoxFit.contain,
+                    semanticLabel: messages.appLogo,
+                  ),
+                  const SizedBox(height: 24),
+                  CircularProgressIndicator(
+                    color: const Color(0xFF5A1218),
+                    semanticsLabel: messages.loading,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

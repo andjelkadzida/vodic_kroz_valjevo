@@ -80,7 +80,8 @@ AppBar customAppBar(BuildContext context, String title, Color color,
               ),
               applicationName: localization(context).appTitle,
               applicationVersion: '2.0.0',
-              applicationLegalese: localization(context).appAuthor,
+              applicationLegalese:
+                  localization(context).appAuthor(DateTime.now().year),
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(top: 8),

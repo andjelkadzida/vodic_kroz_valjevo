@@ -303,6 +303,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bugReport => 'Bug Report Form';
 
   @override
+  String get bugReportIntro =>
+      'Tell us what went wrong so we can improve the app.';
+
+  @override
+  String get bugReportDetails => 'Describe the issue';
+
+  @override
+  String get bugReportDeviceDetails => 'Device details';
+
+  @override
+  String get bugReportDeviceNote => 'These details are detected automatically.';
+
+  @override
+  String get bugReportAttachment => 'Attachment (optional)';
+
+  @override
+  String get removeAttachment => 'Remove attachment';
+
+  @override
   String get bugTitle => 'Bug Title';
 
   @override
@@ -322,6 +341,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get osVersion => 'Operating System Version';
+
+  @override
+  String get deviceInfoUnavailable =>
+      'Some device details could not be detected and will not be included in the report.';
+
+  @override
+  String get deviceInfoNotAvailable => 'Not available';
 
   @override
   String get uploadFile => 'Upload File';
@@ -382,7 +408,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutApp => 'About the application';
 
   @override
-  String get appAuthor => '© 2026 Andjelka Dzida';
+  String appAuthor(int year) {
+    return '© $year Andjelka Dzida';
+  }
 
   @override
   String get appLogo => 'Application Logo';
@@ -511,6 +539,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get indicator => 'Indicator';
+
+  @override
+  String get cityFactsTitle => 'Key facts about Valjevo';
 
   @override
   String get openAboutDialog => 'Open about dialog.';

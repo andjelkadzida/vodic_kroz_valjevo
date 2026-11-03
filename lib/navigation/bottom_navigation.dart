@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import '../localization/language.dart';
@@ -66,7 +64,6 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     final List<NavItem> navItems = [
       NavItem(
           Icons.home,
@@ -95,35 +92,39 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           (context) => localization(context).bugReport),
     ];
 
-    return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      items: navItems.map((NavItem navItem) {
-        return BottomNavigationBarItem(
-          icon: SizedBox(
-            width: max(50, screenSize.width * 0.1),
-            height: max(50, screenSize.height * 0.03),
-            child: Icon(
-              _selectedIndex == -1 ||
-                      _selectedIndex != navItems.indexOf(navItem)
-                  ? navItem.icon
-                  : navItem.selectedIcon,
-              size: screenSize.width * 0.07,
-            ),
-          ),
-          label: navItem.title(context),
-          tooltip: navItem.tooltip(context),
-        );
-      }).toList(),
-      currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
-      selectedItemColor:
-          _selectedIndex == -1 ? unselectedColor : unselectedColor,
-      unselectedItemColor: unselectedColor,
-      showUnselectedLabels: false,
-      showSelectedLabels: false,
-      onTap: _onNavItemTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedFontSize: screenSize.width * 0.03,
-      unselectedFontSize: screenSize.width * 0.03,
+    return ColoredBox(
+      color: Colors.white,
+      child: SafeArea(
+        top: false,
+        bottom: false,
+        child: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          items: navItems.map((NavItem navItem) {
+            return BottomNavigationBarItem(
+              icon: SizedBox(
+                width: 48,
+                height: 48,
+                child: Icon(
+                  _selectedIndex == -1 ||
+                          _selectedIndex != navItems.indexOf(navItem)
+                      ? navItem.icon
+                      : navItem.selectedIcon,
+                  size: 28,
+                ),
+              ),
+              label: navItem.title(context),
+              tooltip: navItem.tooltip(context),
+            );
+          }).toList(),
+          currentIndex: _selectedIndex == -1 ? 0 : _selectedIndex,
+          selectedItemColor: unselectedColor,
+          unselectedItemColor: unselectedColor,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          onTap: _onNavItemTapped,
+          type: BottomNavigationBarType.fixed,
+        ),
+      ),
     );
   }
 }

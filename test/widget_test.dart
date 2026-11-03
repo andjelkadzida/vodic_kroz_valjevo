@@ -1,40 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:vodic_kroz_valjevo/database_config/database_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vodic_kroz_valjevo/main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
-  sqfliteFfiInit(); // Initialize sqflite_ffi
+  TestWidgetsFlutterBinding.ensureInitialized();
+  const tts = MethodChannel('flutter_tts');
 
   group('VodicKrozValjevo', () {
-    testWidgets('should use default language if not set',
-        (WidgetTester tester) async {
-      databaseFactory = databaseFactoryFfi;
-      final db = await DatabaseHelper.instance.getNamedDatabase();
-      bool isFirstRun = true;
-      late Locale defaultLocale;
+    setUp(() {
+      SharedPreferences.setMockInitialValues({'scriptCode': 'de'});
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(tts, (_) async => 1);
+    });
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: Builder(
-            builder: (BuildContext buildContext) {
-              defaultLocale = Localizations.localeOf(buildContext);
-              return VodicKrozValjevo(database: db, isFirstRun: isFirstRun);
-            },
-          ),
-        ),
-      );
+    tearDown(() {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(tts, null);
+    });
 
-      await tester.pumpAndSettle();
-
-      expect(
-        Localizations.localeOf(tester.element(find.byType(VodicKrozValjevo))),
-        equals(defaultLocale),
-      );
+    testWidgets('restores the saved language', (WidgetTester tester) async {
+      await tester.pumpWidget(const VodicKrozValjevo(isFirstRun: true));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      final locale =
+          tester.widget<MaterialApp>(find.byType(MaterialApp)).locale;
+      expect(locale?.languageCode, 'de');
     });
   });
 }

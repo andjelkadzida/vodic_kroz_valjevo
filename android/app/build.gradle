@@ -31,9 +31,14 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.andjelkadzida.vodic_kroz_valjevo"
-    compileSdk = 34
-    ndkVersion = "25.1.8937393"
-    ext.kotlin_version = '1.6.0'
+    compileSdk = 36
+    ndkVersion = "28.2.13676358"
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -47,8 +52,8 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = 26
-        targetSdk = 34
-        versionCode = flutterVersionCode
+        targetSdk = 36
+        versionCode = 55//flutterVersionCode // koriscen
         versionName = flutterVersionName
         multiDexEnabled true
     }

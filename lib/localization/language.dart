@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../main.dart';
 import '../pages/menu/menu_page.dart';
 import '../navigation/navigation_helper.dart';
+import 'locale_controller.dart';
 import 'supported_languages.dart';
 
 class Language {
@@ -41,62 +39,47 @@ class LanguageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      width: screenWidth,
-      child: IntrinsicWidth(
-        child: SizedBox(
-          height: max(50, screenHeight * 0.08),
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              return Semantics(
-                label: localization(context).changeLanguageLabel(language.name),
-                child: SizedBox(
-                  width: max(50, screenWidth * 0.55),
-                  height: max(50, screenHeight * 0.2),
-                  child: InkWell(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        ExcludeSemantics(
-                          child: Text(
-                            language.flag,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
-                                  fontSize: screenWidth * 0.05,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                        ),
-                        SizedBox(width: screenWidth * 0.02),
-                        Text(
-                          language.name,
-                          style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontSize: screenWidth * 0.045,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.black,
-                                  ),
-                        ),
-                      ],
-                    ),
-                    onTap: () {
-                      setSelectedLanguage(language);
-                      if (calledFromNavBar) {
-                        Navigator.pop(context);
-                        HapticFeedback.mediumImpact();
-                      } else {
-                        navigateTo(context, const MenuPage());
-                      }
-                    },
+      width: double.infinity,
+      child: Semantics(
+        label: localization(context).changeLanguageLabel(language.name),
+        child: InkWell(
+          onTap: () async {
+            await LocaleScope.of(context).select(language.scriptCode);
+            HapticFeedback.selectionClick();
+            if (!context.mounted) return;
+            if (calledFromNavBar) {
+              Navigator.pop(context);
+              HapticFeedback.mediumImpact();
+            } else {
+              navigateTo(context, const MenuPage());
+            }
+          },
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 48),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ExcludeSemantics(
+                    child: Text(language.flag,
+                        style: Theme.of(context).textTheme.titleMedium),
                   ),
-                ),
-              );
-            },
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      language.name,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -104,70 +87,59 @@ class LanguageButton extends StatelessWidget {
   }
 }
 
-void setSelectedLanguage(Language language) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('isFirstRun', false);
-
-  HapticFeedback.selectionClick();
-
-  Locale locale = await setLocale(language.scriptCode);
-  VodicKrozValjevo.setLanguage(locale);
+Future<void> showLanguageMenuIfNeeded(BuildContext context) async {
+  final prefs = await SharedPreferences.getInstance();
+  if (!context.mounted) return;
+  if (prefs.getBool('isFirstRun') ?? true) {
+    showLanguageMenu(context);
+  } else {
+    navigateTo(context, const MenuPage());
+  }
 }
 
-void showLanguageMenuIfNeeded(BuildContext context) {
-  SharedPreferences.getInstance().then((prefs) {
-    if (prefs.getBool('isFirstRun') ?? true) {
-      showLanguageMenu(context);
-    } else {
-      navigateTo(context, const MenuPage());
-    }
-  });
-}
-
-// Set different bahaviour for language menu based on where it was called from
 void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
   showModalBottomSheet(
     context: context,
+    backgroundColor: Colors.white,
+    isScrollControlled: true,
+    useSafeArea: true,
     builder: (BuildContext context) {
-      var size = MediaQuery.of(context).size;
-      return Container(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(
-          horizontal: size.width * 0.08,
-          vertical: size.width * 0.02,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: size.width * 0.02),
-              child: Semantics(
-                child: Text(
-                  localization(context).chooseLanguage,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: size.width * 0.06,
-                        fontWeight: FontWeight.w500,
-                      ),
-                ),
-              ),
-            ),
-            ...Language.languageList(context).map(
-              (language) => Padding(
-                padding: EdgeInsets.only(bottom: size.width * 0.02),
-                child: Semantics(
-                  button: true,
-                  enabled: true,
-                  onTapHint:
-                      localization(context).selectLanguageLabel(language),
-                  child: LanguageButton(
-                    language: language,
-                    calledFromNavBar: calledFromNavBar,
+      final height = MediaQuery.of(context).size.height;
+      return SafeArea(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: height * 0.9),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Semantics(
+                    child: Text(
+                      localization(context).chooseLanguage,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
                   ),
                 ),
-              ),
+                ...Language.languageList(context).map(
+                  (language) => Semantics(
+                    button: true,
+                    enabled: true,
+                    onTapHint:
+                        localization(context).selectLanguageLabel(language),
+                    child: LanguageButton(
+                      language: language,
+                      calledFromNavBar: calledFromNavBar,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       );
     },

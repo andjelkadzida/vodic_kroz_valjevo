@@ -10,7 +10,22 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
+    afterEvaluate { p ->
+        if (p.plugins.hasPlugin("com.android.library")) {
+            p.android.compileSdkVersion 36
+        }
+    }
+}
+subprojects {
     project.evaluationDependsOn(":app")
+}
+
+subprojects {
+    tasks.configureEach { task ->
+        if (task.class.name.contains("KotlinCompile")) {
+            task.kotlinOptions.jvmTarget = "11"
+        }
+    }
 }
 
 tasks.register("clean", Delete) {

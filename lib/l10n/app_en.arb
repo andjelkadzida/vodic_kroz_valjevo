@@ -22,17 +22,26 @@
     "tapToNavigateToSight": "Tap to navigate to the sight.",
     "settings": "Settings",
     "openSettings": "Open Settings",
+    "connectionProblem": "Unable to complete the request. Check your internet connection and try again.",
+    "networkSettingsHint": "Turn on Wi-Fi or mobile data in your device settings.",
+    "networkSettingsIosHint": "Turn on Wi-Fi or mobile data in Settings or Control Center.",
+    "networkSettingsFailed": "Could not open device settings.",
+    "retryConnection": "Try again",
     "image": "Image of {name}",
     "loading": "Loading data, please wait...",
     "errorLoadingData": "Error occured during loading data.",
     "noDataAvailable": "No data available!",
-    "tapToHearSightDetails": "Tap to hear details about the sight. Tap twice to stop.",
-    "tapToHearParkDetails": "Tap to hear details about the park. Tap twice to stop.",
-    "tapToHearSportDetails": "Tap to hear details about the sport field. Tap twice to stop.",
+    "tapToHearSightDetails": "Read sight details aloud",
+    "tapToHearParkDetails": "Read park details aloud",
+    "tapToHearSportDetails": "Read sports field details aloud",
     "tapToViewPark": "Tap to view park's details.",
     "tapToViewSport": "Tap to view sport field's details.",
-    "tapToHearLegend": "Tap to hear the legend of the city name. Tap twice to stop.",
-    "tapToHearHistory": "Tap to hear the city's history. Tap twice to stop.",
+    "tapToHearLegend": "Read the city legend aloud",
+    "tapToHearHistory": "Read the city history aloud",
+    "readCityFact": "Read {fact} aloud",
+    "@readCityFact": {
+        "placeholders": {"fact": {"type": "String"}}
+    },
     "tapToSeeSightDetails": "To view further information regarding the sight named {name}, simply tap on it.",
     "legendOfTheCity": "Legends about the name of the city",
     "starCount": "{numberOfStars, plural, =1{1 star} other{{numberOfStars} stars}}",
@@ -51,6 +60,34 @@
     "getStarted": "Get Started",
     "mapPage": "City map",
     "map": "Map of the city of Valjevo",
+    "mapView": "Map view",
+    "listView": "List view",
+    "previousItem": "Previous item",
+    "nextItem": "Next item",
+    "previousPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "resetZoom": "Reset zoom",
+    "movePhotoUp": "Move photo up",
+    "movePhotoDown": "Move photo down",
+    "movePhotoLeft": "Move photo left",
+    "movePhotoRight": "Move photo right",
+    "moveMapUp": "Move map up",
+    "moveMapDown": "Move map down",
+    "moveMapLeft": "Move map left",
+    "moveMapRight": "Move map right",
+    "resetMap": "Reset map",
+    "stopReading": "Stop reading",
+    "speechUnavailable": "Speech is unavailable. Check your device's text-to-speech settings.",
+    "retryImage": "Retry loading image",
+    "positionInList": "{current} of {total}",
+    "@positionInList": {
+        "placeholders": {
+            "current": {"type": "int"},
+            "total": {"type": "int"}
+        }
+    },
     "website": "Website",
     "menuItem": "Menu Item: {item}",
     "tapToOpen": "Tap to open {item}",
@@ -59,6 +96,12 @@
     "historyOfTheCity": "City History",
     "song": "When you come to any city\n\nAnd one comes to any ctiy very late\n\nWhen you come very late to any city\n\nIn case that city happens to be Valjevo...",
     "bugReport": "Bug Report Form",
+    "bugReportIntro": "Tell us what went wrong so we can improve the app.",
+    "bugReportDetails": "Describe the issue",
+    "bugReportDeviceDetails": "Device details",
+    "bugReportDeviceNote": "These details are detected automatically.",
+    "bugReportAttachment": "Attachment (optional)",
+    "removeAttachment": "Remove attachment",
     "bugTitle": "Bug Title",
     "bugDescription": "Bug Description",
     "operatingSystem": "Operating System",
@@ -66,6 +109,8 @@
     "selectOSLabel": "Press to select the operating system.",
     "deviceModel": "Device Model",
     "osVersion": "Operating System Version",
+    "deviceInfoUnavailable": "Some device details could not be detected and will not be included in the report.",
+    "deviceInfoNotAvailable": "Not available",
     "uploadFile": "Upload File",
     "submit": "Submit",
     "enterDescription": "Please enter a description of the issue.",
@@ -84,7 +129,10 @@
     "copyrightOfImages": "Copyright of the photos",
     "noInternetConnection": "No Internet Connection!",
     "aboutApp": "About the application",
-    "appAuthor": "© 2024 Andjelka Dzida",
+    "appAuthor": "© {year} Andjelka Dzida",
+    "@appAuthor": {
+        "placeholders": {"year": {"type": "int"}}
+    },
     "appLogo": "Application Logo",
     "aboutAppLocalization": "Localization: Our application is designed for global accessibility, offering multilingual support that encompasses English, German, and Serbian, inclusive of both Latin and Cyrillic scripts.",
     "aboutAppAccessibility": "Accessibility: We are committed to ensuring our app is accessible to everyone, including users with disabilities. Our app includes features such as screen reader support, adjustable text sizes.",
@@ -96,12 +144,57 @@
     "elevation": "Elevation above sea level",
     "populationDensity": "Population density",
     "population": "Population",
+    "citySurfaceValue": "{value} ha",
+    "@citySurfaceValue": {
+        "placeholders": {"value": {"type": "int", "format": "decimalPattern"}}
+    },
+    "citySurfaceSpoken": "{value} hectares",
+    "@citySurfaceSpoken": {
+        "placeholders": {"value": {"type": "int", "format": "decimalPattern"}}
+    },
+    "cityElevationValue": "{value} m",
+    "@cityElevationValue": {
+        "placeholders": {"value": {"type": "int", "format": "decimalPattern"}}
+    },
+    "cityElevationSpoken": "{value} meters",
+    "@cityElevationSpoken": {
+        "placeholders": {"value": {"type": "int", "format": "decimalPattern"}}
+    },
+    "cityDensityValue": "{value} people/km² ({year})",
+    "@cityDensityValue": {
+        "placeholders": {
+            "value": {"type": "double", "format": "decimalPattern"},
+            "year": {"type": "int"}
+        }
+    },
+    "cityDensitySpoken": "{value} people per square kilometer in {year}",
+    "@cityDensitySpoken": {
+        "placeholders": {
+            "value": {"type": "double", "format": "decimalPattern"},
+            "year": {"type": "int"}
+        }
+    },
+    "cityPopulationValue": "{value} ({year})",
+    "@cityPopulationValue": {
+        "placeholders": {
+            "value": {"type": "int", "format": "decimalPattern"},
+            "year": {"type": "int"}
+        }
+    },
+    "cityPopulationSpoken": "{value} people in {year}",
+    "@cityPopulationSpoken": {
+        "placeholders": {
+            "value": {"type": "int", "format": "decimalPattern"},
+            "year": {"type": "int"}
+        }
+    },
     "district": "District",
     "cityDay": "City Day",
     "saint": "City Patron Saint Day",
     "kolubaraDistrict": "Kolubara District",
     "saintName": "Trojice (Duhovi)",
     "indicator": "Indicator",
+    "cityFactsTitle": "Key facts about Valjevo",
     "openAboutDialog": "Open about dialog.",
     "cityDayDate": "20. March",
 

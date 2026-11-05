@@ -19,8 +19,7 @@
     <application
         android:allowBackup="false"
         android:fullBackupOnly="false"
-        android:label="@string/app_name"
-        android:name="VApp"
+        android:label="@string/vapp_name"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="tiramisu">

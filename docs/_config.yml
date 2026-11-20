@@ -1,0 +1,15 @@
+# GitHub Pages site settings for the docs/ folder
+theme: jekyll-theme-cayman
+
+title: Vodič kroz Valjevo
+description: Valjevo tour guide
+lang: en
+
+# Hide the .zip / .tar.gz download buttons in the page header
+show_downloads: false
+
+# index.md is the page; keep README.md (if present) out of the built site
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

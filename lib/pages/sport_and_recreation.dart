@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../database_config/tour_data_service.dart';
 import '../helper/accessibility_theme.dart';

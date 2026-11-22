@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names, no_leading_underscores_for_local_identifiers
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../l10n/app_localizations.dart';
 

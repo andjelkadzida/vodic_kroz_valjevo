@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';

@@ -76,6 +76,8 @@
     "moveMapRight": "Pomeri mapu nadesno",
     "resetMap": "Vrati mapu",
     "stopReading": "Zaustavi čitanje",
+    "pauseReading": "Pauzira čitanje",
+    "resumeReading": "Nastavi čitanje",
     "speechUnavailable": "Čitanje nije dostupno. Proverite podešavanja govora na uređaju.",
     "retryImage": "Pokušaj ponovo da učitaš sliku",
     "positionInList": "{current} od {total}",

@@ -11,20 +11,23 @@ class Language {
   final int id;
   final String flag;
   final String name;
-  final String languageCode;
-  final String scriptCode;
-  final String countyCode;
 
-  Language(this.id, this.flag, this.name, this.languageCode, this.scriptCode,
-      this.countyCode);
+  /// Selection key stored in SharedPreferences and passed to
+  /// LocaleScope.select(): SERBIAN_LATIN, SERBIAN_CYRL, ENGLISH or GERMAN.
+  final String key;
+
+  const Language(this.id, this.flag, this.name, this.key);
+
+  /// The real locale this entry stands for.
+  Locale get locale => localeForKey(key);
 
   static List<Language> languageList(BuildContext context) {
+    final l10n = localization(context);
     return <Language>[
-      Language(1, '🇷🇸', localization(context).serbian, 'sr', 'Latn', 'sr-RS'),
-      Language(
-          2, '🇷🇸', localization(context).serbianCyrl, 'sr', 'Cyrl', 'sr-RS'),
-      Language(3, '🇺🇸', localization(context).english, 'en', 'en', 'en-US'),
-      Language(4, '🇩🇪', localization(context).german, 'de', 'de', 'de-DE')
+      Language(1, '🇷🇸', l10n.serbian, SERBIAN_LATIN),
+      Language(2, '🇷🇸', l10n.serbianCyrl, SERBIAN_CYRL),
+      Language(3, '🇺🇸', l10n.english, ENGLISH),
+      Language(4, '🇩🇪', l10n.german, GERMAN),
     ];
   }
 }
@@ -37,24 +40,29 @@ class LanguageButton extends StatelessWidget {
       {Key? key, required this.language, this.calledFromNavBar = false})
       : super(key: key);
 
+  Future<void> _select(BuildContext context) async {
+    await LocaleScope.of(context).select(language.key);
+    HapticFeedback.selectionClick();
+    if (!context.mounted) return;
+    if (calledFromNavBar) {
+      Navigator.pop(context);
+      HapticFeedback.mediumImpact();
+    } else {
+      navigateTo(context, const MenuPage());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Semantics(
+        button: true,
+        enabled: true,
         label: localization(context).changeLanguageLabel(language.name),
+        onTap: () => _select(context),
         child: InkWell(
-          onTap: () async {
-            await LocaleScope.of(context).select(language.scriptCode);
-            HapticFeedback.selectionClick();
-            if (!context.mounted) return;
-            if (calledFromNavBar) {
-              Navigator.pop(context);
-              HapticFeedback.mediumImpact();
-            } else {
-              navigateTo(context, const MenuPage());
-            }
-          },
+          onTap: () => _select(context),
           child: ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 48),
             child: Padding(
@@ -129,8 +137,8 @@ void showLanguageMenu(BuildContext context, {bool calledFromNavBar = false}) {
                   (language) => Semantics(
                     button: true,
                     enabled: true,
-                    onTapHint:
-                        localization(context).selectLanguageLabel(language),
+                    onTapHint: localization(context)
+                        .selectLanguageLabel(language.name),
                     child: LanguageButton(
                       language: language,
                       calledFromNavBar: calledFromNavBar,

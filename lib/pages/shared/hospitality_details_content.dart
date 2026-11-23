@@ -59,6 +59,9 @@ class HospitalityDetailsContent extends StatelessWidget {
                     Center(
                       child: Semantics(
                         link: true,
+                        label: localization(context).photoSource,
+                        onTap: () => _openUrl(photoSourceUrl),
+                        enabled: true,
                         child: InkWell(
                           onTap: () => _openUrl(photoSourceUrl),
                           child: ConstrainedBox(
@@ -112,6 +115,9 @@ class HospitalityDetailsContent extends StatelessWidget {
                     if (website != null)
                       Semantics(
                         link: true,
+                        label: localization(context).website,
+                        onTap: () => _openUrl(website!),
+                        enabled: true,
                         child: InkWell(
                           onTap: () => _openUrl(website!),
                           child: ConstrainedBox(

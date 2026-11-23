@@ -11,6 +11,12 @@ import 'l10n/app_localizations.dart';
 import 'pages/home_page.dart';
 import 'text_to_speech/text_to_speech_config.dart';
 
+const List<LocalizationsDelegate<dynamic>> appLocalizationsDelegates =
+    <LocalizationsDelegate<dynamic>>[
+  AppLocalizations.delegate,
+  ...GlobalMaterialLocalizations.delegates,
+];
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const ApplicationBootstrap());
@@ -76,7 +82,7 @@ class _ApplicationBootstrapState extends State<ApplicationBootstrap> {
 
         return MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           debugShowCheckedModeBanner: false,
           home: Builder(
             builder: (context) {
@@ -194,7 +200,7 @@ class _VodicKrozValjevo extends State<VodicKrozValjevo> {
         animation: _localeController,
         builder: (context, _) => MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           locale: _localeController.locale,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

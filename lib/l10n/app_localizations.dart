@@ -88,8 +88,6 @@ abstract class AppLocalizations {
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
     delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
   ];
 
@@ -563,6 +561,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stop reading'**
   String get stopReading;
+
+  /// No description provided for @pauseReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause reading'**
+  String get pauseReading;
+
+  /// No description provided for @resumeReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume reading'**
+  String get resumeReading;
 
   /// No description provided for @speechUnavailable.
   ///

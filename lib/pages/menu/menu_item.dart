@@ -24,6 +24,7 @@ class MenuItem extends StatelessWidget {
       button: true,
       enabled: true,
       onTapHint: localization(context).tapToOpen(label),
+      onTap: onTap,
       child: Card(
         elevation: 4,
         margin: EdgeInsets.zero,

@@ -76,6 +76,8 @@
     "moveMapRight": "Karte nach rechts bewegen",
     "resetMap": "Karte zurücksetzen",
     "stopReading": "Vorlesen stoppen",
+    "pauseReading": "Vorlesen pausieren",
+    "resumeReading": "Vorlesen fortsetzen",
     "speechUnavailable": "Sprachausgabe nicht verfügbar. Überprüfen Sie die Einstellungen der Sprachausgabe auf Ihrem Gerät.",
     "retryImage": "Bild erneut laden",
     "positionInList": "{current} von {total}",

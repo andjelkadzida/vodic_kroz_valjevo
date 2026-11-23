@@ -41,7 +41,8 @@ void main() {
       await tester.pumpAndSettle();
       final german = find.byWidgetPredicate(
         (widget) =>
-            widget is LanguageButton && widget.language.scriptCode == 'de',
+            widget is LanguageButton &&
+            widget.language.locale.languageCode == 'de',
       );
       await tester.ensureVisible(german);
       await tester.tap(german);

@@ -76,6 +76,8 @@
     "moveMapRight": "Помери мапу надесно",
     "resetMap": "Врати мапу",
     "stopReading": "Заустави читање",
+    "pauseReading": "Паузира читање",
+    "resumeReading": "Настави читање",
     "speechUnavailable": "Читање није доступно. Проверите подешавања говора на уређају.",
     "retryImage": "Покушај поново да учиташ слику",
     "positionInList": "{current} од {total}",

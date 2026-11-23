@@ -75,6 +75,9 @@ class _PlacesViewState extends State<_PlacesView> {
         child: Semantics(
           button: true,
           label: item['title'] as String,
+          onTap: () =>
+              showDetailsPage(context, widget.buildDetailsPage(item)),
+          enabled: true,
           child: GestureDetector(
             onTap: () =>
                 showDetailsPage(context, widget.buildDetailsPage(item)),
@@ -159,7 +162,6 @@ class _ViewToggle extends StatelessWidget {
   final bool selected;
   final VoidCallback onPressed;
 
-  @override
   Widget build(BuildContext context) {
     const color = Color.fromRGBO(11, 20, 32, 1);
     return Semantics(
@@ -171,7 +173,15 @@ class _ViewToggle extends StatelessWidget {
           foregroundColor: selected ? Colors.white : color,
           backgroundColor: selected ? color : Colors.white,
         ),
-        child: Text(label, textAlign: TextAlign.center),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 8,
+          children: [
+            if (selected) const ExcludeSemantics(child: Icon(Icons.check)),
+            Text(label, textAlign: TextAlign.center),
+          ],
+        ),
       ),
     );
   }

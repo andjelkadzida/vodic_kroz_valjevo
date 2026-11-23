@@ -51,7 +51,10 @@ class GuideDetailsContent extends StatelessWidget {
                       const SizedBox(height: 12),
                       Semantics(
                         button: true,
+                        label: localization(context).startNavigation,
                         onTapHint: navigationHint,
+                        onTap: onNavigate,
+                        enabled: true,
                         child: InkWell(
                           onTap: onNavigate,
                           child: ConstrainedBox(

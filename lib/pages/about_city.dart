@@ -178,26 +178,26 @@ class _CityFacts extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                color: colors.primaryContainer,
+                color: const Color.fromRGBO(25, 55, 109, 1),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Semantics(
                   container: true,
                   header: true,
-                  label: messages.cityFactsTitle,
+                  label: messages.aboutCity,
                   child: ExcludeSemantics(
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.location_city_outlined,
-                          color: colors.onPrimaryContainer,
+                          color: Color(0xFFE0E6ED),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            messages.cityFactsTitle,
+                            messages.aboutCity,
                             style: theme.textTheme.titleMedium?.copyWith(
-                              color: colors.onPrimaryContainer,
+                              color: const Color(0xFFE0E6ED),
                               fontWeight: FontWeight.w600,
                             ),
                           ),

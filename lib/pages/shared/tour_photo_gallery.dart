@@ -234,6 +234,10 @@ class _TourPhotoGalleryState extends State<TourPhotoGallery> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
                     tooltip: localization(context).previousPhoto,
                     onPressed:
                         _current > 0 ? () => _changePage(_current - 1) : null,
@@ -246,6 +250,10 @@ class _TourPhotoGalleryState extends State<TourPhotoGallery> {
                         .positionInList(_current + 1, widget.images.length)),
                   ),
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
                     tooltip: localization(context).nextPhoto,
                     onPressed: _current + 1 < widget.images.length
                         ? () => _changePage(_current + 1)
@@ -254,6 +262,10 @@ class _TourPhotoGalleryState extends State<TourPhotoGallery> {
                         semanticLabel: localization(context).nextPhoto),
                   ),
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
                     tooltip: localization(context).zoomOut,
                     onPressed: base != null && scale != null && scale > base
                         ? () => _zoom(1 / 1.5, base)
@@ -262,6 +274,10 @@ class _TourPhotoGalleryState extends State<TourPhotoGallery> {
                         semanticLabel: localization(context).zoomOut),
                   ),
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
                     tooltip: localization(context).zoomIn,
                     onPressed: base != null && scale != null && scale < base * 5
                         ? () => _zoom(1.5, base)
@@ -270,6 +286,10 @@ class _TourPhotoGalleryState extends State<TourPhotoGallery> {
                         semanticLabel: localization(context).zoomIn),
                   ),
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
                     tooltip: localization(context).resetZoom,
                     onPressed: base == null
                         ? null
@@ -282,24 +302,40 @@ class _TourPhotoGalleryState extends State<TourPhotoGallery> {
                   ),
                   if (base != null && scale != null && scale > base) ...[
                     IconButton(
+                      constraints: const BoxConstraints(
+                        minWidth: 48,
+                        minHeight: 48,
+                      ),
                       tooltip: localization(context).movePhotoUp,
                       onPressed: () => _moveImage(const Offset(0, -48)),
                       icon: Icon(Icons.arrow_upward,
                           semanticLabel: localization(context).movePhotoUp),
                     ),
                     IconButton(
+                      constraints: const BoxConstraints(
+                        minWidth: 48,
+                        minHeight: 48,
+                      ),
                       tooltip: localization(context).movePhotoDown,
                       onPressed: () => _moveImage(const Offset(0, 48)),
                       icon: Icon(Icons.arrow_downward,
                           semanticLabel: localization(context).movePhotoDown),
                     ),
                     IconButton(
+                      constraints: const BoxConstraints(
+                        minWidth: 48,
+                        minHeight: 48,
+                      ),
                       tooltip: localization(context).movePhotoLeft,
                       onPressed: () => _moveImage(const Offset(-48, 0)),
                       icon: Icon(Icons.arrow_back,
                           semanticLabel: localization(context).movePhotoLeft),
                     ),
                     IconButton(
+                      constraints: const BoxConstraints(
+                        minWidth: 48,
+                        minHeight: 48,
+                      ),
                       tooltip: localization(context).movePhotoRight,
                       onPressed: () => _moveImage(const Offset(48, 0)),
                       icon: Icon(Icons.arrow_forward,

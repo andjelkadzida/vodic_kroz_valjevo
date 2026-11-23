@@ -9,9 +9,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>VApp uses the camera so you can take a photo to report a bug</string>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<string>© 2026 Andjelka Dzida. All rights reserved.</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.travel</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -94,5 +92,12 @@
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>sr</string>
+		<string>sr-Latn</string>
+		<string>en</string>
+		<string>de</string>
+	</array>
 </dict>
 </plist>

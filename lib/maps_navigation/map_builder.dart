@@ -75,9 +75,6 @@ class _PlacesViewState extends State<_PlacesView> {
         child: Semantics(
           button: true,
           label: item['title'] as String,
-          onTap: () =>
-              showDetailsPage(context, widget.buildDetailsPage(item)),
-          enabled: true,
           child: GestureDetector(
             onTap: () =>
                 showDetailsPage(context, widget.buildDetailsPage(item)),

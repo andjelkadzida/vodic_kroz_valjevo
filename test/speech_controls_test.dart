@@ -16,7 +16,7 @@ void main() {
   var connectivityChecks = 0;
   var settingsCalls = 0;
 
-  setUp(() {
+  setUp(() async {
     calls.clear();
     speechResult = 1;
     languageResult = 1;
@@ -37,6 +37,7 @@ void main() {
       settingsCalls++;
       return null;
     });
+    await TextToSpeechConfig.instance.stopSpeaking();
   });
 
   tearDown(() {

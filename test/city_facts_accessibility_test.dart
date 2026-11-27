@@ -45,7 +45,7 @@ void main() {
     );
   });
 
-  setUp(() {
+  setUp(() async {
     SharedPreferences.setMockInitialValues({});
     TourDataService.instance.refresh(TourCollection.aboutCity);
     calls.clear();
@@ -62,6 +62,7 @@ void main() {
       return ['none'];
     });
     messenger.setMockMethodCallHandler(events, (_) async => null);
+    await TextToSpeechConfig.instance.stopSpeaking();
   });
 
   tearDown(() {
@@ -179,24 +180,19 @@ void main() {
           expect(controls, findsOneWidget);
           expect(
             find.descendant(
-                of: controls, matching: find.byIcon(Icons.volume_up)),
+                of: controls, matching: find.byIcon(Icons.play_arrow)),
             findsOneWidget,
           );
           final stop = find.descendant(
             of: controls,
             matching: find.byTooltip(messages.stopReading),
           );
-          expect(stop, findsOneWidget);
+          expect(stop, findsNothing);
           expect(tester.getSize(read).shortestSide, greaterThanOrEqualTo(48));
-          expect(tester.getSize(stop).shortestSide, greaterThanOrEqualTo(48));
 
           final readNode = tester.getSemantics(read);
-          final stopNode = tester.getSemantics(stop);
           expect(readNode.label, contains(messages.readCityFact(fact.label)));
-          expect(stopNode.label, contains(messages.stopReading));
           expect(readNode.getSemanticsData().hasAction(SemanticsAction.tap),
-              isTrue);
-          expect(stopNode.getSemanticsData().hasAction(SemanticsAction.tap),
               isTrue);
 
           final checksBefore = connectivityChecks;
@@ -204,7 +200,7 @@ void main() {
             tester.semantics.tap(find.semantics.byLabel(readNode.label));
           } else if (index == 1) {
             final readIcon = find.descendant(
-                of: read, matching: find.byIcon(Icons.volume_up));
+                of: read, matching: find.byIcon(Icons.play_arrow));
             Focus.of(tester.element(readIcon)).requestFocus();
             await tester.pump();
             await tester.sendKeyEvent(LogicalKeyboardKey.enter);

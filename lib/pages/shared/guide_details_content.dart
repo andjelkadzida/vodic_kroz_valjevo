@@ -52,8 +52,6 @@ class GuideDetailsContent extends StatelessWidget {
                       Semantics(
                         button: true,
                         onTapHint: navigationHint,
-                        onTap: onNavigate,
-                        enabled: true,
                         child: InkWell(
                           onTap: onNavigate,
                           child: ConstrainedBox(

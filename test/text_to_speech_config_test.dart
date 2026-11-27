@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -26,6 +28,7 @@ void main() {
       'activate:true',
       'completion:false',
       'speak:First',
+      'stop',
       'category',
       'activate:true',
       'completion:false',
@@ -48,6 +51,54 @@ void main() {
       'completion:false',
       'speak:Hello',
     ]);
+  });
+
+  test('delayed pause cannot restore paused state after stop', () async {
+    final tts = _FakeFlutterTts();
+    final speech =
+        TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+    await speech.speak('Hello');
+    tts.pauseCompleter = Completer<dynamic>();
+    final pause = speech.pauseSpeaking();
+    await speech.stopSpeaking();
+    tts.pauseCompleter!.complete(1);
+    await pause;
+
+    expect(speech.state, SpeechState.stopped);
+  });
+
+  test('delayed resume cannot restore playing state after stop', () async {
+    final tts = _FakeFlutterTts();
+    final speech =
+        TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+    await speech.speak('Hello');
+    await speech.pauseSpeaking();
+    tts.speakCompleter = Completer<dynamic>();
+    final resume = speech.resumeSpeaking();
+    await speech.stopSpeaking();
+    tts.speakCompleter!.complete(1);
+    await resume;
+
+    expect(speech.state, SpeechState.stopped);
+  });
+
+  test('delayed replacement stop cannot restart after stop', () async {
+    final tts = _FakeFlutterTts();
+    final speech =
+        TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+    await speech.speak('First');
+    tts.stopCompleter = Completer<dynamic>();
+    final replacement = speech.speak('Second');
+    await Future<void>.delayed(Duration.zero);
+    final stop = speech.stopSpeaking();
+    tts.stopCompleter!.complete(1);
+    await Future.wait([replacement, stop]);
+
+    expect(speech.state, SpeechState.stopped);
+    expect(tts.events, isNot(contains('speak:Second')));
   });
 
   for (final failure in [0, false, null]) {
@@ -84,6 +135,9 @@ class _FakeFlutterTts extends FlutterTts {
   IosTextToSpeechAudioMode? mode;
   Object? categoryResult = 1;
   Object? activationResult = 1;
+  Completer<dynamic>? stopCompleter;
+  Completer<dynamic>? pauseCompleter;
+  Completer<dynamic>? speakCompleter;
 
   @override
   Future<dynamic> setSpeechRate(double rate) async {
@@ -137,6 +191,21 @@ class _FakeFlutterTts extends FlutterTts {
   @override
   Future<dynamic> speak(String text, {bool focus = false}) async {
     events.add('speak:$text');
+    if (speakCompleter != null) return speakCompleter!.future;
+    return 1;
+  }
+
+  @override
+  Future<dynamic> stop() async {
+    events.add('stop');
+    if (stopCompleter != null) return stopCompleter!.future;
+    return 1;
+  }
+
+  @override
+  Future<dynamic> pause() async {
+    events.add('pause');
+    if (pauseCompleter != null) return pauseCompleter!.future;
     return 1;
   }
 }

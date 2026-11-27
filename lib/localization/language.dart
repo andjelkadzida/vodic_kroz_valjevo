@@ -58,9 +58,7 @@ class LanguageButton extends StatelessWidget {
       width: double.infinity,
       child: Semantics(
         button: true,
-        enabled: true,
         label: localization(context).changeLanguageLabel(language.name),
-        onTap: () => _select(context),
         child: InkWell(
           onTap: () => _select(context),
           child: ConstrainedBox(

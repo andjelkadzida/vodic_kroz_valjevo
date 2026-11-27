@@ -337,10 +337,12 @@ void main() {
       final messages = AppLocalizations.of(context)!;
       final read =
           tester.getSemantics(find.byTooltip(messages.tapToHearSightDetails));
-      final stop = tester.getSemantics(find.byTooltip(messages.stopReading));
       expect(read.label, contains(messages.tapToHearSightDetails));
-      expect(stop.label, contains(messages.stopReading));
       expect(read.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      await tester.tap(find.byTooltip(messages.tapToHearSightDetails));
+      await tester.pump(const Duration(milliseconds: 300));
+      final stop = tester.getSemantics(find.byTooltip(messages.stopReading));
+      expect(stop.label, contains(messages.stopReading));
       expect(stop.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
     } finally {
       semantics.dispose();

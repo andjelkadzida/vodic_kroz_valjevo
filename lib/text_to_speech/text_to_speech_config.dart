@@ -19,6 +19,7 @@ class TextToSpeechConfig extends ChangeNotifier {
 
   SpeechState _state = SpeechState.stopped;
   String? _currentText;
+  int _operationRevision = 0;
 
   TextToSpeechConfig._internal()
       : flutterTts = FlutterTts(),
@@ -53,9 +54,17 @@ class TextToSpeechConfig extends ChangeNotifier {
   void _registerHandlers() {
     // When the text is finished (or an error occurs), return the buttons
     // to the initial state on all pages.
-    flutterTts.setCompletionHandler(() => _update(SpeechState.stopped, null));
-    flutterTts.setErrorHandler((_) => _update(SpeechState.stopped, null));
+    flutterTts.setCompletionHandler(_handlePlaybackEnded);
+    flutterTts.setErrorHandler((_) => _handlePlaybackEnded());
   }
+
+  void _handlePlaybackEnded() {
+    _operationRevision++;
+    _update(SpeechState.stopped, null);
+  }
+
+  bool _isCurrentOperation(int revision) =>
+      revision == _operationRevision;
 
   void _update(SpeechState state, String? text) {
     if (_state == state && _currentText == text) return;
@@ -94,9 +103,11 @@ class TextToSpeechConfig extends ChangeNotifier {
   /// Plays [text] from the beginning. If another text is currently being read (or paused),
   /// e.g., from the previous page, it is stopped first.
   Future<void> speak(String text) async {
+    final operation = ++_operationRevision;
     try {
       if (isActive) {
         await flutterTts.stop();
+        if (!_isCurrentOperation(operation)) return;
         _update(SpeechState.stopped, null);
       }
 
@@ -104,6 +115,7 @@ class TextToSpeechConfig extends ChangeNotifier {
           _configuredLanguage != _requestedLanguage) {
         final language = _requestedLanguage!;
         await _configureLanguage(language);
+        if (!_isCurrentOperation(operation)) return;
         if (_requestedLanguage == language) _configuredLanguage = language;
       }
 
@@ -115,36 +127,48 @@ class TextToSpeechConfig extends ChangeNotifier {
           ],
           IosTextToSpeechAudioMode.voicePrompt,
         );
+        if (!_isCurrentOperation(operation)) return;
         if (categoryResult != 1 && categoryResult != true) {
           throw const SpeechUnavailableException();
         }
         final Object? activationResult =
             await flutterTts.setSharedInstance(true);
+        if (!_isCurrentOperation(operation)) return;
         if (activationResult != 1 && activationResult != true) {
           throw const SpeechUnavailableException();
         }
       }
       await flutterTts.awaitSpeakCompletion(false);
+      if (!_isCurrentOperation(operation)) return;
       final result = await flutterTts.speak(text);
+      if (!_isCurrentOperation(operation)) return;
       if (result == 0 || result == false) {
         throw const SpeechUnavailableException();
       }
       _update(SpeechState.playing, text);
     } catch (_) {
-      _update(SpeechState.stopped, null);
+      if (_isCurrentOperation(operation)) {
+        _update(SpeechState.stopped, null);
+      }
       rethrow;
     }
   }
 
   Future<void> stopSpeaking() async {
+    final operation = ++_operationRevision;
     await flutterTts.stop();
-    _update(SpeechState.stopped, null);
+    if (_isCurrentOperation(operation)) {
+      _update(SpeechState.stopped, null);
+    }
   }
 
   Future<void> pauseSpeaking() async {
     if (!isPlaying) return;
+    final operation = ++_operationRevision;
     await flutterTts.pause();
-    _update(SpeechState.paused, _currentText);
+    if (_isCurrentOperation(operation)) {
+      _update(SpeechState.paused, _currentText);
+    }
   }
 
   /// Continues a paused text. flutter_tts does not have a separate "resume" method:
@@ -152,7 +176,9 @@ class TextToSpeechConfig extends ChangeNotifier {
   Future<void> resumeSpeaking() async {
     final text = _currentText;
     if (!isPaused || text == null) return;
+    final operation = ++_operationRevision;
     final result = await flutterTts.speak(text);
+    if (!_isCurrentOperation(operation)) return;
     if (result == 0 || result == false) {
       _update(SpeechState.stopped, null);
       throw const SpeechUnavailableException();

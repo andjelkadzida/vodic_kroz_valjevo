@@ -12,7 +12,7 @@ import 'text_to_speech_config.dart';
 ///  - the text of this page is paused:       [resume] [stop]
 ///  - the text of another page is being read: [play this] [pause] [stop]
 ///  - the text of another page is paused:    [play this] [stop]
-class SpeechControls extends StatelessWidget {
+class SpeechControls extends StatefulWidget {
   const SpeechControls({
     Key? key,
     required this.text,
@@ -21,6 +21,19 @@ class SpeechControls extends StatelessWidget {
 
   final String text;
   final String readLabel;
+
+  @override
+  State<SpeechControls> createState() => _SpeechControlsState();
+}
+
+class _SpeechControlsState extends State<SpeechControls> {
+  final FocusNode _primaryFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _primaryFocus.dispose();
+    super.dispose();
+  }
 
   Future<void> _run(
       BuildContext context, Future<void> Function() action) async {
@@ -47,12 +60,14 @@ class SpeechControls extends StatelessWidget {
     required IconData icon,
     required String label,
     required VoidCallback onPressed,
+    FocusNode? focusNode,
   }) {
     return IconButton(
       constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
       visualDensity: VisualDensity.standard,
       tooltip: label,
       onPressed: onPressed,
+      focusNode: focusNode,
       icon: Icon(icon, semanticLabel: label),
     );
   }
@@ -66,43 +81,44 @@ class SpeechControls extends StatelessWidget {
       builder: (context, _) {
         final l10n = localization(context);
         // Whether the text of this page is active (being read or paused).
-        final isMine = speech.isCurrent(text);
+        final isMine = speech.isCurrent(widget.text);
+
+        IconData primaryIcon;
+        String primaryLabel;
+        VoidCallback primaryAction;
+        if (isMine && speech.isPaused) {
+          primaryIcon = Icons.play_arrow;
+          primaryLabel = l10n.resumeReading;
+          primaryAction = () => _run(context, speech.resumeSpeaking);
+        } else if (speech.isPlaying && isMine) {
+          primaryIcon = Icons.pause;
+          primaryLabel = l10n.pauseReading;
+          primaryAction = () => _run(context, speech.pauseSpeaking);
+        } else {
+          primaryIcon = Icons.play_arrow;
+          primaryLabel = widget.readLabel;
+          primaryAction = () => _run(context, () => speech.speak(widget.text));
+        }
 
         return Wrap(
           children: [
-            // Play the text of this page. It is always shown, except when this
-            // text is already active. If the text of another page is being read,
-            // it is stopped and this one starts.
-            if (!isMine)
-              GestureDetector(
-                excludeFromSemantics: true,
-                onDoubleTap: () => _run(context, speech.stopSpeaking),
-                child: _button(
-                  icon: Icons.play_arrow,
-                  label: readLabel,
-                  onPressed: () => _run(context, () => speech.speak(text)),
-                ),
-              ),
-            // Pause: for the text that is currently being read, from this or another page.
-            if (speech.isPlaying)
-              _button(
-                icon: Icons.pause,
-                label: l10n.pauseReading,
-                onPressed: () => _run(context, speech.pauseSpeaking),
-              ),
-            // Resume: only when the text of this page is paused.
-            if (isMine && speech.isPaused)
-              _button(
-                icon: Icons.play_arrow,
-                label: l10n.resumeReading,
-                onPressed: () => _run(context, speech.resumeSpeaking),
-              ),
+            // Keep the primary action mounted so it retains focus as playback
+            // changes between Read, Pause, and Resume.
+            _button(
+              icon: primaryIcon,
+              label: primaryLabel,
+              focusNode: _primaryFocus,
+              onPressed: primaryAction,
+            ),
             // Stop: for any active text, from this or another page.
             if (speech.isActive)
               _button(
                 icon: Icons.stop,
                 label: l10n.stopReading,
-                onPressed: () => _run(context, speech.stopSpeaking),
+                onPressed: () => _run(context, () async {
+                  await speech.stopSpeaking();
+                  if (mounted) _primaryFocus.requestFocus();
+                }),
               ),
           ],
         );

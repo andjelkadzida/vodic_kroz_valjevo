@@ -264,7 +264,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get stopReading => 'Zaustavi čitanje';
 
   @override
-  String get pauseReading => 'Pauzira čitanje';
+  String get pauseReading => 'Pauziraj čitanje';
 
   @override
   String get resumeReading => 'Nastavi čitanje';
@@ -958,7 +958,7 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get stopReading => 'Заустави читање';
 
   @override
-  String get pauseReading => 'Паузира читање';
+  String get pauseReading => 'Паузирај читање';
 
   @override
   String get resumeReading => 'Настави читање';
@@ -1651,7 +1651,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get stopReading => 'Zaustavi čitanje';
 
   @override
-  String get pauseReading => 'Pauzira čitanje';
+  String get pauseReading => 'Pauziraj čitanje';
 
   @override
   String get resumeReading => 'Nastavi čitanje';

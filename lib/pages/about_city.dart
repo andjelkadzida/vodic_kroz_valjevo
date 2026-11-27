@@ -184,7 +184,7 @@ class _CityFacts extends StatelessWidget {
                 child: Semantics(
                   container: true,
                   header: true,
-                  label: messages.aboutCity,
+                  label: messages.cityFactsTitle,
                   child: ExcludeSemantics(
                     child: Row(
                       children: [

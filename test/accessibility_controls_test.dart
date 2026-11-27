@@ -10,6 +10,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
 import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/main.dart' show appLocalizationsDelegates;
 import 'package:vodic_kroz_valjevo/pages/hotels/hotel_details.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels/hotels.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
@@ -58,7 +59,14 @@ void main() {
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(connectivity, (_) async => ['none']);
     messenger.setMockMethodCallHandler(events, (_) async => null);
-    messenger.setMockMethodCallHandler(tts, (_) async => 1);
+    messenger.setMockMethodCallHandler(tts, (call) async {
+      if (call.method == 'speak') {
+        TextToSpeechConfig.instance.flutterTts.startHandler?.call();
+      } else if (call.method == 'pause') {
+        TextToSpeechConfig.instance.flutterTts.pauseHandler?.call();
+      }
+      return 1;
+    });
     await TextToSpeechConfig.instance.stopSpeaking();
   });
 
@@ -307,7 +315,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         locale: const Locale('de'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, child) => MediaQuery(
           data: MediaQuery.of(context).copyWith(
@@ -403,7 +411,7 @@ void main() {
 
 Widget _app(Widget home) => MaterialApp(
       locale: const Locale('en'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(disableAnimations: true),

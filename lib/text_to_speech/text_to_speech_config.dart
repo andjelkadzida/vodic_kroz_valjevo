@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
-enum SpeechState { stopped, playing, paused }
+enum SpeechState { stopped, starting, playing, paused }
 
 /// Jedna, deljena instanca za citanje teksta.
 ///
@@ -20,6 +20,10 @@ class TextToSpeechConfig extends ChangeNotifier {
   SpeechState _state = SpeechState.stopped;
   String? _currentText;
   int _operationRevision = 0;
+  int? _pendingStartRevision;
+  int? _pendingPauseRevision;
+  bool _pausedBeforeStart = false;
+  bool _replacingPrevious = false;
 
   TextToSpeechConfig._internal()
       : flutterTts = FlutterTts(),
@@ -39,32 +43,68 @@ class TextToSpeechConfig extends ChangeNotifier {
 
   SpeechState get state => _state;
 
-  /// Text that is currently being read or is paused (null if nothing is active).
+  /// Text that is starting, being read, or paused (null if nothing is active).
   String? get currentText => _currentText;
 
   bool get isPlaying => _state == SpeechState.playing;
   bool get isPaused => _state == SpeechState.paused;
+  bool get isStarting => _state == SpeechState.starting;
 
-  /// Something is being read or is paused.
+  /// Something is starting, being read, or paused.
   bool get isActive => _state != SpeechState.stopped;
 
-  /// Whether this text is the one currently being read or paused.
+  /// Whether this text is the one starting, being read, or paused.
   bool isCurrent(String text) => isActive && _currentText == text;
 
   void _registerHandlers() {
-    // When the text is finished (or an error occurs), return the buttons
-    // to the initial state on all pages.
+    flutterTts.setStartHandler(_handlePlaybackStarted);
+    flutterTts.setContinueHandler(_handlePlaybackStarted);
+    flutterTts.setPauseHandler(_handlePlaybackPaused);
     flutterTts.setCompletionHandler(_handlePlaybackEnded);
-    flutterTts.setErrorHandler((_) => _handlePlaybackEnded());
+    flutterTts.setErrorHandler((error) {
+      debugPrint('Text-to-speech playback failed: $error');
+      _resetPlayback();
+    });
+  }
+
+  void _handlePlaybackStarted() {
+    if (!isStarting || _pendingStartRevision != _operationRevision) return;
+    _pendingStartRevision = null;
+    _replacingPrevious = false;
+    _update(SpeechState.playing, _currentText);
+  }
+
+  void _handlePlaybackPaused() {
+    if ((!isPlaying && !isStarting) ||
+        _pendingPauseRevision != _operationRevision) {
+      return;
+    }
+    _pendingStartRevision = null;
+    _pendingPauseRevision = null;
+    _replacingPrevious = false;
+    _update(SpeechState.paused, _currentText);
   }
 
   void _handlePlaybackEnded() {
+    // A previous utterance can finish while its replacement is being prepared.
+    if (_pausedBeforeStart ||
+        (isStarting && (_pendingStartRevision == null || _replacingPrevious))) {
+      _replacingPrevious = false;
+      return;
+    }
+    _resetPlayback();
+  }
+
+  void _resetPlayback() {
     _operationRevision++;
+    _pendingStartRevision = null;
+    _pendingPauseRevision = null;
+    _pausedBeforeStart = false;
+    _replacingPrevious = false;
     _update(SpeechState.stopped, null);
   }
 
-  bool _isCurrentOperation(int revision) =>
-      revision == _operationRevision;
+  bool _isCurrentOperation(int revision) => revision == _operationRevision;
 
   void _update(SpeechState state, String? text) {
     if (_state == state && _currentText == text) return;
@@ -103,12 +143,18 @@ class TextToSpeechConfig extends ChangeNotifier {
   /// Plays [text] from the beginning. If another text is currently being read (or paused),
   /// e.g., from the previous page, it is stopped first.
   Future<void> speak(String text) async {
+    if (isStarting && _currentText == text) return;
+    final wasActive = isActive;
     final operation = ++_operationRevision;
+    _pendingStartRevision = null;
+    _pendingPauseRevision = null;
+    _pausedBeforeStart = false;
+    _replacingPrevious = wasActive;
+    _update(SpeechState.starting, text);
     try {
-      if (isActive) {
+      if (wasActive) {
         await flutterTts.stop();
         if (!_isCurrentOperation(operation)) return;
-        _update(SpeechState.stopped, null);
       }
 
       while (_requestedLanguage != null &&
@@ -140,14 +186,17 @@ class TextToSpeechConfig extends ChangeNotifier {
       }
       await flutterTts.awaitSpeakCompletion(false);
       if (!_isCurrentOperation(operation)) return;
+      _pendingStartRevision = operation;
       final result = await flutterTts.speak(text);
       if (!_isCurrentOperation(operation)) return;
       if (result == 0 || result == false) {
         throw const SpeechUnavailableException();
       }
-      _update(SpeechState.playing, text);
+      _handlePlaybackStarted();
     } catch (_) {
       if (_isCurrentOperation(operation)) {
+        _pendingStartRevision = null;
+        _replacingPrevious = false;
         _update(SpeechState.stopped, null);
       }
       rethrow;
@@ -156,18 +205,50 @@ class TextToSpeechConfig extends ChangeNotifier {
 
   Future<void> stopSpeaking() async {
     final operation = ++_operationRevision;
-    await flutterTts.stop();
-    if (_isCurrentOperation(operation)) {
+    if (_pendingStartRevision != null) _pendingStartRevision = operation;
+    if (_pendingPauseRevision != null) _pendingPauseRevision = operation;
+    try {
+      final result = await flutterTts.stop();
+      if (!_isCurrentOperation(operation)) return;
+      if (result == 0 || result == false) {
+        throw const SpeechUnavailableException();
+      }
+      _pendingStartRevision = _pendingPauseRevision = null;
+      _pausedBeforeStart = false;
+      _replacingPrevious = false;
       _update(SpeechState.stopped, null);
+    } catch (_) {
+      if (_isCurrentOperation(operation) &&
+          isStarting &&
+          _pendingStartRevision == null) {
+        _update(SpeechState.stopped, null);
+      }
+      rethrow;
     }
   }
 
   Future<void> pauseSpeaking() async {
-    if (!isPlaying) return;
-    final operation = ++_operationRevision;
-    await flutterTts.pause();
-    if (_isCurrentOperation(operation)) {
+    if ((!isPlaying && !isStarting) || _pendingPauseRevision != null) return;
+    if (isStarting && _pendingStartRevision == null) {
+      _operationRevision++;
+      _pausedBeforeStart = true;
+      _replacingPrevious = false;
       _update(SpeechState.paused, _currentText);
+      return;
+    }
+    final operation = ++_operationRevision;
+    if (_pendingStartRevision != null) _pendingStartRevision = operation;
+    _pendingPauseRevision = operation;
+    try {
+      final result = await flutterTts.pause();
+      if (!_isCurrentOperation(operation)) return;
+      if (result == 0 || result == false) {
+        throw const SpeechUnavailableException();
+      }
+      _handlePlaybackPaused();
+    } catch (_) {
+      if (_isCurrentOperation(operation)) _pendingPauseRevision = null;
+      rethrow;
     }
   }
 
@@ -176,14 +257,28 @@ class TextToSpeechConfig extends ChangeNotifier {
   Future<void> resumeSpeaking() async {
     final text = _currentText;
     if (!isPaused || text == null) return;
-    final operation = ++_operationRevision;
-    final result = await flutterTts.speak(text);
-    if (!_isCurrentOperation(operation)) return;
-    if (result == 0 || result == false) {
-      _update(SpeechState.stopped, null);
-      throw const SpeechUnavailableException();
+    if (_pausedBeforeStart) {
+      await speak(text);
+      return;
     }
-    _update(SpeechState.playing, text);
+    final operation = ++_operationRevision;
+    _pendingStartRevision = operation;
+    _replacingPrevious = false;
+    _update(SpeechState.starting, text);
+    try {
+      final result = await flutterTts.speak(text);
+      if (!_isCurrentOperation(operation)) return;
+      if (result == 0 || result == false) {
+        throw const SpeechUnavailableException();
+      }
+      _handlePlaybackStarted();
+    } catch (_) {
+      if (_isCurrentOperation(operation)) {
+        _pendingStartRevision = null;
+        _update(SpeechState.paused, text);
+      }
+      rethrow;
+    }
   }
 }
 

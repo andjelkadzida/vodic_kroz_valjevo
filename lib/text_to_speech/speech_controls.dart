@@ -8,9 +8,10 @@ import 'text_to_speech_config.dart';
 /// State of reading is shared across the entire application, so the buttons on each
 /// page refresh themselves automatically:
 ///  - nothing is being read:                 [play]
+///  - this text is starting:                 [pause] [stop]
 ///  - the text of this page is being read:   [pause] [stop]
 ///  - the text of this page is paused:       [resume] [stop]
-///  - the text of another page is being read: [play this] [pause] [stop]
+///  - the text of another page is being read: [play this] [stop]
 ///  - the text of another page is paused:    [play this] [stop]
 class SpeechControls extends StatefulWidget {
   const SpeechControls({
@@ -80,7 +81,7 @@ class _SpeechControlsState extends State<SpeechControls> {
       listenable: speech,
       builder: (context, _) {
         final l10n = localization(context);
-        // Whether the text of this page is active (being read or paused).
+        // Whether the text of this page is active.
         final isMine = speech.isCurrent(widget.text);
 
         IconData primaryIcon;
@@ -90,7 +91,7 @@ class _SpeechControlsState extends State<SpeechControls> {
           primaryIcon = Icons.play_arrow;
           primaryLabel = l10n.resumeReading;
           primaryAction = () => _run(context, speech.resumeSpeaking);
-        } else if (speech.isPlaying && isMine) {
+        } else if (isMine && (speech.isPlaying || speech.isStarting)) {
           primaryIcon = Icons.pause;
           primaryLabel = l10n.pauseReading;
           primaryAction = () => _run(context, speech.pauseSpeaking);

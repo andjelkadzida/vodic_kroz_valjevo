@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
 import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 import 'package:vodic_kroz_valjevo/localization/locale_controller.dart';
+import 'package:vodic_kroz_valjevo/main.dart' show appLocalizationsDelegates;
 import 'package:vodic_kroz_valjevo/pages/about_city.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
@@ -54,6 +55,11 @@ void main() {
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(tts, (call) async {
       calls.add(call);
+      if (call.method == 'speak' && speechResult == 1) {
+        TextToSpeechConfig.instance.flutterTts.startHandler?.call();
+      } else if (call.method == 'pause') {
+        TextToSpeechConfig.instance.flutterTts.pauseHandler?.call();
+      }
       return call.method == 'speak' ? speechResult : 1;
     });
     messenger.setMockMethodCallHandler(connectivity, (_) async {
@@ -415,7 +421,7 @@ Future<void> _pumpCity(WidgetTester tester, Locale locale,
   await tester.pumpWidget(
     MaterialApp(
       locale: locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(

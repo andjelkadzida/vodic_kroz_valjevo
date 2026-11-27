@@ -16,6 +16,8 @@ We have developed a unique tour guide application that caters to the needs of bl
 On iOS, requested text-to-speech continues to play when the Silent switch is
 on. Speech follows the device's media volume and audio route, and mixes with
 other audio. Android speech uses the device's existing audio settings.
+Pause and Stop are available while speech starts or plays, and Resume is
+available when it is paused.
 
 ## Launch splash
 

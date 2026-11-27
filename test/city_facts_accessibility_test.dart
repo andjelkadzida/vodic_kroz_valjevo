@@ -48,7 +48,6 @@ void main() {
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     TourDataService.instance.refresh(TourCollection.aboutCity);
-    calls.clear();
     speechResult = 1;
     connectivityChecks = 0;
     final messenger =
@@ -63,6 +62,7 @@ void main() {
     });
     messenger.setMockMethodCallHandler(events, (_) async => null);
     await TextToSpeechConfig.instance.stopSpeaking();
+    calls.clear();
   });
 
   tearDown(() {
@@ -173,9 +173,9 @@ void main() {
           await tester.pump();
           expect(read.hitTestable(), findsOneWidget);
 
-          final controls = find.ancestor(
-            of: read,
-            matching: find.byType(SpeechControls),
+          final controls = find.byWidgetPredicate(
+            (widget) =>
+                widget is SpeechControls && widget.text == description,
           );
           expect(controls, findsOneWidget);
           expect(
@@ -212,11 +212,48 @@ void main() {
           await tester.pump();
           final speakCalls =
               calls.where((call) => call.method == 'speak').toList();
-          expect(speakCalls, hasLength(index + 1));
+          expect(speakCalls, hasLength(index * 2 + 1));
           final arguments = speakCalls.last.arguments;
           final spoken = arguments is Map ? arguments['text'] : arguments;
           expect(spoken, description);
           expect(connectivityChecks, checksBefore);
+
+          final pause = find.descendant(
+            of: controls,
+            matching: find.byTooltip(messages.pauseReading),
+          );
+          final playingStop = find.descendant(
+            of: controls,
+            matching: find.byTooltip(messages.stopReading),
+          );
+          expect(
+            find.descendant(
+                of: controls, matching: find.byIcon(Icons.pause)),
+            findsOneWidget,
+          );
+          expect(pause, findsOneWidget);
+          expect(playingStop, findsOneWidget);
+          await tester.tap(pause);
+          await tester.pump();
+
+          final resume = find.descendant(
+            of: controls,
+            matching: find.byTooltip(messages.resumeReading),
+          );
+          expect(
+            find.descendant(
+                of: controls, matching: find.byIcon(Icons.play_arrow)),
+            findsOneWidget,
+          );
+          expect(resume, findsOneWidget);
+          expect(playingStop, findsOneWidget);
+          await tester.tap(resume);
+          await tester.pump(const Duration(milliseconds: 350));
+          await tester.pump();
+          expect(
+            calls.where((call) => call.method == 'speak'),
+            hasLength(index * 2 + 2),
+          );
 
           await tester.ensureVisible(stop);
           await tester.pump();

@@ -288,8 +288,6 @@ class _PagedRecreationCardsState extends State<_PagedRecreationCards> {
             borderRadius: BorderRadius.circular(24),
             child: Semantics(
               container: true,
-              label: localization(context)
-                  .positionInList(_currentPage + 1, widget.data.length),
               child: Wrap(
                 alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,

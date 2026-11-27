@@ -195,7 +195,7 @@ class _CityFacts extends StatelessWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            messages.aboutCity,
+                            messages.cityFactsTitle,
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: const Color(0xFFE0E6ED),
                               fontWeight: FontWeight.w600,

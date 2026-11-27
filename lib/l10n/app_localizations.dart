@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart' show GlobalWidgetsLocalizations;
 import 'package:intl/intl.dart' as intl;
-import 'package:material_ui/material_ui.dart';
 
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
@@ -90,7 +89,6 @@ abstract class AppLocalizations {
       <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalWidgetsLocalizations.delegate,
-    ...GlobalMaterialLocalizations.delegates,
   ];
 
   /// A list of this localizations delegate's supported locales.

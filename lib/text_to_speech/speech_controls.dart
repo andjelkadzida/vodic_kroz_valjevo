@@ -116,8 +116,8 @@ class _SpeechControlsState extends State<SpeechControls> {
                 icon: Icons.stop,
                 label: l10n.stopReading,
                 onPressed: () => _run(context, () async {
-                  await speech.stopSpeaking();
                   if (mounted) _primaryFocus.requestFocus();
+                  await speech.stopSpeaking();
                 }),
               ),
           ],

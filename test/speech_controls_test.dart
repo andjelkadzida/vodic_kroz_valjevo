@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,6 +17,7 @@ void main() {
   var languageResult = 1;
   var connectivityChecks = 0;
   var settingsCalls = 0;
+  Completer<void>? stopCompleter;
 
   setUp(() async {
     calls.clear();
@@ -22,11 +25,15 @@ void main() {
     languageResult = 1;
     connectivityChecks = 0;
     settingsCalls = 0;
+    stopCompleter = null;
     final messenger =
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(tts, (call) async {
       calls.add(call.method);
       if (call.method == 'setLanguage') return languageResult;
+      if (call.method == 'stop' && stopCompleter != null) {
+        await stopCompleter!.future;
+      }
       return call.method == 'speak' ? speechResult : 1;
     });
     messenger.setMockMethodCallHandler(connectivity, (_) async {
@@ -61,6 +68,38 @@ void main() {
     await tester.tap(find.byTooltip(stop));
     await tester.pump();
     expect(calls, contains('stop'));
+  });
+
+  testWidgets('stopping moves focus from Stop to the primary action',
+      (tester) async {
+    await _pumpControls(tester);
+    final context = tester.element(find.byType(SpeechControls));
+    final messages = AppLocalizations.of(context)!;
+    final readButton = find.byTooltip('Read description');
+    Focus.of(tester.element(readButton)).requestFocus();
+    await tester.tap(readButton);
+    await tester.pump(const Duration(milliseconds: 350));
+
+    final pauseButton = find.byTooltip(messages.pauseReading);
+    expect(tester.widget<IconButton>(pauseButton).focusNode!.hasFocus, isTrue);
+
+    final stopButton = find.byTooltip(messages.stopReading);
+    Focus.of(tester.element(stopButton)).requestFocus();
+    expect(tester.widget<IconButton>(stopButton).focusNode!.hasFocus, isTrue);
+
+    stopCompleter = Completer<void>();
+    await tester.tap(stopButton);
+    await tester.pump();
+
+    expect(tester.widget<IconButton>(pauseButton).focusNode!.hasFocus, isTrue);
+
+    stopCompleter!.complete();
+    await tester.pumpAndSettle();
+    final readAgainButton = find.byTooltip('Read description');
+    expect(
+      tester.widget<IconButton>(readAgainButton).focusNode!.hasFocus,
+      isTrue,
+    );
   });
 
   testWidgets('speech failures are reported in the selected language',

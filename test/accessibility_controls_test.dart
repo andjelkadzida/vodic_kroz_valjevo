@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui' show SemanticsAction;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lottie/lottie.dart';
@@ -10,6 +10,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
 import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
+import 'package:vodic_kroz_valjevo/main.dart' show appLocalizationsDelegates;
 import 'package:vodic_kroz_valjevo/pages/hotels/hotel_details.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels/hotels.dart';
 import 'package:vodic_kroz_valjevo/pages/hotels_and_restaurants.dart';
@@ -17,6 +18,8 @@ import 'package:vodic_kroz_valjevo/pages/menu/menu_page.dart';
 import 'package:vodic_kroz_valjevo/pages/shared/tour_photo_gallery.dart';
 import 'package:vodic_kroz_valjevo/pages/sights/sight_details_page.dart';
 import 'package:vodic_kroz_valjevo/pages/sport_and_recreation.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
+import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
 
 import 'support/fake_parse_client.dart';
 import 'support/tour_fixtures.dart';
@@ -26,6 +29,7 @@ void main() {
   late FakeParseClient client;
   const connectivity = MethodChannel('dev.fluttercommunity.plus/connectivity');
   const events = MethodChannel('dev.fluttercommunity.plus/connectivity_status');
+  const tts = MethodChannel('flutter_tts');
 
   setUpAll(() async {
     client = FakeParseClient(makeTourFixtures());
@@ -46,7 +50,7 @@ void main() {
     );
   });
 
-  setUp(() {
+  setUp(() async {
     SharedPreferences.setMockInitialValues({});
     for (final collection in TourCollection.values) {
       TourDataService.instance.refresh(collection);
@@ -55,13 +59,24 @@ void main() {
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(connectivity, (_) async => ['none']);
     messenger.setMockMethodCallHandler(events, (_) async => null);
+    messenger.setMockMethodCallHandler(tts, (call) async {
+      if (call.method == 'speak') {
+        TextToSpeechConfig.instance.flutterTts.startHandler?.call();
+      } else if (call.method == 'pause') {
+        TextToSpeechConfig.instance.flutterTts.pauseHandler?.call();
+      }
+      return 1;
+    });
+    await TextToSpeechConfig.instance.stopSpeaking();
   });
 
-  tearDown(() {
+  tearDown(() async {
+    await TextToSpeechConfig.instance.stopSpeaking();
     final messenger =
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(connectivity, null);
     messenger.setMockMethodCallHandler(events, null);
+    messenger.setMockMethodCallHandler(tts, null);
   });
 
   testWidgets('photo controls navigate, zoom, move, and reset without gestures',
@@ -300,7 +315,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         locale: const Locale('de'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, child) => MediaQuery(
           data: MediaQuery.of(context).copyWith(
@@ -335,13 +350,46 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
       final context = tester.element(find.byType(SightDetailsPage));
       final messages = AppLocalizations.of(context)!;
+      final controls = find.byType(SpeechControls);
+      final idlePlay =
+          find.descendant(of: controls, matching: find.byIcon(Icons.play_arrow));
       final read =
           tester.getSemantics(find.byTooltip(messages.tapToHearSightDetails));
-      final stop = tester.getSemantics(find.byTooltip(messages.stopReading));
+      expect(idlePlay, findsOneWidget);
+      expect(find.byTooltip(messages.stopReading), findsNothing);
       expect(read.label, contains(messages.tapToHearSightDetails));
-      expect(stop.label, contains(messages.stopReading));
       expect(read.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
-      expect(stop.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      await tester.tap(find.byTooltip(messages.tapToHearSightDetails));
+      await tester.pump(const Duration(milliseconds: 300));
+      final pause = find.descendant(
+          of: controls, matching: find.byTooltip(messages.pauseReading));
+      final playingStop =
+          tester.getSemantics(find.byTooltip(messages.stopReading));
+      expect(pause, findsOneWidget);
+      expect(playingStop.label, contains(messages.stopReading));
+      expect(playingStop.getSemanticsData().hasAction(SemanticsAction.tap),
+          isTrue);
+
+      await tester.tap(pause);
+      await tester.pump();
+      final resume = find.descendant(
+          of: controls, matching: find.byTooltip(messages.resumeReading));
+      final pausedPlay =
+          find.descendant(of: controls, matching: find.byIcon(Icons.play_arrow));
+      expect(resume, findsOneWidget);
+      expect(pausedPlay, findsOneWidget);
+      expect(find.byTooltip(messages.stopReading), findsOneWidget);
+
+      await tester.tap(find.byTooltip(messages.stopReading));
+      await tester.pump();
+      expect(find.byTooltip(messages.stopReading), findsNothing);
+      expect(
+        find.descendant(
+            of: controls,
+            matching:
+                find.byTooltip(messages.tapToHearSightDetails)),
+        findsOneWidget,
+      );
     } finally {
       semantics.dispose();
     }
@@ -363,7 +411,7 @@ void main() {
 
 Widget _app(Widget home) => MaterialApp(
       locale: const Locale('en'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(disableAnimations: true),

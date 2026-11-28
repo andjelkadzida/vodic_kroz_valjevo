@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:math' as math;
+
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 import '../helper/accessibility_theme.dart';
@@ -14,10 +16,23 @@ class HomePage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'images/backgroundAndCoverImages/homeImage.jpg',
-            fit: BoxFit.cover,
-            semanticLabel: localization(context).valjevoCityImage,
+          LayoutBuilder(
+            builder: (context, constraints) {
+              // The asset is 3000 x 4000; cover may crop either dimension.
+              final width = math.max(
+                constraints.maxWidth,
+                constraints.maxHeight * 3 / 4,
+              );
+              return Image.asset(
+                'images/backgroundAndCoverImages/homeImage.jpg',
+                fit: BoxFit.cover,
+                cacheWidth: math.max(
+                  1,
+                  (width * MediaQuery.devicePixelRatioOf(context)).ceil(),
+                ),
+                semanticLabel: localization(context).valjevoCityImage,
+              );
+            },
           ),
           const ExcludeSemantics(child: ColoredBox(color: photoTextScrim)),
           SafeArea(

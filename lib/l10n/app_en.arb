@@ -79,6 +79,8 @@
     "moveMapRight": "Move map right",
     "resetMap": "Reset map",
     "stopReading": "Stop reading",
+    "pauseReading": "Pause reading",
+    "resumeReading": "Resume reading",
     "speechUnavailable": "Speech is unavailable. Check your device's text-to-speech settings.",
     "retryImage": "Retry loading image",
     "positionInList": "{current} of {total}",

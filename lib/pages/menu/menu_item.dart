@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../localization/supported_languages.dart';
@@ -24,6 +24,7 @@ class MenuItem extends StatelessWidget {
       button: true,
       enabled: true,
       onTapHint: localization(context).tapToOpen(label),
+      onTap: onTap,
       child: Card(
         elevation: 4,
         margin: EdgeInsets.zero,

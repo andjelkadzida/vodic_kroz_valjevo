@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui' show SemanticsAction;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart' show RenderParagraph;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vodic_kroz_valjevo/database_config/tour_data_service.dart';
 import 'package:vodic_kroz_valjevo/l10n/app_localizations.dart';
 import 'package:vodic_kroz_valjevo/localization/locale_controller.dart';
+import 'package:vodic_kroz_valjevo/main.dart' show appLocalizationsDelegates;
 import 'package:vodic_kroz_valjevo/pages/about_city.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/speech_controls.dart';
 import 'package:vodic_kroz_valjevo/text_to_speech/text_to_speech_config.dart';
@@ -45,16 +46,20 @@ void main() {
     );
   });
 
-  setUp(() {
+  setUp(() async {
     SharedPreferences.setMockInitialValues({});
     TourDataService.instance.refresh(TourCollection.aboutCity);
-    calls.clear();
     speechResult = 1;
     connectivityChecks = 0;
     final messenger =
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     messenger.setMockMethodCallHandler(tts, (call) async {
       calls.add(call);
+      if (call.method == 'speak' && speechResult == 1) {
+        TextToSpeechConfig.instance.flutterTts.startHandler?.call();
+      } else if (call.method == 'pause') {
+        TextToSpeechConfig.instance.flutterTts.pauseHandler?.call();
+      }
       return call.method == 'speak' ? speechResult : 1;
     });
     messenger.setMockMethodCallHandler(connectivity, (_) async {
@@ -62,6 +67,8 @@ void main() {
       return ['none'];
     });
     messenger.setMockMethodCallHandler(events, (_) async => null);
+    await TextToSpeechConfig.instance.stopSpeaking();
+    calls.clear();
   });
 
   tearDown(() {
@@ -172,31 +179,26 @@ void main() {
           await tester.pump();
           expect(read.hitTestable(), findsOneWidget);
 
-          final controls = find.ancestor(
-            of: read,
-            matching: find.byType(SpeechControls),
+          final controls = find.byWidgetPredicate(
+            (widget) =>
+                widget is SpeechControls && widget.text == description,
           );
           expect(controls, findsOneWidget);
           expect(
             find.descendant(
-                of: controls, matching: find.byIcon(Icons.volume_up)),
+                of: controls, matching: find.byIcon(Icons.play_arrow)),
             findsOneWidget,
           );
           final stop = find.descendant(
             of: controls,
             matching: find.byTooltip(messages.stopReading),
           );
-          expect(stop, findsOneWidget);
+          expect(stop, findsNothing);
           expect(tester.getSize(read).shortestSide, greaterThanOrEqualTo(48));
-          expect(tester.getSize(stop).shortestSide, greaterThanOrEqualTo(48));
 
           final readNode = tester.getSemantics(read);
-          final stopNode = tester.getSemantics(stop);
           expect(readNode.label, contains(messages.readCityFact(fact.label)));
-          expect(stopNode.label, contains(messages.stopReading));
           expect(readNode.getSemanticsData().hasAction(SemanticsAction.tap),
-              isTrue);
-          expect(stopNode.getSemanticsData().hasAction(SemanticsAction.tap),
               isTrue);
 
           final checksBefore = connectivityChecks;
@@ -204,7 +206,7 @@ void main() {
             tester.semantics.tap(find.semantics.byLabel(readNode.label));
           } else if (index == 1) {
             final readIcon = find.descendant(
-                of: read, matching: find.byIcon(Icons.volume_up));
+                of: read, matching: find.byIcon(Icons.play_arrow));
             Focus.of(tester.element(readIcon)).requestFocus();
             await tester.pump();
             await tester.sendKeyEvent(LogicalKeyboardKey.enter);
@@ -216,11 +218,48 @@ void main() {
           await tester.pump();
           final speakCalls =
               calls.where((call) => call.method == 'speak').toList();
-          expect(speakCalls, hasLength(index + 1));
+          expect(speakCalls, hasLength(index * 2 + 1));
           final arguments = speakCalls.last.arguments;
           final spoken = arguments is Map ? arguments['text'] : arguments;
           expect(spoken, description);
           expect(connectivityChecks, checksBefore);
+
+          final pause = find.descendant(
+            of: controls,
+            matching: find.byTooltip(messages.pauseReading),
+          );
+          final playingStop = find.descendant(
+            of: controls,
+            matching: find.byTooltip(messages.stopReading),
+          );
+          expect(
+            find.descendant(
+                of: controls, matching: find.byIcon(Icons.pause)),
+            findsOneWidget,
+          );
+          expect(pause, findsOneWidget);
+          expect(playingStop, findsOneWidget);
+          await tester.tap(pause);
+          await tester.pump();
+
+          final resume = find.descendant(
+            of: controls,
+            matching: find.byTooltip(messages.resumeReading),
+          );
+          expect(
+            find.descendant(
+                of: controls, matching: find.byIcon(Icons.play_arrow)),
+            findsOneWidget,
+          );
+          expect(resume, findsOneWidget);
+          expect(playingStop, findsOneWidget);
+          await tester.tap(resume);
+          await tester.pump(const Duration(milliseconds: 350));
+          await tester.pump();
+          expect(
+            calls.where((call) => call.method == 'speak'),
+            hasLength(index * 2 + 2),
+          );
 
           await tester.ensureVisible(stop);
           await tester.pump();
@@ -382,7 +421,7 @@ Future<void> _pumpCity(WidgetTester tester, Locale locale,
   await tester.pumpWidget(
     MaterialApp(
       locale: locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(

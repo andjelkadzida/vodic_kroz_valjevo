@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
@@ -159,7 +159,6 @@ class _ViewToggle extends StatelessWidget {
   final bool selected;
   final VoidCallback onPressed;
 
-  @override
   Widget build(BuildContext context) {
     const color = Color.fromRGBO(11, 20, 32, 1);
     return Semantics(
@@ -171,7 +170,15 @@ class _ViewToggle extends StatelessWidget {
           foregroundColor: selected ? Colors.white : color,
           backgroundColor: selected ? color : Colors.white,
         ),
-        child: Text(label, textAlign: TextAlign.center),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 8,
+          children: [
+            if (selected) const ExcludeSemantics(child: Icon(Icons.check)),
+            Text(label, textAlign: TextAlign.center),
+          ],
+        ),
       ),
     );
   }

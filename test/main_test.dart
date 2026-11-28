@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,7 +41,8 @@ void main() {
       await tester.pumpAndSettle();
       final german = find.byWidgetPredicate(
         (widget) =>
-            widget is LanguageButton && widget.language.scriptCode == 'de',
+            widget is LanguageButton &&
+            widget.language.locale.languageCode == 'de',
       );
       await tester.ensureVisible(german);
       await tester.tap(german);

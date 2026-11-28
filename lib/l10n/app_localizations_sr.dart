@@ -264,6 +264,12 @@ class AppLocalizationsSr extends AppLocalizations {
   String get stopReading => 'Zaustavi čitanje';
 
   @override
+  String get pauseReading => 'Pauziraj čitanje';
+
+  @override
+  String get resumeReading => 'Nastavi čitanje';
+
+  @override
   String get speechUnavailable =>
       'Čitanje nije dostupno. Proverite podešavanja govora na uređaju.';
 
@@ -952,6 +958,12 @@ class AppLocalizationsSrCyrl extends AppLocalizationsSr {
   String get stopReading => 'Заустави читање';
 
   @override
+  String get pauseReading => 'Паузирај читање';
+
+  @override
+  String get resumeReading => 'Настави читање';
+
+  @override
   String get speechUnavailable =>
       'Читање није доступно. Проверите подешавања говора на уређају.';
 
@@ -1637,6 +1649,12 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get stopReading => 'Zaustavi čitanje';
+
+  @override
+  String get pauseReading => 'Pauziraj čitanje';
+
+  @override
+  String get resumeReading => 'Nastavi čitanje';
 
   @override
   String get speechUnavailable =>

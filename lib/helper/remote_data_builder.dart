@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'connection_problem_view.dart';
 import 'internet_connectivity.dart';

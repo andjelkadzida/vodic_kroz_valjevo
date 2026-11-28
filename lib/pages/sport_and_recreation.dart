@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../database_config/tour_data_service.dart';
 import '../helper/accessibility_theme.dart';
@@ -136,8 +136,18 @@ class _RecreationCarousel extends StatelessWidget {
                 ))
             .fold<double>(0, max);
         final imageHeight = (pageWidth * 0.55).clamp(150.0, 260.0);
+        const paddingHeight = 16.0;
+        final controlSpacingHeight =
+            max(16.0, MediaQuery.of(context).size.height * 0.04);
+        const controlHeight = 48.0;
+        final totalHeight = imageHeight +
+            titleHeight +
+            paddingHeight +
+            controlSpacingHeight +
+            controlHeight;
+
         return SizedBox(
-          height: imageHeight + titleHeight + 96,
+          height: totalHeight,
           child: _PagedRecreationCards(
             key: ValueKey(fraction),
             data: data,
@@ -268,35 +278,48 @@ class _PagedRecreationCardsState extends State<_PagedRecreationCards> {
             },
           ),
         ),
+        SizedBox(
+          height: max(12.0, MediaQuery.of(context).size.height * 0.04),
+          child: const SizedBox.shrink(),
+        ),
         Center(
           child: Material(
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                IconButton(
-                  tooltip: localization(context).previousItem,
-                  onPressed:
-                      _currentPage > 0 ? () => moveTo(_currentPage - 1) : null,
-                  icon: Icon(Icons.chevron_left,
-                      semanticLabel: localization(context).previousItem),
-                ),
-                Semantics(
-                  liveRegion: true,
-                  child: Text(localization(context)
-                      .positionInList(_currentPage + 1, widget.data.length)),
-                ),
-                IconButton(
-                  tooltip: localization(context).nextItem,
-                  onPressed: _currentPage < lastPage
-                      ? () => moveTo(_currentPage + 1)
-                      : null,
-                  icon: Icon(Icons.chevron_right,
-                      semanticLabel: localization(context).nextItem),
-                ),
-              ],
+            child: Semantics(
+              container: true,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  IconButton(
+                    tooltip: localization(context).previousItem,
+                    onPressed: _currentPage > 0
+                        ? () => moveTo(_currentPage - 1)
+                        : null,
+                    icon: Icon(Icons.chevron_left,
+                        semanticLabel: localization(context).previousItem),
+                  ),
+                  Semantics(
+                    liveRegion: true,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        localization(context).positionInList(
+                            _currentPage + 1, widget.data.length),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    tooltip: localization(context).nextItem,
+                    onPressed: _currentPage < lastPage
+                        ? () => moveTo(_currentPage + 1)
+                        : null,
+                    icon: Icon(Icons.chevron_right,
+                        semanticLabel: localization(context).nextItem),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

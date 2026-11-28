@@ -265,6 +265,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get stopReading => 'Vorlesen stoppen';
 
   @override
+  String get pauseReading => 'Vorlesen pausieren';
+
+  @override
+  String get resumeReading => 'Vorlesen fortsetzen';
+
+  @override
   String get speechUnavailable =>
       'Sprachausgabe nicht verfügbar. Überprüfen Sie die Einstellungen der Sprachausgabe auf Ihrem Gerät.';
 

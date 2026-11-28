@@ -260,6 +260,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get stopReading => 'Stop reading';
 
   @override
+  String get pauseReading => 'Pause reading';
+
+  @override
+  String get resumeReading => 'Resume reading';
+
+  @override
   String get speechUnavailable =>
       'Speech is unavailable. Check your device\'s text-to-speech settings.';
 

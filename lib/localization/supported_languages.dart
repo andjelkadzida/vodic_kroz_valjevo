@@ -1,60 +1,65 @@
-// ignore_for_file: constant_identifier_names, no_leading_underscores_for_local_identifiers
+// ignore_for_file: constant_identifier_names
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../l10n/app_localizations.dart';
 
-const String LANG_CODE = 'languageCode';
+/// SharedPreferences key under which the selected language is stored.
+/// The name is unchanged, so values saved by earlier app versions still load.
 const String SCRIPT_CODE = 'scriptCode';
-const String COUNTRY_CODE = 'countryCode';
 
-//Supported languages and scripts
+// Selection keys: the values stored in SharedPreferences.
+// They are unchanged from the previous version ('Latn', 'Cyrl', 'en', 'de').
 const String SERBIAN_LATIN = 'Latn';
 const String SERBIAN_CYRL = 'Cyrl';
 const String ENGLISH = 'en';
 const String GERMAN = 'de';
-const String SERBIAN = 'sr';
 
-//Supported country codes
-const String SERBIAN_CC = 'sr-RS';
-const String ENGLISH_CC = 'en-US';
-const String GERMAN_CC = 'de-DE';
+// The locales the app can run in. Country codes are plain region codes
+// (RS, US, DE), and only Serbian carries a script code.
+const Locale serbianLatinLocale = Locale.fromSubtags(
+  languageCode: 'sr',
+  scriptCode: 'Latn',
+  countryCode: 'RS',
+);
+const Locale serbianCyrillicLocale = Locale.fromSubtags(
+  languageCode: 'sr',
+  scriptCode: 'Cyrl',
+  countryCode: 'RS',
+);
+const Locale englishLocale = Locale('en', 'US');
+const Locale germanLocale = Locale('de', 'DE');
 
-Future<Locale> setLocale(String scriptCode) async {
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  await _prefs.setString(SCRIPT_CODE, scriptCode);
-  return _lang(scriptCode);
+/// Pass this to MaterialApp.supportedLocales.
+const List<Locale> appSupportedLocales = <Locale>[
+  serbianCyrillicLocale,
+  serbianLatinLocale,
+  englishLocale,
+  germanLocale,
+];
+
+Future<Locale> setLocale(String key) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString(SCRIPT_CODE, key);
+  return localeForKey(key);
 }
 
 Future<Locale> getLocale() async {
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  String scriptCode = _prefs.getString(SCRIPT_CODE) ?? SERBIAN_CYRL;
-  return _lang(scriptCode);
+  final prefs = await SharedPreferences.getInstance();
+  return localeForKey(prefs.getString(SCRIPT_CODE) ?? SERBIAN_CYRL);
 }
 
-Locale _lang(String scriptCode) {
-  switch (scriptCode) {
-    case SERBIAN_LATIN:
-      return const Locale.fromSubtags(
-          languageCode: SERBIAN,
-          scriptCode: SERBIAN_LATIN,
-          countryCode: SERBIAN_CC);
+Locale localeForKey(String key) {
+  switch (key) {
     case SERBIAN_CYRL:
-      return const Locale.fromSubtags(
-          languageCode: SERBIAN,
-          scriptCode: SERBIAN_CYRL,
-          countryCode: SERBIAN_CC);
+      return serbianCyrillicLocale;
     case ENGLISH:
-      return const Locale.fromSubtags(
-          languageCode: ENGLISH, scriptCode: ENGLISH, countryCode: ENGLISH_CC);
+      return englishLocale;
     case GERMAN:
-      return const Locale.fromSubtags(
-          languageCode: GERMAN, scriptCode: GERMAN, countryCode: GERMAN_CC);
+      return germanLocale;
+    case SERBIAN_LATIN:
     default:
-      return const Locale.fromSubtags(
-          languageCode: SERBIAN,
-          scriptCode: SERBIAN_LATIN,
-          countryCode: SERBIAN_CC);
+      return serbianLatinLocale;
   }
 }
 

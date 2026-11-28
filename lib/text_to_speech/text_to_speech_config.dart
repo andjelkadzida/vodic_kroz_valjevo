@@ -21,6 +21,7 @@ class TextToSpeechConfig extends ChangeNotifier {
   String? _currentText;
   int _operationRevision = 0;
   int? _pendingStartRevision;
+  int? _pendingStartOperation;
   int? _pendingPauseRevision;
   bool _pausedBeforeStart = false;
   bool _replacingPrevious = false;
@@ -106,6 +107,17 @@ class TextToSpeechConfig extends ChangeNotifier {
 
   bool _isCurrentOperation(int revision) => revision == _operationRevision;
 
+  /// Whether the start requested by [operation] is still awaited. A stop or
+  /// pause request moves the pending start to its own revision, so the start
+  /// stays valid if that request fails and is dropped once it succeeds.
+  bool _isPendingStart(int operation) =>
+      _pendingStartOperation == operation &&
+      _pendingStartRevision != null &&
+      _pendingStartRevision == _operationRevision;
+
+  bool _ownsStart(int operation) =>
+      _isCurrentOperation(operation) || _isPendingStart(operation);
+
   void _update(SpeechState state, String? text) {
     if (_state == state && _currentText == text) return;
     _state = state;
@@ -186,16 +198,16 @@ class TextToSpeechConfig extends ChangeNotifier {
       }
       await flutterTts.awaitSpeakCompletion(false);
       if (!_isCurrentOperation(operation)) return;
-      _pendingStartRevision = operation;
+      _pendingStartRevision = _pendingStartOperation = operation;
       final result = await flutterTts.speak(text);
-      if (!_isCurrentOperation(operation)) return;
+      if (!_ownsStart(operation)) return;
       if (result == 0 || result == false) {
         throw const SpeechUnavailableException();
       }
       _handlePlaybackStarted();
     } catch (_) {
-      if (_isCurrentOperation(operation)) {
-        _pendingStartRevision = null;
+      if (_ownsStart(operation)) {
+        _pendingStartRevision = _pendingPauseRevision = null;
         _replacingPrevious = false;
         _update(SpeechState.stopped, null);
       }
@@ -262,19 +274,19 @@ class TextToSpeechConfig extends ChangeNotifier {
       return;
     }
     final operation = ++_operationRevision;
-    _pendingStartRevision = operation;
+    _pendingStartRevision = _pendingStartOperation = operation;
     _replacingPrevious = false;
     _update(SpeechState.starting, text);
     try {
       final result = await flutterTts.speak(text);
-      if (!_isCurrentOperation(operation)) return;
+      if (!_ownsStart(operation)) return;
       if (result == 0 || result == false) {
         throw const SpeechUnavailableException();
       }
       _handlePlaybackStarted();
     } catch (_) {
-      if (_isCurrentOperation(operation)) {
-        _pendingStartRevision = null;
+      if (_ownsStart(operation)) {
+        _pendingStartRevision = _pendingPauseRevision = null;
         _update(SpeechState.paused, text);
       }
       rethrow;

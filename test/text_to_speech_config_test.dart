@@ -178,6 +178,129 @@ void main() {
     await play;
   });
 
+  for (final failure in [0, false]) {
+    test(
+        'a stop rejected with $failure keeps a delayed speak result without '
+        'native callbacks', () async {
+      final tts = _FakeFlutterTts()
+        ..autoStart = false
+        ..speakCompleter = Completer<dynamic>();
+      final speech =
+          TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+      final play = speech.speak('Hello');
+      await Future<void>.delayed(Duration.zero);
+      tts.stopResult = failure;
+      await expectLater(
+        speech.stopSpeaking(),
+        throwsA(isA<SpeechUnavailableException>()),
+      );
+      expect(speech.state, SpeechState.starting);
+      tts.speakCompleter!.complete(1);
+      await play;
+      expect(speech.state, SpeechState.playing);
+      expect(speech.currentText, 'Hello');
+    });
+
+    test(
+        'a pause rejected with $failure keeps a delayed speak result without '
+        'native callbacks', () async {
+      final tts = _FakeFlutterTts()
+        ..autoStart = false
+        ..autoPause = false
+        ..speakCompleter = Completer<dynamic>();
+      final speech =
+          TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+      final play = speech.speak('Hello');
+      await Future<void>.delayed(Duration.zero);
+      tts.pauseResult = failure;
+      await expectLater(
+        speech.pauseSpeaking(),
+        throwsA(isA<SpeechUnavailableException>()),
+      );
+      expect(speech.state, SpeechState.starting);
+      tts.speakCompleter!.complete(1);
+      await play;
+      expect(speech.state, SpeechState.playing);
+      expect(speech.currentText, 'Hello');
+    });
+  }
+
+  test(
+      'a rejected stop keeps a delayed resume result without native callbacks',
+      () async {
+    final tts = _FakeFlutterTts()
+      ..autoStart = false
+      ..autoPause = false;
+    final speech = TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+    await speech.speak('Hello');
+    await speech.pauseSpeaking();
+    tts.speakCompleter = Completer<dynamic>();
+    final resume = speech.resumeSpeaking();
+    tts.stopResult = 0;
+    await expectLater(
+      speech.stopSpeaking(),
+      throwsA(isA<SpeechUnavailableException>()),
+    );
+    tts.speakCompleter!.complete(1);
+    await resume;
+    expect(speech.state, SpeechState.playing);
+    expect(speech.currentText, 'Hello');
+  });
+
+  test('a stop after a rejected stop still cancels a delayed speak result',
+      () async {
+    final tts = _FakeFlutterTts()
+      ..autoStart = false
+      ..speakCompleter = Completer<dynamic>();
+    final speech = TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+    final play = speech.speak('Hello');
+    await Future<void>.delayed(Duration.zero);
+    tts.stopResult = 0;
+    await expectLater(
+      speech.stopSpeaking(),
+      throwsA(isA<SpeechUnavailableException>()),
+    );
+    tts.stopResult = 1;
+    await speech.stopSpeaking();
+    tts.speakCompleter!.complete(1);
+    await play;
+    expect(speech.state, SpeechState.stopped);
+  });
+
+  test('a replacement after a rejected stop ignores the earlier speak result',
+      () async {
+    final tts = _FakeFlutterTts()
+      ..autoStart = false
+      ..speakCompleter = Completer<dynamic>();
+    final speech = TextToSpeechConfig.forTesting(flutterTts: tts, isIOS: false);
+
+    final first = speech.speak('First');
+    await Future<void>.delayed(Duration.zero);
+    tts.stopResult = 0;
+    await expectLater(
+      speech.stopSpeaking(),
+      throwsA(isA<SpeechUnavailableException>()),
+    );
+    final firstResult = tts.speakCompleter!;
+    tts
+      ..stopResult = 1
+      ..speakCompleter = Completer<dynamic>();
+    final second = speech.speak('Second');
+    await Future<void>.delayed(Duration.zero);
+    firstResult.complete(1);
+    await first;
+    expect(speech.state, SpeechState.starting);
+    expect(speech.currentText, 'Second');
+    tts.speakCompleter!.complete(1);
+    await second;
+    expect(speech.state, SpeechState.playing);
+    expect(speech.currentText, 'Second');
+  });
+
   test('a failed stop during preparation does not leave controls stuck',
       () async {
     final tts = _FakeFlutterTts()
